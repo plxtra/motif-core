@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../tsbuildinfo/adi-watchmaker.tsbuildinfo"
+  },
+  "include": [
+    "*.ts",
+  ],
+
+  "references": [
+    { "path": "../symbol-id/tsconfig.json" },
+    { "path": "../feed/tsconfig.json" },
+    { "path": "../common/tsconfig.json" },
+    { "path": "../../res/tsconfig.json" },
+    { "path": "../../sys/tsconfig.json" },
+  ]
+}

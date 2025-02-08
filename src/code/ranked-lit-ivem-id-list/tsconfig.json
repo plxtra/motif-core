@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../tsbuildinfo/ranked-lit-ivem-id-list.tsbuildinfo"
+  },
+  "include": [
+    "*.ts"
+  ],
+  "references": [
+    { "path": "./definition/tsconfig.json" },
+    { "path": "../adi/tsconfig.json" },
+    { "path": "../services/tsconfig.json" },
+    { "path": "../watchmaker/tsconfig.json" },
+  ]
+}

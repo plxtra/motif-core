@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../tsbuildinfo/adi-common.tsbuildinfo"
+  },
+  "include": [
+    "*.ts"
+  ],
+
+  "references": [
+    { "path": "./zenith-protocol/tsconfig.json" },
+    { "path": "../../res/tsconfig.json" },
+    { "path": "../../sys/tsconfig.json" },
+  ]
+}

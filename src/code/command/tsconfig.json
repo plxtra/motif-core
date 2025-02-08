@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../tsbuildinfo/command.tsbuildinfo"
+  },
+  "include": [
+    "*.ts",
+  ],
+  "references": [
+    { "path": "../sys/tsconfig.json" },
+    { "path": "../res/tsconfig.json" },
+  ]
+}

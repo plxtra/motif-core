@@ -1,0 +1,107 @@
+
+{
+   // Specifies the initial default exchange. If not specified, an exchange is selected at random.
+  "defaultDefaultZenithExchangeCode": "ASX",
+  // If an exchange is not specified or its defaultDataEnvironmentZenithCode is not specified, then its default Data Environment
+  // is specified by the first item in this list which is used by the downloaded markets.
+  // If no item in this list is used in downloaded markets, then the most used data environment becomes the default Data Environment.
+  // If not specified, then a hard coded list is used (same as in this template).
+  "defaultExchangeEnvironmentPriorityList": [null, "production", "delayed", "sample", "demo", "test"],
+  // Lists exchanges in this config. If not specified, then all exchanges are generated with defaults.
+  "exchanges": [
+    {
+      // The code for this exchange in a Zenith Symbol. Required for each exchange listed.
+      "zenithCode": "ASX",
+      // Specifies default Environment for an exchange and its markets. If not specified, then defaultDataEnvironmentPriorityList
+      // is used to calculate the default Data Environment.
+      // It is possible for the Data Environment Zenith Code to be implicit in a Zenith symbology code.  That is, it is not included.  Typically,
+      // this occurs for production data environments.  In this case, the defaultDataEnvironmentZenithCode is specified with 'null'.
+      "defaultExchangeEnvironmentZenithCode": "sample",
+      // A 2 letter symbology code for exchange.  If not specified, generated from Zenith code while ensuring there are no collisions
+      "symbologyCode": "AX",
+      // Default field to use when displaying a security's name. Must be one of "allowableSymbolNameFields".
+      // If not specified, defaults to first field in allowableSymbolNameFields.
+      "defaultSymbolNameField": "Name",
+      // List of symbol fields which can be used as the security name.
+      // Can include: "Code", "Name", "Short", "Long", "Base", "Isin", "Ticker", "Gics", "Ric" (provided supported by feed).
+      // If not specified, defaults to "Name", "Code".
+      "allowableSymbolNameFields": [
+        "Name", "Code", "Short", "Long"
+      ],
+      // Default fields used when searching for a symbol.  If not specified, set to first 2 fields in allowableSymbolSearchFields (or less, if not 2).
+      "defaultSymbolSearchFields": [
+        "Code", "Name"
+      ],
+      // List of symbol fields which can be used when searching for a symbol.
+      // Can include: "Code", "Name", "Short", "Long", "Base", "Isin", "Ticker", "Gics", "Ric" (provided supported by feed).
+      // If not specified, defaults to "Code", "Name".
+      "allowableSymbolSearchFields": [
+        "Code", "Name", "Short", "Long", "Base", "Isin"
+      ],
+      // The abbreviated name of the exchange in one or more languages.  If not specified, or required language is not specified, defaults to Zenith code
+      "abbreviatedDisplay": {
+          "en": "ASX"
+      },
+      // The full name of the exchange in one or more languages.  If not specified, or required language is not specified, defaults to Zenith code
+      "fullDisplay": {
+          "en": "Australian Stock Exchange"
+      },
+      // The default lit market.  Use for coverting IvemIds to LitIvemIds.  Set to Null if exchange does not have any Lit markets.  If undefined, first Lit Market found is used.
+      "defaultLitMarketZenithCode": "ASX", // ASX Trade match
+      // The default trading market.  Use for coverting IvemIds to RoutedIvemIds.  Set to Null if exchange does not have any Trading markets.
+      // If undefined, uses defaultLitMarketZenithCode. If that is also undefined, then uses first found Market.
+      "defaultTradingMarketZenithCode": "ASX", // ASX Trade match
+      // The markets within this exchange.  If not specified or a market is not included, then the defaults will be used for these markets
+      "markets": [
+        {
+          // The code for this market in a Zenith Symbol. The exchange part must match the containing exchange's Zenith code.
+          // Required for each market listed.
+          "zenithCode": "ASX",
+          // The internal name of this market (not used for display purposes).  If not specified, the Zenith code is used.
+          "name": "AsxTradeMatch",
+          // The single letter suffix which when added to the Exchange symbology code, forms the market symbology code.
+          // If not specified, this suffix code is automatically generated.
+          "symbologyExchangeSuffixCode": "T",
+          // Priority of market in a display list of an exchange's markets. Higher priority means higher in list.
+          // If not specified, then equal lowest with all other markets where display priority is not specified.
+          "displayPriority": 10,
+          // The name of the market in one or more languages.  If not specified, or required language is not specified, defaults to Zenith code
+          "display": {
+            "en": "ASX TradeMatch"
+          },
+          // The market boards within the market.  If not specified or a board is not included, then the defaults will be used for these boards
+          "boards": [
+            {
+              // The code for this market board in a Zenith Symbol. The exchange part must match the containing exchange's Zenith code.
+              // Required for each market board listed.
+              "zenithCode": "ASX",
+              // The internal name of this market (not used for display purposes).  If not specified, the Zenith code is used.
+              "name": "AsxTradeMatch",
+              // The name of the market board in one or more languages.  If not specified, or required language is not specified, defaults to Zenith code
+              "display": {
+                "en": "ASX TradeMatch"
+              }
+            }
+          ],
+          // The zenith codes of exchanges from which symbols can be traded on this market.  If undefined, then only symbols from the market's own exchange.
+          "symbologySupportedExchanges": [
+            "XXX"
+          ]
+        }
+      ]
+    }
+  ],
+  // Lists data environments in this config. If not specified, then all data environments are generated with defaults.
+  "dataEnvironments": [
+    {
+      // The code for this data environment in a Zenith Symbol. If the data environment is implicit (not included in a zenith symbol code), then
+      // set "zenithCode" to null.
+      // Required for each data environment listed.
+      "zenithCode": "sample",
+      // The name of the data environment in one or more languages.  If not specified, or required language is not specified, defaults to Zenith code.
+      "display": {
+          "en": "Sample"
+      }
+    }
+  ]
+}

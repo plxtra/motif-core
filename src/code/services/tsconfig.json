@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../tsbuildinfo/services.tsbuildinfo"
+  },
+  "include": [
+    "*.ts",
+    "key-value-store/*.ts",
+    "settings/*.ts",
+  ],
+  "exclude": [
+    "layout.ts",
+    "layouts-service.ts",
+    "motif-services-instance-item.ts",
+    "motif-services-instance-service.ts",
+  ],
+  "references": [
+    { "path": "../command/tsconfig.json" },
+    { "path": "../adi/tsconfig.json" },
+    { "path": "../sys/tsconfig.json" },
+    { "path": "../res/tsconfig.json" },
+  ]
+}

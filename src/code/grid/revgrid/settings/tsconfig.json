@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../../tsbuildinfo/grid-revgrid-settings.tsbuildinfo"
+  },
+  "include": [
+    "*.ts"
+  ],
+  "references": [
+  ]
+}

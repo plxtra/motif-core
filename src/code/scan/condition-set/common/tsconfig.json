@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../../tsbuildinfo/scan-condition-set-common.tsbuildinfo"
+  },
+  "include": [
+    "*.ts",
+  ],
+  "references": [
+    { "path": "../../../sys/tsconfig.json" },
+    { "path": "../../../res/tsconfig.json" },
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "@motifmarkets/motif-core",
+  "version": "0.1.0",
+  "description": "Core library for Motif",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/motifmarkets/motif-core.git"
+  },
+  "keywords": [
+    "Motif",
+    "MotifMarkets",
+    "Core"
+  ],
+  "homepage": "https://www.motifmarkets.com/platform/documentation/motif/",
+  "author": {
+    "name": "Motif Markets",
+    "url": "https://www.motifmarkets.com/"
+  },
+  "license": "SEE LICENSE IN license.txt",
+  "bugs": {
+    "url": "https://github.com/motifmarkets/motif-core/issues"
+  },
+  "module": "dist/code/public-api.js",
+  "typings": "dist/types/public-api.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*.ts",
+    "license.txt"
+  ],
+  "scripts": {
+    "link-xilytix": "npm link @xilytix/sysutils @xilytix/revgrid @xilytix/ui-action",
+    "lint": "eslint -c .eslintrc.json --ext .ts src/",
+    "build": "tsc --build ./tsconfig.json",
+    "force-build": "tsc --build --force ./tsconfig.json",
+    "lib": "tsc --project ./tsconfig.json --emitDeclarationOnly",
+    "rollup": "npx api-extractor run --local --verbose",
+    "types": "npm run lib && npm run rollup",
+    "api": "npm run build && npm run rollup",
+    "force-api": "npm run force-build && npm run rollup",
+    "clean": "npx del-cli ./dist/* && npx del-cli ./lib/*",
+    "dist": "npm run clean && npm run force-api",
+    "publish": "npm publish --access=public"
+  },
+  "dependencies": {
+    "@ctrl/tinycolor": "^4.1.0",
+    "@xilytix/revgrid": "^0.9.0",
+    "@xilytix/sysutils": "^0.0.3",
+    "@xilytix/ui-action": "^0.0.3",
+    "nanoid": "^5.0.6"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.48.1",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "del-cli": "^5.1.0",
+    "eslint": "^8.57.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "typescript": "^5.7.2"
+  }
+}

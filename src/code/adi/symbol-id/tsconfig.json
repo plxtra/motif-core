@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.code.json",
+
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../tsbuildinfo/adi-symbol-id-info.tsbuildinfo"
+  },
+
+  "include": [
+    "*.ts",
+  ],
+
+  "references": [
+    { "path": "../markets/tsconfig.json" },
+    { "path": "../feed/tsconfig.json" },
+    { "path": "../publish-subscribe/tsconfig.json" },
+    { "path": "../data-item/tsconfig.json" },
+    { "path": "../publishers/tsconfig.json" },
+    { "path": "../common/tsconfig.json" },
+    { "path": "../../res/tsconfig.json" },
+    { "path": "../../sys/tsconfig.json" },
+  ]
+}

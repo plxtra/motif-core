@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.code.json",
+
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../tsbuildinfo/adi-markets-info.tsbuildinfo"
+  },
+
+  "include": [
+    "*.ts"
+, "../zenith-server-info-data-item.ts", "../feed/trading-markets-data-item.ts"  ],
+
+  "references": [
+    { "path": "../feed/tsconfig.json" },
+    { "path": "../publish-subscribe/tsconfig.json" },
+    { "path": "../data-item/tsconfig.json" },
+    { "path": "../publishers/tsconfig.json" },
+    { "path": "../common/tsconfig.json" },
+    { "path": "../../res/tsconfig.json" },
+    { "path": "../../sys/tsconfig.json" },
+  ]
+}

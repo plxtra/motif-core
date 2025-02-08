@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.code.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../../../tsbuildinfo/grid-typed.tsbuildinfo"
+  },
+  "include": [
+    "*.ts",
+  ],
+  "references": [
+    { "path": "../table/tsconfig.json" },
+    { "path": "../../services/tsconfig.json" },
+    { "path": "../../sys/tsconfig.json" },
+  ]
+}

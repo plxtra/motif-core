@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "strictBindCallApply": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": false,
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./lib",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "paths": {
+      // "res-internal-api": ["./src/code/res/internal-api"],
+      // "sys-internal-api": ["./src/code/sys/internal-api"],
+      // "adi-internal-api": ["./src/code/adi/internal-api"],
+      // "services-internal-api": ["./src/code/services/internal-api"],
+      // "grid-revgrid-types": ["./src/code/grid/grid-revgrid-types"],
+      // "grid-layout-internal-api": ["./src/code/grid/layout/internal-api"],
+      // "grid-record-internal-api": ["./src/code/grid/record/internal-api"],
+      // "grid-table-internal-api": ["./src/code/grid/table/internal-api"],
+      // make sure we do not import the CommonJS decimal.js-light
+      // "decimal.js-light": ["node_modules/decimal.js-light.mjs"]
+    },
+    // "traceResolution": true, // can use this to debug paths
+  },
+
+  "include": [],
+
+  "references": [
+    { "path": "./src/code/tsconfig.json" }
+  ]
+}
