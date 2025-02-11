@@ -1,16 +1,18 @@
 import { RevSourcedFieldCustomHeadings, RevTableRecordSourceDefinition } from '@xilytix/revgrid';
-import { StringId, Strings } from '../../../../res/internal-api';
-import { TextFormattableValue } from '../../../../services/internal-api';
 import {
     EnumInfoOutOfOrderError,
     Err,
-    ErrorCode,
     Integer,
     JsonElement,
-    JsonElementErr,
     Ok,
     Result,
     compareNumber
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../../../res/internal-api';
+import { TextFormattableValue } from '../../../../services/internal-api';
+import {
+    ErrorCode,
+    JsonElementErr,
 } from "../../../../sys/internal-api";
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 

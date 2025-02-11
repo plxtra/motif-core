@@ -1,4 +1,4 @@
-import { Guid, Integer } from '../../sys/internal-api';
+import { Guid, Integer } from '@xilytix/sysutils';
 import { ActiveFaultedStatusId } from '../common/internal-api';
 
 export interface ScanStatusedDescriptorInterface {

@@ -1,4 +1,5 @@
-import { BadnessList, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '../../sys/internal-api';
+import { Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { BadnessList, } from '../../sys/internal-api';
 import { InsertReplaceIrrcChange, IrrcChange, IrrcChangeTypeId, RemoveIrrcChange } from '../common/internal-api';
 import { FeedSubscriptionDataItem } from './feed-subscription-data-item';
 

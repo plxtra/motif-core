@@ -1,5 +1,6 @@
+import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail } from '../../../adi/internal-api';
-import { CorrectnessRecord, Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessRecord } from '../../../sys/internal-api';
 import { DataIvemAlternateCodesTableFieldSourceDefinition } from '../field-source/internal-api';
 import { CorrectnessTableValue, StringCorrectnessTableValue, TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';

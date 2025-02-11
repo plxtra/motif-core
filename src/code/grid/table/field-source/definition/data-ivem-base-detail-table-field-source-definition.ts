@@ -1,12 +1,14 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { DataIvemBaseDetail } from '../../../../adi/internal-api';
 import {
     AssertInternalError,
-    FieldDataType,
-    FieldDataTypeId,
     Integer,
     UnreachableCaseError
-} from '../../../../sys/internal-api';
+} from '@xilytix/sysutils';
+import { DataIvemBaseDetail } from '../../../../adi/internal-api';
+import {
+    FieldDataType,
+    FieldDataTypeId,
+} from "../../../../sys/internal-api";
 import {
     CorrectnessTableField,
     DataIvemIdCorrectnessTableField,

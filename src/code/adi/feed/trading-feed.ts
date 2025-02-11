@@ -1,13 +1,15 @@
-import { StringId, Strings } from '../../res/internal-api';
 import {
     AssertInternalError,
+    EnumInfoOutOfOrderError,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
+import {
     Badness,
     Correctness,
     CorrectnessId,
-    EnumInfoOutOfOrderError,
     FieldDataTypeId,
-    Integer,
-    MultiEvent
 } from "../../sys/internal-api";
 import { FeedClassId, FeedStatusId, OrderStatuses, TradingMarketsDataMessage } from '../common/internal-api';
 import { Feed } from './feed';

@@ -1,11 +1,13 @@
 import {
     AssertInternalError,
-    Badness,
-    CorrectnessId,
     Integer,
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    Badness,
+    CorrectnessId,
 } from "../../sys/internal-api";
 import { DataDefinition, FeedClass, FeedClassId, FeedsDataDefinition } from '../common/internal-api';
 import { Feed } from './feed';

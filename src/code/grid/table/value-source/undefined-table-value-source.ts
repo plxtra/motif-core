@@ -1,4 +1,4 @@
-import { Integer } from '../../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 import { TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';
 

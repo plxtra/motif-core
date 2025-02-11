@@ -1,12 +1,14 @@
 import {
     Integer,
-    KeyedCorrectnessList,
-    KeyedCorrectnessListItem,
-    KeyedCorrectnessSettableList,
     MapKey,
     MultiEvent,
     RecordList,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    KeyedCorrectnessList,
+    KeyedCorrectnessListItem,
+    KeyedCorrectnessSettableList,
 } from "../../sys/internal-api";
 import { PublisherSubscriptionDataItem } from './publisher-subscription-data-item';
 

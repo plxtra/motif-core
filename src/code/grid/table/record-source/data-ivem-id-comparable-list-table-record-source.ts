@@ -1,7 +1,8 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { AdiService, DataIvemId } from '../../../adi/internal-api';
 import { SymbolDetailCacheService, TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, Integer, UiComparableList, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessBadness, UiComparableList } from '../../../sys/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

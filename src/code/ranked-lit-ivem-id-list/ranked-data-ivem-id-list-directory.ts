@@ -1,14 +1,16 @@
+import {
+    Integer,
+    LockOpenListItem,
+    MultiEvent,
+    UnreachableCaseError,
+    UsableListChangeTypeId
+} from '@xilytix/sysutils';
 import { RankedDataIvemIdListDirectoryItem } from '../services/internal-api';
 import {
     Badness,
     BadnessComparableList,
     BadnessMappedComparableList,
-    Integer,
-    LockOpenListItem,
-    MultiEvent,
     ResourceBadness,
-    UnreachableCaseError,
-    UsableListChangeTypeId
 } from '../sys/internal-api';
 
 export class RankedDataIvemIdListDirectory extends BadnessComparableList<RankedDataIvemIdListDirectoryItem> {

@@ -1,4 +1,5 @@
-import { assert, AssertInternalError, UnexpectedTypeError } from '../../sys/internal-api';
+import { AssertInternalError, UnexpectedTypeError } from '@xilytix/sysutils';
+import { assert } from '../../sys/internal-api';
 import { DataDefinition, DataMessage, DataMessageTypeId, FeedClass, FeedClassId, FeedStatusId, OrderStatus, OrderStatuses, OrderStatusesDataDefinition, OrderStatusesDataMessage } from '../common/internal-api';
 import { FeedStatusSubscriptionDataItem } from './feed-status-subscription-data-item';
 

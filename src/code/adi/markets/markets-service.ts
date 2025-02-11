@@ -2036,21 +2036,27 @@ export namespace MarketsService {
 
     export type StartedPromiseResolveFtn = (this: void) => void;
 
-    export abstract class Markets<T extends Market> extends BadnessComparableList<T> {
+    export abstract class Markets<T extends Market> extends BadnessComparableList<T, Market> {
         constructor(
             readonly marketTypeId: Market.TypeId,
             compareItemsFtn: CompareFtn<Market>,
-            private readonly _compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn,
+            protected readonly _compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn,
             readonly exchanges: Exchanges,
             readonly genericUnknownExchangeEnvironment: ExchangeEnvironment,
             readonly genericUnknownExchange: Exchange,
             readonly genericUnknownMarket: T,
-            private readonly _beginChangeEventer: Markets.BeginChangeEventer,
-            private readonly _endChangeEventer: Markets.EndChangeEventer,
-            private readonly _getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer,
-            private readonly _getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer,
+            protected readonly _beginChangeEventer: Markets.BeginChangeEventer,
+            protected readonly _endChangeEventer: Markets.EndChangeEventer,
+            protected readonly _getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer,
+            protected readonly _getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer,
         ) {
             super(compareItemsFtn);
+        }
+
+        override clone(): Markets<T> {
+            const result = this.createEmptyCopy(this._compareItemsFtn);
+            result.assign(this);
+            return result;
         }
 
         findZenithCode(value: string) {
@@ -2153,6 +2159,7 @@ export namespace MarketsService {
             return result;
         }
 
+        abstract createEmptyCopy(compareFtn: CompareFtn<Market>): Markets<T>;
         abstract tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
         protected abstract findUnknownFromZenithCode(zenithCode: string): T | undefined;
         protected abstract addUnknownMarket(market: T): void;
@@ -2272,12 +2279,30 @@ export namespace MarketsService {
             );
         }
 
+        override createEmptyCopy(): UnknownDataMarkets {
+            return new UnknownDataMarkets(
+                this._adiService,
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+            );
+        }
+
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): DataMarket {
             return DataMarket.createUnknown(this._adiService, exchangeEnvironment, exchange, zenithCode);
         }
     }
 
     export class DefaultExchangeEnvironmentKnownDataMarkets extends DefaultExchangeEnvironmentKnownMarkets<DataMarket> {
+        declare readonly unknownMarkets: MarketsService.UnknownDataMarkets;
+
         constructor(
             private readonly _adiService: AdiService,
             compareItemsFtn: CompareFtn<Market>,
@@ -2301,12 +2326,32 @@ export namespace MarketsService {
             );
         }
 
+        override createEmptyCopy(): DefaultExchangeEnvironmentKnownDataMarkets {
+            return new DefaultExchangeEnvironmentKnownDataMarkets(
+                this._adiService,
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+                this.unknownMarkets,
+            );
+        }
+
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): DataMarket {
             return DataMarket.createUnknown(this._adiService, exchangeEnvironment, exchange, zenithCode);
         }
     }
 
     export class AllKnownDataMarkets extends AllKnownMarkets<DataMarket> {
+        declare readonly unknownMarkets: MarketsService.UnknownDataMarkets;
+        declare readonly defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownDataMarkets;
+
         constructor(
             private readonly _adiService: AdiService,
             compareItemsFtn: CompareFtn<Market>,
@@ -2328,6 +2373,24 @@ export namespace MarketsService {
                 exchanges, genericUnknownExchangeEnvironment, genericUnknownExchange, genericUnknownMarket,
                 beginChangeEventer, endChangeEventer, getExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer,
                 unknownMarkets, defaultExchangeEnvironmentMarkets,
+            );
+        }
+
+        override createEmptyCopy(): AllKnownDataMarkets {
+            return new AllKnownDataMarkets(
+                this._adiService,
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+                this.unknownMarkets,
+                this.defaultExchangeEnvironmentMarkets,
             );
         }
 
@@ -2358,12 +2421,30 @@ export namespace MarketsService {
             );
         }
 
+        override createEmptyCopy(): UnknownTradingMarkets {
+            return new UnknownTradingMarkets(
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+                this._bestLitUnknownDataMarket,
+            );
+        }
+
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): TradingMarket {
             return TradingMarket.createUnknown(exchangeEnvironment, exchange, zenithCode);
         }
     }
 
     export class DefaultExchangeEnvironmentKnownTradingMarkets extends DefaultExchangeEnvironmentKnownMarkets<TradingMarket> {
+        declare readonly unknownMarkets: MarketsService.UnknownTradingMarkets;
+
         constructor(
             compareItemsFtn: CompareFtn<Market>,
             compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn,
@@ -2387,12 +2468,32 @@ export namespace MarketsService {
             );
         }
 
+        override createEmptyCopy(): DefaultExchangeEnvironmentKnownTradingMarkets {
+            return new DefaultExchangeEnvironmentKnownTradingMarkets(
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+                this.unknownMarkets,
+                this._bestLitUnknownDataMarket,
+            );
+        }
+
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): TradingMarket {
             return TradingMarket.createUnknown(exchangeEnvironment, exchange, zenithCode);
         }
     }
 
     export class AllKnownTradingMarkets extends AllKnownMarkets<TradingMarket> {
+        declare readonly unknownMarkets: MarketsService.UnknownTradingMarkets;
+        declare readonly defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownTradingMarkets;
+
         constructor(
             compareItemsFtn: CompareFtn<Market>,
             compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn,
@@ -2414,6 +2515,24 @@ export namespace MarketsService {
                 exchanges, genericUnknownExchangeEnvironment, genericUnknownExchange, genericUnknownMarket,
                 beginChangeEventer, endChangeEventer, getExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer,
                 unknownMarkets, defaultExchangeEnvironmentMarkets,
+            );
+        }
+
+        override createEmptyCopy(): AllKnownTradingMarkets {
+            return new AllKnownTradingMarkets(
+                this._compareItemsFtn,
+                this._compareMarketPropertyToStringFtn,
+                this.exchanges,
+                this.genericUnknownExchangeEnvironment,
+                this.genericUnknownExchange,
+                this.genericUnknownMarket,
+                this._beginChangeEventer,
+                this._endChangeEventer,
+                this._getExchangeEnvironmentOrUnknownEventer,
+                this._getExchangeOrUnknownEventer,
+                this.unknownMarkets,
+                this.defaultExchangeEnvironmentMarkets,
+                this._bestLitUnknownDataMarket,
             );
         }
 

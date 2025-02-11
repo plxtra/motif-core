@@ -1,4 +1,4 @@
-import { SysDecimal } from '../sys/internal-api';
+import { SysDecimal } from '@xilytix/sysutils';
 import { SymbolDetailCacheService } from './symbol-detail-cache-service';
 
 export class SecurityPriceStepper {

@@ -1,10 +1,12 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { MarketIvemId } from '../../../../adi/internal-api';
 import {
     AssertInternalError,
+    Integer
+} from '@xilytix/sysutils';
+import { MarketIvemId } from '../../../../adi/internal-api';
+import {
     FieldDataType,
     FieldDataTypeId,
-    Integer
 } from "../../../../sys/internal-api";
 import {
     DataIvemIdTableField,

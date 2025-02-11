@@ -1,7 +1,7 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
 import { Market, MarketIvemId, MarketsService } from '../adi/internal-api';
 import { SymbolsService } from '../services/internal-api';
-import { MultiEvent } from '../sys/internal-api';
 
 export class MarketIvemIdUiAction<T extends Market> extends UiAction {
     private _value: MarketIvemId<T> | undefined;

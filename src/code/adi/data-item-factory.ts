@@ -2,7 +2,7 @@ import {
     AssertInternalError,
     NotImplementedError,
     UnreachableCaseError
-} from '../sys/internal-api';
+} from '@xilytix/sysutils';
 import { AllBalancesDataItem } from './all-balances-data-item';
 import { AllHoldingsDataItem } from './all-holdings-data-item';
 import { AllOrdersDataItem } from './all-orders-data-item';

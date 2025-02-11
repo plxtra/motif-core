@@ -1,20 +1,22 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { StringId, Strings } from '../res/internal-api';
 import {
     AssertInternalError,
     CommaText,
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     Integer,
-    MultiEvent,
-    SourceTzOffsetDate,
-    SysDecimal,
-    assert,
     isArrayEqualUniquely,
     isDecimalEqual,
     isDecimalGreaterThan,
     isUndefinableArrayEqualUniquely,
-    newDecimal
+    MultiEvent,
+    newDecimal,
+    SourceTzOffsetDate,
+    SysDecimal
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../res/internal-api';
+import {
+    assert,
+    FieldDataTypeId,
 } from '../sys/internal-api';
 import {
     CallOrPutId,

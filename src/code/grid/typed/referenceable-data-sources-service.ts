@@ -1,6 +1,7 @@
 import { RevDataSource, RevReferenceableDataSources } from '@xilytix/revgrid';
+import { JsonElement, SysTick, mSecsPerSec } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../services/internal-api';
-import { Badness, JsonElement, LockOpenList, SysTick, mSecsPerSec } from '../../sys/internal-api';
+import { Badness, LockOpenList } from '../../sys/internal-api';
 import { ReferenceableColumnLayoutsService } from '../layout/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionFactory, TableRecordSourceDefinition } from '../table/internal-api';
 import { ReferenceableDataSource } from './referenceable-data-source';

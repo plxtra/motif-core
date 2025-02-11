@@ -1,5 +1,5 @@
 import { RevColumnLayoutDefinition, RevSourcedField, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { PickEnum } from '../../../../sys/internal-api';
+import { PickEnum } from '@xilytix/sysutils';
 import { GridField } from '../../../field/internal-api';
 import { GridFieldTableFieldSourceDefinition, TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';

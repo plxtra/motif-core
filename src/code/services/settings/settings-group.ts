@@ -1,4 +1,5 @@
-import { EnumInfoOutOfOrderError, Err, ErrorCode, Integer, JsonElement, JsonElementErr, Ok, Result } from '../../sys/internal-api';
+import { EnumInfoOutOfOrderError, Err, Integer, JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
 
 export abstract class SettingsGroup {
     beginChangesEvent: SettingsGroup.BeginChangesEvent;

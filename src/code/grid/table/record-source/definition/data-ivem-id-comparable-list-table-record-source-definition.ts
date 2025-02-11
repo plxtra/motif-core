@@ -1,6 +1,7 @@
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { JsonElement, Ok, PickEnum, Result } from '@xilytix/sysutils';
 import { DataIvemId, MarketIvemId, MarketsService } from '../../../../adi/internal-api';
-import { ErrorCode, JsonElement, JsonElementErr, Ok, PickEnum, Result, UiComparableList } from '../../../../sys/internal-api';
+import { ErrorCode, JsonElementErr, UiComparableList } from '../../../../sys/internal-api';
 import {
     DataIvemBaseDetailTableFieldSourceDefinition,
     DataIvemIdTableFieldSourceDefinition,

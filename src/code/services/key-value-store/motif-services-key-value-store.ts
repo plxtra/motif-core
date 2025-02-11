@@ -1,4 +1,4 @@
-import { Result } from '../../sys/internal-api';
+import { Result } from '@xilytix/sysutils';
 import { MotifServicesService } from '../motif-services-service';
 import { KeyValueStore } from './key-value-store';
 

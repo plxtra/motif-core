@@ -1,10 +1,12 @@
-import { StringId, Strings } from '../../res/internal-api';
 import {
     AssertInternalError,
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     Integer,
     isUndefinableArrayEqualUniquely
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
+import {
+    FieldDataTypeId,
 } from "../../sys/internal-api";
 import { DataIvemAttributes } from './data-ivem-attributes';
 import { ZenithProtocolCommon } from './zenith-protocol/internal-api';

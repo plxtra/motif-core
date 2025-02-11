@@ -1,4 +1,5 @@
-import { ErrorCode, ErrorCodeWithExtra, ErrorCodeWithExtraErr, Ok, Result, UnreachableCaseError } from '../../../sys/internal-api';
+import { Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { ErrorCode, ErrorCodeWithExtra, ErrorCodeWithExtraErr } from '../../../sys/internal-api';
 import { ExchangeEnvironmentZenithCode } from './exchange-environment-zenith-code';
 import { ZenithProtocolCommon } from './zenith-protocol-common';
 

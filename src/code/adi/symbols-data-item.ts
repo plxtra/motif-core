@@ -1,4 +1,5 @@
-import { assert, CorrectnessList, ErrorCode, FeedError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '../sys/internal-api';
+import { Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { assert, CorrectnessList, ErrorCode, FeedError } from '../sys/internal-api';
 import {
     AurcChangeTypeId,
     DataDefinition,

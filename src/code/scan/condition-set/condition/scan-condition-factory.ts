@@ -1,4 +1,4 @@
-import { Result } from '../../../sys/internal-api';
+import { Result } from '@xilytix/sysutils';
 import { ScanFormula } from '../../formula/internal-api';
 import { ScanConditionSetLoadError } from '../common/internal-api';
 import {

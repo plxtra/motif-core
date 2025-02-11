@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { JsonElement, Ok, UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, JsonElement, Ok, UnreachableCaseError } from '@xilytix/sysutils';
 import { I18nStrings, StringId } from '../res/internal-api';
 import { ErrorCode } from './error-code';
-import { Err } from './error-code-with-extra-err';
 
 /** @public */
 export type JsonElementResult<T> = Ok<T, string> | JsonElementErr<T>;

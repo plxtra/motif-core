@@ -1,6 +1,6 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { JsonElement } from '@xilytix/sysutils';
 import { AllBrokerageAccountGroup, BrokerageAccountGroup, MarketsService } from '../../../../adi/internal-api';
-import { JsonElement } from '../../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from "../../field-source/internal-api";
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

@@ -1,8 +1,9 @@
+import { Integer, MultiEvent, RecordList, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { DataIvemId, RankScoredDataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { Badness } from '../sys/badness';
 import { BadnessList } from '../sys/badness-list';
 import { CorrectnessId } from '../sys/correctness';
-import { CorrectnessRecord, Integer, MultiEvent, RecordList, UsableListChangeTypeId } from '../sys/internal-api';
+import { CorrectnessRecord } from '../sys/internal-api';
 
 export class IndexRankScoredDataIvemIdList implements RankScoredDataIvemIdList {
     readonly userCanAdd = true;

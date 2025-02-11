@@ -1,9 +1,10 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { JsonElement, PickEnum, Result } from '@xilytix/sysutils';
 import {
     RankedDataIvemIdListDefinition,
     RankedDataIvemIdListDefinitionFactoryService
 } from "../../../../ranked-lit-ivem-id-list/internal-api";
-import { ErrorCode, JsonElement, JsonElementErr, PickEnum, Result } from '../../../../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
 import {
     TableFieldSourceDefinition,
     TableFieldSourceDefinitionCachingFactory

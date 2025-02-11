@@ -1,4 +1,4 @@
-import { PickEnum } from '../../../../sys/internal-api';
+import { PickEnum } from '@xilytix/sysutils';
 import { ZenithProtocolCommon } from '../../../common/zenith-protocol/internal-api';
 
 export namespace ZenithMarketMyx {

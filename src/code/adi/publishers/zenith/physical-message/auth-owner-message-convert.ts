@@ -1,4 +1,5 @@
-import { defined, ErrorCode, Integer, ZenithDataError } from '../../../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
+import { defined, ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 
 /** @internal */

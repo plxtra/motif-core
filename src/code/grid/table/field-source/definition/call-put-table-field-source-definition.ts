@@ -1,11 +1,13 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { CallPut } from '../../../../services/internal-api';
 import {
     AssertInternalError,
-    FieldDataType,
-    FieldDataTypeId,
     Integer,
     UnreachableCaseError
+} from '@xilytix/sysutils';
+import { CallPut } from '../../../../services/internal-api';
+import {
+    FieldDataType,
+    FieldDataTypeId,
 } from "../../../../sys/internal-api";
 import {
     BooleanTableField,

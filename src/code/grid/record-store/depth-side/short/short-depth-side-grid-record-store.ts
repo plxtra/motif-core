@@ -1,6 +1,7 @@
 import { RevRecordIndex, RevRecordStore } from '@xilytix/revgrid';
+import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { DepthLevelsDataItem } from '../../../../adi/internal-api';
-import { CorrectnessId, Integer, MultiEvent, UnreachableCaseError } from '../../../../sys/internal-api';
+import { CorrectnessId } from '../../../../sys/internal-api';
 import { DepthSideGridRecordStore } from '../depth-side-grid-record-store';
 import { ShortDepthRecord } from './short-depth-record';
 

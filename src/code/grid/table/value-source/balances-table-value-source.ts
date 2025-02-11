@@ -1,5 +1,5 @@
+import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Balances } from '../../../adi/internal-api';
-import { Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
 import { BalancesTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

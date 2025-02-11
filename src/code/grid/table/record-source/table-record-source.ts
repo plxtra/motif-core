@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings, RevTableRecordSource } from '@xilytix/revgrid';
+import { CorrectnessState, MultiEvent } from '@xilytix/sysutils';
 import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
-import { Badness, CorrectnessState, MultiEvent } from '../../../sys/internal-api';
+import { Badness } from '../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { TableRecordSourceDefinition } from './definition/internal-api';
 

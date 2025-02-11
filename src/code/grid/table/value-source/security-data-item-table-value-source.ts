@@ -1,5 +1,3 @@
-import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
-import { TextFormattableValue } from '../../../services/internal-api';
 import {
     AssertInternalError,
     Integer,
@@ -8,7 +6,9 @@ import {
     SysDecimal,
     UnexpectedCaseError,
     UnreachableCaseError
-} from "../../../sys/internal-api";
+} from '@xilytix/sysutils';
+import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
+import { TextFormattableValue } from '../../../services/internal-api';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,

@@ -1,9 +1,11 @@
 import {
     AssertInternalError,
-    Badness,
-    CorrectnessId,
     MultiEvent,
     SourceTzOffsetDate
+} from '@xilytix/sysutils';
+import {
+    Badness,
+    CorrectnessId,
 } from '../sys/internal-api';
 import { DataDefinition, FeedClass, FeedClassId } from './common/internal-api';
 import { FeedStatusSubscriptionDataItem } from './feed/internal-api';

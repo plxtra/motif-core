@@ -1,12 +1,14 @@
 import {
     AssertInternalError,
-    ErrorCode,
     Integer,
     MultiEvent,
     PickEnum,
     RecordList,
     UnreachableCaseError,
     UsableListChangeTypeId,
+} from '@xilytix/sysutils';
+import {
+    ErrorCode,
     ZenithDataError
 } from '../../sys/internal-api';
 import {

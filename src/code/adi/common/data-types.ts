@@ -1,14 +1,10 @@
-import { StringId, Strings } from '../../res/internal-api';
 import {
     AssertInternalError,
-    Badness,
     CommaText,
     ComparisonResult,
-    CorrectnessId,
     EnumInfoOutOfOrderError,
     Integer,
     SysDecimal,
-    assert,
     compareInteger,
     compareNumber,
     getUniqueElementArraysOverlapElements,
@@ -19,6 +15,12 @@ import {
     newDecimal,
     secsPerHour,
     secsPerMin
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
+import {
+    Badness,
+    CorrectnessId,
+    assert,
 } from '../../sys/internal-api';
 import { ZenithProtocolCommon } from './zenith-protocol/internal-api';
 

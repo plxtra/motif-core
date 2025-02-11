@@ -1,9 +1,6 @@
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from '@xilytix/revgrid';
-import { DepthDataItem, DepthStyleId, MarketsService, OrderSide, OrderSideId } from '../../../../adi/internal-api';
-import { SessionInfoService } from '../../../../services/session-info-service';
 import {
     AssertInternalError,
-    CorrectnessId,
     Integer,
     isDecimalEqual,
     isDecimalGreaterThan,
@@ -13,6 +10,11 @@ import {
     newDecimal,
     SysDecimal,
     UnreachableCaseError
+} from '@xilytix/sysutils';
+import { DepthDataItem, DepthStyleId, MarketsService, OrderSide, OrderSideId } from '../../../../adi/internal-api';
+import { SessionInfoService } from '../../../../services/session-info-service';
+import {
+    CorrectnessId,
 } from "../../../../sys/internal-api";
 import { DepthRecord } from '../depth-record';
 import { DepthSideGridRecordStore } from '../depth-side-grid-record-store';

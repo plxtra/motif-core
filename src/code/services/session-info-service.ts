@@ -1,5 +1,5 @@
+import { IndexSignatureHack, Integer, MultiEvent } from '@xilytix/sysutils';
 import { ExchangeEnvironment, MarketIvemId, PublisherSessionTerminatedReasonId } from '../adi/internal-api';
-import { IndexSignatureHack, Integer, MultiEvent } from '../sys/internal-api';
 import { SessionStateId } from './session-state';
 
 /** @public */

@@ -1,4 +1,4 @@
-import { Integer, MultiEvent } from '../sys/internal-api';
+import { Integer, MultiEvent } from '@xilytix/sysutils';
 
 export interface HistorySequenceSeriesInterface {
     pointCount: number;

@@ -1,4 +1,4 @@
-import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent, SourceTzOffsetDateTime } from '../sys/internal-api';
+import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent, SourceTzOffsetDateTime } from '@xilytix/sysutils';
 import { SequenceHistory } from './sequence-history';
 
 export abstract class HistorySequencer {

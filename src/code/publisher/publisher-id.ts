@@ -1,5 +1,6 @@
+import { EnumInfoOutOfOrderError, Err, JsonElement, Ok, Result } from '@xilytix/sysutils';
 import { StringId, Strings } from '../res/internal-api';
-import { EnumInfoOutOfOrderError, Err, ErrorCode, JsonElement, JsonElementErr, Ok, Result } from '../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../sys/internal-api';
 
 /** @public */
 export interface PublisherId {

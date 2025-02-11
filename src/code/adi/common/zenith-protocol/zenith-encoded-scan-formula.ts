@@ -1,4 +1,4 @@
-import { PickEnum } from '../../../sys/internal-api';
+import { PickEnum } from '@xilytix/sysutils';
 import { ZenithProtocolCommon } from './zenith-protocol-common';
 
 export namespace ZenithEncodedScanFormula {

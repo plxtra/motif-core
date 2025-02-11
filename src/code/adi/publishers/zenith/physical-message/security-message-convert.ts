@@ -1,15 +1,17 @@
-import { StringId, Strings } from '../../../../res/internal-api';
 import {
     AssertInternalError,
     Err,
-    ErrorCode,
-    getUndefinedNullOrFunctionResult,
-    ifDefined,
     InternalError,
     newDecimal,
     Ok,
     Result,
     UnexpectedCaseError,
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../../../res/internal-api';
+import {
+    ErrorCode,
+    getUndefinedNullOrFunctionResult,
+    ifDefined,
     ZenithDataError
 } from "../../../../sys/internal-api";
 import {

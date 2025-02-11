@@ -1,4 +1,4 @@
-import { AssertInternalError, Guid, parseIntStrict, UnreachableCaseError } from '../../../../sys/internal-api';
+import { AssertInternalError, Guid, parseIntStrict, UnreachableCaseError } from '@xilytix/sysutils';
 import { ScanAttachedNotificationChannel, ScanDataDefinition, ScanTargetTypeId, unknownZenithCode, ZenithSymbol } from '../../../common/internal-api';
 import { ZenithProtocolCommon } from '../../../common/zenith-protocol/internal-api';
 import { ZenithProtocol } from './protocol/zenith-protocol';

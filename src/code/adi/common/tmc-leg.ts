@@ -1,4 +1,4 @@
-import { Integer } from '../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 import { OrderSideId, ZenithIvemId } from './data-types';
 
 export interface TmcLeg {

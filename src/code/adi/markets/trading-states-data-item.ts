@@ -1,4 +1,5 @@
-import { assert, AssertInternalError, Badness, Correctness, UnexpectedTypeError } from '../../sys/internal-api';
+import { AssertInternalError, UnexpectedTypeError } from '@xilytix/sysutils';
+import { assert, Badness, Correctness } from '../../sys/internal-api';
 import {
     DataDefinition,
     DataMessage,

@@ -1,6 +1,6 @@
 import { RevTableFieldSourceDefinition } from '@xilytix/revgrid';
+import { EnumInfoOutOfOrderError, Integer } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../../../services/internal-api';
-import { EnumInfoOutOfOrderError, Integer } from '../../../../sys/internal-api';
 // import { GridRecordFieldState } from '../../../record/grid-record-internal-api';
 import { CorrectnessTableField, TableField } from '../../field/internal-api';
 import { CorrectnessTableValue, TableValue } from '../../value/internal-api';

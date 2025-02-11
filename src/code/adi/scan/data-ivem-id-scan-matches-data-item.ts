@@ -1,4 +1,4 @@
-import { AssertInternalError, ChangeSubscribableComparableList, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '../../sys/internal-api';
+import { AssertInternalError, ChangeSubscribableComparableList, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { DataDefinition, DataIvemIdMatchesDataMessage, DataMessage, DataMessageTypeId } from '../common/internal-api';
 import { MarketsService } from '../markets/internal-api';
 import { RankScoredDataIvemId, RankScoredDataIvemIdList } from '../rank-scored-lit-ivem-id/internal-api';

@@ -1,13 +1,15 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
+import {
+    EnumInfoOutOfOrderError,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../res/internal-api';
 import {
     Correctness,
     CorrectnessId,
-    EnumInfoOutOfOrderError,
     FieldDataTypeId,
-    Integer,
     KeyedCorrectnessListItem,
-    MultiEvent
 } from "../sys/internal-api";
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import {

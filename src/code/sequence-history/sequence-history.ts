@@ -1,4 +1,5 @@
-import { AssertInternalError, Badness, CorrectnessId } from '../sys/internal-api';
+import { AssertInternalError } from '@xilytix/sysutils';
+import { Badness, CorrectnessId } from '../sys/internal-api';
 
 export abstract class SequenceHistory {
     badnessChangedEvent: SequenceHistory.badnessChangedEvent;

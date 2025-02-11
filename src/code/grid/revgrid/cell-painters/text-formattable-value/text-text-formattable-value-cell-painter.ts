@@ -6,9 +6,10 @@ import {
     RevStandardTextPainter,
     RevViewCell
 } from '@xilytix/revgrid';
+import { IndexSignatureHack, Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { HigherLowerId, OrderSideId } from '../../../../adi/internal-api';
 import { ColorScheme, ColorTextFormattableValue, SettingsService, TextFormattableValue, TextFormatter } from '../../../../services/internal-api';
-import { CorrectnessId, IndexSignatureHack, Integer, UnreachableCaseError } from '../../../../sys/internal-api';
+import { CorrectnessId } from '../../../../sys/internal-api';
 import { GridField } from '../../../field/internal-api';
 import { DepthRecord, DepthRecordTextFormattableValue } from '../../../record-store/internal-api';
 import { SourcedFieldGrid } from '../../adapted-revgrid/sourced-field-grid';

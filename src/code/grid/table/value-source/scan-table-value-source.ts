@@ -1,6 +1,7 @@
+import { AssertInternalError, CommaText, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Scan } from '../../../scan/internal-api';
 import { SymbolsService } from '../../../services/symbols-service';
-import { AssertInternalError, CommaText, Correctness, Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
+import { Correctness } from '../../../sys/internal-api';
 import { ScanTableFieldSourceDefinition } from '../field-source/internal-api';
 import {
     ActiveFaultedStatusIdCorrectnessTableValue,

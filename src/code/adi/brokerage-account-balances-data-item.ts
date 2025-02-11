@@ -3,11 +3,13 @@ import {
     ComparableList,
     compareInteger,
     ComparisonResult,
-    ErrorCode,
     Integer,
     MapKey,
     UnreachableCaseError,
     UsableListChangeTypeId,
+} from '@xilytix/sysutils';
+import {
+    ErrorCode,
     ZenithDataError
 } from "../sys/internal-api";
 import { Balances } from './balances';

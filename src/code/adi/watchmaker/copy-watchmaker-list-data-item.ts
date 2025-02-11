@@ -1,4 +1,4 @@
-import { AssertInternalError } from '../../sys/internal-api';
+import { AssertInternalError } from '@xilytix/sysutils';
 import { CreateOrCopyWatchmakerListDataMessage, DataMessage, DataMessageTypeId } from '../common/internal-api';
 import { WatchmakerPublishDataItem } from './watchmaker-publish-data-item';
 

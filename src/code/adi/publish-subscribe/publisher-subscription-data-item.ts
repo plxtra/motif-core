@@ -1,11 +1,13 @@
-import { StringId, Strings } from '../../res/internal-api';
 import {
     AssertInternalError,
-    Badness,
     EnumInfoOutOfOrderError,
     Integer,
     UnexpectedCaseError,
     UnreachableCaseError
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
+import {
+    Badness,
 } from '../../sys/internal-api';
 import {
     AdiPublisher,

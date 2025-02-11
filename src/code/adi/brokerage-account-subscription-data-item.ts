@@ -1,11 +1,13 @@
 import {
     AssertInternalError,
-    Badness,
-    CorrectnessId,
     Integer,
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    Badness,
+    CorrectnessId,
 } from '../sys/internal-api';
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountsDataItem } from './brokerage-accounts-data-item';

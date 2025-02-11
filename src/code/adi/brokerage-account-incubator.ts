@@ -1,4 +1,4 @@
-import { getErrorMessage } from '../sys/internal-api';
+import { getErrorMessage } from '@xilytix/sysutils';
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountsDataItem } from './brokerage-accounts-data-item';
 import { BrokerageAccountsDataDefinition } from './common/internal-api';

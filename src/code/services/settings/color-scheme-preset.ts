@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '../../sys/internal-api';
+import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { ColorScheme } from './color-scheme';
 
 export namespace ColorSchemePreset {

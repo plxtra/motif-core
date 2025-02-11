@@ -1,4 +1,5 @@
-import { assert, Integer } from '../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
+import { assert } from '../sys/internal-api';
 import { DataMessage, DataMessageTypeId, TLowLevelTopShareholdersDataMessage, TopShareholder } from './common/internal-api';
 import { PublisherSubscriptionDataItem } from './publish-subscribe/internal-api';
 

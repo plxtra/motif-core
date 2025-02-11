@@ -1,6 +1,6 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
+import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { DepthLevelsDataItem } from '../../../../adi/internal-api';
-import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '../../../../sys/internal-api';
 
 export const enum ShortDepthSideFieldId {
     PriceAndHasUndisclosed,

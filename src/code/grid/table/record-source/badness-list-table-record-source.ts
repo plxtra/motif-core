@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { LockOpenListItem } from '@xilytix/sysutils';
 import { TextFormatter } from '../../../services/internal-api';
-import { BadnessList, CorrectnessBadness, LockOpenListItem } from '../../../sys/internal-api';
+import { BadnessList, CorrectnessBadness } from '../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { BadnessListTableRecordSourceDefinition } from './definition/internal-api';
 import { SubscribeBadnessListTableRecordSource } from './subscribe-badness-list-table-record-source';

@@ -1,5 +1,6 @@
+import { AssertInternalError, Integer, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { AssertInternalError, Correctness, Integer, UsableListChangeTypeId } from '../../sys/internal-api';
+import { Correctness } from '../../sys/internal-api';
 import { DataMessage, DataMessageTypeId, FeedClass, FeedClassId, FeedsDataMessage, FeedStatus, OrderStatusesDataDefinition, QueryTradingMarketsDataDefinition } from '../common/internal-api';
 import { RecordsPublisherSubscriptionDataItem } from '../publish-subscribe/internal-api';
 import { Feed } from './feed';
@@ -96,11 +97,15 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
             const getMarketsPromise = tradingFeed.getMarketsForFieldsDataItem();
             getMarketsPromise.then(
                 (feedMarkets) => {
-                    if (feedMarkets !== undefined && this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
-                        const allTradingFeedMarkets = this.tryGetReadyTradingFeedMarkets();
-                        if (allTradingFeedMarkets !== undefined) {
-                            this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn(allTradingFeedMarkets);
-                            this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn = undefined;
+                    if (feedMarkets !== undefined) {
+                        window.motifLogger.logInfo(`${Strings[StringId.Feed]} ${Strings[StringId.Trading]} ${Strings[StringId.Markets]} ${Strings[StringId.Available]}: ${FeedClass.idToDisplay(result.classId)}`);
+
+                        if (this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
+                            const allTradingFeedMarkets = this.tryGetReadyTradingFeedMarkets();
+                            if (allTradingFeedMarkets !== undefined) {
+                                this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn(allTradingFeedMarkets);
+                                this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn = undefined;
+                            }
                         }
                     }
                 },

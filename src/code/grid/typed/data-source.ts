@@ -1,7 +1,7 @@
 import { RevColumnLayoutOrReferenceDefinition, RevDataSource } from '@xilytix/revgrid';
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../services/internal-api';
-import { AssertInternalError, Badness, Err, ErrorCode, LockOpenListItem, Ok, PickEnum, Result } from '../../sys/internal-api';
+import { Badness, ErrorCode } from '../../sys/internal-api';
 import { ColumnLayoutOrReference } from '../layout/internal-api';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 

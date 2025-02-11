@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, SysTick } from '../../sys/internal-api';
+import { AssertInternalError, Integer, SysTick } from '@xilytix/sysutils';
 import { DataDefinition, PublisherSubscriptionDataDefinition } from './data-definition';
 import { DataMessages } from './data-messages';
 import { AdiPublisherTypeId, DataItemId, DataItemRequestNr } from './data-types';

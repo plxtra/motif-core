@@ -1,9 +1,6 @@
 import {
-    assert,
-    Badness,
     compareInteger,
     ComparisonResult,
-    CorrectnessBadness,
     Integer,
     mSecsPerMin,
     MultiEvent,
@@ -14,6 +11,11 @@ import {
     SysTick,
     UnreachableCaseError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    assert,
+    Badness,
+    CorrectnessBadness,
 } from '../sys/internal-api';
 import {
     AuiChangeTypeId, DataDefinition,

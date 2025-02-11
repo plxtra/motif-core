@@ -1,4 +1,5 @@
-import { ErrorCodeLogger, parseIntStrict, parseNumberStrict, UnreachableCaseError } from '../../../../sys/internal-api';
+import { parseIntStrict, parseNumberStrict, UnreachableCaseError } from '@xilytix/sysutils';
+import { ErrorCodeLogger } from '../../../../sys/internal-api';
 import { DataIvemAlternateCodes, ZenithProtocolCommon } from '../../../common/internal-api';
 import { MyxDataIvemAttributes } from '../../../common/myx-data-ivem-attributes';
 import { ZenithMarketMyx } from './zenith-market-myx';

@@ -1,4 +1,5 @@
-import { ExerciseTimer, SysTick } from '../../sys/internal-api';
+import { SysTick } from '@xilytix/sysutils';
+import { ExerciseTimer } from '../../sys/internal-api';
 import { AdiPublisher, DataDefinition } from '../common/internal-api';
 import { DataItem } from './data-item';
 import { DataMgr } from './data-mgr';

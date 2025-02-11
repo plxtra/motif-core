@@ -1,5 +1,5 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { BooleanUiAction } from '@xilytix/ui-action';
-import { MultiEvent } from '../sys/internal-api';
 import { ButtonUiAction } from './button-ui-action';
 
 export class IconButtonUiAction extends ButtonUiAction {

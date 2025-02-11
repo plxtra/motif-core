@@ -1,5 +1,6 @@
+import { JsonElement, Ok, Result } from '@xilytix/sysutils';
 import { PublisherId } from '../publisher/internal-api';
-import { ErrorCode, JsonElement, JsonElementErr, Ok, Result } from '../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../sys/internal-api';
 
 /** @public */
 export interface ExtensionId {

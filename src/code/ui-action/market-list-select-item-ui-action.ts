@@ -1,6 +1,6 @@
+import { MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { SelectItemUiAction } from '@xilytix/ui-action';
 import { DataMarket, Market, MarketsService } from '../adi/internal-api';
-import { MultiEvent, UsableListChangeTypeId } from '../sys/internal-api';
 
 /** @public */
 export class MarketListSelectItemUiAction<T extends Market> extends SelectItemUiAction<T> {

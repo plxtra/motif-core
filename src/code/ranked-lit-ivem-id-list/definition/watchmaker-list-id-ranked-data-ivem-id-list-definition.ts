@@ -1,4 +1,5 @@
-import { ErrorCode, JsonElement, JsonElementErr, Ok, Result } from '../../sys/internal-api';
+import { JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';
 
 /** @public */

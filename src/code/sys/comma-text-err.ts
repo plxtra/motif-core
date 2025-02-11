@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { CommaText, UnreachableCaseError } from '@xilytix/sysutils';
+import { CommaText, Err, UnreachableCaseError } from '@xilytix/sysutils';
 import { ErrorCode } from './error-code';
-import { Err } from './error-code-with-extra-err';
 
 /** @public */
 export class CommaTextErr<T = undefined> extends Err<T> {

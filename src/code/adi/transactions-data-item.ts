@@ -1,11 +1,13 @@
 import {
-    assert,
-    Badness,
     Integer,
     MultiEvent,
     NotImplementedError,
     UnexpectedTypeError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    assert,
+    Badness,
 } from '../sys/internal-api';
 import {
     DataMessage,

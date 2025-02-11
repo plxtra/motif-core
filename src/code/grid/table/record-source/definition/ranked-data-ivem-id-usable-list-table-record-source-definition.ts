@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { PickEnum } from '@xilytix/sysutils';
 import { RankedDataIvemId } from '../../../../adi/internal-api';
-import { PickEnum, UsableList } from '../../../../sys/internal-api';
+import { UsableList } from '../../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 import { UsableListTableRecordSourceDefinition } from './usable-list-table-record-source-definition';

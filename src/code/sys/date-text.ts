@@ -1,5 +1,4 @@
-import { Iso8601 } from '@xilytix/sysutils';
-import { dateToDashedYyyyMmDd } from './utils';
+import { dateToDashedYyyyMmDd, Iso8601 } from '@xilytix/sysutils';
 
 // Dates on the GUI are strings. This unit provides functions to check date strings match expected formats.
 /** @public */

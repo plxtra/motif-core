@@ -1,4 +1,5 @@
-import { AssertInternalError, BadnessList, ErrorCodeLogger, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '../../sys/internal-api';
+import { AssertInternalError, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { BadnessList, ErrorCodeLogger } from '../../sys/internal-api';
 import { AurcChangeTypeId, DataDefinition, DataMessage, DataMessageTypeId, FeedClassId, ScanStatusedDescriptorsDataMessage } from '../common/internal-api';
 import { FeedSubscriptionDataItem } from '../feed/internal-api';
 import { ScanStatusedDescriptor } from './scan-statused-descriptor';

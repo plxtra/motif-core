@@ -1,4 +1,4 @@
-import { CommaText, Integer, MapKey, UnreachableCaseError } from '../../sys/internal-api';
+import { CommaText, Integer, MapKey, UnreachableCaseError } from '@xilytix/sysutils';
 import { PublisherSubscriptionDataDefinition } from './data-definition';
 
 export interface AdiPublisherSubscription {

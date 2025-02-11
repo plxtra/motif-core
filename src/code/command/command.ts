@@ -1,6 +1,6 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer, ModifierKey } from '@xilytix/sysutils';
 import { ExtStringId } from '../res/internal-api';
-import { ExtensionHandle, Handle, ModifierKey } from '../sys/internal-api';
+import { ExtensionHandle, Handle } from '../sys/internal-api';
 
 export interface Command {
     readonly extensionHandle: ExtensionHandle;

@@ -1,5 +1,21 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
+    AssertInternalError,
+    EnumInfoOutOfOrderError,
+    Guid,
+    Integer,
+    LockOpenListItem,
+    LockOpenManager,
+    MapKey,
+    MultiEvent,
+    Ok,
+    Result,
+    UnreachableCaseError,
+    isUndefinableArrayEqualUniquely,
+    isUndefinableDateEqual,
+    isUndefinableStringNumberBooleanNestArrayEqual
+} from '@xilytix/sysutils';
+import {
     ActiveFaultedStatusId,
     AdiService,
     DataItemIncubator,
@@ -17,21 +33,9 @@ import {
 import { StringId, Strings } from '../res/internal-api';
 import { EnumTextFormattableValue, RankedDataIvemIdListDirectoryItem, TextFormattableValue } from '../services/internal-api';
 import {
-    AssertInternalError,
     Correctness,
     CorrectnessId,
-    EnumInfoOutOfOrderError,
     FieldDataTypeId,
-    Guid,
-    Integer,
-    LockOpenListItem,
-    LockOpenManager,
-    MapKey,
-    MultiEvent, Ok, Result,
-    UnreachableCaseError,
-    isUndefinableArrayEqualUniquely,
-    isUndefinableDateEqual,
-    isUndefinableStringNumberBooleanNestArrayEqual
 } from "../sys/internal-api";
 
 /** @public */

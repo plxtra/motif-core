@@ -1,4 +1,10 @@
 import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
+import {
+    Integer,
+    UnreachableCaseError,
+    compareBoolean,
+    compareInteger,
+} from '@xilytix/sysutils';
 import { DepthLevelsDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
 import {
     IntegerTextFormattableValue,
@@ -9,11 +15,7 @@ import {
     TextFormattableValue
 } from '../../../../services/internal-api';
 import {
-    Integer,
     PriceOrRemainder,
-    UnreachableCaseError,
-    compareBoolean,
-    compareInteger,
     comparePriceOrRemainder
 } from '../../../../sys/internal-api';
 import { DepthRecord } from '../depth-record';

@@ -1,10 +1,7 @@
-import { StringId, Strings } from '../res/internal-api';
 import {
     AssertInternalError,
-    Badness,
     ComparisonResult,
     EnumInfoOutOfOrderError,
-    ErrorCodeLogger,
     Integer,
     MultiEvent,
     SysTick,
@@ -13,6 +10,11 @@ import {
     compareInteger,
     mSecsPerMin,
     rangedEarliestBinarySearch
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../res/internal-api';
+import {
+    Badness,
+    ErrorCodeLogger,
 } from '../sys/internal-api';
 import {
     DataDefinition,

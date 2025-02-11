@@ -1,6 +1,4 @@
 import { RevTableField } from '@xilytix/revgrid';
-import { IvemId, MarketIvemId } from '../../../adi/internal-api';
-import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
 import {
     Integer,
     SourceTzOffsetDate,
@@ -10,7 +8,9 @@ import {
     compareDecimal,
     compareString,
     compareValue
-} from "../../../sys/internal-api";
+} from '@xilytix/sysutils';
+import { IvemId, MarketIvemId } from '../../../adi/internal-api';
+import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
 import {
     BaseSourceTzOffsetDateTimeCorrectnessTableValue,
     CorrectnessTableValue,

@@ -1,4 +1,4 @@
-import { UnreachableCaseError } from '../sys/internal-api';
+import { UnreachableCaseError } from '@xilytix/sysutils';
 import { CapabilityId } from './capability';
 
 export class CapabilitiesService {

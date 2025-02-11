@@ -1,9 +1,11 @@
-import { StringId, Strings } from '../../res/i18n-strings';
 import {
     CommaText,
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     Integer
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/i18n-strings';
+import {
+    FieldDataTypeId,
 } from "../../sys/internal-api";
 import {
     MarketOrderRoute,

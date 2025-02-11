@@ -1,14 +1,16 @@
-import { AdiService } from '../adi/internal-api';
-import { NotificationChannelsService } from '../notification-channel/internal-api';
-import { SymbolsService } from '../services/internal-api';
 import {
-    ErrorCode,
     Integer,
     LockOpenListItem,
     MultiEvent,
     Ok,
     Result,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import { AdiService } from '../adi/internal-api';
+import { NotificationChannelsService } from '../notification-channel/internal-api';
+import { SymbolsService } from '../services/internal-api';
+import {
+    ErrorCode,
 } from "../sys/internal-api";
 import { ScanConditionSet } from './condition-set/internal-api';
 import { ScanFieldSet } from './field-set/internal-api';

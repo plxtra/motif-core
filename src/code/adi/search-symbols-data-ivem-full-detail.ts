@@ -1,14 +1,14 @@
-import { StringId, Strings } from '../res/internal-api';
 import {
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     Integer,
     MultiEvent,
     SourceTzOffsetDate,
     SysDecimal,
     isUndefinableArrayEqualUniquely,
     isUndefinableDecimalEqual
-} from '../sys/internal-api';
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../res/internal-api';
+import { FieldDataTypeId } from '../sys/internal-api';
 import {
     CallOrPutId,
     DataIvemAlternateCodes,

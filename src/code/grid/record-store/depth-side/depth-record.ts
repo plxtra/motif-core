@@ -1,6 +1,6 @@
+import { IndexedRecord, Integer } from '@xilytix/sysutils';
 import { MarketsService } from '../../../adi/internal-api';
 import { IntegerTextFormattableValue, TextFormattableValue } from '../../../services/internal-api';
-import { IndexedRecord, Integer } from '../../../sys/internal-api';
 
 /** @public */
 export abstract class DepthRecord implements IndexedRecord {

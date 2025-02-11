@@ -1,5 +1,5 @@
+import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { TopShareholder, TopShareholdersDataItem } from '../../../adi/internal-api';
-import { Integer, UnreachableCaseError } from '../../../sys/internal-api';
 import { TopShareholderTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

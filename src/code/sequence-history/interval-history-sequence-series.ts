@@ -1,4 +1,4 @@
-import { Integer } from '../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 import { HistorySequenceSeries } from './history-sequence-series';
 import { IntervalHistorySequencer } from './interval-history-sequencer';
 

@@ -11,7 +11,7 @@ import {
     Ok,
     Result,
     SysDecimal,
-} from '../../sys/internal-api';
+} from '@xilytix/sysutils';
 import { AdiPublisherSubscriptionDelayRetryAlgorithmId } from './adi-publisher-subscription-delay-retry-algorithm';
 import {
     ChartIntervalId,

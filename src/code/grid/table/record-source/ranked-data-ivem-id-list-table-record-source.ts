@@ -1,4 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { AssertInternalError, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
 import { AdiService, RankedDataIvemId } from '../../../adi/internal-api';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition,
@@ -10,7 +11,7 @@ import {
 } from "../../../ranked-lit-ivem-id-list/internal-api";
 import { TextFormatter } from '../../../services/internal-api';
 import { SymbolDetailCacheService } from '../../../services/symbol-detail-cache-service';
-import { AssertInternalError, CorrectnessBadness, ErrorCode, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessBadness, ErrorCode, } from '../../../sys/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

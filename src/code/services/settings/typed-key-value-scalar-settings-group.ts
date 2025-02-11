@@ -1,4 +1,4 @@
-import { Integer, JsonElement, MultiEvent } from '../../sys/internal-api';
+import { Integer, JsonElement, MultiEvent } from '@xilytix/sysutils';
 import { SettingsGroup } from './settings-group';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 

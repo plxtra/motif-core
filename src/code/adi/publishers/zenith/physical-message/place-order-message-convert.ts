@@ -1,4 +1,5 @@
-import { AssertInternalError, Err, ErrorCode, newUndefinableDecimal, Ok, Result, ZenithDataError } from '../../../../sys/internal-api';
+import { AssertInternalError, Err, newUndefinableDecimal, Ok, Result } from '@xilytix/sysutils';
+import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

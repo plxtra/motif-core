@@ -1,4 +1,12 @@
 import { RevTableValue } from '@xilytix/revgrid';
+import {
+    Integer,
+    SourceTzOffsetDate,
+    SourceTzOffsetDateTime,
+    SysDecimal,
+    newUndefinableDate,
+    newUndefinableDecimal
+} from '@xilytix/sysutils';
 import { DataIvemId, IvemId } from '../../../adi/internal-api';
 import {
     BooleanTextFormattableValue,
@@ -22,12 +30,6 @@ import {
 } from '../../../services/internal-api';
 import {
     CorrectnessId,
-    Integer,
-    SourceTzOffsetDate,
-    SourceTzOffsetDateTime,
-    SysDecimal,
-    newUndefinableDate,
-    newUndefinableDecimal
 } from '../../../sys/internal-api';
 
 export abstract class TableValue extends RevTableValue<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {

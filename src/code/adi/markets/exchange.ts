@@ -1,5 +1,12 @@
+import {
+    CommaText, compareString, compareUndefinableNumber, ComparisonResult, EnumInfoOutOfOrderError,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { CommaText, compareString, compareUndefinableNumber, ComparisonResult, Correctness, CorrectnessId, EnumInfoOutOfOrderError, FieldDataTypeId, Integer, KeyedCorrectnessListItem, MultiEvent } from '../../sys/internal-api';
+import {
+    FieldDataTypeId
+} from "../../sys/internal-api";
 import { SymbolFieldId, unknownZenithCode, ZenithEnvironmentedValueParts } from '../common/internal-api';
 // eslint-disable-next-line import/no-cycle
 import { ExchangeEnvironment } from './exchange-environment';
@@ -11,7 +18,7 @@ import { Market } from './market';
 // eslint-disable-next-line import/no-cycle
 import { TradingMarket } from './trading-market';
 
-export class Exchange implements KeyedCorrectnessListItem {
+export class Exchange {
     readonly zenithCode: string;
     readonly mapKey: string;
     readonly abbreviatedDisplay: string;
@@ -35,13 +42,9 @@ export class Exchange implements KeyedCorrectnessListItem {
     private _defaultLitMarket: DataMarket;
     private _defaultTradingMarket: TradingMarket;
 
-    private _usable = false;
-    private _correctnessId: CorrectnessId = CorrectnessId.Suspect;
-
     private _beginChangeCount = 0;
     private _changedValueFieldIds = new Array<Exchange.FieldId>();
 
-    private readonly _correctnessChangedEvent = new MultiEvent<Exchange.CorrectnessChangedEventHandler>();
     private readonly _fieldValuesChangedMultiEvent = new MultiEvent<Exchange.FieldValuesChangedHandler>();
 
     constructor(
@@ -95,8 +98,6 @@ export class Exchange implements KeyedCorrectnessListItem {
     get tradingMarkets(): readonly TradingMarket[] { return this._tradingMarkets; }
     get defaultLitMarket(): DataMarket { return this._defaultLitMarket; }
     get defaultTradingMarket(): TradingMarket { return this._defaultTradingMarket; }
-    get usable() { return this._usable; }
-    get correctnessId(): CorrectnessId { return this._correctnessId; }
 
     destroy() {
         this._destroyed = true;
@@ -165,14 +166,6 @@ export class Exchange implements KeyedCorrectnessListItem {
         this.endChange();
     }
 
-    setListCorrectness(value: CorrectnessId) {
-        if (value !== this._correctnessId) {
-            this._correctnessId = value;
-            this._usable = Correctness.idIsUsable(value);
-            this.notifyCorrectnessChanged();
-        }
-    }
-
     getMarkets(marketTypeId: Market.TypeId): Market[] {
         return marketTypeId === Market.TypeId.Data ? this._dataMarkets : this._tradingMarkets; // want to return T[] - not Market[]
     }
@@ -181,27 +174,12 @@ export class Exchange implements KeyedCorrectnessListItem {
         return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket : this._defaultTradingMarket; // want to return T - not Market
     }
 
-    subscribeCorrectnessChangedEvent(handler: Exchange.CorrectnessChangedEventHandler) {
-        return this._correctnessChangedEvent.subscribe(handler);
-    }
-
-    unsubscribeCorrectnessChangedEvent(subscriptionId: MultiEvent.SubscriptionId) {
-        this._correctnessChangedEvent.unsubscribe(subscriptionId);
-    }
-
     subscribeFieldValuesChangedEvent(handler: Exchange.FieldValuesChangedHandler) {
         return this._fieldValuesChangedMultiEvent.subscribe(handler);
     }
 
     unsubscribeFieldValuesChangedEvent(subscriptionId: MultiEvent.SubscriptionId) {
         this._fieldValuesChangedMultiEvent.unsubscribe(subscriptionId);
-    }
-
-    private notifyCorrectnessChanged() {
-        const handlers = this._correctnessChangedEvent.copyHandlers();
-        for (const handler of handlers) {
-            handler();
-        }
     }
 
     private notifyFieldValuesChanged(changedValueFieldIds: readonly Exchange.FieldId[]) {
@@ -477,7 +455,6 @@ export namespace Exchange {
             defaultTradingMarketZenithCode: null,
         }
         const result = new Exchange(zenithCode, exchangeEnvironment, config, true);
-        result.setListCorrectness(CorrectnessId.Error);
         result.setIsDefaultDefault(false);
         result.setIsExchangeEnvironmentDefault(false);
         result.setSymbologyCode('');

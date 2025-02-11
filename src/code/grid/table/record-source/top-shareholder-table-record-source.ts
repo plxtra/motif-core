@@ -1,5 +1,14 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
+    AssertInternalError,
+    Integer,
+    LockOpenListItem,
+    MultiEvent,
+    UnreachableCaseError,
+    UsableListChangeTypeId,
+    newUndefinableDate
+} from '@xilytix/sysutils';
+import {
     AdiService,
     DataIvemId,
     TopShareholder,
@@ -8,14 +17,8 @@ import {
 } from "../../../adi/internal-api";
 import { TextFormatter } from '../../../services/internal-api';
 import {
-    AssertInternalError,
     Badness,
     CorrectnessBadness,
-    Integer,
-    LockOpenListItem,
-    MultiEvent, UnreachableCaseError,
-    UsableListChangeTypeId,
-    newUndefinableDate
 } from "../../../sys/internal-api";
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory

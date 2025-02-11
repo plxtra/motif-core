@@ -1,6 +1,7 @@
+import { Integer, LockOpenListItem, Result } from '@xilytix/sysutils';
 import { DataIvemId } from '../adi/internal-api';
 import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
-import { BadnessList, Integer, LockOpenListItem, Result } from '../sys/internal-api';
+import { BadnessList } from '../sys/internal-api';
 import { RankedDataIvemIdListDefinition } from './definition/ranked-data-ivem-id-list-definition';
 
 /** @public */

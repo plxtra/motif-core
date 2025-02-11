@@ -1,5 +1,6 @@
+import { CommaText, EnumInfoOutOfOrderError, isArrayEqualUniquely } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { CommaText, EnumInfoOutOfOrderError, FieldDataTypeId, isArrayEqualUniquely } from '../../sys/internal-api';
+import { FieldDataTypeId } from '../../sys/internal-api';
 
 export interface DataIvemAlternateCodes {
     [key: string]: string | undefined;

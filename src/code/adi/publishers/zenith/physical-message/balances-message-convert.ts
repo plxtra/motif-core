@@ -1,4 +1,5 @@
-import { AssertInternalError, ErrorCode, ErrorCodeLogger, Ok, Result, UnexpectedCaseError, ZenithDataError } from '../../../../sys/internal-api';
+import { AssertInternalError, Ok, Result, UnexpectedCaseError } from '@xilytix/sysutils';
+import { ErrorCode, ErrorCodeLogger, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

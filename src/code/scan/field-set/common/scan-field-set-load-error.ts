@@ -1,5 +1,5 @@
+import { EnumInfoOutOfOrderError, Err, Result } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../../res/internal-api';
-import { EnumInfoOutOfOrderError, Err, Result } from '../../../sys/internal-api';
 
 export const enum ScanFieldSetLoadErrorTypeId {
     AndFieldHasOrChild,

@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { Integer, LockOpenListItem, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { TextFormatter } from '../../../services/internal-api';
-import { Badness, CorrectnessBadness, Integer, LockOpenListItem, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '../../../sys/internal-api';
+import { Badness, CorrectnessBadness } from '../../../sys/internal-api';
 import {
     TableField,
     TableFieldSourceDefinition,

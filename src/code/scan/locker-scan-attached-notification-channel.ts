@@ -1,8 +1,9 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
+import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@xilytix/sysutils';
 import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi/internal-api';
 import { LockOpenNotificationChannel } from '../notification-channel/internal-api';
 import { StringId, Strings } from '../res/internal-api';
-import { AssertInternalError, EnumInfoOutOfOrderError, FieldDataTypeId, Integer, MultiEvent } from '../sys/internal-api';
+import { FieldDataTypeId } from '../sys/internal-api';
 
 export class LockerScanAttachedNotificationChannel {
     changedEventer: LockerScanAttachedNotificationChannel.ChangedEventer | undefined; // only used by List

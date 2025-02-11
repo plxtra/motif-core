@@ -1,7 +1,8 @@
+import { SysTick } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
 import { Command } from '../command/internal-api';
 import { StringId } from '../res/internal-api';
-import { ErrorCode, ExtensionHandle, ExtensionOrInternalError, SysTick } from '../sys/internal-api';
+import { ErrorCode, ExtensionHandle, ExtensionOrInternalError } from '../sys/internal-api';
 import { CommandUiAction } from '../ui-action/internal-api';
 import { Cancellable } from './cancellable';
 

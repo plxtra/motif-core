@@ -1,4 +1,5 @@
-import { BadnessMappedComparableList, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '../sys/internal-api';
+import { Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { BadnessMappedComparableList } from '../sys/internal-api';
 import { Scan } from './scan';
 import { ScanList } from './scan-list';
 

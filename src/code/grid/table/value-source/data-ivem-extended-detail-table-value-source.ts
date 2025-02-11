@@ -1,5 +1,5 @@
+import { AssertInternalError, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi/internal-api';
-import { AssertInternalError, Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
 import { DataIvemExtendedDetailTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,

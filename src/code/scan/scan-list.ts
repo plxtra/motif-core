@@ -1,6 +1,7 @@
+import { AssertInternalError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { AdiService, ScanDescriptorsDataDefinition, ScanStatusedDescriptor, ScanStatusedDescriptorsDataItem } from '../adi/internal-api';
 import { RankedDataIvemIdListDirectoryItem } from '../services/ranked-data-ivem-id-list-directory-item';
-import { AssertInternalError, Badness, ErrorCode, Integer, LockOpenList, MultiEvent, UnreachableCaseError, UsableListChangeTypeId, ZenithDataError } from '../sys/internal-api';
+import { Badness, ErrorCode, LockOpenList, ZenithDataError } from '../sys/internal-api';
 import { Scan } from './scan';
 
 export class ScanList extends LockOpenList<Scan, RankedDataIvemIdListDirectoryItem> {

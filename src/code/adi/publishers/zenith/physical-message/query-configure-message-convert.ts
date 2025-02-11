@@ -1,4 +1,5 @@
-import { AssertInternalError, ErrorCode, Ok, Result, SysTick, ZenithDataError } from '../../../../sys/internal-api';
+import { AssertInternalError, Ok, Result, SysTick } from '@xilytix/sysutils';
+import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, RequestErrorDataMessages } from '../../../common/internal-api';
 import { ZenithQueryConfigureDataDefinition } from '../zenith-data-definitions';
 import { ZenithQueryConfigureDataMessage } from '../zenith-data-messages';

@@ -1,7 +1,6 @@
 import { RevDataServer, RevRectangle, RevStandardCheckboxPainter, RevViewCell } from '@xilytix/revgrid';
-import { IndexSignatureHack } from '@xilytix/sysutils';
+import { AssertInternalError, IndexSignatureHack, Integer } from '@xilytix/sysutils';
 import { SettingsService, TextFormattableValue } from '../../../../services/internal-api';
-import { AssertInternalError, Integer } from '../../../../sys/internal-api';
 import { GridField } from '../../../field/internal-api';
 import { SourcedFieldGrid } from '../../adapted-revgrid/sourced-field-grid';
 import { AdaptedRevgridBehavioredColumnSettings } from '../../settings/internal-api';

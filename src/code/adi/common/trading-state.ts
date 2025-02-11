@@ -1,5 +1,5 @@
+import { EnumInfoOutOfOrderError, Integer } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { EnumInfoOutOfOrderError, Integer } from '../../sys/internal-api';
 
 export interface TradingState {
     name: string;

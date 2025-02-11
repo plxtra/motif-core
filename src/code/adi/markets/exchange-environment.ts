@@ -1,5 +1,12 @@
+import {
+    EnumInfoOutOfOrderError,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { Correctness, CorrectnessId, EnumInfoOutOfOrderError, FieldDataTypeId, Integer, KeyedCorrectnessListItem, MultiEvent } from '../../sys/internal-api';
+import {
+    FieldDataTypeId
+} from "../../sys/internal-api";
 import { ExchangeEnvironmentZenithCode } from '../common/internal-api';
 // eslint-disable-next-line import/no-cycle
 import { Exchange } from './exchange';
@@ -11,7 +18,7 @@ import { TradingMarket } from './trading-market';
 import { ZenithCodedEnvironment } from './zenith-coded-environment';
 // eslint-disable-next-line import/no-cycle
 
-export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrectnessListItem {
+export class ExchangeEnvironment implements ZenithCodedEnvironment {
     readonly mapKey: string;
     readonly display: string;
     readonly production: boolean;
@@ -22,13 +29,9 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
 
     private _destroyed = false;
 
-    private _usable = false;
-    private _correctnessId: CorrectnessId = CorrectnessId.Suspect;
-
     private _beginChangeCount = 0;
     private _changedValueFieldIds = new Array<ExchangeEnvironment.FieldId>();
 
-    private readonly _correctnessChangedEvent = new MultiEvent<ExchangeEnvironment.CorrectnessChangedEventHandler>();
     private readonly _fieldValuesChangedMultiEvent = new MultiEvent<ExchangeEnvironment.FieldValuesChangedHandler>();
 
     constructor(
@@ -54,9 +57,6 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
     }
 
     get destroyed(): boolean { return this._destroyed; }
-
-    get usable() { return this._usable; }
-    get correctnessId(): CorrectnessId { return this._correctnessId; }
 
     get exchangeCount(): number { return this._exchanges.length; }
     get exchanges(): readonly Exchange[] { return this._exchanges; }
@@ -108,35 +108,12 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
         this.endChange();
     }
 
-    setListCorrectness(value: CorrectnessId) {
-        if (value !== this._correctnessId) {
-            this._correctnessId = value;
-            this._usable = Correctness.idIsUsable(value);
-            this.notifyCorrectnessChanged();
-        }
-    }
-
-    subscribeCorrectnessChangedEvent(handler: Exchange.CorrectnessChangedEventHandler) {
-        return this._correctnessChangedEvent.subscribe(handler);
-    }
-
-    unsubscribeCorrectnessChangedEvent(subscriptionId: MultiEvent.SubscriptionId) {
-        this._correctnessChangedEvent.unsubscribe(subscriptionId);
-    }
-
     subscribeFieldValuesChangedEvent(handler: ExchangeEnvironment.FieldValuesChangedHandler) {
         return this._fieldValuesChangedMultiEvent.subscribe(handler);
     }
 
     unsubscribeFieldValuesChangedEvent(subscriptionId: MultiEvent.SubscriptionId) {
         this._fieldValuesChangedMultiEvent.unsubscribe(subscriptionId);
-    }
-
-    private notifyCorrectnessChanged() {
-        const handlers = this._correctnessChangedEvent.copyHandlers();
-        for (const handler of handlers) {
-            handler();
-        }
     }
 
     private notifyFieldValuesChanged(changedValueFieldIds: readonly ExchangeEnvironment.FieldId[]) {
@@ -269,7 +246,6 @@ export namespace ExchangeEnvironment {
 
     export function createUnknown(zenithCode: ExchangeEnvironmentZenithCode) {
         const result = new ExchangeEnvironment(zenithCode, true, undefined, []);
-        result.setListCorrectness(CorrectnessId.Error);
         return result;
     }
 

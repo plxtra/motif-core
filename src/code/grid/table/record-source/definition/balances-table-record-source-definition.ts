@@ -1,6 +1,6 @@
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { PickEnum } from '@xilytix/sysutils';
 import { Balances, BrokerageAccount, BrokerageAccountGroup } from '../../../../adi/internal-api';
-import { PickEnum } from '../../../../sys/internal-api';
 import {
     BalancesTableFieldSourceDefinition,
     BrokerageAccountTableFieldSourceDefinition,

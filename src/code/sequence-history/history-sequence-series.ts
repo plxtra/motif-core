@@ -1,4 +1,4 @@
-import { Integer, MultiEvent } from '../sys/internal-api';
+import { Integer, MultiEvent } from '@xilytix/sysutils';
 import { HistorySequenceSeriesInterface } from './history-sequence-series-interface';
 import { HistorySequencer } from './history-sequencer';
 

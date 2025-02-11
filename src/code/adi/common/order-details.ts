@@ -1,4 +1,4 @@
-import { Integer, newUndefinableDate, newUndefinableDecimal, SysDecimal } from '../../sys/internal-api';
+import { Integer, newUndefinableDate, newUndefinableDecimal, SysDecimal } from '@xilytix/sysutils';
 import {
     IvemClassId, OrderInstructionId, OrderPriceUnitTypeId, OrderShortSellTypeId, OrderSideId, OrderTypeId, TimeInForceId
 } from './data-types';

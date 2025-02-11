@@ -1,7 +1,8 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
 import { AdiService, Feed, FeedsDataDefinition, FeedsDataItem } from '../../../adi/internal-api';
 import { TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, Integer, KeyedCorrectnessList, LockOpenListItem, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessBadness, KeyedCorrectnessList } from '../../../sys/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

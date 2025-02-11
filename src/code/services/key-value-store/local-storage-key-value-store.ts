@@ -1,4 +1,4 @@
-import { Ok, Result } from '../../sys/internal-api';
+import { Ok, Result } from '@xilytix/sysutils';
 import { KeyValueStore } from './key-value-store';
 
 export class LocalStorageKeyValueStore implements KeyValueStore {

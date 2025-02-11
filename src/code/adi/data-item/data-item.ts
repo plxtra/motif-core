@@ -1,4 +1,5 @@
-import { assert, Badness, CorrectnessBadness, delay1Tick, Integer, MultiEvent, SysTick } from '../../sys/internal-api';
+import { delay1Tick, Integer, MultiEvent, SysTick } from '@xilytix/sysutils';
+import { assert, Badness, CorrectnessBadness } from '../../sys/internal-api';
 import {
     AdiPublisher,
     DataChannel,

@@ -1,4 +1,4 @@
-import { Err, Integer, Ok, Result, SourceTzOffsetDate, UnreachableCaseError } from '../../sys/internal-api';
+import { Err, Integer, Ok, Result, SourceTzOffsetDate, UnreachableCaseError } from '@xilytix/sysutils';
 import { ScanFormula } from '../formula/internal-api';
 import { ScanConditionSetLoadError, ScanConditionSetLoadErrorTypeId } from './common/internal-api';
 import {

@@ -1,11 +1,13 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { Feed } from '../../../../adi/internal-api';
 import {
     AssertInternalError,
-    FieldDataType,
-    FieldDataTypeId,
     Integer,
     UnreachableCaseError
+} from '@xilytix/sysutils';
+import { Feed } from '../../../../adi/internal-api';
+import {
+    FieldDataType,
+    FieldDataTypeId,
 } from "../../../../sys/internal-api";
 import {
     CorrectnessTableField,

@@ -1,4 +1,5 @@
-import { Correctness, CorrectnessRecord, MultiEvent } from '../../../sys/internal-api';
+import { MultiEvent } from '@xilytix/sysutils';
+import { Correctness, CorrectnessRecord } from '../../../sys/internal-api';
 import { TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';
 

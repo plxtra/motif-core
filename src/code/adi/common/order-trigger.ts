@@ -1,4 +1,3 @@
-import { StringId, Strings } from '../../res/internal-api';
 import {
     EnumInfoOutOfOrderError,
     SysDecimal,
@@ -6,7 +5,8 @@ import {
     isDecimalEqual,
     isUndefinableDecimalEqual,
     newUndefinableDecimal
-} from '../../sys/internal-api';
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
 import { Movement, MovementId, OrderTriggerTypeId } from './data-types';
 
 export abstract class OrderTrigger {

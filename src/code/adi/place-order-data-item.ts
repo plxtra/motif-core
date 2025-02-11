@@ -1,4 +1,4 @@
-import { SysDecimal } from '../sys/internal-api';
+import { SysDecimal } from '@xilytix/sysutils';
 import { DataDefinition, DataMessage, DataMessageTypeId, OrderRequestTypeId, PlaceOrderResponseDataMessage } from './common/internal-api';
 import { OrderRequestDataItem } from './order-request-data-item';
 

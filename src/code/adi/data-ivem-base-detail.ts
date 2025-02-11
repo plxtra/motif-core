@@ -1,5 +1,6 @@
+import { EnumInfoOutOfOrderError, MultiEvent } from '@xilytix/sysutils';
 import { StringId, Strings } from '../res/internal-api';
-import { EnumInfoOutOfOrderError, FieldDataTypeId, MultiEvent } from '../sys/internal-api';
+import { FieldDataTypeId } from '../sys/internal-api';
 import {
     DataIvemAlternateCodes,
     IvemClassId,

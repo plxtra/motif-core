@@ -1,4 +1,5 @@
 import {
+    AssertInternalError,
     Integer,
     Logger,
     mSecsPerHour,
@@ -8,10 +9,7 @@ import {
     SysTick,
     UnreachableCaseError
 } from '@xilytix/sysutils';
-import {
-    AssertInternalError,
-    WebsocketCloseCode
-} from '../../../sys/internal-api';
+import { WebsocketCloseCode } from '../../../sys/internal-api';
 import { AdiPublisher } from '../../common/adi-publisher';
 import {
     AdiPublisherSubscription,

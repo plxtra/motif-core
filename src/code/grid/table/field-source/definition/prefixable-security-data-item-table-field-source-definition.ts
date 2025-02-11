@@ -1,12 +1,14 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { SecurityDataItem } from '../../../../adi/internal-api';
 import {
     AssertInternalError,
-    FieldDataType,
-    FieldDataTypeId,
     Integer,
     UnexpectedCaseError,
     UnreachableCaseError
+} from '@xilytix/sysutils';
+import { SecurityDataItem } from '../../../../adi/internal-api';
+import {
+    FieldDataType,
+    FieldDataTypeId,
 } from "../../../../sys/internal-api";
 import {
     BooleanCorrectnessTableField,

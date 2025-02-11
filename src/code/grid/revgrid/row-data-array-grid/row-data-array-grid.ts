@@ -6,8 +6,8 @@ import {
     RevSingleHeadingDataRowArraySourcedFieldGrid,
     RevSubgrid
 } from '@xilytix/revgrid';
+import { Integer, MultiEvent } from '@xilytix/sysutils';
 import { SettingsService } from '../../../services/internal-api';
-import { Integer, MultiEvent } from '../../../sys/internal-api';
 import { GridField } from '../../field/internal-api';
 import { SourcedFieldGrid } from '../adapted-revgrid/internal-api';
 import { AdaptedRevgridBehavioredColumnSettings, AdaptedRevgridBehavioredGridSettings } from '../settings/internal-api';

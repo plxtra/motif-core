@@ -1,5 +1,5 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { ScanList, ScansService } from '../scan/internal-api';
-import { MultiEvent } from '../sys/internal-api';
 
 export class RankedDataIvemIdListsService /* extends LockOpenList<RankedDataIvemIdList>*/ {
     private readonly _scanList: ScanList;

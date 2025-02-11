@@ -1,7 +1,8 @@
 import { RevColumnLayoutDefinition, RevRecordSourcedFieldDefinition, RevSourcedFieldDefinition } from '@xilytix/revgrid';
+import { UnreachableCaseError } from '@xilytix/sysutils';
 import { OrderSideId } from '../../../../adi/internal-api';
 import { TextFormattableValue } from '../../../../services/internal-api';
-import { CorrectnessId, UnreachableCaseError } from '../../../../sys/internal-api';
+import { CorrectnessId } from '../../../../sys/internal-api';
 import { AllowedGridField } from '../../../field/internal-api';
 import { DepthSideGridField } from '../depth-side-grid-field';
 import { ShortDepthRecord } from './short-depth-record';

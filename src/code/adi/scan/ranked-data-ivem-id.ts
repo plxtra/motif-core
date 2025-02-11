@@ -1,13 +1,15 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
+import {
+    EnumInfoOutOfOrderError,
+    Integer,
+    Mappable,
+    MultiEvent,
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/i18n-strings';
 import {
     CorrectnessId,
     CorrectnessRecord,
-    EnumInfoOutOfOrderError,
     FieldDataTypeId,
-    Integer,
-    Mappable,
-    MultiEvent,
 } from "../../sys/internal-api";
 import { DataIvemId } from '../symbol-id/internal-api';
 

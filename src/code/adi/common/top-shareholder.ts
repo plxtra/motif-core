@@ -1,5 +1,6 @@
+import { EnumInfoOutOfOrderError, Integer, MapKey, MultiEvent } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { EnumInfoOutOfOrderError, FieldDataTypeId, Integer, MapKey, MultiEvent } from '../../sys/internal-api';
+import { FieldDataTypeId, } from '../../sys/internal-api';
 
 export class TopShareholder {
     name?: string;

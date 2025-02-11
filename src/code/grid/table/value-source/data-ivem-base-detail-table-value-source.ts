@@ -1,5 +1,6 @@
+import { CommaText, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { DataIvemBaseDetail } from '../../../adi/internal-api';
-import { CommaText, CorrectnessRecord, Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessRecord } from '../../../sys/internal-api';
 import { DataIvemBaseDetailTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

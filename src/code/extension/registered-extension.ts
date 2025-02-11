@@ -1,4 +1,5 @@
-import { ExtensionHandle, MultiEvent } from '../sys/internal-api';
+import { MultiEvent } from '@xilytix/sysutils';
+import { ExtensionHandle } from '../sys/internal-api';
 import { ExtensionInfo } from './extension-info';
 
 /** @public */

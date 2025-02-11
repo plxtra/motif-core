@@ -1,11 +1,13 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { StringId, Strings } from '../../../res/internal-api';
 import {
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     IndexedRecord,
     Integer,
     MultiEvent,
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../../res/internal-api';
+import {
+    FieldDataTypeId,
 } from "../../../sys/internal-api";
 import { GridField } from '../../field/internal-api';
 

@@ -1,4 +1,4 @@
-import { AssertInternalError } from '../sys/internal-api';
+import { AssertInternalError } from '@xilytix/sysutils';
 import { Command } from './command';
 
 export interface InternalCommand extends Command {

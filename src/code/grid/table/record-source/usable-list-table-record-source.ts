@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { Integer, LockOpenListItem, MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
 import { TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, Integer, LockOpenListItem, MultiEvent, UsableList, UsableListChangeTypeId } from '../../../sys/internal-api';
+import { CorrectnessBadness, UsableList } from '../../../sys/internal-api';
 import { TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { UsableListTableRecordSourceDefinition } from './definition/internal-api';
 import { TableRecordSource } from './table-record-source';

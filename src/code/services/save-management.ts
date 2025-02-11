@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, MultiEvent, Result } from '../sys/internal-api';
+import { EnumInfoOutOfOrderError, MultiEvent, Result } from '@xilytix/sysutils';
 
 export interface SaveManagement {
     save(): Promise<Result<void>>;

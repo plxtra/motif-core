@@ -1,6 +1,6 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { SelectItemsUiAction } from '@xilytix/ui-action';
 import { Exchange, MarketsService } from '../adi/internal-api';
-import { MultiEvent } from '../sys/internal-api';
 
 /** @public */
 export class ExchangeListSelectItemsUiAction extends SelectItemsUiAction<Exchange> {

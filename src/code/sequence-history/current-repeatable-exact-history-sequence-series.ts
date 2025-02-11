@@ -1,4 +1,4 @@
-import { ComparableList, Integer, MultiEvent } from '../sys/internal-api';
+import { ComparableList, Integer, MultiEvent } from '@xilytix/sysutils';
 import { NumberHistorySequenceSeriesInterface } from './number-history-sequence-series-interface';
 import { RepeatableExactHistorySequenceSeries } from './repeatable-exact-history-sequence-series';
 import { RepeatableExactHistorySequencer } from './repeatable-exact-history-sequencer';

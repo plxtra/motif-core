@@ -1,4 +1,5 @@
-import { assert, AssertInternalError, defined, Integer, SourceTzOffsetDateTime } from '../sys/internal-api';
+import { AssertInternalError, Integer, SourceTzOffsetDateTime } from '@xilytix/sysutils';
+import { assert, defined } from '../sys/internal-api';
 import {
     ChartHistoryDataMessage,
     ChartIntervalId,

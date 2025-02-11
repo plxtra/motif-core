@@ -1,10 +1,12 @@
 import {
     AssertInternalError,
     EnumInfoOutOfOrderError,
-    ErrorCode,
     Guid,
     Integer,
     MultiEvent,
+} from '@xilytix/sysutils';
+import {
+    ErrorCode,
     ZenithDataError
 } from "../../sys/internal-api";
 import { ActiveFaultedStatusId, ScanStatusedDescriptorsDataMessage } from '../common/internal-api';

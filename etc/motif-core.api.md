@@ -4,147 +4,35 @@
 
 ```ts
 
-import { addDays } from '@xilytix/sysutils';
-import { addToArrayByPush } from '@xilytix/sysutils';
-import { addToArrayUniquely } from '@xilytix/sysutils';
-import { addToCapacitisedArrayUniquely } from '@xilytix/sysutils';
-import { addToGrow15ArrayUniquely } from '@xilytix/sysutils';
 import { AnchoredRecordsList } from '@xilytix/sysutils';
-import { anyBinarySearch } from '@xilytix/sysutils';
 import { AssertInternalError } from '@xilytix/sysutils';
 import { BinaryFind } from '@xilytix/sysutils';
 import { BinarySearchResult } from '@xilytix/sysutils';
-import { BooleanOrUndefined } from '@xilytix/sysutils';
 import { BooleanUiAction } from '@xilytix/ui-action';
-import { calculateIntlNumberFormatCharParts } from '@xilytix/sysutils';
 import { ChangeSubscribableComparableList } from '@xilytix/sysutils';
-import { checkEscapeCharForRegexInsideCharClass } from '@xilytix/sysutils';
-import { checkEscapeCharForRegexOutsideCharClass } from '@xilytix/sysutils';
-import { checkLimitTextLength } from '@xilytix/sysutils';
-import { cloneDecimal } from '@xilytix/sysutils';
 import { CommaText } from '@xilytix/sysutils';
 import { ComparableList } from '@xilytix/sysutils';
-import { compareArray } from '@xilytix/sysutils';
-import { compareBoolean } from '@xilytix/sysutils';
-import { compareDate } from '@xilytix/sysutils';
-import { compareDecimal } from '@xilytix/sysutils';
-import { compareEnum } from '@xilytix/sysutils';
 import { CompareFtn } from '@xilytix/sysutils';
-import { compareInteger } from '@xilytix/sysutils';
-import { compareNumber } from '@xilytix/sysutils';
-import { compareString } from '@xilytix/sysutils';
-import { compareUndefinableBoolean } from '@xilytix/sysutils';
-import { compareUndefinableDate } from '@xilytix/sysutils';
-import { compareUndefinableDecimal } from '@xilytix/sysutils';
-import { compareUndefinableEnum } from '@xilytix/sysutils';
-import { compareUndefinableInteger } from '@xilytix/sysutils';
-import { compareUndefinableNumber } from '@xilytix/sysutils';
-import { compareUndefinableString } from '@xilytix/sysutils';
-import { compareValue } from '@xilytix/sysutils';
 import { ComparisonResult } from '@xilytix/sysutils';
-import { concatenateArrayUniquely } from '@xilytix/sysutils';
-import { concatenateElementToArrayUniquely } from '@xilytix/sysutils';
-import { copyJson } from '@xilytix/sysutils';
-import { copyJsonValue } from '@xilytix/sysutils';
 import { CorrectnessState } from '@xilytix/sysutils';
-import { createNumberGroupCharRemoveRegex } from '@xilytix/sysutils';
-import { createRandomUrlSearch } from '@xilytix/sysutils';
-import { DateOrDateTime } from '@xilytix/sysutils';
-import { dateToDashedYyyyMmDd } from '@xilytix/sysutils';
-import { dateToDateOnlyIsoString } from '@xilytix/sysutils';
-import { dateToUtcYyyyMmDd } from '@xilytix/sysutils';
-import { DayOfWeek } from '@xilytix/sysutils';
-import { deepExtendObject } from '@xilytix/sysutils';
-import { deepExtendValue } from '@xilytix/sysutils';
-import { delay1Tick } from '@xilytix/sysutils';
-import { earliestBinarySearch } from '@xilytix/sysutils';
-import { EnumInfoOutOfOrderError } from '@xilytix/sysutils';
 import { Err } from '@xilytix/sysutils';
-import { getElementDocumentPosition } from '@xilytix/sysutils';
-import { getElementDocumentPositionRect } from '@xilytix/sysutils';
-import { getErrorMessage } from '@xilytix/sysutils';
-import { getUniqueElementArraysOverlapElements } from '@xilytix/sysutils';
 import { Guid } from '@xilytix/sysutils';
-import { hoursPerDay } from '@xilytix/sysutils';
-import { HtmlTypes } from '@xilytix/sysutils';
-import { incDateByDays } from '@xilytix/sysutils';
 import { IndexedRecord } from '@xilytix/sysutils';
 import { IndexSignatureHack } from '@xilytix/sysutils';
 import { Integer } from '@xilytix/sysutils';
-import { InternalError } from '@xilytix/sysutils';
-import { IntlNumberFormatCharParts } from '@xilytix/sysutils';
-import { isArrayEqual } from '@xilytix/sysutils';
-import { isArrayEqualUniquely } from '@xilytix/sysutils';
-import { isDateEqual } from '@xilytix/sysutils';
-import { isDecimalEqual } from '@xilytix/sysutils';
-import { isDecimalGreaterThan } from '@xilytix/sysutils';
-import { isDecimalLessThan } from '@xilytix/sysutils';
-import { isDigitCharCode } from '@xilytix/sysutils';
-import { isIntlFormattedInteger } from '@xilytix/sysutils';
-import { isIntlFormattedNumber } from '@xilytix/sysutils';
-import { isPartialIntlFormattedInteger } from '@xilytix/sysutils';
-import { isPartialIntlFormattedNumber } from '@xilytix/sysutils';
-import { isSameDay } from '@xilytix/sysutils';
-import { isSamePossiblyUndefinedArray } from '@xilytix/sysutils';
-import { isStringifiedInteger } from '@xilytix/sysutils';
-import { isStringifiedNumber } from '@xilytix/sysutils';
-import { isStringKeyValueObjectEqual } from '@xilytix/sysutils';
-import { isToday } from '@xilytix/sysutils';
-import { isUndefinableArrayEqual } from '@xilytix/sysutils';
-import { isUndefinableArrayEqualUniquely } from '@xilytix/sysutils';
-import { isUndefinableDateEqual } from '@xilytix/sysutils';
-import { isUndefinableDecimalEqual } from '@xilytix/sysutils';
 import { Json } from '@xilytix/sysutils';
 import { JsonElement } from '@xilytix/sysutils';
-import { JsonValue } from '@xilytix/sysutils';
-import { JsonValueArray } from '@xilytix/sysutils';
-import { Line } from '@xilytix/sysutils';
 import { LockItemByKeyList } from '@xilytix/sysutils';
 import { LockOpenListItem } from '@xilytix/sysutils';
-import { LockOpenManager } from '@xilytix/sysutils';
 import { Logger } from '@xilytix/sysutils';
 import { MapKey } from '@xilytix/sysutils';
 import { Mappable } from '@xilytix/sysutils';
 import { MappedComparableList } from '@xilytix/sysutils';
-import { minsPerDay } from '@xilytix/sysutils';
-import { minsPerHour } from '@xilytix/sysutils';
 import { ModifierKey } from '@xilytix/sysutils';
-import { ModifierKeyId } from '@xilytix/sysutils';
-import { moveElementInArray } from '@xilytix/sysutils';
-import { moveElementsInArray } from '@xilytix/sysutils';
-import { moveIndexedElementsInArrayOnePositionTowardsEndWithSquash } from '@xilytix/sysutils';
-import { moveIndexedElementsInArrayOnePositionTowardsStartWithSquash } from '@xilytix/sysutils';
-import { mSecsPerDay } from '@xilytix/sysutils';
-import { mSecsPerHour } from '@xilytix/sysutils';
-import { mSecsPerMin } from '@xilytix/sysutils';
-import { mSecsPerSec } from '@xilytix/sysutils';
 import { MultiEvent } from '@xilytix/sysutils';
-import { newDate } from '@xilytix/sysutils';
-import { newDecimal } from '@xilytix/sysutils';
-import { newGuid } from '@xilytix/sysutils';
-import { newNowDate } from '@xilytix/sysutils';
-import { newNullDate } from '@xilytix/sysutils';
-import { newUndefinableDate } from '@xilytix/sysutils';
-import { newUndefinableDecimal } from '@xilytix/sysutils';
-import { newUndefinableNullableDecimal } from '@xilytix/sysutils';
-import { NotImplementedError } from '@xilytix/sysutils';
-import { nullDate } from '@xilytix/sysutils';
-import { nullDecimal } from '@xilytix/sysutils';
-import { numberToPixels } from '@xilytix/sysutils';
 import { Ok } from '@xilytix/sysutils';
-import { OptionalKeys } from '@xilytix/sysutils';
-import { OptionalValues } from '@xilytix/sysutils';
-import { parseIntStrict } from '@xilytix/sysutils';
-import { parseNumberStrict } from '@xilytix/sysutils';
 import { PickEnum } from '@xilytix/sysutils';
-import { PickExcludedEnum } from '@xilytix/sysutils';
-import { priorityCompareInteger } from '@xilytix/sysutils';
-import { rangedAnyBinarySearch } from '@xilytix/sysutils';
-import { rangedEarliestBinarySearch } from '@xilytix/sysutils';
-import { rangedQuickSort } from '@xilytix/sysutils';
 import { RecordList } from '@xilytix/sysutils';
-import { Rect } from '@xilytix/sysutils';
-import { removeFromArray } from '@xilytix/sysutils';
 import { Result } from '@xilytix/sysutils';
 import { RevAllowedRecordSourcedField } from '@xilytix/revgrid';
 import { RevAllowedRecordSourcedFieldsColumnLayoutDefinition } from '@xilytix/revgrid';
@@ -220,30 +108,14 @@ import { RevTextFormatter } from '@xilytix/revgrid';
 import { RevTextTruncateTypeId } from '@xilytix/revgrid';
 import { RevViewCell } from '@xilytix/revgrid';
 import { RevViewLayout } from '@xilytix/revgrid';
-import { RGB } from '@xilytix/sysutils';
-import { secsPerDay } from '@xilytix/sysutils';
-import { secsPerHour } from '@xilytix/sysutils';
-import { secsPerMin } from '@xilytix/sysutils';
 import { SelectItemsUiAction } from '@xilytix/ui-action';
 import { SelectItemUiAction } from '@xilytix/ui-action';
-import { shuffleElementsUpInArray } from '@xilytix/sysutils';
 import { SourceTzOffsetDate } from '@xilytix/sysutils';
 import { SourceTzOffsetDateTime } from '@xilytix/sysutils';
-import { StringBuilder } from '@xilytix/sysutils';
-import { subtractElementFromArray } from '@xilytix/sysutils';
-import { subtractElementFromArrayUniquely } from '@xilytix/sysutils';
 import { SysDecimal } from '@xilytix/sysutils';
 import { SysDecimalConstructor } from '@xilytix/sysutils';
 import { SysTick } from '@xilytix/sysutils';
-import { testRemoveFromArray } from '@xilytix/sysutils';
-import { TimeSpan } from '@xilytix/sysutils';
-import { tryGetErrorMessage } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
-import { UnexpectedCaseError } from '@xilytix/sysutils';
-import { UnexpectedTypeError } from '@xilytix/sysutils';
-import { uniqueElementArraysOverlap } from '@xilytix/sysutils';
-import { UnreachableCaseError } from '@xilytix/sysutils';
-import { UsableListChangeType } from '@xilytix/sysutils';
 import { UsableListChangeTypeId } from '@xilytix/sysutils';
 
 // Warning: (ae-missing-release-tag) "AccumulationIntervalHistorySequenceSeries" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -375,16 +247,6 @@ export interface AdaptedRevgridOnlyGridSettings extends RevStandardTextPainter.O
     textTruncateTypeId: RevTextTruncateTypeId | undefined;
     verticalOffset: number;
 }
-
-export { addDays }
-
-export { addToArrayByPush }
-
-export { addToArrayUniquely }
-
-export { addToCapacitisedArrayUniquely }
-
-export { addToGrow15ArrayUniquely }
 
 // Warning: (ae-missing-release-tag) "AddToWatchmakerListDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1175,8 +1037,6 @@ export class AmendOrderResponseDataMessage extends OrderResponseDataMessage {
     static readonly typeId = DataMessageTypeId.AmendOrderResponse;
 }
 
-export { anyBinarySearch }
-
 // Warning: (ae-missing-release-tag) "AppStorageService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "AppStorageService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1232,8 +1092,6 @@ export namespace AppStorageService {
 
 // @public (undocumented)
 export function assert(value: boolean, message?: string): void;
-
-export { AssertInternalError }
 
 // @public (undocumented)
 export function assigned<T>(value: T): value is Exclude<T, null | undefined>;
@@ -2391,8 +2249,6 @@ export class BigIntTextFormattableValue extends GenericTextFormattableValue<bigi
     constructor(data: bigint | undefined);
 }
 
-export { BinarySearchResult }
-
 // Warning: (ae-missing-release-tag) "BkgdItemStateColorSchemeGridField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -2419,8 +2275,6 @@ export abstract class BooleanCorrectnessTableValue extends GenericCorrectnessTab
     // (undocumented)
     protected textFormattableValueTypeId: TextFormattableValue.TypeId;
 }
-
-export { BooleanOrUndefined }
 
 // Warning: (ae-missing-release-tag) "BooleanTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -3205,8 +3059,6 @@ export const enum BuyOrSellId {
     Sell = 1
 }
 
-export { calculateIntlNumberFormatCharParts }
-
 // Warning: (ae-missing-release-tag) "CallOrPut" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -3674,8 +3526,6 @@ export class CellPainterFactoryService {
     createTextTextFormattableValueRowDataArrayGrid(grid: RowDataArrayGrid, dataServer: RowDataArrayGridDataServer): TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 }
 
-export { ChangeSubscribableComparableList }
-
 // Warning: (ae-missing-release-tag) "ChartHistoryDataItem" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "ChartHistoryDataItem" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -3937,12 +3787,6 @@ export class CheckboxTextFormattableValueRecordGridCellPainter implements RevCli
     paint(cell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>, prefillColor: string | undefined): number | undefined;
 }
 
-export { checkEscapeCharForRegexInsideCharClass }
-
-export { checkEscapeCharForRegexOutsideCharClass }
-
-export { checkLimitTextLength }
-
 // Warning: (ae-missing-release-tag) "ClassFeedsDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -3995,8 +3839,6 @@ export interface ClearIrrcChange<T> extends IrrcChange<T> {
     // (undocumented)
     typeId: IrrcChangeTypeId.Clear;
 }
-
-export { cloneDecimal }
 
 // Warning: (ae-missing-release-tag) "CloseIntervalHistorySequenceSeries" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CloseIntervalHistorySequenceSeries" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4995,8 +4837,6 @@ export namespace CommandUiAction {
     }
 }
 
-export { CommaText }
-
 // @public (undocumented)
 export class CommaTextErr<T = undefined> extends Err<T> {
     constructor(errorId: CommaText.ErrorId, extraInfo: string);
@@ -5026,48 +4866,8 @@ export namespace CommonStaticInitialise {
     export function initialise(): void;
 }
 
-export { ComparableList }
-
-export { compareArray }
-
-export { compareBoolean }
-
-export { compareDate }
-
-export { compareDecimal }
-
-export { compareEnum }
-
-export { compareInteger }
-
-export { compareNumber }
-
 // @public (undocumented)
 export function comparePriceOrRemainder(left: PriceOrRemainder, right: PriceOrRemainder, lowToHighSorting: boolean): number;
-
-export { compareString }
-
-export { compareUndefinableBoolean }
-
-export { compareUndefinableDate }
-
-export { compareUndefinableDecimal }
-
-export { compareUndefinableEnum }
-
-export { compareUndefinableInteger }
-
-export { compareUndefinableNumber }
-
-export { compareUndefinableString }
-
-export { compareValue }
-
-export { ComparisonResult }
-
-export { concatenateArrayUniquely }
-
-export { concatenateElementToArrayUniquely }
 
 // Warning: (ae-internal-missing-underscore) The name "ConditionCodesDayTradesGridField" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -5083,10 +4883,6 @@ export class ConditionCodesDayTradesGridField extends DayTradesGridField {
 export class ConfigError extends ExternalError {
     constructor(code: ErrorCode, serviceName: string, message: string);
 }
-
-export { copyJson }
-
-export { copyJsonValue }
 
 // Warning: (ae-missing-release-tag) "CopyWatchmakerListDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -5335,8 +5131,6 @@ export interface CorrectnessSettableListItem {
     setListCorrectness(value: CorrectnessId): void;
 }
 
-export { CorrectnessState }
-
 // Warning: (ae-missing-release-tag) "CorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -5451,8 +5245,6 @@ export class CreateNotificationChannelDataMessage extends DataMessage {
     static readonly typeId = DataMessageTypeId.CreateNotificationChannel;
 }
 
-export { createNumberGroupCharRemoveRegex }
-
 // Warning: (ae-missing-release-tag) "CreateOrCopyWatchmakerListDataMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -5463,8 +5255,6 @@ export class CreateOrCopyWatchmakerListDataMessage extends DataMessage {
     // (undocumented)
     static readonly typeId = DataMessageTypeId.CreateOrCopyWatchmakerList;
 }
-
-export { createRandomUrlSearch }
 
 // Warning: (ae-missing-release-tag) "CreateScanDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -7807,8 +7597,6 @@ export namespace DateInRangeScanField {
     export function isConditionEqual(left: DateInRangeScanField, right: DateInRangeScanField, index: Integer): boolean;
 }
 
-export { DateOrDateTime }
-
 // Warning: (ae-missing-release-tag) "DateScanFieldCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "DateScanFieldCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -8027,14 +7815,6 @@ export class DateTimeCorrectnessTableValue extends BaseDateCorrectnessTableValue
 export class DateTimeTextFormattableValue extends GenericTextFormattableValue<Date> {
     constructor(data: Date | undefined);
 }
-
-export { dateToDashedYyyyMmDd }
-
-export { dateToDateOnlyIsoString }
-
-export { dateToUtcYyyyMmDd }
-
-export { DayOfWeek }
 
 // Warning: (ae-missing-release-tag) "DayTradesDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -8322,10 +8102,6 @@ export class DecimalTextFormattableValue extends GenericTextFormattableValue<Sys
     constructor(data: SysDecimal | undefined);
 }
 
-export { deepExtendObject }
-
-export { deepExtendValue }
-
 // @public (undocumented)
 export const defaultAdaptedRevgridColumnSettings: AdaptedRevgridColumnSettings;
 
@@ -8340,8 +8116,6 @@ export const defaultAdaptedRevgridOnlyGridSettings: AdaptedRevgridOnlyGridSettin
 
 // @public (undocumented)
 export function defined<T>(value: T): value is Exclude<T, undefined>;
-
-export { delay1Tick }
 
 // Warning: (ae-missing-release-tag) "DeleteNotificationChannelDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -9064,8 +8838,6 @@ export class DisplayColorSchemeGridField extends ColorSchemeGridField {
     getViewValue(record: ColorSchemeGridRecordStore.Record): StringTextFormattableValue;
 }
 
-export { earliestBinarySearch }
-
 // Warning: (ae-missing-release-tag) "EditableColumnLayoutDefinitionColumn" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EditableColumnLayoutDefinitionColumn" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -9331,8 +9103,6 @@ export abstract class EnumCorrectnessTableValue extends GenericCorrectnessTableV
     protected textFormattableValueTypeId: TextFormattableValue.TypeId;
 }
 
-export { EnumInfoOutOfOrderError }
-
 // Warning: (ae-missing-release-tag) "EnumTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -9356,8 +9126,6 @@ export abstract class EnumTableValue extends GenericTableValue<Integer> {
 // @public (undocumented)
 export class EnumTextFormattableValue extends GenericTextFormattableValue<Integer> {
 }
-
-export { Err }
 
 // @public (undocumented)
 export const enum ErrorCode {
@@ -10558,7 +10326,7 @@ export class ErrorPublisherSubscriptionDataMessage_UserNotAuthorised extends Err
 // Warning: (ae-missing-release-tag) "Exchange" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Exchange implements KeyedCorrectnessListItem {
+export class Exchange {
     constructor(unenvironmentedZenithCode: string, exchangeEnvironment: ExchangeEnvironment, exchangeConfig: MarketsConfig.Exchange | undefined, unknown: boolean);
     // (undocumented)
     readonly abbreviatedDisplay: string;
@@ -10572,8 +10340,6 @@ export class Exchange implements KeyedCorrectnessListItem {
     readonly allowedSymbolSearchFieldIds: readonly SymbolFieldId[];
     // (undocumented)
     beginChange(): void;
-    // (undocumented)
-    get correctnessId(): CorrectnessId;
     // (undocumented)
     get dataMarkets(): readonly DataMarket[];
     // (undocumented)
@@ -10613,13 +10379,9 @@ export class Exchange implements KeyedCorrectnessListItem {
     // (undocumented)
     setIsExchangeEnvironmentDefault(value: boolean): void;
     // (undocumented)
-    setListCorrectness(value: CorrectnessId): void;
-    // (undocumented)
     setSymbologyCode(value: string): void;
     // (undocumented)
     settings: Exchange.Settings | undefined;
-    // (undocumented)
-    subscribeCorrectnessChangedEvent(handler: Exchange.CorrectnessChangedEventHandler): number;
     // (undocumented)
     subscribeFieldValuesChangedEvent(handler: Exchange.FieldValuesChangedHandler): number;
     // (undocumented)
@@ -10631,11 +10393,7 @@ export class Exchange implements KeyedCorrectnessListItem {
     // (undocumented)
     readonly unknown: boolean;
     // (undocumented)
-    unsubscribeCorrectnessChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
-    // (undocumented)
     unsubscribeFieldValuesChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
-    // (undocumented)
-    get usable(): boolean;
     // (undocumented)
     readonly zenithCode: string;
 }
@@ -10736,7 +10494,7 @@ export namespace Exchange {
 // Warning: (ae-missing-release-tag) "ExchangeEnvironment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrectnessListItem {
+export class ExchangeEnvironment implements ZenithCodedEnvironment {
     constructor(zenithCode: ExchangeEnvironmentZenithCode, unknown: boolean, exchangeEnvironmentConfig: MarketsConfig.ExchangeEnvironment | undefined, productionExchangeEnvironmentListZenithCodes: readonly ExchangeEnvironmentZenithCode[]);
     // (undocumented)
     addDataMarket(market: DataMarket): void;
@@ -10746,8 +10504,6 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
     addTradingMarket(market: TradingMarket): void;
     // (undocumented)
     beginChange(): void;
-    // (undocumented)
-    get correctnessId(): CorrectnessId;
     // (undocumented)
     get dataMarketCount(): number;
     // (undocumented)
@@ -10769,10 +10525,6 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
     // (undocumented)
     readonly production: boolean;
     // (undocumented)
-    setListCorrectness(value: CorrectnessId): void;
-    // (undocumented)
-    subscribeCorrectnessChangedEvent(handler: Exchange.CorrectnessChangedEventHandler): number;
-    // (undocumented)
     subscribeFieldValuesChangedEvent(handler: ExchangeEnvironment.FieldValuesChangedHandler): number;
     // (undocumented)
     get tradingMarketCount(): number;
@@ -10781,11 +10533,7 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment, KeyedCorrect
     // (undocumented)
     readonly unknown: boolean;
     // (undocumented)
-    unsubscribeCorrectnessChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
-    // (undocumented)
     unsubscribeFieldValuesChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
-    // (undocumented)
-    get usable(): boolean;
     // (undocumented)
     readonly zenithCode: ExchangeEnvironmentZenithCode;
 }
@@ -12212,16 +11960,8 @@ export abstract class GenericTextFormattableValue<T> extends TextFormattableValu
     isUndefined(): boolean;
 }
 
-export { getElementDocumentPosition }
-
-export { getElementDocumentPositionRect }
-
-export { getErrorMessage }
-
 // @public (undocumented)
 export function getUndefinedNullOrFunctionResult<U, T>(value: U | undefined | null, fn: (x: U) => T): T | undefined | null;
-
-export { getUniqueElementArraysOverlapElements }
 
 // Warning: (ae-missing-release-tag) "GridField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "GridField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -12408,8 +12148,6 @@ export namespace GridTableDefinitionsStaticInitialise {
     // (undocumented)
     export function initialise(): void;
 }
-
-export { Guid }
 
 // @public (undocumented)
 export type Handle = Integer;
@@ -12966,10 +12704,6 @@ export class HoldingTableValueSource extends CorrectnessTableValueSource<Holding
     protected getRecord(): Holding;
 }
 
-export { hoursPerDay }
-
-export { HtmlTypes }
-
 // @public (undocumented)
 export namespace I18nStrings {
     const // (undocumented)
@@ -13226,8 +12960,6 @@ export class ImmediateOrderTrigger extends OrderTrigger {
     get value(): undefined;
 }
 
-export { incDateByDays }
-
 // Warning: (ae-missing-release-tag) "IncDecAction" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -13250,15 +12982,11 @@ export interface Incubator {
     readonly incubating: boolean;
 }
 
-export { IndexedRecord }
-
 // Warning: (ae-missing-release-tag) "IndexedTableRecordDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface IndexedTableRecordDefinition<Record extends IndexedRecord> extends PayloadTableRecordDefinition<Record> {
 }
-
-export { IndexSignatureHack }
 
 // @public (undocumented)
 export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryBehavioredColumnSettings implements AdaptedRevgridBehavioredColumnSettings {
@@ -13390,8 +13118,6 @@ export const enum InstrumentMovementColorSetId {
     // (undocumented)
     European = 1
 }
-
-export { Integer }
 
 // Warning: (ae-missing-release-tag) "IntegerArrayCorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -14019,8 +13745,6 @@ export namespace InternalCommandModule {
     export function initialiseStatic(): void;
 }
 
-export { InternalError }
-
 // Warning: (ae-missing-release-tag) "IntervalHistorySequencer" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "IntervalHistorySequencer" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -14186,8 +13910,6 @@ export namespace IntervalHistorySequenceSeries {
     }
 }
 
-export { IntlNumberFormatCharParts }
-
 // Warning: (ae-missing-release-tag) "invalidDataItemId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -14245,20 +13967,6 @@ export class IrrcFeedSubscriptionDataItem<T> extends FeedSubscriptionDataItem im
     unsubscribeListChangeEvent(subscriptionId: MultiEvent.SubscriptionId): void;
 }
 
-export { isArrayEqual }
-
-export { isArrayEqualUniquely }
-
-export { isDateEqual }
-
-export { isDecimalEqual }
-
-export { isDecimalGreaterThan }
-
-export { isDecimalLessThan }
-
-export { isDigitCharCode }
-
 // Warning: (ae-missing-release-tag) "IsIndexCorrectnessTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -14272,14 +13980,6 @@ export class IsIndexCorrectnessTableValue extends BooleanCorrectnessTableValue {
 export class IsIndexTableValue extends BooleanTableValue {
     constructor();
 }
-
-export { isIntlFormattedInteger }
-
-export { isIntlFormattedNumber }
-
-export { isPartialIntlFormattedInteger }
-
-export { isPartialIntlFormattedNumber }
 
 // @public (undocumented)
 export function isPriceOrRemainderEqual(left: PriceOrRemainder, right: PriceOrRemainder): boolean;
@@ -14299,10 +13999,6 @@ export class IsReadableColorSchemeGridField extends ColorSchemeGridField {
 export class IsReadableTextFormattableValue extends BooleanTextFormattableValue {
     constructor(data: boolean | undefined);
 }
-
-export { isSameDay }
-
-export { isSamePossiblyUndefinedArray }
 
 // Warning: (ae-missing-release-tag) "IsScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "IsScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -14379,12 +14075,6 @@ export namespace IsScanFieldCondition {
     export type OperatorId = Operands.OperatorId;
 }
 
-export { isStringifiedInteger }
-
-export { isStringifiedNumber }
-
-export { isStringKeyValueObjectEqual }
-
 // Warning: (ae-missing-release-tag) "isStringNumberBooleanNestArrayElementEqual" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -14394,16 +14084,6 @@ export function isStringNumberBooleanNestArrayElementEqual(leftElement: unknown,
 //
 // @public (undocumented)
 export function isStringNumberBooleanNestArrayEqual(left: unknown[], right: unknown[]): boolean;
-
-export { isToday }
-
-export { isUndefinableArrayEqual }
-
-export { isUndefinableArrayEqualUniquely }
-
-export { isUndefinableDateEqual }
-
-export { isUndefinableDecimalEqual }
 
 // Warning: (ae-missing-release-tag) "isUndefinableStringNumberBooleanNestArrayEqual" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -14630,10 +14310,6 @@ export namespace IvemIdUiAction {
     export type ValuePushEventHander = (this: void, value: IvemId | undefined, edited: boolean, selectAll: boolean) => void;
 }
 
-export { Json }
-
-export { JsonElement }
-
 // @public (undocumented)
 export class JsonElementErr<T = undefined> extends Err<T> {
     constructor(errorId: JsonElement.ErrorId, context?: string);
@@ -14664,10 +14340,6 @@ export type JsonElementResult<T> = Ok<T, string> | JsonElementErr<T>;
 export class JsonLoadError extends ExternalError {
     constructor(code: ErrorCode, message?: string);
 }
-
-export { JsonValue }
-
-export { JsonValueArray }
 
 // @public (undocumented)
 export class KeyboardService {
@@ -14953,8 +14625,6 @@ export namespace LatestTradingDayTradesDataItem {
     export type RecordChangeEventHandler = (this: void, index: Integer, oldRecord: TradesDataItem.Record) => void;
 }
 
-export { Line }
-
 // Warning: (ae-missing-release-tag) "LockerScanAttachedNotificationChannel" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "LockerScanAttachedNotificationChannel" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -15184,15 +14854,11 @@ export namespace LockOpenList {
     export type ListChangeEventHandler = (this: void, listChangeTypeId: UsableListChangeTypeId, index: Integer, count: Integer) => void;
 }
 
-export { LockOpenListItem }
-
 // Warning: (ae-missing-release-tag) "LockOpenListTableRecordSource" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export abstract class LockOpenListTableRecordSource<Item extends LockOpenListItem<Item>, List extends BadnessList<Item>> extends SubscribeBadnessListTableRecordSource<LockOpenListItem<Item>, List> {
 }
-
-export { LockOpenManager }
 
 // Warning: (ae-missing-release-tag) "LockOpenNotificationChannel" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "LockOpenNotificationChannel" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -15410,12 +15076,6 @@ export interface ManagedFundTransaction extends Transaction {
     // (undocumented)
     unitValue: SysDecimal;
 }
-
-export { MapKey }
-
-export { Mappable }
-
-export { MappedComparableList }
 
 // Warning: (ae-missing-release-tag) "Market" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Market" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -16417,7 +16077,13 @@ export namespace MarketsService {
     export class AllKnownDataMarkets extends AllKnownMarkets<DataMarket> {
         constructor(_adiService: AdiService, compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: DataMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer, unknownMarkets: MarketsService.UnknownDataMarkets, defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownDataMarkets);
         // (undocumented)
+        createEmptyCopy(): AllKnownDataMarkets;
+        // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): DataMarket;
+        // (undocumented)
+        readonly defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownDataMarkets;
+        // (undocumented)
+        readonly unknownMarkets: MarketsService.UnknownDataMarkets;
     }
     // (undocumented)
     export abstract class AllKnownMarkets<T extends Market> extends KnownMarkets<T> {
@@ -16431,7 +16097,13 @@ export namespace MarketsService {
     export class AllKnownTradingMarkets extends AllKnownMarkets<TradingMarket> {
         constructor(compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: TradingMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer, unknownMarkets: UnknownTradingMarkets, defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownTradingMarkets, _bestLitUnknownDataMarket: DataMarket);
         // (undocumented)
+        createEmptyCopy(): AllKnownTradingMarkets;
+        // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): TradingMarket;
+        // (undocumented)
+        readonly defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownTradingMarkets;
+        // (undocumented)
+        readonly unknownMarkets: MarketsService.UnknownTradingMarkets;
     }
     // (undocumented)
     export type ChangeBegunEventHandler = (this: void) => void;
@@ -16469,7 +16141,11 @@ export namespace MarketsService {
     export class DefaultExchangeEnvironmentKnownDataMarkets extends DefaultExchangeEnvironmentKnownMarkets<DataMarket> {
         constructor(_adiService: AdiService, compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: DataMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer, unknownMarkets: MarketsService.UnknownDataMarkets);
         // (undocumented)
+        createEmptyCopy(): DefaultExchangeEnvironmentKnownDataMarkets;
+        // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): DataMarket;
+        // (undocumented)
+        readonly unknownMarkets: MarketsService.UnknownDataMarkets;
     }
     // (undocumented)
     export abstract class DefaultExchangeEnvironmentKnownMarkets<T extends Market> extends KnownMarkets<T> {
@@ -16480,7 +16156,11 @@ export namespace MarketsService {
     export class DefaultExchangeEnvironmentKnownTradingMarkets extends DefaultExchangeEnvironmentKnownMarkets<TradingMarket> {
         constructor(compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: TradingMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer, unknownMarkets: UnknownTradingMarkets, _bestLitUnknownDataMarket: DataMarket);
         // (undocumented)
+        createEmptyCopy(): DefaultExchangeEnvironmentKnownTradingMarkets;
+        // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): TradingMarket;
+        // (undocumented)
+        readonly unknownMarkets: MarketsService.UnknownTradingMarkets;
     }
     // (undocumented)
     export class ExchangeEnvironments extends ZenithCodedEnvironments<ExchangeEnvironment> {
@@ -16566,16 +16246,26 @@ export namespace MarketsService {
         removeRangeFromMarket(market: DataMarket, idx: Integer, count: Integer): void;
     }
     // (undocumented)
-    export abstract class Markets<T extends Market> extends BadnessComparableList<T> {
+    export abstract class Markets<T extends Market> extends BadnessComparableList<T, Market> {
         constructor(marketTypeId: Market.TypeId, compareItemsFtn: CompareFtn<Market>, _compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: T, _beginChangeEventer: Markets.BeginChangeEventer, _endChangeEventer: Markets.EndChangeEventer, _getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, _getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer);
         // (undocumented)
         protected abstract addUnknownMarket(market: T): void;
+        // (undocumented)
+        protected readonly _beginChangeEventer: Markets.BeginChangeEventer;
         // (undocumented)
         binaryFind(zenithCode: string): BinaryFind.Result;
         // (undocumented)
         binaryInsert(item: T): void;
         // (undocumented)
+        clone(): Markets<T>;
+        // (undocumented)
+        protected readonly _compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn;
+        // (undocumented)
+        abstract createEmptyCopy(compareFtn: CompareFtn<Market>): Markets<T>;
+        // (undocumented)
         protected abstract createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): T;
+        // (undocumented)
+        protected readonly _endChangeEventer: Markets.EndChangeEventer;
         // (undocumented)
         readonly exchanges: Exchanges;
         // (undocumented)
@@ -16592,6 +16282,10 @@ export namespace MarketsService {
         readonly genericUnknownExchangeEnvironment: ExchangeEnvironment;
         // (undocumented)
         readonly genericUnknownMarket: T;
+        // (undocumented)
+        protected readonly _getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer;
+        // (undocumented)
+        protected readonly _getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer;
         // (undocumented)
         getMarketOrUnknown(zenithCode: string): T;
         // (undocumented)
@@ -16660,6 +16354,8 @@ export namespace MarketsService {
     export class UnknownDataMarkets extends UnknownMarkets<DataMarket> {
         constructor(_adiService: AdiService, compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: DataMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer);
         // (undocumented)
+        createEmptyCopy(): UnknownDataMarkets;
+        // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): DataMarket;
     }
     // (undocumented)
@@ -16674,6 +16370,8 @@ export namespace MarketsService {
     // (undocumented)
     export class UnknownTradingMarkets extends UnknownMarkets<TradingMarket> {
         constructor(compareItemsFtn: CompareFtn<Market>, compareMarketPropertyToStringFtn: Market.ComparePropertyToStringFtn, exchanges: Exchanges, genericUnknownExchangeEnvironment: ExchangeEnvironment, genericUnknownExchange: Exchange, genericUnknownMarket: TradingMarket, beginChangeEventer: Markets.BeginChangeEventer, endChangeEventer: Markets.EndChangeEventer, getExchangeEnvironmentOrUnknownEventer: Markets.GetExchangeEnvironmentOrUnknownEventer, getExchangeOrUnknownEventer: Markets.GetExchangeOrUnknownEventer, _bestLitUnknownDataMarket: DataMarket);
+        // (undocumented)
+        createEmptyCopy(): UnknownTradingMarkets;
         // (undocumented)
         protected createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): TradingMarket;
     }
@@ -16935,10 +16633,6 @@ export namespace MatchesDataMessage {
     }
 }
 
-export { minsPerDay }
-
-export { minsPerHour }
-
 // Warning: (ae-missing-release-tag) "ModifiedCorrectnessTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -17020,10 +16714,6 @@ export namespace ModifierComparableList {
     // (undocumented)
     export type ListChangeEventHandler<Modifier> = (this: void, listChangeTypeId: UsableListChangeTypeId, idx: Integer, count: Integer, modifier: Modifier) => void;
 }
-
-export { ModifierKey }
-
-export { ModifierKeyId }
 
 // @public (undocumented)
 export class MotifServicesError extends ExternalError {
@@ -17134,14 +16824,6 @@ export namespace MotifServicesService {
     }
 }
 
-export { moveElementInArray }
-
-export { moveElementsInArray }
-
-export { moveIndexedElementsInArrayOnePositionTowardsEndWithSquash }
-
-export { moveIndexedElementsInArrayOnePositionTowardsStartWithSquash }
-
 // Warning: (ae-missing-release-tag) "MoveInWatchmakerListDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -17239,16 +16921,6 @@ export class MoveOrderResponseDataMessage extends OrderResponseDataMessage {
     // (undocumented)
     static readonly typeId = DataMessageTypeId.MoveOrderResponse;
 }
-
-export { mSecsPerDay }
-
-export { mSecsPerHour }
-
-export { mSecsPerMin }
-
-export { mSecsPerSec }
-
-export { MultiEvent }
 
 // Warning: (ae-missing-release-tag) "MyxDataIvemAttributes" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "MyxDataIvemAttributes" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -17488,16 +17160,6 @@ export class NameColorSchemeGridField extends ColorSchemeGridField {
     getViewValue(record: ColorSchemeGridRecordStore.Record): StringTextFormattableValue;
 }
 
-export { newDate }
-
-export { newDecimal }
-
-export { newGuid }
-
-export { newNowDate }
-
-export { newNullDate }
-
 // Warning: (ae-missing-release-tag) "NewsEnvironmentId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -17507,12 +17169,6 @@ export const enum NewsEnvironmentId {
     // (undocumented)
     Production = 0
 }
-
-export { newUndefinableDate }
-
-export { newUndefinableDecimal }
-
-export { newUndefinableNullableDecimal }
 
 // Warning: (ae-missing-release-tag) "NoneScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "NoneScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -17749,8 +17405,6 @@ export class NotificationDistributionMethodIdTableValue extends EnumTableValue {
     constructor();
 }
 
-export { NotImplementedError }
-
 // Warning: (ae-missing-release-tag) "NotSubbedScanField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -17915,10 +17569,6 @@ export class NullableStringCorrectnessTableValue extends GenericNullableCorrectn
 export class NullableStringDataItemTableField extends GenericNullableDataItemTableField<string, NullableStringCorrectnessTableValue> {
 }
 
-export { nullDate }
-
-export { nullDecimal }
-
 // Warning: (ae-missing-release-tag) "NumberCorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -17973,8 +17623,6 @@ export class NumberTableValue extends BaseNumberTableValue {
 export class NumberTextFormattableValue extends GenericTextFormattableValue<number> {
     constructor(data: number | undefined);
 }
-
-export { numberToPixels }
 
 // Warning: (ae-missing-release-tag) "NumericComparisonScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "NumericComparisonScanCondition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -18287,8 +17935,6 @@ export namespace OhlcIntervalHistorySequenceSeries {
     }
 }
 
-export { Ok }
-
 // Warning: (ae-missing-release-tag) "OnlinedPublisherSubscriptionDataMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -18310,10 +17956,6 @@ export abstract class OpenableScanEditor {
     // (undocumented)
     abstract get scan(): Scan | undefined;
 }
-
-export { OptionalKeys }
-
-export { OptionalValues }
 
 // Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -20635,10 +20277,6 @@ export class OvernightOrderTrigger extends OrderTrigger {
     get value(): undefined;
 }
 
-export { parseIntStrict }
-
-export { parseNumberStrict }
-
 // Warning: (ae-missing-release-tag) "PayloadTableRecordDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -20703,10 +20341,6 @@ export namespace PhysicalMessageStaticInitialise {
     // (undocumented)
     export function initialise(): void;
 }
-
-export { PickEnum }
-
-export { PickExcludedEnum }
 
 // Warning: (ae-missing-release-tag) "PlaceOrderDataItem" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -21108,8 +20742,6 @@ export namespace PriceTextFormattableValue {
     const // (undocumented)
     decimalConstructor: SysDecimalConstructor;
 }
-
-export { priorityCompareInteger }
 
 // Warning: (ae-missing-release-tag) "PublisherBroadcastDataMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -21897,12 +21529,6 @@ export abstract class QueryWatchmakerListMembersDataDefinition extends Watchmake
     // (undocumented)
     get referencable(): boolean;
 }
-
-export { rangedAnyBinarySearch }
-
-export { rangedEarliestBinarySearch }
-
-export { rangedQuickSort }
 
 // Warning: (ae-missing-release-tag) "RankedDataIvemId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "RankedDataIvemId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -22709,8 +22335,6 @@ export class RecordGridDataServer extends RevRecordDataServer<GridField> {
 export class RecordGridSchemaServer extends RevRecordSchemaServer<GridField> {
 }
 
-export { RecordList }
-
 // Warning: (ae-missing-release-tag) "RecordListTableRecordSource" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -22850,8 +22474,6 @@ export class RecordTypeDayTradesGridField extends DayTradesGridField {
     protected createTextFormattableValue(record: DayTradesDataItem.Record): DayTradesGridField.CreateTextFormattableValueResult;
 }
 
-export { Rect }
-
 // Warning: (ae-missing-release-tag) "ReferenceableColumnLayoutDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -22953,8 +22575,6 @@ export class RelatedIdDayTradesGridField extends DayTradesGridField {
     // (undocumented)
     protected createTextFormattableValue(record: DayTradesDataItem.Record): DayTradesGridField.CreateTextFormattableValueResult;
 }
-
-export { removeFromArray }
 
 // Warning: (ae-missing-release-tag) "RemoveIrrcChange" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -23130,10 +22750,6 @@ export namespace ResStaticInitialise {
     // (undocumented)
     export function initialise(): void;
 }
-
-export { Result }
-
-export { RGB }
 
 // Warning: (ae-missing-release-tag) "RowDataArrayGrid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -27021,12 +26637,6 @@ export namespace SearchSymbolsDataIvemFullDetail {
     export function is(base: SearchSymbolsDataIvemBaseDetail): base is SearchSymbolsDataIvemFullDetail;
 }
 
-export { secsPerDay }
-
-export { secsPerHour }
-
-export { secsPerMin }
-
 // Warning: (ae-missing-release-tag) "SecurityDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -28079,8 +27689,6 @@ export class ShortSellTypeIdArrayMyxDataIvemAttributeCorrectnessTableValue exten
     constructor();
 }
 
-export { shuffleElementsUpInArray }
-
 // Warning: (ae-missing-release-tag) "SingleBrokerageAccountGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "SingleBrokerageAccountGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -28156,8 +27764,6 @@ export namespace SourcedFieldGrid {
     export type SettingsChangedEventer = (this: void) => void;
 }
 
-export { SourceTzOffsetDate }
-
 // Warning: (ae-missing-release-tag) "SourceTzOffsetDateCorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -28183,8 +27789,6 @@ export class SourceTzOffsetDateCorrectnessTableValue extends GenericCorrectnessT
 export class SourceTzOffsetDateTextFormattableValue extends GenericTextFormattableValue<SourceTzOffsetDate> {
     constructor(data: SourceTzOffsetDate | undefined);
 }
-
-export { SourceTzOffsetDateTime }
 
 // Warning: (ae-missing-release-tag) "SourceTzOffsetDateTimeCorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -28480,8 +28084,6 @@ export class StringArrayCorrectnessTableValue extends GenericCorrectnessTableVal
 export class StringArrayTextFormattableValue extends GenericTextFormattableValue<readonly string[]> {
     constructor(data: readonly string[] | undefined);
 }
-
-export { StringBuilder }
 
 // Warning: (ae-missing-release-tag) "StringCorrectnessTableField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -33687,10 +33289,6 @@ export abstract class SubscribeRecordListTableRecordSource<T, TList extends Reco
     protected abstract unsubscribeList(opener: LockOpenListItem.Opener, list: TList): void;
 }
 
-export { subtractElementFromArray }
-
-export { subtractElementFromArrayUniquely }
-
 // Warning: (ae-missing-release-tag) "SymbolDetailCacheService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "SymbolDetailCacheService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -34403,8 +34001,6 @@ export class SynchronisedPublisherSubscriptionDataMessage extends PublisherSubsc
     static readonly typeId = DataMessageTypeId.Synchronised;
 }
 
-export { SysDecimal }
-
 // Warning: (ae-internal-missing-underscore) The name "SysStaticInitialise" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
@@ -34412,8 +34008,6 @@ export namespace SysStaticInitialise {
     // (undocumented)
     export function initialise(): void;
 }
-
-export { SysTick }
 
 // Warning: (ae-missing-release-tag) "Table" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -35006,8 +34600,6 @@ export const enum TDeliveryTypeId {
     // (undocumented)
     dyPhysicalDeliveryScripSettlement = 1
 }
-
-export { testRemoveFromArray }
 
 // Warning: (ae-missing-release-tag) "TextContainsScanField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "TextContainsScanField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -35991,8 +35583,6 @@ export class TimeInForceIdCorrectnessTableValue extends EnumCorrectnessTableValu
 export class TimeInForceIdTableValue extends EnumTableValue {
     constructor();
 }
-
-export { TimeSpan }
 
 // Warning: (ae-missing-release-tag) "TimeTextFormattableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -37897,8 +37487,6 @@ export class TrueFalseTextFormattableValue extends BooleanTextFormattableValue {
     constructor(data: boolean | undefined);
 }
 
-export { tryGetErrorMessage }
-
 // Warning: (ae-missing-release-tag) "TSecurityGicsIndustryGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -38348,18 +37936,10 @@ export class UndisclosedTextFormattableValue extends BooleanTextFormattableValue
     constructor(data: boolean | undefined);
 }
 
-export { UnexpectedCaseError }
-
-export { UnexpectedTypeError }
-
-export { uniqueElementArraysOverlap }
-
 // Warning: (ae-missing-release-tag) "unknownZenithCode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const unknownZenithCode = "|Unknown|";
-
-export { UnreachableCaseError }
 
 // Warning: (ae-missing-release-tag) "UpdateNotificationChannelDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -38525,10 +38105,6 @@ export interface UsableList<Record> extends RecordList<Record> {
     // (undocumented)
     readonly usable: boolean;
 }
-
-export { UsableListChangeType }
-
-export { UsableListChangeTypeId }
 
 // @public (undocumented)
 export abstract class UsableListTableRecordSourceDefinition<T> extends TableRecordSourceDefinition {

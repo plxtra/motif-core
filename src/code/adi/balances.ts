@@ -1,10 +1,7 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { StringId, Strings } from '../res/internal-api';
 import {
     AssertInternalError,
-    CorrectnessId,
     EnumInfoOutOfOrderError,
-    FieldDataTypeId,
     Integer,
     MapKey,
     MultiEvent,
@@ -13,6 +10,11 @@ import {
     isDecimalEqual,
     isDecimalGreaterThan,
     newDecimal
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../res/internal-api';
+import {
+    CorrectnessId,
+    FieldDataTypeId,
 } from "../sys/internal-api";
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';

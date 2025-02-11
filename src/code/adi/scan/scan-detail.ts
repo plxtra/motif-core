@@ -1,4 +1,4 @@
-import { Integer } from '../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 import { ScanAttachedNotificationChannel, ScanTargetTypeId, ZenithEncodedScanFormula } from '../common/internal-api';
 import { DataMarket } from '../markets/internal-api';
 import { DataIvemId } from '../symbol-id/internal-api';

@@ -1,5 +1,5 @@
+import { EnumInfoOutOfOrderError } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { EnumInfoOutOfOrderError } from '../../sys/internal-api';
 import { ActiveFaultedStatusId, NotificationDistributionMethodId } from './data-types';
 import { ZenithProtocolCommon } from './zenith-protocol/internal-api';
 

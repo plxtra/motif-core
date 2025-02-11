@@ -1,5 +1,6 @@
+import { AssertInternalError, ComparisonResult, UnreachableCaseError } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
-import { AssertInternalError, Badness, ComparisonResult, UnreachableCaseError } from '../../sys/internal-api';
+import { Badness } from '../../sys/internal-api';
 import { SubscribabilityExtent, SubscribabilityExtentId } from '../common/internal-api';
 import { PublisherSubscriptionDataItem } from './publisher-subscription-data-item';
 

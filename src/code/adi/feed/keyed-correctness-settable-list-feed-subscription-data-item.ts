@@ -1,11 +1,13 @@
 import {
     Integer,
-    KeyedCorrectnessSettableList,
-    KeyedCorrectnessSettableListItem,
     MapKey,
     MultiEvent,
     RecordList,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    KeyedCorrectnessSettableList,
+    KeyedCorrectnessSettableListItem,
 } from "../../sys/internal-api";
 import { FeedSubscriptionDataItem } from './feed-subscription-data-item';
 

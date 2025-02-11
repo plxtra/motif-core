@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, HtmlTypes, Integer, UnreachableCaseError } from '../../sys/internal-api';
+import { EnumInfoOutOfOrderError, HtmlTypes, Integer, UnreachableCaseError } from '@xilytix/sysutils';
 
 export class ColorScheme {
     private _items = new Array<ColorScheme.Item>(ColorScheme.Item.idCount);

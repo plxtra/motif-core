@@ -1,5 +1,5 @@
-import { CommaText, Err, priorityCompareString } from '@xilytix/sysutils';
-import { compareString, ComparisonResult, ErrorCode, JsonElement, JsonElementErr, MapKey, Ok, Result } from '../../sys/internal-api';
+import { CommaText, compareString, ComparisonResult, Err, JsonElement, MapKey, Ok, priorityCompareString, Result } from '@xilytix/sysutils';
+import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
 import { Exchange, MarketsService } from '../markets/internal-api';
 
 export class IvemId {

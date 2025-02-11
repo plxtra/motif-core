@@ -1,5 +1,5 @@
+import { EnumInfoOutOfOrderError, Integer } from '@xilytix/sysutils';
 import { StringId } from '../res/i18n-strings';
-import { EnumInfoOutOfOrderError, Integer } from '../sys/internal-api';
 
 /** @public */
 export class UserAlertService {

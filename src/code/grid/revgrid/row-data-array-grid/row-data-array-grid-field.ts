@@ -1,5 +1,5 @@
+import { AssertInternalError, IndexedRecord } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../../services/internal-api';
-import { AssertInternalError, IndexedRecord } from '../../../sys/internal-api';
 import { GridField } from '../../field/internal-api';
 
 export class RowDataArrayGridField extends GridField {

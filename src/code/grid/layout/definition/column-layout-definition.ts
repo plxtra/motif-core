@@ -1,5 +1,6 @@
 import { RevColumnLayoutDefinition } from '@xilytix/revgrid';
-import { BidAskPair, Err, ErrorCode, JsonElement, Ok, Result, UnreachableCaseError } from '../../../sys/internal-api';
+import { Err, JsonElement, Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { BidAskPair, ErrorCode } from '../../../sys/internal-api';
 
 /** @public */
 export namespace ColumnLayoutDefinition {

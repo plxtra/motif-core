@@ -1,4 +1,4 @@
-import { Integer } from '../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 
 export interface ScanMatch<T> {
     readonly index: Integer;

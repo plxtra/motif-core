@@ -1,14 +1,4 @@
 import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
-import {
-    CountAndXrefsTextFormattableValue,
-    IntegerTextFormattableValue,
-    PriceAndHasUndisclosedTextFormattableValue,
-    PriceTextFormattableValue,
-    StringArrayTextFormattableValue,
-    StringTextFormattableValue,
-    TextFormattableValue
-} from '../../../../services/internal-api';
 import {
     AssertInternalError,
     compareDecimal,
@@ -20,7 +10,17 @@ import {
     SysDecimal,
     uniqueElementArraysOverlap,
     UnreachableCaseError
-} from "../../../../sys/internal-api";
+} from '@xilytix/sysutils';
+import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
+import {
+    CountAndXrefsTextFormattableValue,
+    IntegerTextFormattableValue,
+    PriceAndHasUndisclosedTextFormattableValue,
+    PriceTextFormattableValue,
+    StringArrayTextFormattableValue,
+    StringTextFormattableValue,
+    TextFormattableValue
+} from '../../../../services/internal-api';
 import { DepthRecord } from '../depth-record';
 import { DepthRecordTextFormattableValue } from '../depth-record-text-formattable-value';
 import { FullDepthSideField, FullDepthSideFieldId } from './full-depth-side-field';

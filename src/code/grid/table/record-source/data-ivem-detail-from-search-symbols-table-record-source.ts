@@ -1,5 +1,13 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
+    AssertInternalError,
+    Integer,
+    LockOpenListItem,
+    MultiEvent,
+    UnreachableCaseError,
+    UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
     AdiService,
     Exchange,
     MarketsService,
@@ -9,14 +17,8 @@ import {
 } from "../../../adi/internal-api";
 import { TextFormatter } from '../../../services/internal-api';
 import {
-    AssertInternalError,
     Badness,
     CorrectnessBadness,
-    Integer,
-    LockOpenListItem,
-    MultiEvent,
-    UnreachableCaseError,
-    UsableListChangeTypeId
 } from '../../../sys/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory

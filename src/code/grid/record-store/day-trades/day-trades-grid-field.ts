@@ -1,4 +1,15 @@
 import { RevColumnLayoutDefinition, RevHorizontalAlignId, RevRecordField, RevRecordSourcedFieldDefinition, RevRecordSourcedFieldSourceDefinition, RevSourcedFieldDefinition } from '@xilytix/revgrid';
+import {
+    ComparisonResult,
+    Integer,
+    SourceTzOffsetDateTime,
+    UnreachableCaseError,
+    compareArray,
+    compareNumber,
+    compareUndefinableDecimal,
+    compareUndefinableInteger,
+    compareUndefinableString
+} from '@xilytix/sysutils';
 import { DayTradesDataItem, MovementId, TradeFlagId } from '../../../adi/internal-api';
 import { StringId, Strings } from '../../../res/internal-api';
 import {
@@ -15,17 +26,9 @@ import {
     TrendIdTextFormattableValue
 } from '../../../services/internal-api';
 import {
-    ComparisonResult,
     CorrectnessId,
-    Integer,
-    SourceTzOffsetDateTime,
-    UnreachableCaseError,
-    compareArray,
-    compareNumber,
-    compareUndefinableDecimal,
-    compareUndefinableInteger,
-    compareUndefinableString
 } from "../../../sys/internal-api";
+
 import { AllowedGridField, GridField } from '../../field/internal-api';
 
 /** @public */

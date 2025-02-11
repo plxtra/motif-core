@@ -1,4 +1,4 @@
-import { AssertInternalError, SysDecimal } from '../sys/internal-api';
+import { AssertInternalError, SysDecimal } from '@xilytix/sysutils';
 import {
     DataDefinition,
     OrderRequestError,

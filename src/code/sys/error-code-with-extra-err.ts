@@ -1,6 +1,5 @@
 import { Err } from '@xilytix/sysutils';
 import { ErrorCode } from './error-code';
-export { Err, Ok, Result } from '@xilytix/sysutils';
 
 export interface ErrorCodeWithExtra {
     code: ErrorCode;

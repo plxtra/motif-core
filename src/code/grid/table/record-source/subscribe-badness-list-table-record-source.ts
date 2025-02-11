@@ -1,11 +1,13 @@
 import {
-    Badness,
-    BadnessList,
     Integer,
     LockOpenListItem,
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    Badness,
+    BadnessList,
 } from "../../../sys/internal-api";
 import { TableRecordSource } from './table-record-source';
 

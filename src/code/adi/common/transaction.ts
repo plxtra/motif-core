@@ -1,4 +1,4 @@
-import { Integer, SourceTzOffsetDateTime, SysDecimal } from '../../sys/internal-api';
+import { Integer, SourceTzOffsetDateTime, SysDecimal } from '@xilytix/sysutils';
 import { CurrencyId, IvemClassId } from './data-types';
 
 export interface Transaction {

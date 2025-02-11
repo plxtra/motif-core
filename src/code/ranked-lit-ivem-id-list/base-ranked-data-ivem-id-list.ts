@@ -1,10 +1,5 @@
-import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
-import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
 import {
     AssertInternalError,
-    Badness,
-    BadnessList,
-    CorrectnessId,
     Integer,
     LockOpenListItem,
     MultiEvent,
@@ -18,6 +13,13 @@ import {
     compareNumber,
     moveElementsInArray,
     rangedAnyBinarySearch
+} from '@xilytix/sysutils';
+import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
+import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
+import {
+    Badness,
+    BadnessList,
+    CorrectnessId,
 } from "../sys/internal-api";
 import { RankedDataIvemIdListDefinition } from './definition/internal-api';
 import { RankedDataIvemIdList } from './ranked-data-ivem-id-list';

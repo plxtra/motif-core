@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, mSecsPerMin, mSecsPerSec, UnreachableCaseError } from '../../sys/internal-api';
+import { AssertInternalError, Integer, mSecsPerMin, mSecsPerSec, UnreachableCaseError } from '@xilytix/sysutils';
 
 export const enum AdiPublisherSubscriptionDelayRetryAlgorithmId {
     Never,

@@ -1,5 +1,5 @@
+import { UnreachableCaseError } from '@xilytix/sysutils';
 import { CallOrPutId } from '../../../../adi/internal-api';
-import { UnreachableCaseError } from '../../../../sys/internal-api';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from './prefixable-security-data-item-table-field-source-definition';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
 

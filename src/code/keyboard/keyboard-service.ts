@@ -1,9 +1,10 @@
+import { compareInteger, Integer, ModifierKey, SysTick } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
 import { CommandContext } from '../command-context/internal-api';
 import { Command } from '../command/command';
 import { extStrings } from '../res/ext-strings';
 import { ExtensionOrInternalError } from '../sys/external-error';
-import { compareInteger, ErrorCode, Integer, ModifierKey, SysTick } from '../sys/internal-api';
+import { ErrorCode } from '../sys/internal-api';
 import { KeyboardShortcutRegistry } from './keyboard-shortcut-registry';
 
 /** @public */

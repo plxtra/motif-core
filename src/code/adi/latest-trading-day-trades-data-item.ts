@@ -1,11 +1,13 @@
 import {
     AssertInternalError,
-    Badness,
     Integer,
     MultiEvent,
     newUndefinableDate,
     UnreachableCaseError,
     UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import {
+    Badness,
 } from '../sys/internal-api';
 import {
     DataDefinition,

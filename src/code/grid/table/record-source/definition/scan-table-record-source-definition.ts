@@ -1,6 +1,6 @@
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { PickEnum } from '@xilytix/sysutils';
 import { Scan } from '../../../../scan/internal-api';
-import { PickEnum } from '../../../../sys/internal-api';
 import { ScanTableFieldSourceDefinition, TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

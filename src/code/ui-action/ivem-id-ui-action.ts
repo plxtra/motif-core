@@ -1,7 +1,7 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
 import { IvemId, MarketsService } from '../adi/internal-api';
 import { SymbolsService } from '../services/internal-api';
-import { MultiEvent } from '../sys/internal-api';
 
 /** @public */
 export class IvemIdUiAction extends UiAction {

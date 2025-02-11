@@ -1,6 +1,7 @@
+import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate, SysDecimal } from '@xilytix/sysutils';
 import { DataIvemId, DataMarket, ExerciseTypeId, IvemId } from '../adi/internal-api';
 import { StringId, Strings } from '../res/internal-api';
-import { EnumInfoOutOfOrderError, FieldDataTypeId, Integer, MapKey, SourceTzOffsetDate, SysDecimal } from '../sys/internal-api';
+import { FieldDataTypeId } from '../sys/internal-api';
 
 export class CallPut {
     readonly mapKey: MapKey;

@@ -1,7 +1,7 @@
 import { RevRecordSourcedField, RevSourcedField } from '@xilytix/revgrid';
+import { UnreachableCaseError } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
 import { TextFormattableValue } from '../../services/internal-api';
-import { UnreachableCaseError } from '../../sys/internal-api';
 
 export abstract class GridField extends RevRecordSourcedField<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {
 

@@ -1,6 +1,6 @@
 import { RevColumnLayoutOrReference } from '@xilytix/revgrid';
-import { UnreachableCaseError } from '@xilytix/sysutils';
-import { AssertInternalError, Err, ErrorCode, LockOpenListItem, Ok, PickEnum, Result } from '../../sys/internal-api';
+import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { ErrorCode } from '../../sys/internal-api';
 
 export namespace ColumnLayoutOrReference {
     export function tryLock(columnLayoutOrReference: RevColumnLayoutOrReference, locker: LockOpenListItem.Locker): Promise<Result<void>> {

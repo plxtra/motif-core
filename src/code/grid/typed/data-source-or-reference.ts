@@ -1,6 +1,7 @@
 import { RevDataSourceOrReference } from '@xilytix/revgrid';
+import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../services/internal-api';
-import { AssertInternalError, Badness, Err, ErrorCode, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '../../sys/internal-api';
+import { Badness, ErrorCode } from '../../sys/internal-api';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 
 export class DataSourceOrReference extends RevDataSourceOrReference<

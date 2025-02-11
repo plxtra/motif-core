@@ -1,5 +1,6 @@
 import { RevReferenceableColumnLayoutDefinition } from '@xilytix/revgrid';
-import { Err, ErrorCode, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '../../../sys/internal-api';
+import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { ErrorCode } from '../../../sys/internal-api';
 
 export namespace ReferenceableColumnLayoutDefinition {
     export function tryCreateReferenceableFromJson(element: JsonElement): Result<RevReferenceableColumnLayoutDefinition> {

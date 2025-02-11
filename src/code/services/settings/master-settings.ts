@@ -1,4 +1,4 @@
-import { Integer } from '../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 import { TypedKeyValueScalarSettingsGroup } from './typed-key-value-scalar-settings-group';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 

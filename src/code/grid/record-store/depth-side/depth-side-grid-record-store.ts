@@ -1,9 +1,9 @@
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from '@xilytix/revgrid';
-import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi/internal-api';
 import {
     Integer,
     SysDecimal
-} from "../../../sys/internal-api";
+} from '@xilytix/sysutils';
+import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi/internal-api';
 import { DepthRecord } from './depth-record';
 
 /** @public */

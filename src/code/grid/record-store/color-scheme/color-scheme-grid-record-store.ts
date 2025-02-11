@@ -1,14 +1,14 @@
 import { RevRecordIndex, RevRecordStore } from '@xilytix/revgrid';
 import {
+    IndexedRecord,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
+import {
     ColorScheme,
     ColorSettings,
     SettingsService
 } from '../../../services/internal-api';
-import {
-    IndexedRecord,
-    Integer,
-    MultiEvent
-} from "../../../sys/internal-api";
 
 /** @public */
 export class ColorSchemeGridRecordStore implements RevRecordStore {

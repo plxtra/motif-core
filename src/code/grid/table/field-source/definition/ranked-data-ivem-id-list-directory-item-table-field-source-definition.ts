@@ -1,6 +1,13 @@
 import { RevHorizontalAlignId } from '@xilytix/revgrid';
+import {
+    AssertInternalError,
+    Integer
+} from '@xilytix/sysutils';
 import { RankedDataIvemIdListDirectoryItem } from '../../../../services/internal-api';
-import { AssertInternalError, FieldDataType, FieldDataTypeId, Integer } from '../../../../sys/internal-api';
+import {
+    FieldDataType,
+    FieldDataTypeId,
+} from "../../../../sys/internal-api";
 import {
     BooleanCorrectnessTableField,
     CorrectnessTableField,

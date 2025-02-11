@@ -1,4 +1,4 @@
-import { IndexSignatureHack, JsonElement } from '../../sys/internal-api';
+import { IndexSignatureHack, JsonElement } from '@xilytix/sysutils';
 import { SettingsGroup } from './settings-group';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 

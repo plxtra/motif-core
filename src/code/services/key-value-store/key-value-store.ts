@@ -1,4 +1,4 @@
-import { Result } from '../../sys/internal-api';
+import { Result } from '@xilytix/sysutils';
 
 /** @public */
 export interface KeyValueStore {

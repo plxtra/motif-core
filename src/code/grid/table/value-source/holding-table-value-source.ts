@@ -1,5 +1,5 @@
+import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Holding } from '../../../adi/internal-api';
-import { Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
 import { HoldingTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

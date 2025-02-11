@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { RecordList } from '../../../../sys/internal-api';
+import { RecordList } from '@xilytix/sysutils';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

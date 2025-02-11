@@ -1,7 +1,7 @@
 import { RevDataSourceDefinition } from '@xilytix/revgrid';
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
 import { TextFormattableValue } from '../../services/internal-api';
-import { Err, ErrorCode, JsonElement, Ok, PickEnum, Result } from '../../sys/internal-api';
+import { ErrorCode } from '../../sys/internal-api';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 import { TableRecordSourceDefinitionFromJsonFactory } from './table-record-source-definition-from-json-factory';
 

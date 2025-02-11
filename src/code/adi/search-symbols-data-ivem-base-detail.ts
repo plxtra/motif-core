@@ -1,4 +1,4 @@
-import { MultiEvent, isArrayEqualUniquely, isUndefinableArrayEqualUniquely } from '../sys/internal-api';
+import { MultiEvent, isArrayEqualUniquely, isUndefinableArrayEqualUniquely } from '@xilytix/sysutils';
 import {
     DataIvemAlternateCodes,
     IvemClassId,

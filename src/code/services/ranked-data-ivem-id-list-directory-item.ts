@@ -1,5 +1,6 @@
+import { EnumInfoOutOfOrderError, Integer, LockOpenListItem, MultiEvent } from '@xilytix/sysutils';
 import { StringId, Strings } from '../res/internal-api';
-import { CorrectnessRecord, CorrectnessSettableListItem, EnumInfoOutOfOrderError, FieldDataTypeId, Integer, LockOpenListItem, MultiEvent } from '../sys/internal-api';
+import { CorrectnessRecord, CorrectnessSettableListItem, FieldDataTypeId } from '../sys/internal-api';
 
 export interface RankedDataIvemIdListDirectoryItem extends LockOpenListItem<RankedDataIvemIdListDirectoryItem>, CorrectnessSettableListItem, CorrectnessRecord {
     readonly directoryItemTypeId: RankedDataIvemIdListDirectoryItem.TypeId;

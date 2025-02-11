@@ -1,7 +1,7 @@
-import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import {
     AssertInternalError, Integer
-} from "../sys/internal-api";
+} from '@xilytix/sysutils';
+import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition

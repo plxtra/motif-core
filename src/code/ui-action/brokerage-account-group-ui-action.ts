@@ -1,6 +1,6 @@
+import { MultiEvent } from '@xilytix/sysutils';
 import { UiAction } from '@xilytix/ui-action';
 import { AllBrokerageAccountGroup, BrokerageAccountGroup } from '../adi/internal-api';
-import { MultiEvent } from '../sys/internal-api';
 
 export class BrokerageAccountGroupUiAction extends UiAction {
     private _value: BrokerageAccountGroup | undefined;

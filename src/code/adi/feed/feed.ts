@@ -1,12 +1,14 @@
+import {
+    EnumInfoOutOfOrderError,
+    Integer,
+    MultiEvent
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../../res/internal-api';
 import {
     Correctness,
     CorrectnessId,
-    EnumInfoOutOfOrderError,
     FieldDataTypeId,
-    Integer,
     KeyedCorrectnessListItem,
-    MultiEvent
 } from "../../sys/internal-api";
 import { ExchangeEnvironmentZenithCode, FeedClass, FeedClassId, FeedStatus, FeedStatusId, ZenithEnvironmentedValueParts } from '../common/internal-api';
 

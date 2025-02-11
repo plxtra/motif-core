@@ -1,7 +1,8 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
 import { RankedDataIvemIdListDirectory } from '../../../ranked-lit-ivem-id-list/internal-api';
 import { RankedDataIvemIdListDirectoryItem, TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, Integer, LockOpenListItem, UnreachableCaseError } from '../../../sys/internal-api';
+import { CorrectnessBadness } from '../../../sys/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

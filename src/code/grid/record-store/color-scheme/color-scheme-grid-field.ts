@@ -1,5 +1,8 @@
 import { isReadable as tinyColorIsReadable, readability as tinyColorReadability } from '@ctrl/tinycolor';
 import { RevColumnLayoutDefinition, RevHorizontalAlignId, RevRecordField, RevRecordSourcedFieldDefinition, RevRecordSourcedFieldSourceDefinition, RevSourcedFieldDefinition } from '@xilytix/revgrid';
+import {
+    UnreachableCaseError
+} from '@xilytix/sysutils';
 import { StringId, Strings } from '../../../res/internal-api';
 import {
     ColorScheme,
@@ -12,9 +15,6 @@ import {
     StringTextFormattableValue,
     TextFormattableValue
 } from '../../../services/internal-api';
-import {
-    UnreachableCaseError
-} from "../../../sys/internal-api";
 import { GridField } from '../../field/internal-api';
 import { ColorSchemeGridRecordStore } from './color-scheme-grid-record-store';
 

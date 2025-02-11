@@ -1,5 +1,5 @@
+import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { RankedDataIvemId } from '../../../adi/internal-api';
-import { Integer, MultiEvent, UnreachableCaseError } from '../../../sys/internal-api';
 import { RankedDataIvemIdTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import { CorrectnessTableValue, DataIvemIdCorrectnessTableValue, IntegerCorrectnessTableValue, NumberCorrectnessTableValue, TableValue } from '../value/internal-api';
 import { CorrectnessTableValueSource } from './correctness-table-value-source';

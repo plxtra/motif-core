@@ -1,17 +1,16 @@
-import { ChangeSubscribableComparableList, CommaText, RecordList, UsableListChangeTypeId } from '@xilytix/sysutils';
-import { StringId, Strings } from '../../res/internal-api';
 import {
-    AssertInternalError,
-    Correctness,
-    CorrectnessId,
-    EnumInfoOutOfOrderError,
-    FieldDataTypeId,
+    AssertInternalError, ChangeSubscribableComparableList, CommaText, EnumInfoOutOfOrderError,
     Integer,
     isUndefinableArrayEqualUniquely,
+    MultiEvent, RecordList, SourceTzOffsetDate,
+    SourceTzOffsetDateTime, UsableListChangeTypeId
+} from '@xilytix/sysutils';
+import { StringId, Strings } from '../../res/internal-api';
+import {
+    Correctness,
+    CorrectnessId,
+    FieldDataTypeId,
     KeyedCorrectnessListItem,
-    MultiEvent,
-    SourceTzOffsetDate,
-    SourceTzOffsetDateTime
 } from "../../sys/internal-api";
 import {
     FeedClassId,

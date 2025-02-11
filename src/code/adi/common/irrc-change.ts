@@ -1,4 +1,4 @@
-import { Integer } from '../../sys/internal-api';
+import { Integer } from '@xilytix/sysutils';
 
 export const enum IrrcChangeTypeId {
     Insert,

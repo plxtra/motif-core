@@ -31,46 +31,6 @@ export * from './ui-comparable-list';
 export * from './usable-list';
 export * from './warnings-service';
 // export * from './Scheduler';
-export {
-    AssertInternalError,
-    BinarySearchResult,
-    BooleanOrUndefined,
-    ChangeSubscribableComparableList,
-    CommaText,
-    ComparableList,
-    ComparisonResult,
-    CorrectnessState,
-    DateOrDateTime,
-    DayOfWeek, EnumInfoOutOfOrderError,
-    Guid,
-    HtmlTypes, IndexSignatureHack, IndexedRecord, Integer, InternalError,
-    Json,
-    JsonElement,
-    JsonValue,
-    JsonValueArray,
-    Line,
-    LockOpenListItem,
-    LockOpenManager,
-    MapKey,
-    Mappable,
-    MappedComparableList,
-    ModifierKey,
-    ModifierKeyId,
-    MultiEvent,
-    NotImplementedError,
-    PickEnum,
-    PickExcludedEnum, RGB, RecordList,
-    Rect, SourceTzOffsetDate,
-    SourceTzOffsetDateTime,
-    StringBuilder, SysDecimal, TimeSpan,
-    UnexpectedCaseError,
-    UnexpectedTypeError,
-    UnreachableCaseError,
-    UsableListChangeType,
-    UsableListChangeTypeId, anyBinarySearch, earliestBinarySearch, rangedAnyBinarySearch,
-    rangedEarliestBinarySearch,
-    rangedQuickSort
-} from '@xilytix/sysutils';
 export * from './source-tz-offset-date-time-timezone-mode';
 export { SysStaticInitialise } from './sys-static-initialise';
 export * from './types';
