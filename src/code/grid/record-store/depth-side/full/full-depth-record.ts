@@ -7,10 +7,10 @@ import {
     isArrayEqual,
     isArrayEqualUniquely,
     newDecimal,
-    SysDecimal,
     uniqueElementArraysOverlap,
     UnreachableCaseError
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
 import {
     CountAndXrefsTextFormattableValue,
@@ -64,7 +64,7 @@ export abstract class FullDepthRecord extends DepthRecord {
     }
 
     abstract getCount(): Integer;
-    abstract getPrice(): SysDecimal;
+    abstract getPrice(): Decimal;
     abstract getUndisclosedCount(): Integer;
 
     protected abstract createTextFormattableValue(id: FullDepthSideFieldId): DepthRecord.CreateTextFormattableValueResult;
@@ -166,7 +166,7 @@ export class OrderFullDepthRecord extends FullDepthRecord {
     getVolume() { return this._order.quantity; } // virtual override
     getRenderVolume() { return this._order.quantity; } // virtual override
     getCount() { return 1; } // virtual override
-    getPrice(): SysDecimal { return this._order.price; } // virtual override
+    getPrice(): Decimal { return this._order.price; } // virtual override
     getUndisclosedCount() { return this._order.hasUndisclosed ? 1 : 0; } // virtual override
 
     acceptedByFilter(filterXrefs: string[]): boolean {
@@ -331,7 +331,7 @@ export class OrderFullDepthRecord extends FullDepthRecord {
 }
 
 export class PriceLevelFullDepthRecord extends FullDepthRecord {
-    private _price: SysDecimal;
+    private _price: Decimal;
     private _count: Integer; // Number of orders at this price level.
     private _volume: Integer; // Total number of shares at this price level.
     private _marketZenithCodes: string[]; // Array of markets in orders
@@ -372,7 +372,7 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
         this._orders[0] = firstOrder;
     }
 
-    get price(): SysDecimal { return this._price; }
+    get price(): Decimal { return this._price; }
     get count() { return this._count; }
     get quantity() { return this._volume; }
     get marketIds() { return this._marketZenithCodes; }
@@ -387,7 +387,7 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
     getVolume() { return this._volume; } // virtual override
     getRenderVolume() { return this._volume; } // virtual override
     getCount() { return this._count; } // virtual override
-    getPrice(): SysDecimal { return this.price; } // virtual override
+    getPrice(): Decimal { return this.price; } // virtual override
     getUndisclosedCount() { return this._undisclosedOrderCount; } // virtual override
 
     acceptedByFilter(filterXrefs: string[]): boolean {

@@ -5,9 +5,9 @@ import {
     MultiEvent,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    SysDecimal,
     UnreachableCaseError
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     ActiveFaultedStatus,
     ActiveFaultedStatusId,
@@ -197,11 +197,11 @@ export class TextFormatterService implements TextFormatter {
         return this._integerFormat.format(value);
     }
 
-    formatDecimal(value: SysDecimal) {
+    formatDecimal(value: Decimal) {
         return this._decimalFormat.format(value.toNumber());
     }
 
-    formatPrice(value: SysDecimal) {
+    formatPrice(value: Decimal) {
         // TODO:MED How many decimal places to display?
         return this._priceFormat.format(value.toNumber());
     }

@@ -1,7 +1,8 @@
 // We are trying not to use null - only undefined.  If it does become necessary to use null table grid values, then
 // the classes below can be used.  However try to avoid this
 
-import { Integer, newUndefinableDate, newUndefinableDecimal, SysDecimal } from '@xilytix/sysutils';
+import { Integer, newUndefinableDate, newUndefinableDecimal } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     BooleanTextFormattableValue,
     DateTextFormattableValue,
@@ -77,10 +78,10 @@ export class NullableDateCorrectnessTableValue extends GenericNullableCorrectnes
     }
 }
 
-export abstract class BaseNullableDecimalCorrectnessTableValue extends GenericNullableCorrectnessTableValue<SysDecimal> {
+export abstract class BaseNullableDecimalCorrectnessTableValue extends GenericNullableCorrectnessTableValue<Decimal> {
     override get data() { return super.data; }
 
-    override set data(value: SysDecimal | null | undefined) {
+    override set data(value: Decimal | null | undefined) {
         super.data = value === null ? null : newUndefinableDecimal(value);
     }
 }

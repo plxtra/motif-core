@@ -8,9 +8,9 @@ import {
     moveElementInArray,
     MultiEvent,
     newDecimal,
-    SysDecimal,
     UnreachableCaseError
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { DepthDataItem, DepthStyleId, MarketsService, OrderSide, OrderSideId } from '../../../../adi/internal-api';
 import { SessionInfoService } from '../../../../services/session-info-service';
 import {
@@ -37,7 +37,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
     private _ordersClearSubscriptionId: MultiEvent.SubscriptionId;
 
     private _sideIdDisplay: string; // only used for debugging
-    private readonly _initialPreviousPrice: SysDecimal;
+    private readonly _initialPreviousPrice: Decimal;
 
     private readonly _consistencyCheckingEnabled: boolean;
     private readonly _debugLoggingEnabled: boolean;
@@ -776,7 +776,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         }
     }
 
-    private calculateMoveToWithFromRecordKept(fromOrderIdx: Integer, toOrderIdx: Integer, toPrice: SysDecimal): FullDepthSideGridRecordStore.ToRecordCalculation {
+    private calculateMoveToWithFromRecordKept(fromOrderIdx: Integer, toOrderIdx: Integer, toPrice: Decimal): FullDepthSideGridRecordStore.ToRecordCalculation {
         // toRecord is defined if merge required
         // If toRecord is undefined, then toRecordIdx indicates where new toRecord should be inserted
         // Assumes orderIndex has not yet been updated to reflect order move
@@ -803,7 +803,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         }
     }
 
-    private calculateToRecordForMove(fromOrderIdx: Integer, fromRecordKept: boolean, toOrderIdx: Integer, toPrice: SysDecimal): FullDepthSideGridRecordStore.ToRecordCalculation {
+    private calculateToRecordForMove(fromOrderIdx: Integer, fromRecordKept: boolean, toOrderIdx: Integer, toPrice: Decimal): FullDepthSideGridRecordStore.ToRecordCalculation {
         // Calculate what type of ToRecord is needed.
         // Can either be an existing record into which the toOrder will be merged or a new record.  If it is a new record, calculate its index
         // Uses this._orderIndex which specifies the record each Depth order had PRIOR to the move in the Depth DataItem

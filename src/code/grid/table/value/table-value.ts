@@ -3,10 +3,10 @@ import {
     Integer,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    SysDecimal,
     newUndefinableDate,
     newUndefinableDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { DataIvemId, IvemId } from '../../../adi/internal-api';
 import {
     BooleanTextFormattableValue,
@@ -116,14 +116,14 @@ export class DataIvemIdTableValue extends GenericTableValue<DataIvemId> {
     }
 }
 
-export abstract class BaseDecimalTableValue extends GenericTableValue<SysDecimal> {
+export abstract class BaseDecimalTableValue extends GenericTableValue<Decimal> {
     // protected createTextFormattableValue() {
     //     return new DecimalTextFormattableValue(this.data);
     // }
 
     override get data() { return super.data; }
 
-    override set data(value: SysDecimal | undefined) {
+    override set data(value: Decimal | undefined) {
         super.data = newUndefinableDecimal(value);
     }
 }
@@ -483,14 +483,14 @@ export class ReadonlyCorrectnessTableValue extends BooleanCorrectnessTableValue 
     }
 }
 
-export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<SysDecimal> {
+export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<Decimal> {
     // protected createTextFormattableValue() {
     //     return new DecimalTextFormattableValue(this.data);
     // }
 
     override get data() { return super.data; }
 
-    override set data(value: SysDecimal | undefined) {
+    override set data(value: Decimal | undefined) {
         super.data = newUndefinableDecimal(value);
     }
 }

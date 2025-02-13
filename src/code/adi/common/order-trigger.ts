@@ -1,11 +1,11 @@
 import {
     EnumInfoOutOfOrderError,
-    SysDecimal,
     UnreachableCaseError,
     isDecimalEqual,
     isUndefinableDecimalEqual,
     newUndefinableDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../../res/internal-api';
 import { Movement, MovementId, OrderTriggerTypeId } from './data-types';
 
@@ -14,7 +14,7 @@ export abstract class OrderTrigger {
 
     get typeId() { return this._typeId; }
 
-    abstract get value(): SysDecimal | undefined;
+    abstract get value(): Decimal | undefined;
     abstract get extraParamsText(): string | undefined;
 
     static isEqual(left: OrderTrigger, right: OrderTrigger) {
@@ -69,7 +69,7 @@ export class PriceOrderTrigger extends OrderTrigger {
     private readonly _extraParamsText: string;
 
     constructor(
-        private readonly _value: SysDecimal | undefined,
+        private readonly _value: Decimal | undefined,
         private readonly _fieldId: PriceOrderTrigger.FieldId | undefined,
         private readonly _movementId: MovementId | undefined,
     ) {
@@ -77,7 +77,7 @@ export class PriceOrderTrigger extends OrderTrigger {
         this._extraParamsText = this.generateExtraParamsText();
     }
 
-    get value(): SysDecimal | undefined { return this._value; }
+    get value(): Decimal | undefined { return this._value; }
     get fieldId() { return this._fieldId; }
     get movementId() { return this._movementId; }
 
@@ -142,7 +142,7 @@ export namespace PriceOrderTrigger {
         export function initialise() {
             for (let i = 0; i < idCount; i++) {
                 const info = infos[i];
-                if (info.id !== i) {
+                if (info.id !== i as FieldId) {
                     throw new EnumInfoOutOfOrderError('PriceOrderTrigger.FieldId', i, Strings[info.displayId]);
                 }
             }
@@ -161,9 +161,9 @@ export namespace PriceOrderTrigger {
 }
 
 export class TrailingPriceOrderTrigger extends OrderTrigger {
-    value: SysDecimal;
-    limit: SysDecimal;
-    stop: SysDecimal | undefined;
+    value: Decimal;
+    limit: Decimal;
+    stop: Decimal | undefined;
 
     constructor() {
         super(OrderTriggerTypeId.TrailingPrice);
@@ -187,9 +187,9 @@ export class TrailingPriceOrderTrigger extends OrderTrigger {
 }
 
 export class PercentageTrailingPriceOrderTrigger extends OrderTrigger {
-    value: SysDecimal;
-    limit: SysDecimal;
-    stop: SysDecimal | undefined;
+    value: Decimal;
+    limit: Decimal;
+    stop: Decimal | undefined;
 
     constructor() {
         super(OrderTriggerTypeId.PercentageTrailingPrice);

@@ -4,7 +4,8 @@ declare global {
     }
 }
 
-import { Integer, Logger, SysDecimal } from '@xilytix/sysutils';
+import { Integer, Logger } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 
 // export {
 //     BooleanOrUndefined,
@@ -30,7 +31,7 @@ import { Integer, Logger, SysDecimal } from '@xilytix/sysutils';
 // } from './xiltyix-sysutils';
 
 /** @public */
-export type PriceOrRemainder = SysDecimal | null;
+export type PriceOrRemainder = Decimal | null;
 
 /** @public */
 export interface BidAskPair<T> {

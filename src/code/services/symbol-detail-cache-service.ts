@@ -3,13 +3,13 @@ import {
     MapKey,
     MultiEvent,
     SourceTzOffsetDate,
-    SysDecimal,
     SysTick,
     UnreachableCaseError,
     addToCapacitisedArrayUniquely,
     mSecsPerHour,
     newUndefinableDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     CallOrPutId,
     DataDefinition,
@@ -782,11 +782,11 @@ export namespace SymbolDetailCacheService {
         depthDirectionId: DepthDirectionId | undefined;
         isIndex: boolean | undefined;
         expiryDate: SourceTzOffsetDate | undefined;
-        strikePrice: SysDecimal | undefined;
+        strikePrice: Decimal | undefined;
         exerciseTypeId: ExerciseTypeId | undefined;
         callOrPutId: CallOrPutId | undefined;
-        contractSize: SysDecimal | undefined;
-        lotSize: SysDecimal | undefined;
+        contractSize: Decimal | undefined;
+        lotSize: Decimal | undefined;
         attributes: Attributes | undefined;
         tmcLegs: TmcLegs | undefined;
         alternateCodes: AlternateCodes;

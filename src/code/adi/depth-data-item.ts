@@ -5,7 +5,6 @@ import {
     ComparisonResult,
     Integer,
     MultiEvent,
-    SysDecimal,
     UnexpectedCaseError,
     UnreachableCaseError,
     earliestBinarySearch,
@@ -14,6 +13,7 @@ import {
     isDecimalGreaterThan,
     moveElementInArray
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     ErrorCode,
     ZenithDataError,
@@ -309,7 +309,7 @@ export class DepthDataItem extends MarketSubscriptionDataItem {
     private findOrderIndex(
         list: DepthDataItem.Order[],
         side: OrderSideId,
-        orderPrice: SysDecimal,
+        orderPrice: Decimal,
         orderPosition: number
     ): BinarySearchResult {
 
@@ -732,7 +732,7 @@ export namespace DepthDataItem {
     export interface Order {
         orderId: string;
         sideId: OrderSideId;
-        price: SysDecimal;
+        price: Decimal;
         position: Integer;
         broker: string | undefined;
         crossRef: string | undefined;

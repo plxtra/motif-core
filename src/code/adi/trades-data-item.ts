@@ -7,11 +7,11 @@ import {
     rangedEarliestBinarySearch,
     rangedQuickSort,
     SourceTzOffsetDateTime,
-    SysDecimal,
     SysTick,
     UnreachableCaseError,
     UsableListChangeTypeId
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     assert,
     Badness,
@@ -379,7 +379,7 @@ export namespace TradesDataItem {
 
     export interface Record {
         id: Integer;
-        price: SysDecimal | undefined;
+        price: Decimal | undefined;
         quantity: Integer | undefined;
         time: SourceTzOffsetDateTime | undefined;
         flagIds: readonly TradeFlagId[];

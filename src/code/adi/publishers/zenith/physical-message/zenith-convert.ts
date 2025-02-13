@@ -17,10 +17,10 @@ import {
     Result,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    SysDecimal,
     UnexpectedCaseError,
     UnreachableCaseError,
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../../../../res/internal-api';
 import {
     ErrorCode,
@@ -2347,8 +2347,8 @@ export namespace ZenithConvert {
         }
 
         export interface AsDecimal {
-            readonly brokerage: SysDecimal | undefined;
-            readonly tax: SysDecimal | undefined;
+            readonly brokerage: Decimal | undefined;
+            readonly tax: Decimal | undefined;
         }
     }
 

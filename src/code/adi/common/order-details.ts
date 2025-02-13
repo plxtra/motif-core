@@ -1,4 +1,5 @@
-import { Integer, newUndefinableDate, newUndefinableDecimal, SysDecimal } from '@xilytix/sysutils';
+import { Integer, newUndefinableDate, newUndefinableDecimal } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     IvemClassId, OrderInstructionId, OrderPriceUnitTypeId, OrderShortSellTypeId, OrderSideId, OrderTypeId, TimeInForceId
 } from './data-types';
@@ -29,7 +30,7 @@ export abstract class OrderDetails {
 
 export class MarketOrderDetails extends OrderDetails {
     typeId: OrderTypeId;
-    limitPrice: SysDecimal | undefined;
+    limitPrice: Decimal | undefined;
     quantity: Integer;
     hiddenQuantity: Integer | undefined;
     minimumQuantity: Integer | undefined;

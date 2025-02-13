@@ -1,19 +1,20 @@
-import { SysDecimal } from '@xilytix/sysutils';
+
+import { Decimal } from 'decimal.js-light';
 import { AmendOrderResponseDataMessage, DataDefinition, DataMessage, DataMessageTypeId, OrderRequestTypeId } from './common/internal-api';
 import { OrderRequestDataItem } from './order-request-data-item';
 
 export class AmendOrderDataItem extends OrderRequestDataItem {
-    private _estimatedBrokerage: SysDecimal | undefined;
-    private _estimatedTax: SysDecimal | undefined;
-    private _estimatedValue: SysDecimal | undefined;
+    private _estimatedBrokerage: Decimal | undefined;
+    private _estimatedTax: Decimal | undefined;
+    private _estimatedValue: Decimal | undefined;
 
     constructor(MyDataDefinition: DataDefinition) {
         super(MyDataDefinition, OrderRequestTypeId.Amend);
     }
 
-    get estimatedBrokerage(): SysDecimal | undefined { return this._estimatedBrokerage; }
-    get estimatedTax(): SysDecimal | undefined { return this._estimatedTax; }
-    get estimatedValue(): SysDecimal | undefined { return this._estimatedValue; }
+    get estimatedBrokerage(): Decimal | undefined { return this._estimatedBrokerage; }
+    get estimatedTax(): Decimal | undefined { return this._estimatedTax; }
+    get estimatedValue(): Decimal | undefined { return this._estimatedValue; }
 
     override processMessage(msg: DataMessage) { // virtual;
         if (msg.typeId !== DataMessageTypeId.AmendOrderResponse) {

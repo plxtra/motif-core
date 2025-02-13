@@ -5,12 +5,12 @@ import {
     Integer,
     MapKey,
     MultiEvent,
-    SysDecimal,
     UnreachableCaseError,
     isDecimalEqual,
     isDecimalGreaterThan,
     newDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import {
     CorrectnessId,
@@ -52,11 +52,11 @@ export class Balances implements BrokerageAccountRecord {
     get accountId() { return this._account.id; }
     get currencyId() { return this._currencyId; }
 
-    get netBalance(): SysDecimal { return this._netBalance; }
-    get trading(): SysDecimal { return this._trading; }
-    get nonTrading(): SysDecimal { return this._nonTrading; }
-    get unfilledBuys(): SysDecimal { return this._unfilledBuys; }
-    get margin(): SysDecimal { return this._margin; }
+    get netBalance(): Decimal { return this._netBalance; }
+    get trading(): Decimal { return this._trading; }
+    get nonTrading(): Decimal { return this._nonTrading; }
+    get unfilledBuys(): Decimal { return this._unfilledBuys; }
+    get margin(): Decimal { return this._margin; }
 
     get correctnessId() { return this._correctnessId; }
 
@@ -149,7 +149,7 @@ export class Balances implements BrokerageAccountRecord {
         }
     }
 
-    private updateField(fieldId: Balances.FieldId, amount: SysDecimal) {
+    private updateField(fieldId: Balances.FieldId, amount: Decimal) {
         let recentChangeTypeId: RevRecordValueRecentChangeTypeId | undefined;
         switch (fieldId) {
             case Balances.FieldId.NetBalance:
@@ -204,11 +204,11 @@ export class Balances implements BrokerageAccountRecord {
 
 export namespace Balances {
     export type Id = string;
-    export const initialiseValue: SysDecimal = newDecimal(0);
+    export const initialiseValue: Decimal = newDecimal(0);
 
     export interface BalanceValue {
         readonly type: string;
-        amount: SysDecimal;
+        amount: Decimal;
     }
 
     export type ChangedEventHandler = (valueChanges: ValueChange[]) => void;

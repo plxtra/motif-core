@@ -5,11 +5,11 @@ import {
     LockOpenListItem,
     MultiEvent,
     SourceTzOffsetDate,
-    SysDecimal,
     UnreachableCaseError,
     UsableListChangeTypeId,
     newDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     AdiService,
     CallOrPutId,
@@ -388,7 +388,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
 
 export namespace CallPutFromUnderlyingTableRecordSource {
     export interface CallPutKey {
-        exercisePrice: SysDecimal;
+        exercisePrice: Decimal;
         expiryDate: SourceTzOffsetDate,
         market: DataMarket,
     }

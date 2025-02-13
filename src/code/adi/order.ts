@@ -6,13 +6,13 @@ import {
     MapKey,
     MultiEvent,
     SourceTzOffsetDateTime,
-    SysDecimal,
     isArrayEqualUniquely,
     isDecimalEqual,
     isSamePossiblyUndefinedArray,
     isUndefinableDecimalEqual,
     newDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import {
     CorrectnessId,
@@ -60,16 +60,16 @@ export class Order implements BrokerageAccountRecord {
     private _depthOrderId: string | undefined;
     private _tradingMarket: TradingMarket;
     private _currencyId: CurrencyId | undefined;
-    private _estimatedBrokerage: SysDecimal | undefined;
-    private _currentBrokerage: SysDecimal | undefined;
-    private _estimatedTax: SysDecimal | undefined;
-    private _currentTax: SysDecimal | undefined;
-    private _currentValue: SysDecimal;
+    private _estimatedBrokerage: Decimal | undefined;
+    private _currentBrokerage: Decimal | undefined;
+    private _estimatedTax: Decimal | undefined;
+    private _currentTax: Decimal | undefined;
+    private _currentValue: Decimal;
     private _createdDate: SourceTzOffsetDateTime;
     private _updatedDate: SourceTzOffsetDateTime;
     private _children: string[] | undefined;
     private _executedQuantity: Integer;
-    private _averagePrice: SysDecimal | undefined;
+    private _averagePrice: Decimal | undefined;
     // details
     private _styleId: IvemClassId;
     private _exchange: Exchange;
@@ -80,7 +80,7 @@ export class Order implements BrokerageAccountRecord {
     private _brokerageSchedule: string | undefined;
     // equity details
     private _equityOrderTypeId: OrderTypeId;
-    private _limitPrice: SysDecimal | undefined;
+    private _limitPrice: Decimal | undefined;
     private _quantity: Integer;
     private _hiddenQuantity: Integer | undefined;
     private _minimumQuantity: Integer | undefined;
@@ -89,7 +89,7 @@ export class Order implements BrokerageAccountRecord {
     private _shortSellTypeId: OrderShortSellTypeId | undefined;
     // managed fund details
     private _unitTypeId: OrderPriceUnitTypeId;
-    private _unitAmount: SysDecimal;
+    private _unitAmount: Decimal;
     private _managedFundCurrency: string | undefined;
     private _physicalDelivery: boolean | undefined;
     // route
@@ -171,16 +171,16 @@ export class Order implements BrokerageAccountRecord {
     get marketDisplay() { return this._tradingMarket.display; }
     get tradingMarket() { return this._tradingMarket; }
     get currencyId() { return this._currencyId; }
-    get estimatedBrokerage(): SysDecimal | undefined { return this._estimatedBrokerage; }
-    get currentBrokerage(): SysDecimal | undefined { return this._currentBrokerage; }
-    get estimatedTax(): SysDecimal | undefined { return this._estimatedTax; }
-    get currentTax(): SysDecimal | undefined { return this._currentTax; }
-    get currentValue(): SysDecimal { return this._currentValue; }
+    get estimatedBrokerage(): Decimal | undefined { return this._estimatedBrokerage; }
+    get currentBrokerage(): Decimal | undefined { return this._currentBrokerage; }
+    get estimatedTax(): Decimal | undefined { return this._estimatedTax; }
+    get currentTax(): Decimal | undefined { return this._currentTax; }
+    get currentValue(): Decimal { return this._currentValue; }
     get createdDate() { return this._createdDate; }
     get updatedDate() { return this._updatedDate; }
     get children() { return this._children; }
     get executedQuantity() { return this._executedQuantity; }
-    get averagePrice(): SysDecimal | undefined { return this._averagePrice; }
+    get averagePrice(): Decimal | undefined { return this._averagePrice; }
     get styleId(): IvemClassId { return this._styleId; }
     get exchange(): Exchange {
         const exchange = this._exchange;
@@ -202,7 +202,7 @@ export class Order implements BrokerageAccountRecord {
     get tradeTypeId() { return this._tradeTypeId; }
     get brokerageSchedule() { return this._brokerageSchedule; }
     get equityOrderTypeId() { return this._equityOrderTypeId; }
-    get limitPrice(): SysDecimal | undefined { return this._limitPrice; }
+    get limitPrice(): Decimal | undefined { return this._limitPrice; }
     get quantity() { return this._quantity; }
     get hiddenQuantity() { return this._hiddenQuantity; }
     get minimumQuantity() { return this._minimumQuantity; }
@@ -210,7 +210,7 @@ export class Order implements BrokerageAccountRecord {
     get expiryDate() { return this._expiryDate; }
     get shortSellTypeId() { return this._shortSellTypeId; }
     get unitTypeId() { return this._unitTypeId; }
-    get unitAmount(): SysDecimal { return this._unitAmount; }
+    get unitAmount(): Decimal { return this._unitAmount; }
     get managedFundCurrency() { return this._managedFundCurrency; }
     get physicalDelivery() { return this._physicalDelivery; }
     get trigger() { return this._trigger; }
@@ -246,7 +246,7 @@ export class Order implements BrokerageAccountRecord {
         return this.trigger.typeId;
     }
 
-    get triggerValue(): SysDecimal | undefined {
+    get triggerValue(): Decimal | undefined {
         return this.trigger.value;
     }
     get triggerExtraParamsText() {

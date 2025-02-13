@@ -4,7 +4,6 @@ import {
     ComparisonResult,
     EnumInfoOutOfOrderError,
     Integer,
-    SysDecimal,
     compareInteger,
     compareNumber,
     getUniqueElementArraysOverlapElements,
@@ -16,6 +15,7 @@ import {
     secsPerHour,
     secsPerMin
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../../res/internal-api';
 import {
     Badness,
@@ -8191,12 +8191,12 @@ export interface OrderRequestError {
 }
 
 export namespace AsxIndexPoint {
-    const dollarsToPointsFactor: SysDecimal = newDecimal(100.0);
+    const dollarsToPointsFactor: Decimal = newDecimal(100.0);
 
-    export function toDollars(Value: SysDecimal): SysDecimal {
+    export function toDollars(Value: Decimal): Decimal {
         return Value.div(dollarsToPointsFactor);
     }
-    export function fromDollars(Value: SysDecimal): SysDecimal {
+    export function fromDollars(Value: Decimal): Decimal {
         return Value.times(dollarsToPointsFactor);
     }
 }

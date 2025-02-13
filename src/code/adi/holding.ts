@@ -5,10 +5,10 @@ import {
     Integer,
     MapKey,
     MultiEvent,
-    SysDecimal,
     isDecimalEqual,
     isDecimalGreaterThan
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import {
     CorrectnessId,
@@ -32,11 +32,11 @@ export class Holding implements BrokerageAccountRecord {
     private _exchange: Exchange;
     private _code: string;
     private _styleId: IvemClassId;
-    private _cost: SysDecimal;
+    private _cost: Decimal;
     private _currencyId: CurrencyId | undefined;
     private _totalQuantity: Integer;
     private _totalAvailableQuantity: Integer;
-    private _averagePrice: SysDecimal;
+    private _averagePrice: Decimal;
 
     private _mapKey: MapKey | undefined;
 
@@ -83,11 +83,11 @@ export class Holding implements BrokerageAccountRecord {
     get code() { return this._code; }
     get accountId() { return this._account.id; }
     get styleId() { return this._styleId; }
-    get cost(): SysDecimal { return this._cost; }
+    get cost(): Decimal { return this._cost; }
     get currencyId() { return this._currencyId; }
     get totalQuantity() { return this._totalQuantity; }
     get totalAvailableQuantity() { return this._totalAvailableQuantity; }
-    get averagePrice(): SysDecimal { return this._averagePrice; }
+    get averagePrice(): Decimal { return this._averagePrice; }
 
     get correctnessId() { return this._correctnessId; }
 

@@ -11,8 +11,8 @@ import {
     MultiEvent,
     newDecimal,
     SourceTzOffsetDate,
-    SysDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import {
     assert,
@@ -51,36 +51,36 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
     private _tradingMarketsDisplay: string | undefined;
     private _isIndex: boolean | undefined;
     private _expiryDate: SourceTzOffsetDate | undefined;
-    private _strikePrice: SysDecimal | undefined;
+    private _strikePrice: Decimal | undefined;
     private _callOrPutId: CallOrPutId | undefined;
-    private _contractSize: SysDecimal | undefined;
+    private _contractSize: Decimal | undefined;
     private _subscriptionDataTypeIds: readonly PublisherSubscriptionDataTypeId[] | undefined;
     private _quotationBasis: readonly string[] | undefined;
     private _currencyId: CurrencyId | undefined;
-    private _open: SysDecimal | undefined;
-    private _high: SysDecimal | undefined;
-    private _low: SysDecimal | undefined;
-    private _close: SysDecimal | undefined;
-    private _settlement: SysDecimal | undefined;
-    private _last: SysDecimal | undefined;
+    private _open: Decimal | undefined;
+    private _high: Decimal | undefined;
+    private _low: Decimal | undefined;
+    private _close: Decimal | undefined;
+    private _settlement: Decimal | undefined;
+    private _last: Decimal | undefined;
     private _trend: MovementId | undefined;
-    private _bestAsk: SysDecimal | undefined;
+    private _bestAsk: Decimal | undefined;
     private _askCount: Integer | undefined;
-    private _askQuantity: SysDecimal | undefined;
+    private _askQuantity: Decimal | undefined;
     private _askUndisclosed: boolean | undefined;
-    private _bestBid: SysDecimal | undefined;
+    private _bestBid: Decimal | undefined;
     private _bidCount: Integer | undefined;
-    private _bidQuantity: SysDecimal | undefined;
+    private _bidQuantity: Decimal | undefined;
     private _bidUndisclosed: boolean | undefined;
     private _numberOfTrades: Integer | undefined;
-    private _volume: SysDecimal | undefined;
-    private _auctionPrice: SysDecimal | undefined;
-    private _auctionQuantity: SysDecimal | undefined;
-    private _auctionRemainder: SysDecimal | undefined;
-    private _vWAP: SysDecimal | undefined;
-    private _valueTraded: SysDecimal | undefined;
+    private _volume: Decimal | undefined;
+    private _auctionPrice: Decimal | undefined;
+    private _auctionQuantity: Decimal | undefined;
+    private _auctionRemainder: Decimal | undefined;
+    private _vWAP: Decimal | undefined;
+    private _valueTraded: Decimal | undefined;
     private _openInterest: Integer | undefined;
-    private _shareIssue: SysDecimal | undefined;
+    private _shareIssue: Decimal | undefined;
     private _statusNote: readonly string[] | undefined;
 
     private _fieldValuesChangedMultiEvent = new MultiEvent<SecurityDataItem.FieldValuesChangedEvent>();
@@ -110,36 +110,36 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
     get tradingMarketsDisplay(): string | undefined { return this._tradingMarketsDisplay; }
     get isIndex() { return this._isIndex; }
     get expiryDate() { return this._expiryDate; }
-    get strikePrice(): SysDecimal | undefined { return this._strikePrice; }
+    get strikePrice(): Decimal | undefined { return this._strikePrice; }
     get callOrPutId() { return this._callOrPutId; }
-    get contractSize(): SysDecimal | undefined { return this._contractSize; }
+    get contractSize(): Decimal | undefined { return this._contractSize; }
     get subscriptionDataTypeIds() { return this._subscriptionDataTypeIds; }
     get quotationBasis() { return this._quotationBasis; }
     get currencyId() { return this._currencyId; }
-    get open(): SysDecimal | undefined { return this._open; }
-    get high(): SysDecimal | undefined { return this._high; }
-    get low(): SysDecimal | undefined { return this._low; }
-    get close(): SysDecimal | undefined { return this._close; }
-    get settlement(): SysDecimal | undefined { return this._settlement; }
-    get last(): SysDecimal | undefined { return this._last; }
+    get open(): Decimal | undefined { return this._open; }
+    get high(): Decimal | undefined { return this._high; }
+    get low(): Decimal | undefined { return this._low; }
+    get close(): Decimal | undefined { return this._close; }
+    get settlement(): Decimal | undefined { return this._settlement; }
+    get last(): Decimal | undefined { return this._last; }
     get trend() { return this._trend; }
-    get bestAsk(): SysDecimal | undefined { return this._bestAsk; }
+    get bestAsk(): Decimal | undefined { return this._bestAsk; }
     get askCount() { return this._askCount; }
-    get askQuantity(): SysDecimal | undefined { return this._askQuantity; }
+    get askQuantity(): Decimal | undefined { return this._askQuantity; }
     get askUndisclosed() { return this._askUndisclosed; }
-    get bestBid(): SysDecimal | undefined { return this._bestBid; }
+    get bestBid(): Decimal | undefined { return this._bestBid; }
     get bidCount() { return this._bidCount; }
-    get bidQuantity(): SysDecimal | undefined { return this._bidQuantity; }
+    get bidQuantity(): Decimal | undefined { return this._bidQuantity; }
     get bidUndisclosed() { return this._bidUndisclosed; }
     get numberOfTrades() { return this._numberOfTrades; }
-    get volume(): SysDecimal | undefined { return this._volume; }
-    get auctionPrice(): SysDecimal | undefined { return this._auctionPrice; }
-    get auctionQuantity(): SysDecimal | undefined { return this._auctionQuantity; }
-    get auctionRemainder(): SysDecimal | undefined { return this._auctionRemainder; }
-    get vWAP(): SysDecimal | undefined { return this._vWAP; }
-    get valueTraded(): SysDecimal | undefined { return this._valueTraded; }
+    get volume(): Decimal | undefined { return this._volume; }
+    get auctionPrice(): Decimal | undefined { return this._auctionPrice; }
+    get auctionQuantity(): Decimal | undefined { return this._auctionQuantity; }
+    get auctionRemainder(): Decimal | undefined { return this._auctionRemainder; }
+    get vWAP(): Decimal | undefined { return this._vWAP; }
+    get valueTraded(): Decimal | undefined { return this._valueTraded; }
     get openInterest() { return this._openInterest; }
-    get shareIssue(): SysDecimal | undefined { return this._shareIssue; }
+    get shareIssue(): Decimal | undefined { return this._shareIssue; }
     get statusNote() { return this._statusNote; }
 
     /*AssignValues(SrcDataItem: TDataItem): void { // virtual
@@ -1427,16 +1427,16 @@ export namespace SecurityDataItem {
     export const defaultIsIndex = false;
     export const defaultQuotationBasis: readonly string[] = [];
     export const defaultAskCount = 0;
-    export const defaultAskQuantity: SysDecimal = newDecimal(0.0);
+    export const defaultAskQuantity: Decimal = newDecimal(0.0);
     export const defaultAskUndisclosed = false;
     export const defaultBidCount = 0;
-    export const defaultBidQuantity: SysDecimal = newDecimal(0.0);
+    export const defaultBidQuantity: Decimal = newDecimal(0.0);
     export const defaultBidUndisclosed = false;
     export const defaultNumberOfTrades = 0;
-    export const defaultVolume: SysDecimal = newDecimal(0.0);
-    export const defaultValueTraded: SysDecimal = newDecimal(0.0);
+    export const defaultVolume: Decimal = newDecimal(0.0);
+    export const defaultValueTraded: Decimal = newDecimal(0.0);
     export const defaultOpenInterest = 0;
-    export const defaultShareIssue: SysDecimal = newDecimal(0.0);
+    export const defaultShareIssue: Decimal = newDecimal(0.0);
     export const defaultStatusNote: readonly string[] = [];
 
     export const enum FieldId {

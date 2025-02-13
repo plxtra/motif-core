@@ -3,10 +3,10 @@ import {
     Integer,
     MultiEvent,
     SourceTzOffsetDate,
-    SysDecimal,
     UnexpectedCaseError,
     UnreachableCaseError
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
 import { TextFormattableValue } from '../../../services/internal-api';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from '../field-source/definition/internal-api';
@@ -35,12 +35,12 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
     private fieldValuesChangeEventSubscriptionId: MultiEvent.SubscriptionId;
     // private lastLastHigherLower: HigherLowerId = HigherLowerId.Invalid;
 
-    private _lastOldValue: SysDecimal | undefined;
-    private _bestAskOldValue: SysDecimal | undefined;
-    private _bestBidOldValue: SysDecimal | undefined;
-    private _auctionPriceOldValue: SysDecimal | undefined;
-    private _vwapOldValue: SysDecimal | undefined;
-    private _valueTradedOldValue: SysDecimal | undefined;
+    private _lastOldValue: Decimal | undefined;
+    private _bestAskOldValue: Decimal | undefined;
+    private _bestBidOldValue: Decimal | undefined;
+    private _auctionPriceOldValue: Decimal | undefined;
+    private _vwapOldValue: Decimal | undefined;
+    private _valueTradedOldValue: Decimal | undefined;
 
     constructor(firstFieldIndexOffset: Integer, private readonly _dataIvemId: DataIvemId, private readonly _adi: AdiService) {
         super(firstFieldIndexOffset);
@@ -175,7 +175,7 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
         return new valueConstructor();
     }
 
-    private calculateDecimalHigherLowerId(newValue: SysDecimal | undefined, oldValue: SysDecimal | undefined) {
+    private calculateDecimalHigherLowerId(newValue: Decimal | undefined, oldValue: Decimal | undefined) {
         if (newValue === undefined || oldValue === undefined) {
             return HigherLowerId.Invalid;
         } else {
@@ -239,37 +239,37 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
     //     return higherLower;
     // }
 
-    private calculateLastHigherLowerId(newValue: SysDecimal | undefined): HigherLowerId {
+    private calculateLastHigherLowerId(newValue: Decimal | undefined): HigherLowerId {
         const result = this.calculateDecimalHigherLowerId(newValue, this._lastOldValue);
         this._lastOldValue = newValue;
         return result;
     }
 
-    private calculateBestAskHigherLowerId(newValue: SysDecimal | undefined) {
+    private calculateBestAskHigherLowerId(newValue: Decimal | undefined) {
         const result = this.calculateDecimalHigherLowerId(newValue, this._bestAskOldValue);
         this._bestAskOldValue = newValue;
         return result;
     }
 
-    private calculateBestBidHigherLowerId(newValue: SysDecimal | undefined) {
+    private calculateBestBidHigherLowerId(newValue: Decimal | undefined) {
         const result = this.calculateDecimalHigherLowerId(newValue, this._bestBidOldValue);
         this._bestBidOldValue = newValue;
         return result;
     }
 
-    private calculateAuctionPriceHigherLowerId(newValue: SysDecimal | undefined) {
+    private calculateAuctionPriceHigherLowerId(newValue: Decimal | undefined) {
         const result = this.calculateDecimalHigherLowerId(newValue, this._auctionPriceOldValue);
         this._auctionPriceOldValue = newValue;
         return result;
     }
 
-    private calculateVwapHigherLowerId(newValue: SysDecimal | undefined) {
+    private calculateVwapHigherLowerId(newValue: Decimal | undefined) {
         const result = this.calculateDecimalHigherLowerId(newValue, this._vwapOldValue);
         this._vwapOldValue = newValue;
         return result;
     }
 
-    private calculateValueTradedHigherLowerId(newValue: SysDecimal | undefined) {
+    private calculateValueTradedHigherLowerId(newValue: Decimal | undefined) {
         const result = this.calculateDecimalHigherLowerId(newValue, this._valueTradedOldValue);
         this._valueTradedOldValue = newValue;
         return result;

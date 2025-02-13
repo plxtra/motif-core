@@ -1,4 +1,5 @@
-import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate, SysDecimal } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { DataIvemId, DataMarket, ExerciseTypeId, IvemId } from '../adi/internal-api';
 import { StringId, Strings } from '../res/internal-api';
 import { FieldDataTypeId } from '../sys/internal-api';
@@ -7,10 +8,10 @@ export class CallPut {
     readonly mapKey: MapKey;
 
     constructor(
-        readonly exercisePrice: SysDecimal,
+        readonly exercisePrice: Decimal,
         readonly expiryDate: SourceTzOffsetDate,
         readonly market: DataMarket,
-        readonly contractMultiplier: SysDecimal,
+        readonly contractMultiplier: Decimal,
         readonly exerciseTypeId: ExerciseTypeId,
         readonly underlyingIvemId: IvemId | undefined,
         readonly underlyingIsIndex: boolean | undefined,
@@ -158,7 +159,7 @@ export namespace CallPut {
         }
     }
 
-    export function generateMapKey(exercisePrice: SysDecimal, expiryDate: SourceTzOffsetDate, marketZenithCode: string): MapKey {
+    export function generateMapKey(exercisePrice: Decimal, expiryDate: SourceTzOffsetDate, marketZenithCode: string): MapKey {
         return `${exercisePrice.toString()}|${expiryDate.utcMidnight.getTime()}|${marketZenithCode}`;
     }
 

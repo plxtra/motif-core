@@ -3,10 +3,10 @@ import {
     Integer,
     MultiEvent,
     SourceTzOffsetDate,
-    SysDecimal,
     isUndefinableArrayEqualUniquely,
     isUndefinableDecimalEqual
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import { FieldDataTypeId } from '../sys/internal-api';
 import {
@@ -27,10 +27,10 @@ export class SearchSymbolsDataIvemFullDetail extends SearchSymbolsDataIvemBaseDe
     private _depthDirectionId: DepthDirectionId | undefined;
     private _isIndex: boolean | undefined;
     private _expiryDate: SourceTzOffsetDate | undefined;
-    private _strikePrice: SysDecimal | undefined;
+    private _strikePrice: Decimal | undefined;
     private _exerciseTypeId: ExerciseTypeId | undefined;
     private _callOrPutId: CallOrPutId | undefined;
-    private _contractSize: SysDecimal | undefined;
+    private _contractSize: Decimal | undefined;
     private _lotSize: Integer | undefined;
     private _attributes: DataIvemAttributes | undefined;
     private _tmcLegs: TmcLegs | undefined;
@@ -62,10 +62,10 @@ export class SearchSymbolsDataIvemFullDetail extends SearchSymbolsDataIvemBaseDe
     get depthDirectionId(): DepthDirectionId | undefined { return this._depthDirectionId; }
     get isIndex(): boolean | undefined { return this._isIndex; }
     get expiryDate(): SourceTzOffsetDate | undefined { return this._expiryDate; }
-    get strikePrice(): SysDecimal | undefined { return this._strikePrice; }
+    get strikePrice(): Decimal | undefined { return this._strikePrice; }
     get exerciseTypeId(): ExerciseTypeId | undefined { return this._exerciseTypeId; }
     get callOrPutId(): CallOrPutId | undefined { return this._callOrPutId; }
-    get contractSize(): SysDecimal | undefined { return this._contractSize; }
+    get contractSize(): Decimal | undefined { return this._contractSize; }
     get lotSize(): Integer | undefined { return this._lotSize; }
     get attributes(): DataIvemAttributes | undefined { return this._attributes; }
     get tmcLegs(): TmcLegs | undefined { return this._tmcLegs; }

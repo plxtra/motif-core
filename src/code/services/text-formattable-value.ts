@@ -1,13 +1,13 @@
 import { RevTextFormattableValue } from '@xilytix/revgrid';
 import {
+    DecimalConstructor,
     Integer,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    SysDecimal,
-    SysDecimalConstructor,
     cloneDecimal,
     newUndefinableDecimal
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     ActiveFaultedStatusId,
     DataIvemId,
@@ -428,23 +428,23 @@ export class SourceTzOffsetDateTextFormattableValue extends GenericTextFormattab
     }
 }
 
-export class DecimalTextFormattableValue extends GenericTextFormattableValue<SysDecimal> {
-    constructor(data: SysDecimal | undefined) {
+export class DecimalTextFormattableValue extends GenericTextFormattableValue<Decimal> {
+    constructor(data: Decimal | undefined) {
         super(newUndefinableDecimal(data), TextFormattableValue.TypeId.Decimal);
     }
 }
 
-export class PriceTextFormattableValue extends GenericTextFormattableValue<SysDecimal> {
-    constructor(data: SysDecimal | undefined) {
+export class PriceTextFormattableValue extends GenericTextFormattableValue<Decimal> {
+    constructor(data: Decimal | undefined) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
         super(data === undefined ? undefined : new PriceTextFormattableValue.decimalConstructor(data), TextFormattableValue.TypeId.Price);
     }
 }
 
 export namespace PriceTextFormattableValue {
-    export const decimalConstructor: SysDecimalConstructor = cloneDecimal({
+    export const decimalConstructor: DecimalConstructor = cloneDecimal({
         precision: 20,
-        rounding: SysDecimal.ROUND_HALF_UP,
+        rounding: Decimal.ROUND_HALF_UP,
         toExpNeg: -15,
         toExpPos: 30,
     });
@@ -639,7 +639,7 @@ export class PriceAndHasUndisclosedTextFormattableValue extends GenericTextForma
 
 export namespace PriceAndHasUndisclosedTextFormattableValue {
     export interface DataType {
-        price: SysDecimal;
+        price: Decimal;
         hasUndisclosed: boolean;
     }
 }

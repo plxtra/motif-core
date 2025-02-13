@@ -1,8 +1,6 @@
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from '@xilytix/revgrid';
-import {
-    Integer,
-    SysDecimal
-} from '@xilytix/sysutils';
+import { Integer } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi/internal-api';
 import { DepthRecord } from './depth-record';
 
@@ -41,7 +39,7 @@ export abstract class DepthSideGridRecordStore {
         }
     }
 
-    setAuctionQuantity(value: SysDecimal | undefined) {
+    setAuctionQuantity(value: Decimal | undefined) {
         const valueAsInteger = value === undefined ? undefined : value.toInteger().toNumber(); // Remove this when Depth supports Decimal Auction Quantity
         if (valueAsInteger !== this._auctionVolume) {
             this._auctionVolume = valueAsInteger;

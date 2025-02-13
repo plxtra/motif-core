@@ -1,4 +1,5 @@
-import { AssertInternalError, SysDecimal } from '@xilytix/sysutils';
+import { AssertInternalError } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     DataDefinition,
     OrderRequestError,
@@ -22,9 +23,9 @@ export abstract class OrderRequestDataItem extends PublisherSubscriptionDataItem
     get order() { return this._order; }
     get errors() { return this._errors; }
 
-    abstract get estimatedBrokerage(): SysDecimal | undefined;
-    abstract get estimatedTax(): SysDecimal | undefined;
-    abstract get estimatedValue(): SysDecimal | undefined;
+    abstract get estimatedBrokerage(): Decimal | undefined;
+    abstract get estimatedTax(): Decimal | undefined;
+    abstract get estimatedValue(): Decimal | undefined;
 
     protected override processSubscriptionPreOnline() {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

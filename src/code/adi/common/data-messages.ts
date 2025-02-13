@@ -7,9 +7,9 @@ import {
     Logger,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    SysDecimal,
     SysTick
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import {
     PriceOrRemainder,
 } from '../../sys/internal-api';
@@ -258,16 +258,16 @@ export namespace OrdersDataMessage {
         // marketBoardId: MarketBoardId | undefined;
         tradingMarketZenithCode: string;
         currencyId: CurrencyId | undefined;
-        estimatedBrokerage: SysDecimal | undefined;
-        currentBrokerage: SysDecimal | undefined;
-        estimatedTax: SysDecimal | undefined;
-        currentTax: SysDecimal | undefined;
-        currentValue: SysDecimal;
+        estimatedBrokerage: Decimal | undefined;
+        currentBrokerage: Decimal | undefined;
+        estimatedTax: Decimal | undefined;
+        currentTax: Decimal | undefined;
+        currentValue: Decimal;
         createdDate: SourceTzOffsetDateTime;
         updatedDate: SourceTzOffsetDateTime;
         children: string[] | undefined;
         executedQuantity: Integer;
-        averagePrice: SysDecimal | null | undefined;
+        averagePrice: Decimal | null | undefined;
         // details
         styleId: IvemClassId;
         exchangeZenithCode: string;
@@ -278,7 +278,7 @@ export namespace OrdersDataMessage {
         instructionIds: OrderInstructionId[];
         // market details
         equityOrderTypeId: OrderTypeId;
-        limitPrice: SysDecimal | undefined;
+        limitPrice: Decimal | undefined;
         quantity: Integer;
         hiddenQuantity: Integer | undefined;
         minimumQuantity: Integer | undefined;
@@ -287,7 +287,7 @@ export namespace OrdersDataMessage {
         shortSellTypeId: OrderShortSellTypeId | undefined;
         // managed fund details
         unitTypeId: OrderPriceUnitTypeId;
-        unitAmount: SysDecimal;
+        unitAmount: Decimal;
         managedFundCurrency: string | undefined;
         physicalDelivery: boolean | undefined;
         // route
@@ -346,7 +346,7 @@ export namespace HoldingsDataMessage {
         code: string;
         accountZenithCode: string;
         styleId: IvemClassId;
-        cost: SysDecimal;
+        cost: Decimal;
         currencyId: CurrencyId | undefined;
     }
 
@@ -359,7 +359,7 @@ export namespace HoldingsDataMessage {
         export interface Detail {
             totalQuantity: Integer;
             totalAvailableQuantity: Integer;
-            averagePrice: SysDecimal;
+            averagePrice: Decimal;
         }
     }
 
@@ -421,7 +421,7 @@ export namespace BalancesDataMessage {
         typeId: ChangeTypeId.AddUpdate;
         currencyId: CurrencyId;
         balanceType: string;
-        amount: SysDecimal;
+        amount: Decimal;
     }
 
     export function isClearAccountChange(change: Change): change is InitialiseAccountChange {
@@ -455,7 +455,7 @@ export namespace TradesDataMessage {
 
     export interface AddUpdateChange extends Change {
         id: Integer;
-        price: SysDecimal | undefined;
+        price: Decimal | undefined;
         quantity: Integer | undefined;
         time: SourceTzOffsetDateTime | undefined;
         flagIds: readonly TradeFlagId[];
@@ -528,10 +528,10 @@ export namespace SymbolsDataMessage {
         depthDirectionId: DepthDirectionId | undefined | null;
         isIndex: boolean | undefined | null;
         expiryDate: SourceTzOffsetDate | undefined | null;
-        strikePrice: SysDecimal | undefined | null;
+        strikePrice: Decimal | undefined | null;
         exerciseTypeId: ExerciseTypeId | undefined | null;
         callOrPutId: CallOrPutId | undefined | null;
-        contractSize: SysDecimal | undefined | null;
+        contractSize: Decimal | undefined | null;
         lotSize: Integer | undefined | null;
         alternateCodes: DataIvemAlternateCodes | undefined | null;
         attributes: DataIvemAttributes | undefined | null;
@@ -544,10 +544,10 @@ export namespace SymbolsDataMessage {
         depthDirectionId: DepthDirectionId | undefined;
         isIndex: boolean | undefined;
         expiryDate: SourceTzOffsetDate | undefined;
-        strikePrice: SysDecimal | undefined;
+        strikePrice: Decimal | undefined;
         exerciseTypeId: ExerciseTypeId | undefined;
         callOrPutId: CallOrPutId | undefined;
-        contractSize: SysDecimal | undefined;
+        contractSize: Decimal | undefined;
         lotSize: Integer | undefined;
         alternateCodes: DataIvemAlternateCodes | undefined;
         attributes: DataIvemAttributes | undefined;
@@ -643,7 +643,7 @@ export namespace DepthDataMessage {
     export interface DepthOrder {
         id: string;
         sideId: OrderSideId | undefined;
-        price: SysDecimal | undefined;
+        price: Decimal | undefined;
         position: Integer | undefined;
         broker: string | undefined;
         crossRef: string | undefined;
@@ -707,50 +707,50 @@ export namespace SecurityDataMessage {
         tradingMarketZenithCodes: readonly string[] | undefined;
         isIndex: boolean | undefined;
         expiryDate: SourceTzOffsetDate | null | undefined;
-        strikePrice: SysDecimal | null | undefined;
+        strikePrice: Decimal | null | undefined;
         callOrPutId: CallOrPutId | null | undefined;
-        contractSize: SysDecimal | null | undefined;
+        contractSize: Decimal | null | undefined;
         subscriptionDataTypeIds: readonly PublisherSubscriptionDataTypeId[] | undefined;
         quotationBasis: readonly string[] | undefined;
         currencyId: CurrencyId | null | undefined;
-        open: SysDecimal | null | undefined;
-        high: SysDecimal | null | undefined;
-        low: SysDecimal | null | undefined;
-        close: SysDecimal | null | undefined;
-        settlement: SysDecimal | null | undefined;
-        last: SysDecimal | null | undefined;
+        open: Decimal | null | undefined;
+        high: Decimal | null | undefined;
+        low: Decimal | null | undefined;
+        close: Decimal | null | undefined;
+        settlement: Decimal | null | undefined;
+        last: Decimal | null | undefined;
         trend: MovementId | undefined;
-        bestAsk: SysDecimal | null | undefined;
+        bestAsk: Decimal | null | undefined;
         askCount: Integer | null | undefined;
-        askQuantity: SysDecimal | undefined;
+        askQuantity: Decimal | undefined;
         askUndisclosed: boolean | null | undefined;
-        bestBid: SysDecimal | null | undefined;
+        bestBid: Decimal | null | undefined;
         bidCount: Integer | null | undefined;
-        bidQuantity: SysDecimal | undefined;
+        bidQuantity: Decimal | undefined;
         bidUndisclosed: boolean | null | undefined;
         numberOfTrades: Integer | undefined;
-        volume: SysDecimal | undefined;
-        auctionPrice: SysDecimal | null | undefined;
-        auctionQuantity: SysDecimal | null | undefined;
-        auctionRemainder: SysDecimal | null | undefined;
-        vWAP: SysDecimal | null | undefined;
-        valueTraded: SysDecimal | undefined;
+        volume: Decimal | undefined;
+        auctionPrice: Decimal | null | undefined;
+        auctionQuantity: Decimal | null | undefined;
+        auctionRemainder: Decimal | null | undefined;
+        vWAP: Decimal | null | undefined;
+        valueTraded: Decimal | undefined;
         openInterest: Integer | null | undefined;
-        shareIssue: SysDecimal | null | undefined;
+        shareIssue: Decimal | null | undefined;
         statusNote: readonly string[] | undefined;
         extended: Extended | null | undefined;
     }
 
     export interface Extended {
-        pss: SysDecimal | undefined;
-        idss: SysDecimal | undefined;
-        pdt: SysDecimal | undefined;
-        rss: SysDecimal | undefined;
-        high52: SysDecimal | undefined;
-        low52: SysDecimal | undefined;
-        reference: SysDecimal | undefined;
-        highLimit: SysDecimal | undefined;
-        lowLimit: SysDecimal | undefined;
+        pss: Decimal | undefined;
+        idss: Decimal | undefined;
+        pdt: Decimal | undefined;
+        rss: Decimal | undefined;
+        high52: Decimal | undefined;
+        low52: Decimal | undefined;
+        reference: Decimal | undefined;
+        highLimit: Decimal | undefined;
+        lowLimit: Decimal | undefined;
     }
 }
 
@@ -1121,9 +1121,9 @@ export abstract class OrderResponseDataMessage extends DataMessage {
 export class PlaceOrderResponseDataMessage extends OrderResponseDataMessage {
     static readonly typeId = DataMessageTypeId.PlaceOrderResponse;
 
-    estimatedBrokerage: SysDecimal | undefined;
-    estimatedTax: SysDecimal | undefined;
-    estimatedValue: SysDecimal | undefined;
+    estimatedBrokerage: Decimal | undefined;
+    estimatedTax: Decimal | undefined;
+    estimatedValue: Decimal | undefined;
 
     constructor() {
         super(PlaceOrderResponseDataMessage.typeId);
@@ -1133,9 +1133,9 @@ export class PlaceOrderResponseDataMessage extends OrderResponseDataMessage {
 export class AmendOrderResponseDataMessage extends OrderResponseDataMessage {
     static readonly typeId = DataMessageTypeId.AmendOrderResponse;
 
-    estimatedBrokerage: SysDecimal | undefined;
-    estimatedTax: SysDecimal | undefined;
-    estimatedValue: SysDecimal | undefined;
+    estimatedBrokerage: Decimal | undefined;
+    estimatedTax: Decimal | undefined;
+    estimatedValue: Decimal | undefined;
 
     constructor() {
         super(AmendOrderResponseDataMessage.typeId);

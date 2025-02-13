@@ -10,8 +10,8 @@ import {
     NotImplementedError,
     Ok,
     Result,
-    SysDecimal,
 } from '@xilytix/sysutils';
+import { Decimal } from 'decimal.js-light';
 import { AdiPublisherSubscriptionDelayRetryAlgorithmId } from './adi-publisher-subscription-delay-retry-algorithm';
 import {
     ChartIntervalId,
@@ -217,8 +217,8 @@ export class SearchSymbolsDataDefinition extends MarketSubscriptionDataDefinitio
     marketZenithCodes?: readonly string[];
     preferExact?: boolean;
     startIndex?: Integer;
-    strikePriceMin?: SysDecimal;
-    strikePriceMax?: SysDecimal;
+    strikePriceMin?: Decimal;
+    strikePriceMax?: Decimal;
 
     constructor() {
         super(DataChannelId.Symbols);
