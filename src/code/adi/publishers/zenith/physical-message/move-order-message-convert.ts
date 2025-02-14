@@ -1,4 +1,4 @@
-import { AssertInternalError, Ok, Result } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Ok, Result } from '@xilytix/sysutils';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest,
@@ -8,48 +8,26 @@ import {
     MoveOrderResponseDataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithOrderConvert } from './zenith-order-convert';
 
-export namespace MoveOrderMessageConvert {
+export class MoveOrderMessageConvert extends MessageConvert {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
+        super();
+    }
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof MoveOrderRequestDataDefinition) {
-            return createPublishMessage(request, definition);
+            return MoveOrderMessageConvert.createPublishMessage(request, definition);
         } else {
             throw new AssertInternalError('MOMCCRM55583399', definition.description);
         }
     }
 
-    export function createPublishMessage(
-        request: AdiPublisherRequest | undefined,
-        definition: MoveOrderRequestDataDefinition
-    ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.TradingController.MoveOrder.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
-            Topic: ZenithProtocol.TradingController.TopicName.MoveOrder,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                // Account: ZenithConvert.EnvironmentedAccount.fromId(definition.accountId),
-                Account: definition.accountZenithCode,
-                OrderID: definition.orderId,
-                Flags: definition.flags === undefined ? undefined : ZenithConvert.OrderRequestFlag.fromIdArray(definition.flags),
-                Destination: definition.destinationAccountZenithCode,
-            }
-        };
-
-        if (request !== undefined) {
-            const messageText = JSON.stringify(result);
-            window.motifLogger.logInfo('Move Order Request', messageText);
-        }
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -74,7 +52,7 @@ export namespace MoveOrderMessageConvert {
                     dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
                     dataMessage.result = ZenithConvert.OrderRequestResult.toId(response.Result);
                     const order = response.Order;
-                    dataMessage.order = order === undefined ? undefined : ZenithOrderConvert.toAddUpdateChange(order);
+                    dataMessage.order = order === undefined ? undefined : ZenithOrderConvert.toAddUpdateChange(this._decimalFactory, order);
                     const errors = response.Errors;
                     dataMessage.errors = errors === undefined ? undefined : ZenithConvert.OrderRequestError.toErrorArray(errors);
 
@@ -82,5 +60,33 @@ export namespace MoveOrderMessageConvert {
                 }
             }
         }
+    }
+}
+
+export namespace MoveOrderMessageConvert {
+    export function createPublishMessage(
+        request: AdiPublisherRequest | undefined,
+        definition: MoveOrderRequestDataDefinition
+    ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.TradingController.MoveOrder.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
+            Topic: ZenithProtocol.TradingController.TopicName.MoveOrder,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                // Account: ZenithConvert.EnvironmentedAccount.fromId(definition.accountId),
+                Account: definition.accountZenithCode,
+                OrderID: definition.orderId,
+                Flags: definition.flags === undefined ? undefined : ZenithConvert.OrderRequestFlag.fromIdArray(definition.flags),
+                Destination: definition.destinationAccountZenithCode,
+            }
+        };
+
+        if (request !== undefined) {
+            const messageText = JSON.stringify(result);
+            window.motifLogger.logInfo('Move Order Request', messageText);
+        }
+
+        return new Ok(result);
     }
 }

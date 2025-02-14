@@ -9,46 +9,25 @@ import {
     QueryMarketsDataDefinition,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace MarketsMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class MarketsMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof MarketsDataDefinition) {
-            return createSubUnsubRequestMessage(request);
+            return this.createSubUnsubRequestMessage(request);
         } else {
             if (definition instanceof QueryMarketsDataDefinition) {
-                return createPublishMessage();
+                return this.createPublishMessage();
             } else {
                 throw new AssertInternalError('MMCCRMA5558482000', definition.description);
             }
         }
     }
 
-    function createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.MarketController.Markets.PublishSubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Market,
-            Topic: ZenithProtocol.MarketController.TopicName.QueryMarkets,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    function createSubUnsubRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.MarketController.Markets.PublishSubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Market,
-            Topic: ZenithProtocol.MarketController.TopicName.Markets,
-            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id,
@@ -65,7 +44,7 @@ export namespace MarketsMessageConvert {
                         throw new ZenithDataError(ErrorCode.MMCPMTP2998377, message.Topic);
                     } else {
                         const publishMsg = message as ZenithProtocol.MarketController.Markets.PublishSubPayloadMessageContainer;
-                        dataMessage.markets = parseData(publishMsg.Data);
+                        dataMessage.markets = this.parseData(publishMsg.Data);
                     }
                     break;
                 case ZenithConvert.MessageContainer.Action.Id.Sub:
@@ -73,7 +52,7 @@ export namespace MarketsMessageConvert {
                         throw new ZenithDataError(ErrorCode.MMCPMTS2998377, message.Topic);
                     } else {
                         const subMsg = message as ZenithProtocol.MarketController.Markets.PublishSubPayloadMessageContainer;
-                        dataMessage.markets = parseData(subMsg.Data);
+                        dataMessage.markets = this.parseData(subMsg.Data);
                     }
                     break;
                 default:
@@ -84,7 +63,29 @@ export namespace MarketsMessageConvert {
         }
     }
 
-    function parseData(data: ZenithProtocol.MarketController.Markets.MarketState[]) {
+    private createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.MarketController.Markets.PublishSubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Market,
+            Topic: ZenithProtocol.MarketController.TopicName.QueryMarkets,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private createSubUnsubRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.MarketController.Markets.PublishSubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Market,
+            Topic: ZenithProtocol.MarketController.TopicName.Markets,
+            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private parseData(data: ZenithProtocol.MarketController.Markets.MarketState[]) {
         const result = new Array<MarketsDataMessage.Market>(data.length);
         let count = 0;
         for (let index = 0; index < data.length; index++) {

@@ -1,9 +1,9 @@
 import {
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     UnreachableCaseError,
     isDecimalEqual,
     isUndefinableDecimalEqual,
-    newUndefinableDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../../res/internal-api';
@@ -69,6 +69,7 @@ export class PriceOrderTrigger extends OrderTrigger {
     private readonly _extraParamsText: string;
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _value: Decimal | undefined,
         private readonly _fieldId: PriceOrderTrigger.FieldId | undefined,
         private readonly _movementId: MovementId | undefined,
@@ -84,7 +85,12 @@ export class PriceOrderTrigger extends OrderTrigger {
     get extraParamsText() { return this._extraParamsText; }
 
     createCopy() {
-        return new PriceOrderTrigger(newUndefinableDecimal(this._value), this._fieldId, this._movementId);
+        return new PriceOrderTrigger(
+            this._decimalFactory,
+            this._decimalFactory.newUndefinableDecimal(this._value),
+            this._fieldId,
+            this._movementId
+        );
     }
 
 

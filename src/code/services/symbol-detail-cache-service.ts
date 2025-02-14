@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     MapKey,
     MultiEvent,
     SourceTzOffsetDate,
@@ -7,7 +8,6 @@ import {
     UnreachableCaseError,
     addToCapacitisedArrayUniquely,
     mSecsPerHour,
-    newUndefinableDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import {
@@ -40,7 +40,12 @@ export class SymbolDetailCacheService {
     private readonly _dataIvemIdMap: DataIvemIdMap = new Map<MapKey, SymbolDetailCacheService.DataIvemIdDetail>();
     private readonly _ivemIdMap: IvemIdMap = new Map<MapKey, SymbolDetailCacheService.IvemIdDetail>();
 
-    constructor(private readonly _marketsService: MarketsService, private readonly _dataMgr: DataMgr, private readonly _symbolsService: SymbolsService) { }
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        private readonly _marketsService: MarketsService,
+        private readonly _dataMgr: DataMgr,
+        private readonly _symbolsService: SymbolsService
+    ) { }
 
     finalise() {
         this.clear();
@@ -78,7 +83,7 @@ export class SymbolDetailCacheService {
         if (detail === undefined) {
             detail = this.createEmptyDataIvemIdDetail(dataIvemId);
             this._dataIvemIdMap.set(key, detail);
-            request = new DataIvemIdRequest(this._dataMgr, detail);
+            request = new DataIvemIdRequest(this._decimalFactory, this._dataMgr, detail);
             detail.request = request;
         } else {
             const possiblyUndefinedRequest = detail.request;
@@ -167,7 +172,7 @@ export class SymbolDetailCacheService {
         if (fullDetail === undefined) {
             fullDetail = this.createEmptyFullDataIvemIdDetail(dataIvemId);
             this._dataIvemIdMap.set(key, fullDetail);
-            request = new FullDataIvemIdRequest(this._dataMgr, fullDetail);
+            request = new FullDataIvemIdRequest(this._decimalFactory, this._dataMgr, fullDetail);
             fullDetail.request = request;
         } else {
             const possiblyUndefinedRequest = fullDetail.request;
@@ -202,11 +207,11 @@ export class SymbolDetailCacheService {
             depthDirectionId: detail.depthDirectionId,
             isIndex: detail.isIndex,
             expiryDate: SourceTzOffsetDate.newUndefinable(detail.expiryDate),
-            strikePrice: newUndefinableDecimal(detail.strikePrice),
+            strikePrice: this._decimalFactory.newUndefinableDecimal(detail.strikePrice),
             exerciseTypeId: detail.exerciseTypeId,
             callOrPutId: detail.callOrPutId,
-            contractSize: newUndefinableDecimal(detail.contractSize),
-            lotSize: newUndefinableDecimal(detail.lotSize),
+            contractSize: this._decimalFactory.newUndefinableDecimal(detail.contractSize),
+            lotSize: this._decimalFactory.newUndefinableDecimal(detail.lotSize),
             attributes: detail.attributes,
             alternateCodes: detail.alternateCodes,
             tmcLegs: detail.tmcLegs,
@@ -243,7 +248,7 @@ export class SymbolDetailCacheService {
         if (detail === undefined || (full && !detail.full)) {
             detail = this.createEmptyIvemIdDetail(ivemId, full);
             this._ivemIdMap.set(key, detail);
-            request = new IvemIdRequest(this._dataMgr, detail,
+            request = new IvemIdRequest(this._decimalFactory, this._dataMgr, detail,
                 (dataIvemId, fullRequest) => this.handleGetDataIvemIdDetailForIvemIdEvent(dataIvemId, fullRequest)
             );
             detail.request = request;
@@ -515,8 +520,8 @@ abstract class Request {
 class DataIvemIdRequest extends Request {
     resolveFtnArray: DataIvemIdResolveFtn[] = [];
 
-    constructor(dataMgr: DataMgr, private _detail: SymbolDetailCacheService.DataIvemIdDetail) {
-        super(dataMgr, DataIvemIdRequest.createDataDefinition(_detail.dataIvemId, false));
+    constructor(decimalFactory: DecimalFactory, dataMgr: DataMgr, private _detail: SymbolDetailCacheService.DataIvemIdDetail) {
+        super(dataMgr, DataIvemIdRequest.createDataDefinition(decimalFactory, _detail.dataIvemId, false));
     }
 
     get detail() { return this._detail; }
@@ -561,7 +566,7 @@ class DataIvemIdRequest extends Request {
 
 namespace DataIvemIdRequest {
 
-    export function createDataDefinition(dataIvemId: DataIvemId, fullDetail: boolean) {
+    export function createDataDefinition(decimalFactory: DecimalFactory, dataIvemId: DataIvemId, fullDetail: boolean) {
         const condition: SearchSymbolsDataDefinition.Condition = {
             text: dataIvemId.code,
             fieldIds: [SymbolFieldId.Code],
@@ -569,7 +574,7 @@ namespace DataIvemIdRequest {
             matchIds: [SearchSymbolsDataDefinition.Condition.MatchId.exact],
         };
 
-        const definition = new SearchSymbolsDataDefinition();
+        const definition = new SearchSymbolsDataDefinition(decimalFactory);
         definition.conditions = [condition];
         definition.marketZenithCodes = [dataIvemId.marketZenithCode];
         definition.preferExact = true;
@@ -581,8 +586,12 @@ namespace DataIvemIdRequest {
 class FullDataIvemIdRequest extends Request {
     resolveFtnArray: FullDataIvemIdResolveFtn[] = [];
 
-    constructor(dataMgr: DataMgr, private _detail: SymbolDetailCacheService.FullDataIvemIdDetail) {
-        super(dataMgr, DataIvemIdRequest.createDataDefinition(_detail.dataIvemId, true));
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        dataMgr: DataMgr,
+        private readonly _detail: SymbolDetailCacheService.FullDataIvemIdDetail
+    ) {
+        super(dataMgr, DataIvemIdRequest.createDataDefinition(_decimalFactory, _detail.dataIvemId, true));
     }
 
     get detail() { return this._detail; }
@@ -612,7 +621,7 @@ class FullDataIvemIdRequest extends Request {
         } else {
             detail.exists = true;
             const record = records[0];
-            SymbolDetailCacheService.FullDataIvemIdDetail.loadFromSymbolRecord(detail, record);
+            SymbolDetailCacheService.FullDataIvemIdDetail.loadFromSymbolRecord(this._decimalFactory, detail, record);
         }
         this.resolve(detail);
     }
@@ -629,11 +638,12 @@ class IvemIdRequest extends Request {
     resolveFtnArray: IvemIdResolveFtn[] = [];
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         dataMgr: DataMgr,
         private readonly _detail: SymbolDetailCacheService.IvemIdDetail,
         private _getDataIvemIdDetailEvent: IvemIdRequest.GetDataIvemIdDetailEventHandler,
     ) {
-        super(dataMgr, IvemIdRequest.createDataDefinition(_detail.ivemId, _detail.full));
+        super(dataMgr, IvemIdRequest.createDataDefinition(_decimalFactory, _detail.ivemId, _detail.full));
     }
 
     get detail() { return this._detail; }
@@ -679,7 +689,7 @@ class IvemIdRequest extends Request {
                     dataIvemIdDetail.exists = true;
                     if (full) {
                         if (SymbolDetailCacheService.Detail.isFullDataIvemId(dataIvemIdDetail)) {
-                            SymbolDetailCacheService.FullDataIvemIdDetail.loadFromSymbolRecord(dataIvemIdDetail, record);
+                            SymbolDetailCacheService.FullDataIvemIdDetail.loadFromSymbolRecord(this._decimalFactory, dataIvemIdDetail, record);
                         } else {
                             throw new AssertInternalError('SDCSIIRPDIU22087');
                         }
@@ -711,7 +721,7 @@ class IvemIdRequest extends Request {
 namespace IvemIdRequest {
     export type GetDataIvemIdDetailEventHandler = (dtaIvemId: DataIvemId, full: boolean) => SymbolDetailCacheService.DataIvemIdDetail;
 
-    export function createDataDefinition(ivemId: IvemId, full: boolean) {
+    export function createDataDefinition(decimalFactory: DecimalFactory, ivemId: IvemId, full: boolean) {
         const condition: SearchSymbolsDataDefinition.Condition = {
             text: ivemId.code,
             fieldIds: [SymbolFieldId.Code],
@@ -719,7 +729,7 @@ namespace IvemIdRequest {
             matchIds: [SearchSymbolsDataDefinition.Condition.MatchId.exact],
         };
 
-        const definition = new SearchSymbolsDataDefinition();
+        const definition = new SearchSymbolsDataDefinition(decimalFactory);
         definition.conditions = [condition];
         definition.exchangeZenithCode = ivemId.exchange.zenithCode;
         definition.preferExact = true;
@@ -793,7 +803,7 @@ export namespace SymbolDetailCacheService {
     }
 
     export namespace FullDataIvemIdDetail {
-        export function loadFromSymbolRecord(detail: FullDataIvemIdDetail, record: SymbolsDataItem.Record) {
+        export function loadFromSymbolRecord(decimalFactory: DecimalFactory, detail: FullDataIvemIdDetail, record: SymbolsDataItem.Record) {
             // objects and arrays are immutable so references are ok
             detail.ivemClassId = record.ivemClassId;
             detail.subscriptionDataTypeIds = record.subscriptionDataTypeIds;
@@ -804,11 +814,11 @@ export namespace SymbolDetailCacheService {
             detail.depthDirectionId = record.depthDirectionId;
             detail.isIndex = record.isIndex;
             detail.expiryDate = SourceTzOffsetDate.newUndefinable(record.expiryDate);
-            detail.strikePrice = newUndefinableDecimal(record.strikePrice);
+            detail.strikePrice = decimalFactory.newUndefinableDecimal(record.strikePrice);
             detail.exerciseTypeId = record.exerciseTypeId;
             detail.callOrPutId = record.callOrPutId;
-            detail.contractSize = newUndefinableDecimal(record.contractSize);
-            detail.lotSize = newUndefinableDecimal(record.lotSize);
+            detail.contractSize = decimalFactory.newUndefinableDecimal(record.contractSize);
+            detail.lotSize = decimalFactory.newUndefinableDecimal(record.lotSize);
             detail.attributes = record.attributes;
             detail.tmcLegs = record.tmcLegs;
         }

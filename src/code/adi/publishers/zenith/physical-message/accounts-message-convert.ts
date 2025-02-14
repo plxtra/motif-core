@@ -9,47 +9,26 @@ import {
     QueryBrokerageAccountsDataDefinition,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
 /** @internal */
-export namespace AccountsMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class AccountsMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof BrokerageAccountsDataDefinition) {
-            return createSubUnsubRequestMessage(request.typeId);
+            return this.createSubUnsubRequestMessage(request.typeId);
         } else {
             if (definition instanceof QueryBrokerageAccountsDataDefinition) {
-                return createPublishMessage();
+                return this.createPublishMessage();
             } else {
                 throw new AssertInternalError('TCACM5488388388', definition.description);
             }
         }
     }
 
-    function createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.TradingController.Accounts.PublishSubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
-            Topic: ZenithProtocol.TradingController.TopicName.QueryAccounts,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    function createSubUnsubRequestMessage(requestTypeId: AdiPublisherRequest.TypeId): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.TradingController.Accounts.PublishSubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
-            Topic: ZenithProtocol.TradingController.TopicName.Accounts,
-            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(requestTypeId),
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -66,7 +45,7 @@ export namespace AccountsMessageConvert {
                         throw new ZenithDataError(ErrorCode.TCAPMTP2998377, message.Topic);
                     } else {
                         const publishMsg = message as ZenithProtocol.TradingController.Accounts.PublishSubPayloadMessageContainer;
-                        dataMessage.accounts = parseData(publishMsg.Data);
+                        dataMessage.accounts = this.parseData(publishMsg.Data);
                     }
                     break;
                 case ZenithConvert.MessageContainer.Action.Id.Sub:
@@ -74,7 +53,7 @@ export namespace AccountsMessageConvert {
                         throw new ZenithDataError(ErrorCode.TCAPMTS2998377, message.Topic);
                     } else {
                         const subMsg = message as ZenithProtocol.TradingController.Accounts.PublishSubPayloadMessageContainer;
-                        dataMessage.accounts = parseData(subMsg.Data);
+                        dataMessage.accounts = this.parseData(subMsg.Data);
                     }
                     break;
                 default:
@@ -85,7 +64,29 @@ export namespace AccountsMessageConvert {
         }
     }
 
-    function parseData(data: ZenithProtocol.TradingController.Accounts.AccountState[]) {
+    private createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.TradingController.Accounts.PublishSubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
+            Topic: ZenithProtocol.TradingController.TopicName.QueryAccounts,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private createSubUnsubRequestMessage(requestTypeId: AdiPublisherRequest.TypeId): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.TradingController.Accounts.PublishSubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
+            Topic: ZenithProtocol.TradingController.TopicName.Accounts,
+            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(requestTypeId),
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private parseData(data: ZenithProtocol.TradingController.Accounts.AccountState[]) {
         const result = new Array<BrokerageAccountsDataMessage.Account>(data.length);
         let count = 0;
         for (let index = 0; index < data.length; index++) {

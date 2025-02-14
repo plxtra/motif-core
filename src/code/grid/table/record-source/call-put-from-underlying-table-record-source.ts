@@ -1,13 +1,13 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     LockOpenListItem,
     MultiEvent,
     SourceTzOffsetDate,
     UnreachableCaseError,
     UsableListChangeTypeId,
-    newDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import {
@@ -50,6 +50,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
     private _dataItemBadnessChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         textFormatter: TextFormatter,
         customHeadings: RevSourcedFieldCustomHeadings | undefined,
@@ -98,7 +99,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
                 fieldSourceDefinition.typeId as CallPutFromUnderlyingTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
                 case TableFieldSourceDefinition.TypeId.CallPut: {
-                    const valueSource = new CallPutTableValueSource(result.fieldCount, callPut);
+                    const valueSource = new CallPutTableValueSource(this._decimalFactory, result.fieldCount, callPut);
                     result.addSource(valueSource);
                     break;
                 }
@@ -108,7 +109,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
                         throw new AssertInternalError('CPFUTRSCTRC68409');
                     } else {
                         // below may not bind to fields correctly - check when testing
-                        const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, dataIvemId, this._adiService);
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, dataIvemId);
                         result.addSource(valueSource);
                     }
                     break;
@@ -119,7 +120,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
                         throw new AssertInternalError('CPFUTRSCTRC68409');
                     } else {
                         // below may not bind to fields correctly - check when testing
-                        const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, dataIvemId, this._adiService);
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, dataIvemId);
                         result.addSource(valueSource);
                     }
                     break;
@@ -133,7 +134,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
     }
 
     override openLocked(opener: LockOpenListItem.Opener) {
-        const definition = new SearchSymbolsDataDefinition();
+        const definition = new SearchSymbolsDataDefinition(this._decimalFactory);
 
         const condition: SearchSymbolsDataDefinition.Condition = {
             text: this._underlyingIvemId.code,
@@ -367,7 +368,7 @@ export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableR
                     ErrorCodeLogger.logDataError('CPFUTSCCPFKASC44477', symbolDetail.dataIvemId.name);
                     return undefined;
                 } else {
-                    const contractMultiplier = newDecimal(symbolInfoContractMultipler);
+                    const contractMultiplier = this._decimalFactory.newDecimal(symbolInfoContractMultipler);
                     // currently do not need underlyingIvemId or underlyingIsIndex
                     return new CallPut(
                         exercisePrice,

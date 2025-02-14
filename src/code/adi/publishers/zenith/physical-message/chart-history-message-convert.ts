@@ -11,22 +11,49 @@ import {
     RequestErrorDataMessages,
     unknownZenithCode
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
 /** @internal */
-export namespace ChartHistoryMessageConvert {
+export class ChartHistoryMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryChartHistoryDataDefinition) {
-            return createPublishMessage(request, definition);
+            return this.createPublishMessage(request, definition);
         } else {
             throw new AssertInternalError('CHOMCCRM55583399', definition.description);
         }
     }
 
-    function createPublishMessage(
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        actionId: ZenithConvert.MessageContainer.Action.Id
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
+            throw new ZenithDataError(ErrorCode.CHMCPMC588329999199, message.Controller);
+        } else {
+            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
+                throw new ZenithDataError(ErrorCode.CHMCPMA2233498, actionId.toString());
+            } else {
+                if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.QueryChartHistory) {
+                    throw new ZenithDataError(ErrorCode.CHMCPMT2233498, message.Topic);
+                } else {
+                    const historyMsg = message as ZenithProtocol.MarketController.ChartHistory.PayloadMessageContainer;
+
+                    const dataMessage = new ChartHistoryDataMessage();
+                    dataMessage.dataItemId = subscription.dataItemId;
+                    dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+                    dataMessage.records = this.parseData(historyMsg.Data);
+                    return dataMessage;
+                }
+            }
+        }
+    }
+
+    private createPublishMessage(
         request: AdiPublisherRequest,
         definition: QueryChartHistoryDataDefinition,
     ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
@@ -69,33 +96,7 @@ export namespace ChartHistoryMessageConvert {
         }
     }
 
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        actionId: ZenithConvert.MessageContainer.Action.Id
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
-            throw new ZenithDataError(ErrorCode.CHMCPMC588329999199, message.Controller);
-        } else {
-            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
-                throw new ZenithDataError(ErrorCode.CHMCPMA2233498, actionId.toString());
-            } else {
-                if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.QueryChartHistory) {
-                    throw new ZenithDataError(ErrorCode.CHMCPMT2233498, message.Topic);
-                } else {
-                    const historyMsg = message as ZenithProtocol.MarketController.ChartHistory.PayloadMessageContainer;
-
-                    const dataMessage = new ChartHistoryDataMessage();
-                    dataMessage.dataItemId = subscription.dataItemId;
-                    dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-                    dataMessage.records = parseData(historyMsg.Data);
-                    return dataMessage;
-                }
-            }
-        }
-    }
-
-    function parseData(payloadRecords: ZenithProtocol.MarketController.ChartHistory.Record[]): ChartHistoryDataMessage.Record[] {
+    private parseData(payloadRecords: ZenithProtocol.MarketController.ChartHistory.Record[]): ChartHistoryDataMessage.Record[] {
         const count = payloadRecords.length;
         const records = new Array<ChartHistoryDataMessage.Record>(count);
         for (let i = 0; i < count; i++) {

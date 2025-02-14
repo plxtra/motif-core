@@ -1,5 +1,6 @@
-import { AssertInternalError, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi/internal-api';
+import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { DataIvemExtendedDetailTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,
@@ -20,7 +21,12 @@ import { TableValueSource } from './table-value-source';
 export class DataIvemExtendedDetailTableValueSource extends TableValueSource {
     private _dataIvemDetailExtendedChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(firstFieldIndexOffset: Integer, private _dataIvemFullDetail: SearchSymbolsDataIvemFullDetail, private _dataItem: SymbolsDataItem) {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        firstFieldIndexOffset: Integer,
+        private _dataIvemFullDetail: SearchSymbolsDataIvemFullDetail,
+        private _dataItem: SymbolsDataItem
+    ) {
         super(firstFieldIndexOffset);
     }
 
@@ -97,18 +103,24 @@ export class DataIvemExtendedDetailTableValueSource extends TableValueSource {
             case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.ExpiryDate:
                 (value as SourceTzOffsetDateCorrectnessTableValue).data = this._dataIvemFullDetail.expiryDate;
                 break;
-            case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.StrikePrice:
-                (value as PriceCorrectnessTableValue).data = this._dataIvemFullDetail.strikePrice;
+            case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.StrikePrice: {
+                const strikePrice = this._dataIvemFullDetail.strikePrice;
+                const factoryisedStrikePrice = strikePrice === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, strikePrice);
+                (value as PriceCorrectnessTableValue).data = factoryisedStrikePrice;
                 break;
+            }
             case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.ExerciseTypeId:
                 (value as ExerciseTypeIdCorrectnessTableValue).data = this._dataIvemFullDetail.exerciseTypeId;
                 break;
             case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.CallOrPutId:
                 (value as CallOrPutIdCorrectnessTableValue).data = this._dataIvemFullDetail.callOrPutId;
                 break;
-            case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.ContractSize:
-                (value as DecimalCorrectnessTableValue).data = this._dataIvemFullDetail.contractSize;
+            case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.ContractSize: {
+                const contractSize = this._dataIvemFullDetail.contractSize;
+                const factoryisedContractSize = contractSize === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, contractSize);
+                (value as DecimalCorrectnessTableValue).data = factoryisedContractSize;
                 break;
+            }
             case SearchSymbolsDataIvemFullDetail.ExtendedField.Id.LotSize:
                 (value as IntegerCorrectnessTableValue).data = this._dataIvemFullDetail.lotSize;
                 break;

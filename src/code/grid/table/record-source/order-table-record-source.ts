@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
 import {
     AdiService,
     AllOrdersDataDefinition,
@@ -29,6 +29,7 @@ export class OrderTableRecordSource
     extends BrokerageAccountGroupTableRecordSource<Order, BrokerageAccountGroupRecordList<Order>> {
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         textFormatter: TextFormatter,
         customHeadings: RevSourcedFieldCustomHeadings | undefined,
@@ -76,7 +77,7 @@ export class OrderTableRecordSource
                 fieldSourceDefinition.typeId as OrderTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
                 case TableFieldSourceDefinition.TypeId.Order: {
-                    const valueSource = new OrderTableValueSource(result.fieldCount, order);
+                    const valueSource = new OrderTableValueSource(this._decimalFactory, result.fieldCount, order);
                     result.addSource(valueSource);
                     break;
                 }

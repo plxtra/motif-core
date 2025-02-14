@@ -1,6 +1,7 @@
 import { RevColumnLayoutDefinition, RevHorizontalAlignId, RevRecordField, RevRecordSourcedFieldDefinition, RevRecordSourcedFieldSourceDefinition, RevSourcedFieldDefinition } from '@xilytix/revgrid';
 import {
     ComparisonResult,
+    DecimalFactory,
     Integer,
     SourceTzOffsetDateTime,
     UnreachableCaseError,
@@ -14,6 +15,7 @@ import { DayTradesDataItem, MovementId, TradeFlagId } from '../../../adi/interna
 import { StringId, Strings } from '../../../res/internal-api';
 import {
     DayTradesDataItemRecordTypeIdTextFormattableValue,
+    FactoryisedDecimal,
     IntegerTextFormattableValue,
     OrderSideIdTextFormattableValue,
     PriceTextFormattableValue,
@@ -131,6 +133,7 @@ export namespace DayTradesGridField {
     }
 
     export function createField(
+        decimalFactory: DecimalFactory,
         id: Id,
         getDataItemCorrectnessIdEventHandler: GetDataItemCorrectnessIdEventHandler
     ): DayTradesGridField {
@@ -138,7 +141,7 @@ export namespace DayTradesGridField {
             case DayTradesDataItem.Field.Id.Id:
                 return new IdDayTradesGridField(id, createIdRevFieldDefinition(id), getDataItemCorrectnessIdEventHandler);
             case DayTradesDataItem.Field.Id.Price:
-                return new PriceDayTradesGridField(id, createPriceRevFieldDefinition(id), getDataItemCorrectnessIdEventHandler);
+                return new PriceDayTradesGridField(decimalFactory, id, createPriceRevFieldDefinition(id), getDataItemCorrectnessIdEventHandler);
             case DayTradesDataItem.Field.Id.Quantity:
                 return new QuantityDayTradesGridField(id, createQuantityRevFieldDefinition(id), getDataItemCorrectnessIdEventHandler);
             case DayTradesDataItem.Field.Id.Time:
@@ -446,6 +449,15 @@ export class IdDayTradesGridField extends DayTradesGridField {
 
 /** @internal */
 export class PriceDayTradesGridField extends DayTradesGridField {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        id: DayTradesDataItem.Field.Id,
+        definition: RevRecordSourcedFieldDefinition,
+        getDataItemCorrectnessIdEvent: DayTradesGridField.GetDataItemCorrectnessIdEventHandler,
+    ) {
+        super(id, definition, getDataItemCorrectnessIdEvent);
+    }
+
     protected createTextFormattableValue(record: DayTradesDataItem.Record) {
         let cellAttribute: TextFormattableValue.HigherLowerAttribute | undefined;
         switch (record.tradeRecord.trendId) {
@@ -460,8 +472,10 @@ export class PriceDayTradesGridField extends DayTradesGridField {
                 cellAttribute = undefined;
         }
 
+        const price = record.tradeRecord.price;
+        const factoryisedPrice = price === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, price);
         const result: DayTradesGridField.CreateTextFormattableValueResult = {
-            textFormattableValue: new PriceTextFormattableValue(record.tradeRecord.price),
+            textFormattableValue: new PriceTextFormattableValue(factoryisedPrice),
             cellAttribute,
         };
         return result;

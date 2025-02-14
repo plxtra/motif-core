@@ -3,10 +3,10 @@ import {
     AssertInternalError,
     compareDecimal,
     compareInteger,
+    DecimalFactory,
     Integer,
     isArrayEqual,
     isArrayEqualUniquely,
-    newDecimal,
     uniqueElementArraysOverlap,
     UnreachableCaseError
 } from '@xilytix/sysutils';
@@ -14,6 +14,7 @@ import { Decimal } from 'decimal.js-light';
 import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
 import {
     CountAndXrefsTextFormattableValue,
+    FactoryisedDecimal,
     IntegerTextFormattableValue,
     PriceAndHasUndisclosedTextFormattableValue,
     PriceTextFormattableValue,
@@ -153,13 +154,14 @@ export namespace FullDepthRecord {
 
 export class OrderFullDepthRecord extends FullDepthRecord {
     constructor(
+        decimalFactory: DecimalFactory,
         marketsService: MarketsService,
         index: Integer,
         private _order: DepthDataItem.Order,
         volumeAhead: Integer | undefined,
         auctionQuantity: Integer | undefined
     ) {
-        super(marketsService, DepthRecord.TypeId.Order, index, volumeAhead, auctionQuantity);
+        super(decimalFactory, marketsService, DepthRecord.TypeId.Order, index, volumeAhead, auctionQuantity);
     }
 
     get order() { return this._order; }
@@ -270,8 +272,9 @@ export class OrderFullDepthRecord extends FullDepthRecord {
     }
 
     private createPriceAndHasUndisclosedTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult  {
+        const decimalConstructor = PriceTextFormattableValue.getDecimalConstructor(this._decimalFactory)
         const data: PriceAndHasUndisclosedTextFormattableValue.DataType = {
-            price: new PriceTextFormattableValue.decimalConstructor(this.order.price),
+            price: new decimalConstructor(this.order.price),
             hasUndisclosed: this.order.hasUndisclosed
         };
         const textFormattableValue = new PriceAndHasUndisclosedTextFormattableValue(data);
@@ -313,7 +316,9 @@ export class OrderFullDepthRecord extends FullDepthRecord {
         return { textFormattableValue };
     }
     private createPriceTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {
-        const textFormattableValue = new PriceTextFormattableValue(this.order.price);
+        const price = this.order.price;
+        const factoryisedPrice = new FactoryisedDecimal(this._decimalFactory, price);
+        const textFormattableValue = new PriceTextFormattableValue(factoryisedPrice);
         return { textFormattableValue };
     }
     private createXRefTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {
@@ -344,15 +349,16 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
     private _marketDisplays: string[] | undefined; // Array of market display or zenith code corresponding to marketZenithCodes
 
     constructor(
+        decimalFactory: DecimalFactory,
         marketsService: MarketsService,
         index: Integer,
         firstOrder: DepthDataItem.Order,
         volumeAhead: Integer | undefined,
         auctionQuantity: Integer | undefined
     ) {
-        super(marketsService, DepthRecord.TypeId.PriceLevel, index, volumeAhead, auctionQuantity);
+        super(decimalFactory, marketsService, DepthRecord.TypeId.PriceLevel, index, volumeAhead, auctionQuantity);
 
-        this._price = newDecimal(firstOrder.price);
+        this._price = this._decimalFactory.newDecimal(firstOrder.price);
         this._count = 1;
         this._volume = firstOrder.quantity;
         this._marketZenithCodes = [firstOrder.marketZenithCode];
@@ -617,7 +623,7 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
             switch (valueChange.fieldId) {
                 case DepthDataItem.Order.Field.Id.Price: {
                     if (this._count === 1) {
-                        this._price = newDecimal(newOrder.price);
+                        this._price = this._decimalFactory.newDecimal(newOrder.price);
                         changes[changeCount++] = { fieldIndex: FullDepthSideFieldId.Price, typeId: valueChange.recentChangeTypeId };
                         priceAndHasUndisclosedChangeTypeId = valueChange.recentChangeTypeId;
                     } else {
@@ -703,8 +709,9 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
     }
 
     private createPriceAndHasUndisclosedTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {
+        const decimalConstructor = PriceTextFormattableValue.getDecimalConstructor(this._decimalFactory);
         const data: PriceAndHasUndisclosedTextFormattableValue.DataType = {
-            price: new PriceTextFormattableValue.decimalConstructor(this._price),
+            price: new decimalConstructor(this._price),
             hasUndisclosed: this._undisclosedOrderCount > 0
         };
         const textFormattableValue = new PriceAndHasUndisclosedTextFormattableValue(data);
@@ -746,7 +753,8 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
         return { textFormattableValue };
     }
     private createPriceTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {
-        const textFormattableValue = new PriceTextFormattableValue(this._price);
+        const factoryisedPrice = new FactoryisedDecimal(this._decimalFactory, this._price);
+        const textFormattableValue = new PriceTextFormattableValue(factoryisedPrice);
         return { textFormattableValue };
     }
     private createXRefTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {

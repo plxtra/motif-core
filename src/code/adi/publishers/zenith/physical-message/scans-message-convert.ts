@@ -15,48 +15,26 @@ import {
     ScanDescriptorsDataDefinition,
     ScanStatusedDescriptorsDataMessage
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithNotifyConvert } from './zenith-notify-convert';
 
-export namespace ScansMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class ScansMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof ScanDescriptorsDataDefinition) {
-            return createSubUnsubMessage(request.typeId);
+            return this.createSubUnsubMessage(request.typeId);
         } else {
             if (definition instanceof QueryScanDescriptorsDataDefinition) {
-                return createPublishMessage();
+                return this.createPublishMessage();
             } else {
                 throw new AssertInternalError('SMCCRM70324', definition.description);
             }
         }
     }
 
-    function createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.NotifyController.Scans.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Notify,
-            Topic: ZenithProtocol.NotifyController.TopicName.QueryScans,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    function createSubUnsubMessage(requestTypeId: AdiPublisherRequest.TypeId): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const topic = ZenithProtocol.NotifyController.TopicName.Scans;
-
-        const result: ZenithProtocol.SubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Notify,
-            Topic: topic,
-            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(requestTypeId),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -88,22 +66,45 @@ export namespace ScansMessageConvert {
             const dataMessage = new ScanStatusedDescriptorsDataMessage();
             dataMessage.dataItemId = subscription.dataItemId;
             dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-            dataMessage.changes = parseData(payloadMsg.Data);
+            dataMessage.changes = this.parseData(payloadMsg.Data);
             return dataMessage;
         }
     }
 
-    function parseData(data: readonly ZenithProtocol.NotifyController.ScanChange[]): ScanStatusedDescriptorsDataMessage.Change[] {
+    private createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.NotifyController.Scans.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Notify,
+            Topic: ZenithProtocol.NotifyController.TopicName.QueryScans,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private createSubUnsubMessage(requestTypeId: AdiPublisherRequest.TypeId): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const topic = ZenithProtocol.NotifyController.TopicName.Scans;
+
+        const result: ZenithProtocol.SubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Notify,
+            Topic: topic,
+            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(requestTypeId),
+        };
+
+        return new Ok(result);
+    }
+
+    private parseData(data: readonly ZenithProtocol.NotifyController.ScanChange[]): ScanStatusedDescriptorsDataMessage.Change[] {
         const count = data.length;
         const result = new Array<ScanStatusedDescriptorsDataMessage.Change>(count);
         for (let i = 0; i < count; i++) {
             const scanChange = data[i];
-            result[i] = parseScanChange(scanChange);
+            result[i] = this.parseScanChange(scanChange);
         }
         return result;
     }
 
-    function parseScanChange(zenithChange: ZenithProtocol.NotifyController.ScanChange): ScanStatusedDescriptorsDataMessage.Change {
+    private parseScanChange(zenithChange: ZenithProtocol.NotifyController.ScanChange): ScanStatusedDescriptorsDataMessage.Change {
         const changeTypeId = ZenithConvert.AurcChangeType.toId(zenithChange.Operation);
         switch (changeTypeId) {
             case AurcChangeTypeId.Add:

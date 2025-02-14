@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     getErrorMessage,
     Integer,
@@ -11,7 +12,6 @@ import {
     MultiEvent,
     newDate,
     newUndefinableDate,
-    newUndefinableDecimal,
     NotImplementedError,
     UnreachableCaseError
 } from '@xilytix/sysutils';
@@ -186,6 +186,7 @@ export class OrderPad {
     private _fieldsChangedMultiEvent = new MultiEvent<OrderPad.FieldsChangedEventHandler>();
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _marketsService: MarketsService,
         private readonly _symbolDetailCacheService: SymbolDetailCacheService,
         private readonly _adi: AdiService
@@ -910,12 +911,12 @@ export class OrderPad {
                     this.internalSetTotalQuantity(totalQuantityResult.value);
                 }
 
-                const loadedLimitValueResult = element.tryGetDecimal(OrderPad.JsonName.LoadedLimitValue);
+                const loadedLimitValueResult = element.tryGetDecimal(OrderPad.JsonName.LoadedLimitValue, this._decimalFactory);
                 if (loadedLimitValueResult.isOk()) {
                     this._loadedLimitValue = loadedLimitValueResult.value;
                 }
 
-                const limitValueResult = element.tryGetDecimal(OrderPad.JsonName.LimitValue);
+                const limitValueResult = element.tryGetDecimal(OrderPad.JsonName.LimitValue, this._decimalFactory);
                 if (limitValueResult.isErr()) {
                     this.internalSetLimitValue(undefined);
                 } else {
@@ -1256,7 +1257,7 @@ export class OrderPad {
                             if (triggerMovementId === undefined) {
                                 throw new AssertInternalError('OPCOTM6988847');
                             } else {
-                                return new PriceOrderTrigger(triggerValue, triggerFieldId, triggerMovementId);
+                                return new PriceOrderTrigger(this._decimalFactory, triggerValue, triggerFieldId, triggerMovementId);
                             }
                         }
                     }
@@ -2557,7 +2558,7 @@ export class OrderPad {
         if (!isUndefinableDecimalEqual(value, this._triggerValue)) {
             this.beginChanges();
             try {
-                this._triggerValue = newUndefinableDecimal(value);
+                this._triggerValue = this._decimalFactory.newUndefinableDecimal(value);
                 this._fields[OrderPad.FieldId.TriggerValue].modified = true;
                 this.flagFieldChanged(OrderPad.FieldId.TriggerValue);
             } finally {
@@ -2892,7 +2893,7 @@ export class OrderPad {
         } else {
             switch (this._bestLitSymbolDetail.ivemClassId) {
                 case IvemClassId.Market: {
-                    const marketOrderDetails = new MarketOrderDetails();
+                    const marketOrderDetails = new MarketOrderDetails(this._decimalFactory);
                     this.loadPlaceMarketOrderDetails(marketOrderDetails);
                     return marketOrderDetails;
                 }
@@ -2912,7 +2913,7 @@ export class OrderPad {
         } else {
             switch (this._bestLitSymbolDetail.ivemClassId) {
                 case IvemClassId.Market: {
-                    const marketOrderDetails = new MarketOrderDetails();
+                    const marketOrderDetails = new MarketOrderDetails(this._decimalFactory);
                     this.loadAmendMarketOrderDetails(marketOrderDetails);
                     return marketOrderDetails;
                 }
@@ -2962,7 +2963,7 @@ export class OrderPad {
             if (this.limitValue === undefined) {
                 throw new AssertInternalError('OPLPMODL7743434');
             } else {
-                details.limitPrice = newUndefinableDecimal(this.limitValue);
+                details.limitPrice = this._decimalFactory.newUndefinableDecimal(this.limitValue);
             }
         }
 
@@ -3179,8 +3180,8 @@ export namespace OrderPad {
         UserTimeInForceId = 'userTimeInForceId',
     }
 
-    export function createFromJson(marketsService: MarketsService, symbolDetailCacheService: SymbolDetailCacheService, adi: AdiService, orderPadJson: Json) {
-        const result = new OrderPad(marketsService, symbolDetailCacheService, adi);
+    export function createFromJson(decimalFactory: DecimalFactory, marketsService: MarketsService, symbolDetailCacheService: SymbolDetailCacheService, adi: AdiService, orderPadJson: Json) {
+        const result = new OrderPad(decimalFactory, marketsService, symbolDetailCacheService, adi);
         result.loadFromJson(orderPadJson);
         return result;
     }

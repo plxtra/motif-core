@@ -1,6 +1,7 @@
 import {
     AssertInternalError,
     compareInteger,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     Integer,
     isDateEqual,
@@ -98,7 +99,12 @@ export class DataIvemIdPriceVolumeSequenceHistory extends SequenceHistory {
     private _securityDataItembadnessChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _securityDataItemFieldValuesChangedSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(private readonly _symbolsService: SymbolsService, private readonly _adi: AdiService, private _dataIvemId: DataIvemId) {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        private readonly _symbolsService: SymbolsService,
+        private readonly _adi: AdiService,
+        private _dataIvemId: DataIvemId
+    ) {
         super();
     }
 
@@ -351,7 +357,7 @@ export class DataIvemIdPriceVolumeSequenceHistory extends SequenceHistory {
             matchIds: [SearchSymbolsDataDefinition.Condition.MatchId.exact],
         };
 
-        const definition = new SearchSymbolsDataDefinition();
+        const definition = new SearchSymbolsDataDefinition(this._decimalFactory);
         definition.conditions = [condition];
         definition.fullSymbol = true;
         definition.marketZenithCodes = [this.dataIvemId.marketZenithCode];

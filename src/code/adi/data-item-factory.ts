@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     NotImplementedError,
     UnreachableCaseError
 } from '@xilytix/sysutils';
@@ -56,10 +57,12 @@ import { ZenithExtConnectionDataItem } from './zenith-ext-connection-data-item';
 import { ZenithServerInfoDataItem } from './zenith-server-info-data-item';
 
 export class DataItemFactory implements DataMgr.DataItemFactory {
+    private _decimalFactory: DecimalFactory;
     private _marketsService: MarketsService;
 
-    setMarketsService(value: MarketsService): void {
-        this._marketsService = value;
+    setServices(decimalFactory: DecimalFactory, marketsService: MarketsService): void {
+        this._decimalFactory = decimalFactory;
+        this._marketsService = marketsService;
     }
 
     createDataItem(dataDefinition: DataDefinition): DataItem {
@@ -81,7 +84,7 @@ export class DataItemFactory implements DataMgr.DataItemFactory {
             case DataChannelId.Symbols:
                 return new SymbolsDataItem(this._marketsService, dataDefinition);
             case DataChannelId.Security:
-                return new SecurityDataItem(this._marketsService, dataDefinition);
+                return new SecurityDataItem(this._decimalFactory, this._marketsService, dataDefinition);
             case DataChannelId.Trades:
                 return new TradesDataItem(this._marketsService, dataDefinition);
             case DataChannelId.LatestTradingDayTrades:
@@ -103,7 +106,7 @@ export class DataItemFactory implements DataMgr.DataItemFactory {
             case DataChannelId.AllHoldings:
                 return new AllHoldingsDataItem(dataDefinition);
             case DataChannelId.BrokerageAccountBalances:
-                return new BrokerageAccountBalancesDataItem(this._marketsService, dataDefinition);
+                return new BrokerageAccountBalancesDataItem(this._decimalFactory, this._marketsService, dataDefinition);
             case DataChannelId.AllBalances:
                 return new AllBalancesDataItem(dataDefinition);
             case DataChannelId.BrokerageAccountOrders:

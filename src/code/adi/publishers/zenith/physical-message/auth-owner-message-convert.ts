@@ -3,11 +3,11 @@ import { defined, ErrorCode, ZenithDataError } from '../../../../sys/internal-ap
 import { ZenithProtocol } from './protocol/zenith-protocol';
 
 /** @internal */
-export namespace AuthOwnerMessageConvert {
+export class AuthOwnerMessageConvert {
     // AuthControllers are structured differently from other controllers
     // as they do not generate PariAdi messages
 
-    export function createMessage(
+    createMessage(
         transactionId: Integer,
         provider: string,
         username: string,
@@ -31,15 +31,15 @@ export namespace AuthOwnerMessageConvert {
         };
     }
 
-    export function parseMessage(message: ZenithProtocol.AuthController.AuthOwner.PublishPayloadMessageContainer) {
+    parseMessage(message: ZenithProtocol.AuthController.AuthOwner.PublishPayloadMessageContainer): ZenithProtocol.AuthController.Identify {
         // TODO:MED: It would be better to validate the incoming message instead of doing a blind typecast.
         if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Auth) {
             throw new ZenithDataError(ErrorCode.ACAOPMC298431, message.Controller);
         } else {
-            if (message.Topic !== ZenithProtocol.AuthController.TopicName.AuthOwner) {
+            if (message.Topic as ZenithProtocol.AuthController.TopicName !== ZenithProtocol.AuthController.TopicName.AuthOwner) {
                 throw new ZenithDataError(ErrorCode.ACAOPMT377521, message.Topic);
             } else {
-                if (message.Action === 'Error') {
+                if (message.Action === ZenithProtocol.MessageContainer.Action.Error) {
                     throw new ZenithDataError(ErrorCode.ACAOPMA23964, 'Error Response');
                 } else {
                     if (!defined(message.Data)) {

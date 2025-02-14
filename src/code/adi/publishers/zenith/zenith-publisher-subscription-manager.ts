@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     MapKey,
     newNowDate,
@@ -32,8 +33,14 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
     sendPhysicalMessageEvent: ZenithPublisherSubscriptionManager.SendPhysicalMessageEvent;
     authMessageReceivedEvent: ZenithPublisherSubscriptionManager.AuthMessageReceivedEvent;
 
+    private readonly _zenithMessageConvert: ZenithMessageConvert;
     // TODO:MED Replace array with a list so that memory is not being constantly requested and released.
-    private _physicalMessages: ZenithProtocol.PhysicalMessage[] = [];
+    private readonly _physicalMessages: ZenithProtocol.PhysicalMessage[] = [];
+
+    constructor(decimalFactory: DecimalFactory) {
+        super();
+        this._zenithMessageConvert = new ZenithMessageConvert(decimalFactory);
+    }
 
     addPhysicalMessage(message: unknown): void {
         if (typeof message === 'string') {
@@ -92,7 +99,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
             if (!subscription.resendAllowed && subscription.beenSentAtLeastOnce) {
                 throw new AssertInternalError('ZPSMSP8787323910', subscription.dataDefinition.description);
             } else {
-                const requestMsgResult = ZenithMessageConvert.createRequestMessage(request);
+                const requestMsgResult = this._zenithMessageConvert.createRequestMessage(request);
                 if (requestMsgResult.isErr()) {
                     const requestErrorDataMessages = requestMsgResult.error;
                     const dataMessages = requestErrorDataMessages.dataMessages;
@@ -220,7 +227,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                     if (subscription === undefined) {
                         return []; // was previously unsubscribed with unsubscribeDataItem()
                     } else {
-                        const dataMessage = ZenithMessageConvert.createDataMessage(subscription, parsedMessage, actionId);
+                        const dataMessage = this._zenithMessageConvert.createDataMessage(subscription, parsedMessage, actionId);
                         if (DataMessage.isErrorPublisherSubscriptionDataMessage(dataMessage)) {
                             // probably data error
                             this.processErrorMessage(dataMessage, subscription);
@@ -258,7 +265,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                                 return [errorDataMessage];
                             } else {
                                 // Has data. Do not change change subscription state unless data message is error
-                                const dataMessage = ZenithMessageConvert.createDataMessage(subscription, parsedMessage, actionId);
+                                const dataMessage = this._zenithMessageConvert.createDataMessage(subscription, parsedMessage, actionId);
 
                                 if (DataMessage.isErrorPublisherSubscriptionDataMessage(dataMessage)) {
                                     // probably data error

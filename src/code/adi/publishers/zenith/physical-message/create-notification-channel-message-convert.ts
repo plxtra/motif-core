@@ -9,51 +9,23 @@ import {
     ErrorPublisherSubscriptionDataMessage_PublishRequestError,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithChannelConvert } from './zenith-channel-convert';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace CreateNotificationChannelMessageConvert {
+export class CreateNotificationChannelMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof CreateNotificationChannelDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('CNCMCCRM70317', definition.description);
         }
     }
 
-    function createPublishMessage(definition: CreateNotificationChannelDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-
-        const details: ZenithProtocol.ChannelController.ChannelDescriptor = {
-            Name: definition.notificationChannelName,
-            Description: definition.notificationChannelDescription,
-            Metadata: ZenithChannelConvert.UserMetadata.fromMerge(definition.userMetadata, definition.favourite),
-        }
-
-        const settings = definition.settings;
-        const parameters: ZenithProtocol.ChannelController.ChannelParameters = {
-            Type: ZenithChannelConvert.DistributionMethodType.fromId(definition.distributionMethodId),
-            Settings: settings === undefined ? {} : settings,
-        }
-
-        const result: ZenithProtocol.ChannelController.CreateChannel.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
-            Topic: ZenithProtocol.ChannelController.TopicName.CreateChannel,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                Details: details,
-                Parameters: parameters,
-                IsActive: definition.enabled ? true : undefined,
-            }
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -81,5 +53,34 @@ export namespace CreateNotificationChannelMessageConvert {
                 }
             }
         }
+    }
+
+    private createPublishMessage(definition: CreateNotificationChannelDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+
+        const details: ZenithProtocol.ChannelController.ChannelDescriptor = {
+            Name: definition.notificationChannelName,
+            Description: definition.notificationChannelDescription,
+            Metadata: ZenithChannelConvert.UserMetadata.fromMerge(definition.userMetadata, definition.favourite),
+        }
+
+        const settings = definition.settings;
+        const parameters: ZenithProtocol.ChannelController.ChannelParameters = {
+            Type: ZenithChannelConvert.DistributionMethodType.fromId(definition.distributionMethodId),
+            Settings: settings === undefined ? {} : settings,
+        }
+
+        const result: ZenithProtocol.ChannelController.CreateChannel.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
+            Topic: ZenithProtocol.ChannelController.TopicName.CreateChannel,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                Details: details,
+                Parameters: parameters,
+                IsActive: definition.enabled ? true : undefined,
+            }
+        };
+
+        return new Ok(result);
     }
 }

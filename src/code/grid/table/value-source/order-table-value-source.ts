@@ -1,5 +1,6 @@
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Order } from '../../../adi/internal-api';
+import { FactoryisedDecimal } from '../../../services/internal-api';
 import { OrderTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,
@@ -21,7 +22,11 @@ import { TableValueSource } from './table-value-source';
 export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
     private _orderChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(firstFieldIndexOffset: Integer, private readonly _order: Order) {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        firstFieldIndexOffset: Integer,
+        private readonly _order: Order
+    ) {
         super(firstFieldIndexOffset);
     }
 
@@ -117,21 +122,35 @@ export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
             case Order.FieldId.CurrencyId:
                 (value as EnumCorrectnessTableValue).data = this._order.currencyId;
                 break;
-            case Order.FieldId.EstimatedBrokerage:
-                (value as PriceCorrectnessTableValue).data = this._order.estimatedBrokerage;
+            case Order.FieldId.EstimatedBrokerage: {
+                const estimatedBrokerage = this._order.estimatedBrokerage;
+                const factoryisedEstimatedBrokerage = estimatedBrokerage === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, estimatedBrokerage);
+                (value as PriceCorrectnessTableValue).data = factoryisedEstimatedBrokerage;
                 break;
-            case Order.FieldId.CurrentBrokerage:
-                (value as PriceCorrectnessTableValue).data = this._order.currentBrokerage;
+            }
+            case Order.FieldId.CurrentBrokerage: {
+                const currentBrokerage = this._order.currentBrokerage;
+                const factoryisedCurrentBrokerage = currentBrokerage === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, currentBrokerage);
+                (value as PriceCorrectnessTableValue).data = factoryisedCurrentBrokerage;
                 break;
-            case Order.FieldId.EstimatedTax:
-                (value as PriceCorrectnessTableValue).data = this._order.estimatedTax;
+            }
+            case Order.FieldId.EstimatedTax: {
+                const estimatedTax = this._order.estimatedTax;
+                const factoryisedEstimatedTax = estimatedTax === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, estimatedTax);
+                (value as PriceCorrectnessTableValue).data = factoryisedEstimatedTax;
                 break;
-            case Order.FieldId.CurrentTax:
-                (value as PriceCorrectnessTableValue).data = this._order.currentTax;
+            }
+            case Order.FieldId.CurrentTax: {
+                const currentTax = this._order.currentTax;
+                const factoryisedCurrentTax = currentTax === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, currentTax);
+                (value as PriceCorrectnessTableValue).data = factoryisedCurrentTax;
                 break;
-            case Order.FieldId.CurrentValue:
-                (value as DecimalCorrectnessTableValue).data = this._order.currentValue;
+            }
+            case Order.FieldId.CurrentValue: {
+                const factoryisedCurrentValue = new FactoryisedDecimal(this._decimalFactory, this._order.currentValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedCurrentValue;
                 break;
+            }
             case Order.FieldId.CreatedDate:
                 // (value as SourceTzOffsetDateTimeCorrectnessTableValue).data = this._order.createdDate;
                 (value as SourceTzOffsetDateTimeDateCorrectnessTableValue).data = this._order.createdDate;
@@ -150,9 +169,12 @@ export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
             case Order.FieldId.ExecutedQuantity:
                 (value as IntegerCorrectnessTableValue).data = this._order.executedQuantity;
                 break;
-            case Order.FieldId.AveragePrice:
-                (value as PriceCorrectnessTableValue).data = this._order.averagePrice;
+            case Order.FieldId.AveragePrice: {
+                const averagePrice = this._order.averagePrice;
+                const factoryisedAveragePrice = averagePrice === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, averagePrice);
+                (value as PriceCorrectnessTableValue).data = factoryisedAveragePrice;
                 break;
+            }
             case Order.FieldId.Exchange:
                 (value as StringCorrectnessTableValue).data = this._order.exchange.abbreviatedDisplay;
                 break;
@@ -171,9 +193,12 @@ export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
             case Order.FieldId.EquityOrderTypeId:
                 (value as EnumCorrectnessTableValue).data = this._order.equityOrderTypeId;
                 break;
-            case Order.FieldId.LimitPrice:
-                (value as PriceCorrectnessTableValue).data = this._order.limitPrice;
+            case Order.FieldId.LimitPrice: {
+                const limitPrice = this._order.limitPrice;
+                const factoryisedLimitPrice = limitPrice === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, limitPrice);
+                (value as PriceCorrectnessTableValue).data = factoryisedLimitPrice;
                 break;
+            }
             case Order.FieldId.Quantity:
                 (value as IntegerCorrectnessTableValue).data = this._order.quantity;
                 break;
@@ -195,9 +220,12 @@ export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
             case Order.FieldId.UnitTypeId:
                 (value as EnumCorrectnessTableValue).data = this._order.unitTypeId;
                 break;
-            case Order.FieldId.UnitAmount:
-                (value as DecimalCorrectnessTableValue).data = this._order.unitAmount;
+            case Order.FieldId.UnitAmount: {
+                const decimalValue = this._order.limitPrice;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
+            }
             case Order.FieldId.ManagedFundCurrency:
                 (value as StringCorrectnessTableValue).data = this._order.managedFundCurrency;
                 break;
@@ -213,9 +241,12 @@ export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
             case Order.FieldId.TriggerTypeId:
                 (value as EnumCorrectnessTableValue).data = this._order.triggerTypeId;
                 break;
-            case Order.FieldId.TriggerValue:
-                (value as PriceCorrectnessTableValue).data = this._order.triggerValue;
+            case Order.FieldId.TriggerValue: {
+                const triggerValue = this._order.triggerValue;
+                const factoryisedTriggerValue = triggerValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, triggerValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedTriggerValue;
                 break;
+            }
             case Order.FieldId.TriggerExtraParams:
                 (value as StringCorrectnessTableValue).data = this._order.triggerExtraParamsText;
                 break;

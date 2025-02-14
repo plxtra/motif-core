@@ -574,9 +574,9 @@ export class TextFormatterService implements TextFormatter {
             case TextFormattableValue.TypeId.BigInt:
                 return this.formatBigInt((textFormattableValue as BigIntTextFormattableValue).definedData);
             case TextFormattableValue.TypeId.Decimal:
-                return this.formatDecimal((textFormattableValue as DecimalTextFormattableValue).definedData);
+                return this.formatDecimal((textFormattableValue as DecimalTextFormattableValue).definedData.value);
             case TextFormattableValue.TypeId.Price:
-                return this.formatPrice((textFormattableValue as PriceTextFormattableValue).definedData);
+                return this.formatPrice((textFormattableValue as PriceTextFormattableValue).definedData.value);
             case TextFormattableValue.TypeId.PriceOrRemainder:
                 return this.formatPriceOrRemainder((textFormattableValue as PriceOrRemainderTextFormattableValue).definedData);
             case TextFormattableValue.TypeId.Date:

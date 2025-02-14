@@ -4,6 +4,7 @@ export * from './call-put';
 export * from './capabilities-service';
 export * from './capability';
 export * from './chart-history-interval';
+export * from './factoryised-decimal';
 export * from './idle-service';
 export * from './key-value-store/internal-api';
 export * from './motif-services-service';

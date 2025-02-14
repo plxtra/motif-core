@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { AssertInternalError, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
 import { AdiService, RankedDataIvemId } from '../../../adi/internal-api';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition,
@@ -27,6 +27,7 @@ export class RankedDataIvemIdListTableRecordSource extends SubscribeBadnessListT
     private _lockedRankedDataIvemIdList: RankedDataIvemIdList;
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         private readonly _symbolDetailCacheService: SymbolDetailCacheService,
         private readonly _rankedDataIvemIdListFactoryService: RankedDataIvemIdListFactoryService,
@@ -131,7 +132,7 @@ export class RankedDataIvemIdListTableRecordSource extends SubscribeBadnessListT
                     }
 
                     case TableFieldSourceDefinition.TypeId.SecurityDataItem: {
-                        const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, rankedDataIvemId.dataIvemId, this._adiService);
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, rankedDataIvemId.dataIvemId);
                         result.addSource(valueSource);
                         break;
                     }

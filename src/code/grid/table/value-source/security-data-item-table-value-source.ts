@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     MultiEvent,
     SourceTzOffsetDate,
@@ -8,7 +9,7 @@ import {
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
-import { TextFormattableValue } from '../../../services/internal-api';
+import { FactoryisedDecimal, TextFormattableValue } from '../../../services/internal-api';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,
@@ -42,7 +43,12 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
     private _vwapOldValue: Decimal | undefined;
     private _valueTradedOldValue: Decimal | undefined;
 
-    constructor(firstFieldIndexOffset: Integer, private readonly _dataIvemId: DataIvemId, private readonly _adi: AdiService) {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        private readonly _adi: AdiService,
+        firstFieldIndexOffset: Integer,
+        private readonly _dataIvemId: DataIvemId,
+    ) {
         super(firstFieldIndexOffset);
     }
 
@@ -309,36 +315,57 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
             case SecurityDataItem.FieldId.AskCount:
                 (value as IntegerCorrectnessTableValue).data = this.dataItem.askCount;
                 break;
-            case SecurityDataItem.FieldId.AskQuantity:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.askQuantity;
+            case SecurityDataItem.FieldId.AskQuantity: {
+                const decimalValue = this.dataItem.askQuantity;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
+            }
             case SecurityDataItem.FieldId.BidCount:
                 (value as IntegerCorrectnessTableValue).data = this.dataItem.bidCount;
                 break;
-            case SecurityDataItem.FieldId.BidQuantity:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.bidQuantity;
+            case SecurityDataItem.FieldId.BidQuantity: {
+                const decimalValue = this.dataItem.bidQuantity;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
+            }
             case SecurityDataItem.FieldId.NumberOfTrades:
                 (value as IntegerCorrectnessTableValue).data = this.dataItem.numberOfTrades;
                 break;
-            case SecurityDataItem.FieldId.ContractSize:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.contractSize;
+            case SecurityDataItem.FieldId.ContractSize: {
+                const decimalValue = this.dataItem.contractSize;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
+            }
             case SecurityDataItem.FieldId.OpenInterest:
                 (value as IntegerCorrectnessTableValue).data = this.dataItem.openInterest;
                 break;
-            case SecurityDataItem.FieldId.AuctionQuantity:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.auctionQuantity;
+            case SecurityDataItem.FieldId.AuctionQuantity: {
+                const decimalValue = this.dataItem.auctionQuantity;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.AuctionRemainder:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.auctionRemainder;
+            }
+            case SecurityDataItem.FieldId.AuctionRemainder: {
+                const decimalValue = this.dataItem.auctionRemainder;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.Volume:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.volume;
+            }
+            case SecurityDataItem.FieldId.Volume: {
+                const decimalValue = this.dataItem.volume;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.ShareIssue:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.shareIssue;
+            }
+            case SecurityDataItem.FieldId.ShareIssue: {
+                const decimalValue = this.dataItem.shareIssue;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
+            }
             case SecurityDataItem.FieldId.Market:
                 (value as StringCorrectnessTableValue).data = this.dataItem.market.display;
                 break;
@@ -366,66 +393,102 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
             case SecurityDataItem.FieldId.BidUndisclosed:
                 (value as BooleanCorrectnessTableValue).data = this.dataItem.bidUndisclosed;
                 break;
-            case SecurityDataItem.FieldId.Open:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.open;
+            case SecurityDataItem.FieldId.Open: {
+                const decimalValue = this.dataItem.open;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.High:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.high;
+            }
+            case SecurityDataItem.FieldId.High: {
+                const decimalValue = this.dataItem.high;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.Low:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.low;
+            }
+            case SecurityDataItem.FieldId.Low: {
+                const decimalValue = this.dataItem.low;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.Close:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.close;
+            }
+            case SecurityDataItem.FieldId.Close: {
+                const decimalValue = this.dataItem.close;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.Settlement:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.settlement;
+            }
+            case SecurityDataItem.FieldId.Settlement: {
+                const decimalValue = this.dataItem.settlement;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.Last:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.last;
+            }
+            case SecurityDataItem.FieldId.Last: {
+                const decimalValue = this.dataItem.last;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const lastHigherLowerId = this.calculateLastHigherLowerId(this.dataItem.last);
                     this.loadHigherLower(value, lastHigherLowerId);
                 }
                 break;
-            case SecurityDataItem.FieldId.BestAsk:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.bestAsk;
+            }
+            case SecurityDataItem.FieldId.BestAsk: {
+                const decimalValue = this.dataItem.bestAsk;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const bestAskHigherLower = this.calculateBestAskHigherLowerId(this.dataItem.bestAsk);
                     this.loadHigherLower(value, bestAskHigherLower);
                 }
                 break;
-            case SecurityDataItem.FieldId.BestBid:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.bestBid;
+            }
+            case SecurityDataItem.FieldId.BestBid: {
+                const decimalValue = this.dataItem.bestBid;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const bestBidHigherLowerId = this.calculateBestBidHigherLowerId(this.dataItem.bestBid);
                     this.loadHigherLower(value, bestBidHigherLowerId);
                 }
                 break;
-            case SecurityDataItem.FieldId.AuctionPrice:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.auctionPrice;
+            }
+            case SecurityDataItem.FieldId.AuctionPrice: {
+                const decimalValue = this.dataItem.auctionPrice;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const auctionPriceHigherLowerId = this.calculateAuctionPriceHigherLowerId(this.dataItem.auctionPrice);
                     this.loadHigherLower(value, auctionPriceHigherLowerId);
                 }
                 break;
-            case SecurityDataItem.FieldId.VWAP:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.vWAP;
+            }
+            case SecurityDataItem.FieldId.VWAP: {
+                const decimalValue = this.dataItem.vWAP;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const vwapHigherLowerId = this.calculateVwapHigherLowerId(this.dataItem.vWAP);
                     this.loadHigherLower(value, vwapHigherLowerId);
                 }
                 break;
-            case SecurityDataItem.FieldId.StrikePrice:
-                (value as PriceCorrectnessTableValue).data = this.dataItem.strikePrice;
+            }
+            case SecurityDataItem.FieldId.StrikePrice: {
+                const decimalValue = this.dataItem.strikePrice;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as PriceCorrectnessTableValue).data = factoryisedDecimalValue;
                 break;
-            case SecurityDataItem.FieldId.ValueTraded:
-                (value as DecimalCorrectnessTableValue).data = this.dataItem.valueTraded;
+            }
+            case SecurityDataItem.FieldId.ValueTraded: {
+                const decimalValue = this.dataItem.valueTraded;
+                const factoryisedDecimalValue = decimalValue === undefined ? undefined : new FactoryisedDecimal(this._decimalFactory, decimalValue);
+                (value as DecimalCorrectnessTableValue).data = factoryisedDecimalValue;
                 if (changed) {
                     const valueTradedHigherLowerId = this.calculateValueTradedHigherLowerId(this.dataItem.valueTraded);
                     this.loadHigherLower(value, valueTradedHigherLowerId);
                 }
                 break;
+            }
             case SecurityDataItem.FieldId.ExpiryDate:
                 (value as SourceTzOffsetDateCorrectnessTableValue).data = SourceTzOffsetDate.newUndefinable(this.dataItem.expiryDate);
                 break;

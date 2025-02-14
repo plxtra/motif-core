@@ -3,11 +3,11 @@ import { defined, ErrorCode, ZenithDataError } from '../../../../sys/internal-ap
 import { ZenithProtocol } from './protocol/zenith-protocol';
 
 /** @internal */
-export namespace AuthTokenMessageConvert {
+export class AuthTokenMessageConvert {
     // AuthControllers are structured differently from other controllers
     // as they do not generate PariAdi messages
 
-    export function createMessage(
+    createMessage(
         transactionId: Integer,
         provider: string,
         accessToken: string
@@ -25,11 +25,11 @@ export namespace AuthTokenMessageConvert {
         };
     }
 
-    export function parseMessage(message: ZenithProtocol.AuthController.AuthToken.PublishPayloadMessageContainer) {
+    parseMessage(message: ZenithProtocol.AuthController.AuthToken.PublishPayloadMessageContainer) {
         if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Auth) {
             throw new ZenithDataError(ErrorCode.ACATPMC298431, message.Controller);
         } else {
-            if (message.Topic !== ZenithProtocol.AuthController.TopicName.AuthToken) {
+            if (message.Topic as ZenithProtocol.AuthController.TopicName !== ZenithProtocol.AuthController.TopicName.AuthToken) {
                 throw new ZenithDataError(ErrorCode.ACATPMT377521, message.Topic);
             } else {
                 if (message.Action === ZenithProtocol.MessageContainer.Action.Error) {

@@ -1,9 +1,9 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     getErrorMessage,
-    newUndefinableDecimal,
     Ok,
-    Result,
+    Result
 } from '@xilytix/sysutils';
 import {
     ErrorCode,
@@ -27,22 +27,57 @@ import {
     ZenithProtocolCommon,
     ZenithSymbol
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithMarketMyxConvert } from './zenith-market-myx-convert';
 
-export namespace SymbolsMessageConvert {
+export class SymbolsMessageConvert extends MessageConvert {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
+        super();
+    }
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof SearchSymbolsDataDefinition) {
-            return createSearchPublishMessage(definition);
+            return this.createSearchPublishMessage(definition);
         } else {
             // if (definition instanceof SymbolsDataDefinition) {
-            //     return createSubUnsubMessage(definition, request.typeId);
+            //     return this.createSubUnsubMessage(definition, request.typeId);
             // } else {
                 throw new AssertInternalError('SMCCRM1111999428', definition.description);
             // }
+        }
+    }
+
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        actionId: ZenithConvert.MessageContainer.Action.Id
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
+            throw new ZenithDataError(ErrorCode.SMCPMC588329999199, message.Controller);
+        } else {
+            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
+                throw new ZenithDataError(ErrorCode.SMCPMD558382000, actionId.toString(10));
+            } else {
+                if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.SearchSymbols) {
+                    throw new ZenithDataError(ErrorCode.SMCPMP5885239991, message.Topic);
+                } else {
+                    const publishMsg = message as ZenithProtocol.MarketController.SearchSymbols.PublishPayloadMessageContainer;
+                    const data = publishMsg.Data;
+                    if (data === undefined || data === null) {
+                        if (data === undefined && subscription.errorWarningCount === 0) {
+                            return this.createDataMessage(subscription, []);
+                        } else {
+                            return ErrorPublisherSubscriptionDataMessage_PublishRequestError.createFromAdiPublisherSubscription(subscription, AdiPublisherSubscription.AllowedRetryTypeId.Never);
+                        }
+                    } else {
+                        const changes = this.parsePublishPayload(data);
+                        return this.createDataMessage(subscription, changes);
+                    }
+                }
+            }
         }
     }
 
@@ -118,14 +153,14 @@ export namespace SymbolsMessageConvert {
     //     return result;
     // }
 
-    function createSearchPublishMessage(definition: SearchSymbolsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    private createSearchPublishMessage(definition: SearchSymbolsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         // const exchange = definition.zenithExchangeCode === undefined
         //     ? undefined
         //     : ZenithConvert.EnvironmentedExchange.fromId(definition.zenithExchangeCode);
         const ivemClass = definition.ivemClassId === undefined
             ? undefined
             : ZenithConvert.SymbolClass.fromId(definition.ivemClassId);
-        const conditions = createSearchConditions(definition.conditions);
+        const conditions = this.createSearchConditions(definition.conditions);
         const expiryDateMin = definition.expiryDateMin === undefined
             ? undefined
             : ZenithConvert.Date.DateTimeIso8601.fromDate(definition.expiryDateMin);
@@ -172,7 +207,7 @@ export namespace SymbolsMessageConvert {
         return new Ok(result);
     }
 
-    function createSearchConditions(conditions: SearchSymbolsDataDefinition.Condition[] | undefined) {
+    private createSearchConditions(conditions: SearchSymbolsDataDefinition.Condition[] | undefined) {
         if (conditions === undefined) {
             return undefined;
         } else {
@@ -180,17 +215,17 @@ export namespace SymbolsMessageConvert {
             let result: ZenithProtocol.MarketController.SearchSymbols.Condition[] = [];
             for (let i = 0; i < count; i++) {
                 const condition = conditions[i];
-                result = [...result, ...createFieldSearchConditions(condition)];
+                result = [...result, ...this.createFieldSearchConditions(condition)];
             }
             return result;
         }
     }
 
-    export function createFieldSearchConditions(condition: SearchSymbolsDataDefinition.Condition) {
+    private createFieldSearchConditions(condition: SearchSymbolsDataDefinition.Condition) {
         const fieldIds = condition.fieldIds;
         let result: ZenithProtocol.MarketController.SearchSymbols.Condition[];
         if (fieldIds === undefined) {
-            result = [createFieldSearchCondition(undefined, undefined, condition)];
+            result = [this.createFieldSearchCondition(undefined, undefined, condition)];
         } else {
             const maxCount = fieldIds.length;
             result = new Array<ZenithProtocol.MarketController.SearchSymbols.Condition>(maxCount);
@@ -198,15 +233,15 @@ export namespace SymbolsMessageConvert {
             const containsCode = fieldIds.includes(SymbolFieldId.Code);
             const containsName = fieldIds.includes(SymbolFieldId.Name);
             if (containsCode && containsName) {
-                result[count++] = createFieldSearchCondition(undefined, undefined, condition); // undefined field = code + name
+                result[count++] = this.createFieldSearchCondition(undefined, undefined, condition); // undefined field = code + name
             } else {
                 if (containsCode) {
                     const field = ZenithProtocol.MarketController.SearchSymbols.Condition.Field.Code;
-                    result[count++] = createFieldSearchCondition(field, undefined, condition);
+                    result[count++] = this.createFieldSearchCondition(field, undefined, condition);
                 }
                 if (containsName) {
                     const field = ZenithProtocol.MarketController.SearchSymbols.Condition.Field.Name;
-                    result[count++] = createFieldSearchCondition(field, undefined, condition);
+                    result[count++] = this.createFieldSearchCondition(field, undefined, condition);
                 }
             }
 
@@ -214,7 +249,7 @@ export namespace SymbolsMessageConvert {
                 const alternateKey = ZenithConvert.SymbolAlternateKey.fromId(fieldId);
                 if (alternateKey !== undefined) {
                     const field = ZenithProtocol.MarketController.SearchSymbols.Condition.Field.Alternate;
-                    result[count++] = createFieldSearchCondition(field, alternateKey, condition);
+                    result[count++] = this.createFieldSearchCondition(field, alternateKey, condition);
                 }
             }
 
@@ -224,7 +259,7 @@ export namespace SymbolsMessageConvert {
         return result;
     }
 
-    export function createFieldSearchCondition(
+    private createFieldSearchCondition(
         field: ZenithProtocol.MarketController.SearchSymbols.Condition.Field | undefined,
         alternateKey: ZenithProtocol.MarketController.SearchSymbols.AlternateKey | undefined,
         condition: SearchSymbolsDataDefinition.Condition
@@ -248,7 +283,7 @@ export namespace SymbolsMessageConvert {
     }
 
 
-    // function createSubUnsubMessage(definition: SymbolsDataDefinition, requestTypeId: AdiPublisherRequest.TypeId) {
+    // private createSubUnsubMessage(definition: SymbolsDataDefinition, requestTypeId: AdiPublisherRequest.TypeId) {
     //     const topicName = Zenith.MarketController.TopicName.Symbols;
     //     const market = ZenithConvert.EnvironmentedMarket.fromId(definition.marketId);
     //     const zenithClass = ZenithConvert.IvemClass.fromId(definition.classId);
@@ -263,38 +298,7 @@ export namespace SymbolsMessageConvert {
     //     return result;
     // }
 
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        actionId: ZenithConvert.MessageContainer.Action.Id
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
-            throw new ZenithDataError(ErrorCode.SMCPMC588329999199, message.Controller);
-        } else {
-            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
-                throw new ZenithDataError(ErrorCode.SMCPMD558382000, actionId.toString(10));
-            } else {
-                if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.SearchSymbols) {
-                    throw new ZenithDataError(ErrorCode.SMCPMP5885239991, message.Topic);
-                } else {
-                    const publishMsg = message as ZenithProtocol.MarketController.SearchSymbols.PublishPayloadMessageContainer;
-                    const data = publishMsg.Data;
-                    if (data === undefined || data === null) {
-                        if (data === undefined && subscription.errorWarningCount === 0) {
-                            return createDataMessage(subscription, []);
-                        } else {
-                            return ErrorPublisherSubscriptionDataMessage_PublishRequestError.createFromAdiPublisherSubscription(subscription, AdiPublisherSubscription.AllowedRetryTypeId.Never);
-                        }
-                    } else {
-                        const changes = parsePublishPayload(data);
-                        return createDataMessage(subscription, changes);
-                    }
-                }
-            }
-        }
-    }
-
-    function createDataMessage(subscription: AdiPublisherSubscription, changes: SymbolsDataMessage.Change[]) {
+    private createDataMessage(subscription: AdiPublisherSubscription, changes: SymbolsDataMessage.Change[]) {
         const dataMessage = new SymbolsDataMessage();
         dataMessage.dataItemId = subscription.dataItemId;
         dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
@@ -302,7 +306,7 @@ export namespace SymbolsMessageConvert {
         return dataMessage;
     }
 
-    function parsePublishPayload(symbols: ZenithProtocol.MarketController.SearchSymbols.Detail[] | null) {
+    private parsePublishPayload(symbols: ZenithProtocol.MarketController.SearchSymbols.Detail[] | null) {
         let result: SymbolsDataMessage.Change[];
         if (symbols === null) {
             const change: SymbolsDataMessage.ClearChange = {
@@ -314,7 +318,7 @@ export namespace SymbolsMessageConvert {
 
             for (let index = 0; index < symbols.length; index++) {
                 const symbol = symbols[index] as ZenithProtocol.MarketController.SearchSymbols.FullDetail;
-                result[index] = createAddChange(AurcChangeTypeId.Add, symbol);
+                result[index] = this.createAddChange(AurcChangeTypeId.Add, symbol);
             }
         }
 
@@ -411,12 +415,12 @@ export namespace SymbolsMessageConvert {
     //     }
     // }
 
-    function createAddChange(changeTypeId: AurcChangeTypeId, detail: ZenithProtocol.MarketController.SearchSymbols.FullDetail | undefined) {
+    private createAddChange(changeTypeId: AurcChangeTypeId, detail: ZenithProtocol.MarketController.SearchSymbols.FullDetail | undefined) {
         if (detail === undefined) {
             throw new AssertInternalError('SMCCACFFD232200095534');
         } else {
             try {
-                const exchangeZenithCode = getExchange(detail);
+                const exchangeZenithCode = this.getExchange(detail);
                 const zenithExchangeCode = ZenithEnvironmentedValueParts.getValueFromString(exchangeZenithCode);
                 const detailAlternate = detail.Alternate;
                 const alternateCodes = detailAlternate === undefined ? {} : ZenithConvert.SymbolAlternate.toAdi(detailAlternate);
@@ -438,14 +442,14 @@ export namespace SymbolsMessageConvert {
                     depthDirectionId: ifDefined(detail.DepthDirection, x => ZenithConvert.DepthDirection.toId(x)),
                     isIndex: detail.IsIndex,
                     expiryDate: ifDefined(detail.ExpiryDate, x => ZenithConvert.Date.DashedYyyyMmDdDate.toSourceTzOffsetDate(x)),
-                    strikePrice: newUndefinableDecimal(detail.StrikePrice),
+                    strikePrice: this._decimalFactory.newUndefinableDecimal(detail.StrikePrice),
                     exerciseTypeId: ifDefined(detail.ExerciseType, x => ZenithConvert.ExerciseType.toId(x)),
                     callOrPutId: ifDefined(detail.CallOrPut, x => ZenithConvert.CallOrPut.toId(x)),
-                    contractSize: newUndefinableDecimal(detail.ContractSize),
+                    contractSize: this._decimalFactory.newUndefinableDecimal(detail.ContractSize),
                     lotSize: detail.LotSize,
                     alternateCodes,
-                    attributes: parseAttributes(zenithExchangeCode, detail.Attributes),
-                    tmcLegs: detail.Legs === null ? undefined : parseLegs(detail.Legs, exchangeZenithCode),
+                    attributes: this.parseAttributes(zenithExchangeCode, detail.Attributes),
+                    tmcLegs: detail.Legs === null ? undefined : this.parseLegs(detail.Legs, exchangeZenithCode),
                     categories: detail.Categories,
                 };
 
@@ -460,7 +464,7 @@ export namespace SymbolsMessageConvert {
     //     return tradingMarkets.map(tm => ZenithConvert.EnvironmentedMarket.toId(tm).marketId);
     // }
 
-    function getExchange(detail: ZenithProtocol.MarketController.SearchSymbols.Detail) {
+    private getExchange(detail: ZenithProtocol.MarketController.SearchSymbols.Detail) {
         const exchange = detail.Exchange;
         if (exchange === undefined) {
             return detail.Market; // Exchange and Market are same so only provided once
@@ -498,7 +502,7 @@ export namespace SymbolsMessageConvert {
     //     return result;
     // }
 
-    function parseAttributes(zenithExchangeCode: string, attributes: ZenithProtocol.MarketController.SearchSymbols.Attributes | undefined) {
+    private parseAttributes(zenithExchangeCode: string, attributes: ZenithProtocol.MarketController.SearchSymbols.Attributes | undefined) {
         if (attributes === undefined) {
             return undefined;
         } else {
@@ -569,7 +573,7 @@ export namespace SymbolsMessageConvert {
     //     }
     // }
 
-    function parseLegs(value: ZenithProtocol.MarketController.Leg[] | undefined, zenithExchangeCode: string) {
+    private parseLegs(value: ZenithProtocol.MarketController.Leg[] | undefined, zenithExchangeCode: string) {
         if (value === undefined) {
             return undefined;
         } else {

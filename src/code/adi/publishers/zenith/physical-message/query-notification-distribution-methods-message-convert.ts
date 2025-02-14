@@ -10,32 +10,23 @@ import {
     QueryNotificationDistributionMethodsDataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithChannelConvert } from './zenith-channel-convert';
 import { ZenithConvert } from './zenith-convert';
-export namespace QueryNotificationDistributionMethodsMessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class QueryNotificationDistributionMethodsMessageConvert extends MessageConvert {
+
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryNotificationDistributionMethodsDataDefinition) {
-            return createPublishMessage();
+            return this.createPublishMessage();
         } else {
             throw new AssertInternalError('CNDMSMCCRM70317', definition.description);
         }
     }
 
-    function createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.ChannelController.QueryMethods.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
-            Topic: ZenithProtocol.ChannelController.TopicName.QueryMethods,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -57,7 +48,7 @@ export namespace QueryNotificationDistributionMethodsMessageConvert {
                         const dataMessage = new QueryNotificationDistributionMethodsDataMessage();
                         dataMessage.dataItemId = subscription.dataItemId;
                         dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-                        dataMessage.methodIds = parsePublishPayload(data);
+                        dataMessage.methodIds = this.parsePublishPayload(data);
                         return dataMessage;
                     }
                 }
@@ -65,7 +56,18 @@ export namespace QueryNotificationDistributionMethodsMessageConvert {
         }
     }
 
-    function parsePublishPayload(data: ZenithProtocol.ChannelController.QueryMethods.Payload): readonly NotificationDistributionMethodId[]  {
+    private createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.ChannelController.QueryMethods.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
+            Topic: ZenithProtocol.ChannelController.TopicName.QueryMethods,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private parsePublishPayload(data: ZenithProtocol.ChannelController.QueryMethods.Payload): readonly NotificationDistributionMethodId[]  {
         const count = data.length;
         const methodIds = new Array<NotificationDistributionMethodId>(count);
         for (let i = 0; i < count; i++) {

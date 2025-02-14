@@ -1,12 +1,12 @@
 import {
     CommaText,
     dateToUtcYyyyMmDd,
+    DecimalFactory,
     Guid,
     Integer,
     JsonElement,
     MapKey,
     newUndefinableDate,
-    newUndefinableDecimal,
     NotImplementedError,
     Ok,
     Result,
@@ -220,7 +220,7 @@ export class SearchSymbolsDataDefinition extends MarketSubscriptionDataDefinitio
     strikePriceMin?: Decimal;
     strikePriceMax?: Decimal;
 
-    constructor() {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
         super(DataChannelId.Symbols);
     }
 
@@ -228,7 +228,7 @@ export class SearchSymbolsDataDefinition extends MarketSubscriptionDataDefinitio
     get referencable() { return false; }
 
     createCopy() {
-        const result = new SearchSymbolsDataDefinition();
+        const result = new SearchSymbolsDataDefinition(this._decimalFactory);
         result.assign(this);
         return result;
     }
@@ -253,8 +253,8 @@ export class SearchSymbolsDataDefinition extends MarketSubscriptionDataDefinitio
         this.marketZenithCodes = other.marketZenithCodes === undefined ? undefined : other.marketZenithCodes.slice();
         this.preferExact = other.preferExact;
         this.startIndex = other.startIndex;
-        this.strikePriceMin = newUndefinableDecimal(other.strikePriceMin);
-        this.strikePriceMax = newUndefinableDecimal(other.strikePriceMax);
+        this.strikePriceMin = this._decimalFactory.newUndefinableDecimal(other.strikePriceMin);
+        this.strikePriceMax = this._decimalFactory.newUndefinableDecimal(other.strikePriceMax);
     }
 }
 
@@ -306,9 +306,9 @@ export namespace SearchSymbolsDataDefinition {
         }
     }
 
-    export function tryCreateFromJson(_element: JsonElement): Result<SearchSymbolsDataDefinition> {
+    export function tryCreateFromJson(decimalFactory: DecimalFactory, _element: JsonElement): Result<SearchSymbolsDataDefinition> {
         // not yet implemented - just create default
-        const definition = new SearchSymbolsDataDefinition();
+        const definition = new SearchSymbolsDataDefinition(decimalFactory);
         return new Ok(definition);
     }
 }

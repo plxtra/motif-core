@@ -11,33 +11,23 @@ import {
     QueryNotificationChannelsDataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithChannelConvert } from './zenith-channel-convert';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace QueryNotificationChannelsMessageConvert {
+export class QueryNotificationChannelsMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryNotificationChannelsDataDefinition) {
-            return createPublishMessage();
+            return this.createPublishMessage();
         } else {
             throw new AssertInternalError('QNCSMCCRM70317', definition.description);
         }
     }
 
-    function createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.ChannelController.QueryChannels.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
-            Topic: ZenithProtocol.ChannelController.TopicName.QueryChannels,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -59,38 +49,49 @@ export namespace QueryNotificationChannelsMessageConvert {
                         const dataMessage = new QueryNotificationChannelsDataMessage();
                         dataMessage.dataItemId = subscription.dataItemId;
                         dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-                        dataMessage.notificationChannels = parsePublishPayload(data);
+                        dataMessage.notificationChannels = this.parsePublishPayload(data);
                         return dataMessage;
                     }
                 }
             }
         }
     }
-}
 
-function parsePublishPayload(data: ZenithProtocol.ChannelController.QueryChannels.PublishPayload): readonly NotificationChannel[] {
-    const count = data.length;
-    const channels = new Array<NotificationChannel>(count);
-    for (let i = 0; i < count; i++) {
-        const channelState = data[i];
-        const convertedUserMetadata = ZenithChannelConvert.UserMetadata.to(channelState.Metadata);
-        const channelStatusId = ZenithConvert.ActiveFaultedStatus.toId(channelState.Status);
-
-        const channel: NotificationChannel = {
-            channelId: channelState.ID,
-            channelName: channelState.Name,
-            channelDescription: channelState.Description,
-            userMetadata: channelState.Metadata,
-            favourite: convertedUserMetadata.favourite,
-            channelStatusId,
-            enabled: channelStatusId !== ActiveFaultedStatusId.Inactive,
-            faulted: channelStatusId === ActiveFaultedStatusId.Faulted,
-            distributionMethodId: ZenithChannelConvert.DistributionMethodType.toId(channelState.Type),
-            settings: undefined,
+    private createPublishMessage(): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.ChannelController.QueryChannels.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
+            Topic: ZenithProtocol.ChannelController.TopicName.QueryChannels,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
         };
 
-        channels[i] = channel;
+        return new Ok(result);
     }
 
-    return channels;
+    private parsePublishPayload(data: ZenithProtocol.ChannelController.QueryChannels.PublishPayload): readonly NotificationChannel[] {
+        const count = data.length;
+        const channels = new Array<NotificationChannel>(count);
+        for (let i = 0; i < count; i++) {
+            const channelState = data[i];
+            const convertedUserMetadata = ZenithChannelConvert.UserMetadata.to(channelState.Metadata);
+            const channelStatusId = ZenithConvert.ActiveFaultedStatus.toId(channelState.Status);
+
+            const channel: NotificationChannel = {
+                channelId: channelState.ID,
+                channelName: channelState.Name,
+                channelDescription: channelState.Description,
+                userMetadata: channelState.Metadata,
+                favourite: convertedUserMetadata.favourite,
+                channelStatusId,
+                enabled: channelStatusId !== ActiveFaultedStatusId.Inactive,
+                faulted: channelStatusId === ActiveFaultedStatusId.Faulted,
+                distributionMethodId: ZenithChannelConvert.DistributionMethodType.toId(channelState.Type),
+                settings: undefined,
+            };
+
+            channels[i] = channel;
+        }
+
+        return channels;
+    }
 }

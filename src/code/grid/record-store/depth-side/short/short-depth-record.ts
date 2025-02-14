@@ -1,5 +1,6 @@
 import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
+    DecimalFactory,
     Integer,
     UnreachableCaseError,
     compareBoolean,
@@ -27,13 +28,14 @@ export class ShortDepthRecord extends DepthRecord {
     // protected renderRecord = new Array<TextFormattableValue | undefined>(ShortDepthSideField.idCount);
 
     constructor(
+        decimalFactory: DecimalFactory,
         marketsService: MarketsService,
         index: Integer,
         private _level: DepthLevelsDataItem.Level,
         volumeAhead: Integer | undefined,
         auctionQuantity: Integer | undefined,
     ) {
-        super(marketsService, DepthRecord.TypeId.PriceLevel, index, volumeAhead, auctionQuantity);
+        super(decimalFactory, marketsService, DepthRecord.TypeId.PriceLevel, index, volumeAhead, auctionQuantity);
     }
 
     get level() { return this._level; }
@@ -133,8 +135,9 @@ export class ShortDepthRecord extends DepthRecord {
     }
 
     private createPriceAndHasUndisclosedTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult  {
+        const decimalConstructor = PriceTextFormattableValue.getDecimalConstructor(this._decimalFactory);
         const data: PriceOrRemainderAndHasUndisclosedTextFormattableValue.DataType = {
-            price: this._level.price === null ? null : new PriceTextFormattableValue.decimalConstructor(this._level.price),
+            price: this._level.price === null ? null : new decimalConstructor(this._level.price),
             hasUndisclosed: this._level.hasUndisclosed,
         };
         const textFormattableValue = new PriceOrRemainderAndHasUndisclosedTextFormattableValue(data);
@@ -166,7 +169,7 @@ export class ShortDepthRecord extends DepthRecord {
         return { textFormattableValue };
     }
     private createPriceTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {
-        const textFormattableValue = new PriceOrRemainderTextFormattableValue(this._level.price);
+        const textFormattableValue = new PriceOrRemainderTextFormattableValue(this._decimalFactory, this._level.price);
         return { textFormattableValue };
     }
     private createOrderCountTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult {

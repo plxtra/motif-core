@@ -1,5 +1,6 @@
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Balances } from '../../../adi/internal-api';
+import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { BalancesTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,
@@ -14,7 +15,7 @@ import { TableValueSource } from './table-value-source';
 export class BalancesTableValueSource extends CorrectnessTableValueSource<Balances> {
     private _balancesChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(firstFieldIndexOffset: Integer, private _balances: Balances) {
+    constructor(private readonly _decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, private _balances: Balances) {
         super(firstFieldIndexOffset);
     }
 
@@ -90,19 +91,19 @@ export class BalancesTableValueSource extends CorrectnessTableValueSource<Balanc
                 (value as CurrencyIdCorrectnessTableValue).data = this._balances.currencyId;
                 break;
             case Balances.FieldId.NetBalance:
-                (value as DecimalCorrectnessTableValue).data = this._balances.netBalance;
+                (value as DecimalCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._balances.netBalance);
                 break;
             case Balances.FieldId.Trading:
-                (value as DecimalCorrectnessTableValue).data = this._balances.trading;
+                (value as DecimalCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._balances.trading);
                 break;
             case Balances.FieldId.NonTrading:
-                (value as DecimalCorrectnessTableValue).data = this._balances.nonTrading;
+                (value as DecimalCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._balances.nonTrading);
                 break;
             case Balances.FieldId.UnfilledBuys:
-                (value as DecimalCorrectnessTableValue).data = this._balances.unfilledBuys;
+                (value as DecimalCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._balances.unfilledBuys);
                 break;
             case Balances.FieldId.Margin:
-                (value as DecimalCorrectnessTableValue).data = this._balances.margin;
+                (value as DecimalCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._balances.margin);
                 break;
             default:
                 throw new UnreachableCaseError('ACBTVSTVSLV8851', id);

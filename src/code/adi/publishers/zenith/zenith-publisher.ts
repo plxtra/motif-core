@@ -1,5 +1,6 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     Logger,
     mSecsPerHour,
@@ -40,9 +41,10 @@ import { ZenithPublisherSubscriptionManager } from './zenith-publisher-subscript
 import { ZenithWebsocket } from './zenith-websocket';
 
 export class ZenithPublisher extends AdiPublisher {
-    private _requestEngine: ZenithPublisherSubscriptionManager;
-    private _stateEngine = new ZenithConnectionStateEngine();
-    private _websocket = new ZenithWebsocket();
+    private readonly _requestEngine: ZenithPublisherSubscriptionManager;
+    private readonly _stateEngine = new ZenithConnectionStateEngine();
+    private readonly _websocket = new ZenithWebsocket();
+    private readonly _authTokenMessageConvert = new AuthTokenMessageConvert();
 
     private _connectionDataItemId: DataItemId;
     private _connectionDataItemRequestNr: Integer;
@@ -65,7 +67,7 @@ export class ZenithPublisher extends AdiPublisher {
     private _userNotAuthorisedSubscriptionErrorCount = 0;
     private _serverWarningSubscriptionErrorCount = 0;
 
-    constructor() {
+    constructor(decimalFactory: DecimalFactory) {
         super();
 
         this._stateEngine.actionEvent = (actionId, waitId) => { this.handleStateEngineActionEvent(actionId, waitId); };
@@ -76,7 +78,7 @@ export class ZenithPublisher extends AdiPublisher {
         this._stateEngine.stateChangeEvent = (stateId, waitId) => { this.handleStateEngineStateChangeEvent(stateId, waitId); };
         this._stateEngine.reconnectEvent = (reasonId) => { this.handleStateEngineReconnectEvent(reasonId); };
         this._stateEngine.logEvent = (logLevelId, text) => { this.log(logLevelId, text); };
-        this._requestEngine = new ZenithPublisherSubscriptionManager();
+        this._requestEngine = new ZenithPublisherSubscriptionManager(decimalFactory);
         this._requestEngine.subscriptionErrorEvent = (typeId) => { this.handleRequestEngineSubscriptionErrorEvent(typeId); };
         this._requestEngine.serverWarningEvent = () => { this.handleRequestEngineServerWarningEvent(); };
         this._requestEngine.sendPhysicalMessageEvent = (message) => this.handleRequestEngineSendPhysicalMessageEvent(message);
@@ -385,7 +387,7 @@ export class ZenithPublisher extends AdiPublisher {
         } else {
             const transactionId = this._requestEngine.getNextTransactionId();
             const provider = ZenithProtocol.AuthController.Provider.Bearer;
-            const msgContainer = AuthTokenMessageConvert.createMessage(transactionId, provider, accessToken);
+            const msgContainer = this._authTokenMessageConvert.createMessage(transactionId, provider, accessToken);
             const msg = JSON.stringify(msgContainer);
             this.logInfo('Fetching Zenith Auth');
             this._websocket.sendAuth(msg, transactionId, waitId);
@@ -396,7 +398,7 @@ export class ZenithPublisher extends AdiPublisher {
         let identify: ZenithProtocol.AuthController.Identify | undefined;
         switch (msg.Topic as ZenithProtocol.AuthController.TopicName) {
             case ZenithProtocol.AuthController.TopicName.AuthToken:
-                identify = AuthTokenMessageConvert.parseMessage(msg as ZenithProtocol.AuthController.AuthToken.PublishPayloadMessageContainer);
+                identify = this._authTokenMessageConvert.parseMessage(msg as ZenithProtocol.AuthController.AuthToken.PublishPayloadMessageContainer);
                 break;
             default:
                 this.logError('Unexpected Zenith Auth Fetch response topic: "' + msg.Topic + '". Stopping');

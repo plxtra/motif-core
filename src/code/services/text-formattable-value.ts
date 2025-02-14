@@ -1,11 +1,10 @@
 import { RevTextFormattableValue } from '@xilytix/revgrid';
 import {
     DecimalConstructor,
+    DecimalFactory,
     Integer,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    cloneDecimal,
-    newUndefinableDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import {
@@ -26,6 +25,7 @@ import {
     CorrectnessId,
     PriceOrRemainder,
 } from '../sys/internal-api';
+import { FactoryisedDecimal } from './factoryised-decimal';
 import { ColorSettings } from './settings/internal-api';
 
 export abstract class TextFormattableValue implements RevTextFormattableValue<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {
@@ -428,34 +428,57 @@ export class SourceTzOffsetDateTextFormattableValue extends GenericTextFormattab
     }
 }
 
-export class DecimalTextFormattableValue extends GenericTextFormattableValue<Decimal> {
-    constructor(data: Decimal | undefined) {
-        super(newUndefinableDecimal(data), TextFormattableValue.TypeId.Decimal);
+export class DecimalTextFormattableValue extends GenericTextFormattableValue<FactoryisedDecimal> {
+    constructor(data: FactoryisedDecimal | undefined) {
+        super(data, TextFormattableValue.TypeId.Decimal);
     }
 }
 
-export class PriceTextFormattableValue extends GenericTextFormattableValue<Decimal> {
-    constructor(data: Decimal | undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
-        super(data === undefined ? undefined : new PriceTextFormattableValue.decimalConstructor(data), TextFormattableValue.TypeId.Price);
+export class PriceTextFormattableValue extends GenericTextFormattableValue<FactoryisedDecimal> {
+    constructor(data: FactoryisedDecimal | undefined) {
+        let priceFactoryisedDecimal: FactoryisedDecimal | undefined;
+        if (data === undefined) {
+            priceFactoryisedDecimal = undefined;
+        } else {
+            const decimalConstructor = PriceTextFormattableValue.getDecimalConstructor(data.decimalFactory);
+            const priceDecimal = new decimalConstructor(data.value);
+            priceFactoryisedDecimal = new FactoryisedDecimal(data.decimalFactory, priceDecimal);
+        }
+        super(priceFactoryisedDecimal, TextFormattableValue.TypeId.Price);
     }
 }
 
 export namespace PriceTextFormattableValue {
-    export const decimalConstructor: DecimalConstructor = cloneDecimal({
-        precision: 20,
-        rounding: Decimal.ROUND_HALF_UP,
-        toExpNeg: -15,
-        toExpPos: 30,
-    });
+    let decimalConstructor: DecimalConstructor | undefined;
+
+    export function getDecimalConstructor(decimalFactory: DecimalFactory): DecimalConstructor {
+        if (decimalConstructor === undefined) {
+            decimalConstructor = decimalFactory.cloneDecimal({
+                precision: 20,
+                rounding: Decimal.ROUND_HALF_UP,
+                toExpNeg: -15,
+                toExpPos: 30,
+            });
+        }
+        return decimalConstructor;
+    }
 }
 
 export class PriceOrRemainderTextFormattableValue extends GenericTextFormattableValue<PriceOrRemainder> {
-    constructor(data: PriceOrRemainder | undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        super(data === undefined ? undefined :
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            data === null ? null : new PriceTextFormattableValue.decimalConstructor(data), TextFormattableValue.TypeId.PriceOrRemainder);
+    constructor(decimalFactory: DecimalFactory, data: PriceOrRemainder | undefined) {
+        let resolvedData: Decimal | null | undefined;
+        if (data === undefined) {
+            resolvedData = undefined;
+        } else {
+            if (data === null) {
+                resolvedData = null;
+            } else {
+                const decimalConstructor = PriceTextFormattableValue.getDecimalConstructor(decimalFactory);
+                resolvedData = new decimalConstructor(data);
+            }
+        }
+
+        super(resolvedData, TextFormattableValue.TypeId.PriceOrRemainder);
     }
 }
 

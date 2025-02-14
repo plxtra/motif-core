@@ -2,6 +2,7 @@ import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     CommaText,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     Integer,
     isArrayEqualUniquely,
@@ -9,7 +10,6 @@ import {
     isDecimalGreaterThan,
     isUndefinableArrayEqualUniquely,
     MultiEvent,
-    newDecimal,
     SourceTzOffsetDate,
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
@@ -85,7 +85,11 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
 
     private _fieldValuesChangedMultiEvent = new MultiEvent<SecurityDataItem.FieldValuesChangedEvent>();
 
-    constructor(marketsService: MarketsService, myDataDefinition: DataDefinition) {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        marketsService: MarketsService,
+        myDataDefinition: DataDefinition
+    ) {
         const securityDefinition = myDataDefinition as SecurityDataDefinition;
         const market = marketsService.getDataMarketOrUnknown(securityDefinition.marketZenithCode);
         super(marketsService, myDataDefinition, market);
@@ -406,7 +410,7 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.AskCount;
             }
             if (this._askQuantity === undefined) {
-                this._askQuantity = newDecimal(SecurityDataItem.defaultAskQuantity);
+                this._askQuantity = this._decimalFactory.newDecimal(SecurityDataItem.defaultAskQuantityAsNumber);
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.AskQuantity;
             }
             if (this._askUndisclosed === undefined) {
@@ -418,7 +422,7 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.BidCount;
             }
             if (this._bidQuantity === undefined) {
-                this._bidQuantity = newDecimal(SecurityDataItem.defaultBidQuantity);
+                this._bidQuantity = this._decimalFactory.newDecimal(SecurityDataItem.defaultBidQuantityAsNumber);
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.BidQuantity;
             }
             if (this._bidUndisclosed === undefined) {
@@ -430,11 +434,11 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.NumberOfTrades;
             }
             if (this._volume === undefined) {
-                this._volume = newDecimal(SecurityDataItem.defaultVolume);
+                this._volume = this._decimalFactory.newDecimal(SecurityDataItem.defaultVolumeAsNumber);
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.Volume;
             }
             if (this._valueTraded === undefined) {
-                this._valueTraded = newDecimal(SecurityDataItem.defaultValueTraded);
+                this._valueTraded = this._decimalFactory.newDecimal(SecurityDataItem.defaultValueTradedAsNumber);
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.ValueTraded;
             }
             if (this._openInterest === undefined) {
@@ -442,7 +446,7 @@ export class SecurityDataItem extends MarketSubscriptionDataItem {
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.OpenInterest;
             }
             if (this._shareIssue === undefined) {
-                this._shareIssue = newDecimal(SecurityDataItem.defaultShareIssue);
+                this._shareIssue = this._decimalFactory.newDecimal(SecurityDataItem.defaultShareIssueAsNumber);
                 modifiedFieldIds[modifiedFieldCount++] = SecurityDataItem.FieldId.ShareIssue;
             }
             if (this._statusNote === undefined) {
@@ -1427,16 +1431,16 @@ export namespace SecurityDataItem {
     export const defaultIsIndex = false;
     export const defaultQuotationBasis: readonly string[] = [];
     export const defaultAskCount = 0;
-    export const defaultAskQuantity: Decimal = newDecimal(0.0);
+    export const defaultAskQuantityAsNumber = 0;
     export const defaultAskUndisclosed = false;
     export const defaultBidCount = 0;
-    export const defaultBidQuantity: Decimal = newDecimal(0.0);
+    export const defaultBidQuantityAsNumber = 0;
     export const defaultBidUndisclosed = false;
     export const defaultNumberOfTrades = 0;
-    export const defaultVolume: Decimal = newDecimal(0.0);
-    export const defaultValueTraded: Decimal = newDecimal(0.0);
+    export const defaultVolumeAsNumber = 0;
+    export const defaultValueTradedAsNumber = 0;
     export const defaultOpenInterest = 0;
-    export const defaultShareIssue: Decimal = newDecimal(0.0);
+    export const defaultShareIssueAsNumber = 0;
     export const defaultStatusNote: readonly string[] = [];
 
     export const enum FieldId {

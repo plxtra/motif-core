@@ -1,4 +1,4 @@
-import { AssertInternalError, Ok, Result, UnexpectedCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Ok, Result, UnexpectedCaseError } from '@xilytix/sysutils';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest,
@@ -10,26 +10,66 @@ import {
     QueryBrokerageAccountOrdersDataDefinition,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithOrderConvert } from './zenith-order-convert';
 
-export namespace OrdersMessageConvert {
+export class OrdersMessageConvert extends MessageConvert {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
+        super();
+    }
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof BrokerageAccountOrdersDataDefinition) {
-            return createSubUnsubMessage(definition, request.typeId);
+            return this.createSubUnsubMessage(definition, request.typeId);
         } else {
             if (definition instanceof QueryBrokerageAccountOrdersDataDefinition) {
-                return createPublishMessage(definition);
+                return this.createPublishMessage(definition);
             } else {
                 throw new AssertInternalError('TCOCM9842242384', definition.description);
             }
         }
     }
 
-    function createPublishMessage(definition: QueryBrokerageAccountOrdersDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        actionId: ZenithConvert.MessageContainer.Action.Id
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Trading) {
+            throw new ZenithDataError(ErrorCode.TCOPMC9923852488, message.Controller);
+        } else {
+            const dataMessage = new OrdersDataMessage();
+            dataMessage.dataItemId = subscription.dataItemId;
+            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+            switch (actionId) {
+                case ZenithConvert.MessageContainer.Action.Id.Publish:
+                    if (message.Topic as ZenithProtocol.TradingController.TopicName !== ZenithProtocol.TradingController.TopicName.QueryOrders) {
+                        throw new ZenithDataError(ErrorCode.TCOPMP555832222, message.Topic);
+                    } else {
+                        const publishMsg = message as ZenithProtocol.TradingController.Orders.PublishPayloadMessageContainer;
+                        dataMessage.changeRecords = this.parsePublishMessageData(publishMsg.Data);
+                    }
+                    break;
+                case ZenithConvert.MessageContainer.Action.Id.Sub:
+                    if (!message.Topic.startsWith(ZenithProtocol.TradingController.TopicName.Orders)) {
+                        throw new ZenithDataError(ErrorCode.TCOPMS884352993242, message.Topic);
+                    } else {
+                        const subMsg = message as ZenithProtocol.TradingController.Orders.SubPayloadMessageContainer;
+                        dataMessage.changeRecords = this.parseSubMessageData(subMsg.Data);
+                    }
+                    break;
+                default:
+                    throw new UnexpectedCaseError('TCOPMU12122209553', actionId.toString(10));
+            }
+
+            return dataMessage;
+        }
+    }
+
+    private createPublishMessage(definition: QueryBrokerageAccountOrdersDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         // const account = ZenithConvert.EnvironmentedAccount.fromId(definition.accountId);
         // const orderId = definition.orderId;
 
@@ -47,7 +87,7 @@ export namespace OrdersMessageConvert {
         return new Ok(result);
     }
 
-    function createSubUnsubMessage(
+    private createSubUnsubMessage(
         definition: BrokerageAccountOrdersDataDefinition,
         requestTypeId: AdiPublisherRequest.TypeId
     ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
@@ -63,50 +103,14 @@ export namespace OrdersMessageConvert {
         return new Ok(result);
     }
 
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        actionId: ZenithConvert.MessageContainer.Action.Id
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Trading) {
-            throw new ZenithDataError(ErrorCode.TCOPMC9923852488, message.Controller);
-        } else {
-            const dataMessage = new OrdersDataMessage();
-            dataMessage.dataItemId = subscription.dataItemId;
-            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-            switch (actionId) {
-                case ZenithConvert.MessageContainer.Action.Id.Publish:
-                    if (message.Topic as ZenithProtocol.TradingController.TopicName !== ZenithProtocol.TradingController.TopicName.QueryOrders) {
-                        throw new ZenithDataError(ErrorCode.TCOPMP555832222, message.Topic);
-                    } else {
-                        const publishMsg = message as ZenithProtocol.TradingController.Orders.PublishPayloadMessageContainer;
-                        dataMessage.changeRecords = parsePublishMessageData(publishMsg.Data);
-                    }
-                    break;
-                case ZenithConvert.MessageContainer.Action.Id.Sub:
-                    if (!message.Topic.startsWith(ZenithProtocol.TradingController.TopicName.Orders)) {
-                        throw new ZenithDataError(ErrorCode.TCOPMS884352993242, message.Topic);
-                    } else {
-                        const subMsg = message as ZenithProtocol.TradingController.Orders.SubPayloadMessageContainer;
-                        dataMessage.changeRecords = parseSubMessageData(subMsg.Data);
-                    }
-                    break;
-                default:
-                    throw new UnexpectedCaseError('TCOPMU12122209553', actionId.toString(10));
-            }
-
-            return dataMessage;
-        }
-    }
-
-    function parsePublishMessageData(data: ZenithProtocol.TradingController.Orders.PublishPayload) {
+    private parsePublishMessageData(data: ZenithProtocol.TradingController.Orders.PublishPayload) {
         const result = new Array<OrdersDataMessage.ChangeRecord>(data.length);
         for (let index = 0; index < data.length; index++) {
             const zenithOrder = data[index];
             try {
                 const changeRecord: OrdersDataMessage.ChangeRecord = {
                     typeId: AurcChangeTypeId.Add,
-                    change: ZenithOrderConvert.toAddChange(zenithOrder)
+                    change: ZenithOrderConvert.toAddChange(this._decimalFactory, zenithOrder)
                 };
                 result[index] = changeRecord;
             } catch (e) {
@@ -122,17 +126,17 @@ export namespace OrdersMessageConvert {
         return result;
     }
 
-    function parseSubMessageData(data: ZenithProtocol.TradingController.Orders.SubPayload) {
+    private parseSubMessageData(data: ZenithProtocol.TradingController.Orders.SubPayload) {
         const result = new Array<OrdersDataMessage.ChangeRecord>(data.length);
         let count = 0;
         for (let index = 0; index < data.length; index++) {
-            const record = parseChangeRecord(data[index]);
+            const record = this.parseChangeRecord(data[index]);
             result[count++] = record;
         }
         return result;
     }
 
-    function parseChangeRecord(cr: ZenithProtocol.TradingController.Orders.OrderChangeRecord): OrdersDataMessage.ChangeRecord {
+    private parseChangeRecord(cr: ZenithProtocol.TradingController.Orders.OrderChangeRecord): OrdersDataMessage.ChangeRecord {
         const typeId = ZenithConvert.AbbreviatedAurcChangeType.toId(cr.O);
         if (typeId === AurcChangeTypeId.Clear) {
             const accountZenithCode = cr.Account;
@@ -151,7 +155,7 @@ export namespace OrdersMessageConvert {
             }
         } else {
             if (cr.Order !== undefined) {
-                const change = ZenithOrderConvert.toChange(typeId, cr.Order);
+                const change = ZenithOrderConvert.toChange(this._decimalFactory, typeId, cr.Order);
                 return {
                     typeId,
                     change,

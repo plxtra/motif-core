@@ -1,13 +1,13 @@
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from '@xilytix/revgrid';
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     isDecimalEqual,
     isDecimalGreaterThan,
     isDecimalLessThan,
     moveElementInArray,
     MultiEvent,
-    newDecimal,
     UnreachableCaseError
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
@@ -43,6 +43,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
     private readonly _debugLoggingEnabled: boolean;
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         marketsService: MarketsService,
         sessionInfoService: SessionInfoService,
         styleId: DepthStyleId,
@@ -57,11 +58,11 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         this._sideIdDisplay = OrderSide.idToDisplay(sideId);
         switch (this.sideId) {
             case OrderSideId.Ask: {
-                this._initialPreviousPrice = newDecimal(Number.MIN_VALUE);
+                this._initialPreviousPrice = this._decimalFactory.newDecimal(Number.MIN_VALUE);
                 break;
             }
             case OrderSideId.Bid: {
-                this._initialPreviousPrice = newDecimal(Number.MAX_VALUE);
+                this._initialPreviousPrice = this._decimalFactory.newDecimal(Number.MAX_VALUE);
                 break;
             }
             default:
@@ -133,7 +134,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         if (this._orderIndex.length > 0) {
             this._records.length = this._orderIndex.length;
             for (let i = 0; i < this._orderIndex.length; i++) {
-                this._records[i] = new OrderFullDepthRecord(this._marketsService, i, this._dataItemOrders[i], 0, this._auctionVolume);
+                this._records[i] = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, i, this._dataItemOrders[i], 0, this._auctionVolume);
                 this._orderIndex[i] = this._records[i];
             }
             this.processAuctionAndVolumeAhead(0, true);
@@ -151,7 +152,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         if (this._orderIndex.length > 0) {
             this._records.length = this._orderIndex.length; // maximum possible
             let additionalOrderCount = 0;
-            let record = new PriceLevelFullDepthRecord(this._marketsService, 0, this._dataItemOrders[0], 0, this._auctionVolume);
+            let record = new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, 0, this._dataItemOrders[0], 0, this._auctionVolume);
             let firstAdditionalOrderIdx = 1;
             this._orderIndex[0] = record;
             for (let i = 1; i < this._orderIndex.length; i++) {
@@ -163,7 +164,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                     }
                     this._records[recordCount++] = record;
 
-                    record = new PriceLevelFullDepthRecord(this._marketsService, record.index + 1, this._dataItemOrders[i], 0, this._auctionVolume);
+                    record = new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, record.index + 1, this._dataItemOrders[i], 0, this._auctionVolume);
                     firstAdditionalOrderIdx = i + 1;
                     additionalOrderCount = 0;
                 }
@@ -293,7 +294,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
             } else {
                 let recordIndex = 0;
                 let levelOrderIndex = 0;
-                let previousPrice = newDecimal(this._initialPreviousPrice);
+                let previousPrice = this._decimalFactory.newDecimal(this._initialPreviousPrice);
                 let previousWasOrder = false;
 
                 for (let i = 0; i < this._orderIndex.length; i++) {
@@ -388,9 +389,9 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
         volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined
     ) {
         if (this._newPriceLevelAsOrder) {
-            return new OrderFullDepthRecord(this._marketsService, index, order, volumeAhead, auctionQuantity);
+            return new OrderFullDepthRecord(this._decimalFactory, this._marketsService, index, order, volumeAhead, auctionQuantity);
         } else {
-            return new PriceLevelFullDepthRecord(this._marketsService, index, order, volumeAhead, auctionQuantity);
+            return new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, index, order, volumeAhead, auctionQuantity);
         }
     }
 
@@ -419,7 +420,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                 let firstRecord: FullDepthRecord;
                 if (succPriceEqual) {
                     // If successor price is equal it must be order.  Make sure this is order as well otherwise merge would be needed
-                    firstRecord = new OrderFullDepthRecord(this._marketsService, 0, order, 0, this._auctionVolume)
+                    firstRecord = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, 0, order, 0, this._auctionVolume)
                 } else {
                     firstRecord = this.createFullDepthRecordForNewPriceLevel(0, order, 0, this._auctionVolume);
                 }
@@ -456,7 +457,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
             const volumeAhead = prevOrderRecord.cumulativeQuantity;
             if (prevPriceEqual) {
                 // If previous price is equal then previous must be order.  Make sure this is order as well otherwise merge would be needed
-                record = new OrderFullDepthRecord(this._marketsService, recordIndex, order, volumeAhead, this._auctionVolume)
+                record = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, recordIndex, order, volumeAhead, this._auctionVolume)
             } else {
                 record = this.createFullDepthRecordForNewPriceLevel(recordIndex, order, volumeAhead, this._auctionVolume);
             }
@@ -630,7 +631,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                         }
 
                         if (FullDepthRecord.isOrder(toRecord)) {
-                            toRecord = new PriceLevelFullDepthRecord(this._marketsService, toRecord.index, toOrder, undefined, undefined);
+                            toRecord = new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, toRecord.index, toOrder, undefined, undefined);
                         }
 
                         toRecordInvalidatedValues = (toRecord as PriceLevelFullDepthRecord).addOrder(toOrder);
@@ -650,7 +651,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                     const newAtIndexToRecordCalculation = toRecordCalculation as FullDepthSideGridRecordStore.NewAtIndexToRecordCalculation;
                     const toRecordIdx = newAtIndexToRecordCalculation.newIndex;
                     if (newAtIndexToRecordCalculation.forceAsOrder) {
-                        toRecord = new OrderFullDepthRecord(this._marketsService, toRecordIdx, toOrder, undefined, undefined);
+                        toRecord = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, toRecordIdx, toOrder, undefined, undefined);
                     } else {
                         toRecord = this.createFullDepthRecordForNewPriceLevel(toRecordIdx, toOrder, undefined, undefined);
                     }
@@ -675,7 +676,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                         }
 
                         if (FullDepthRecord.isOrder(toRecord)) {
-                            toRecord = new PriceLevelFullDepthRecord(this._marketsService, toRecord.index, toOrder, undefined, undefined);
+                            toRecord = new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, toRecord.index, toOrder, undefined, undefined);
                         }
 
                         toRecordInvalidatedValues = (toRecord as PriceLevelFullDepthRecord).addOrder(toOrder);
@@ -725,7 +726,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                             if (orders.length !== 1) {
                                 throw new AssertInternalError('FDSSGRSCTRFMFR30100', orders.length.toString());
                             } else {
-                                toRecord = new OrderFullDepthRecord(this._marketsService, toRecordIdx, orders[0], undefined, undefined);
+                                toRecord = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, toRecordIdx, orders[0], undefined, undefined);
                             }
                         } else {
                             toRecord = fromRecord;
@@ -734,7 +735,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                     } else {
                         if (FullDepthRecord.isOrder(fromRecord)) {
                             const order = fromRecord.order;
-                            toRecord = new PriceLevelFullDepthRecord(this._marketsService, toRecordIdx, order, undefined, undefined);
+                            toRecord = new PriceLevelFullDepthRecord(this._decimalFactory, this._marketsService, toRecordIdx, order, undefined, undefined);
                         } else {
                             toRecord = fromRecord;
                             toRecord.index = toRecordIdx;
@@ -1008,7 +1009,9 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
             if (!FullDepthRecord.isOrder(firstOrderRecord)) {
                 throw new AssertInternalError('FDSGDSFDSGDSCOTPL22245', JSON.stringify(firstOrderRecord));
             } else {
-                const levelRecord = new PriceLevelFullDepthRecord(this._marketsService,
+                const levelRecord = new PriceLevelFullDepthRecord(
+                    this._decimalFactory,
+                    this._marketsService,
                     levelRecordIndex,
                     firstOrderRecord.order, firstOrderRecord.volumeAhead, this._auctionVolume
                 );
@@ -1068,7 +1071,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
             const firstRecordIdx = record.index;
 
             // replace existing record with first order record
-            const firstRecord = new OrderFullDepthRecord(this._marketsService, firstRecordIdx, this._dataItemOrders[firstOrderIdx],
+            const firstRecord = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, firstRecordIdx, this._dataItemOrders[firstOrderIdx],
                 record.volumeAhead, this._auctionVolume);
             this._orderIndex[firstOrderIdx] = firstRecord;
             this._records[record.index] = firstRecord;
@@ -1088,7 +1091,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
                 for (let i = 0; i < additionalOrderCount; i++) {
                     const recordIdx = firstAdditionalRecordIdx + i;
                     const order = this._dataItemOrders[firstAdditionalOrderIdx + i];
-                    const additionalOrderRecord = new OrderFullDepthRecord(this._marketsService, recordIdx, order, 0, this._auctionVolume);
+                    const additionalOrderRecord = new OrderFullDepthRecord(this._decimalFactory, this._marketsService, recordIdx, order, 0, this._auctionVolume);
                     additionalOrderRecords[i] = additionalOrderRecord;
 
                     // replace level record in orderIndex with additional order record

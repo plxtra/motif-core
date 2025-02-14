@@ -3,6 +3,7 @@ import {
     ComparableList,
     compareInteger,
     ComparisonResult,
+    DecimalFactory,
     Integer,
     MapKey,
     UnreachableCaseError,
@@ -15,10 +16,15 @@ import {
 import { Balances } from './balances';
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import { BrokerageAccountGroupRecordList } from './brokerage-account-group-record-list';
-import { BalancesDataMessage, CurrencyId, DataMessage, DataMessageTypeId } from './common/internal-api';
+import { BalancesDataMessage, CurrencyId, DataDefinition, DataMessage, DataMessageTypeId } from './common/internal-api';
+import { MarketsService } from './markets/internal-api';
 import { RecordsBrokerageAccountSubscriptionDataItem } from './records-brokerage-account-subscription-data-item';
 
 export class BrokerageAccountBalancesDataItem extends RecordsBrokerageAccountSubscriptionDataItem<Balances> implements BrokerageAccountGroupRecordList<Balances> {
+    constructor(private readonly _decimalFactory: DecimalFactory, marketsService: MarketsService, definition: DataDefinition) {
+        super(marketsService, definition);
+    }
+
     override processMessage(msg: DataMessage) {
         // virtual;
         if (msg.typeId !== DataMessageTypeId.Balances) {
@@ -181,7 +187,7 @@ export class BrokerageAccountBalancesDataItem extends RecordsBrokerageAccountSub
             for (let i = itemList.firstAddIndex; i < nextItemListSectionIdx; i++) {
                 const item = items[i];
 
-                const record = new Balances(account, item.currencyId, this.correctnessId);
+                const record = new Balances(this._decimalFactory, account, item.currencyId, this.correctnessId);
                 if (item.balanceCount > 0) {
                     record.update(item.balances, item.balanceCount);
                 }

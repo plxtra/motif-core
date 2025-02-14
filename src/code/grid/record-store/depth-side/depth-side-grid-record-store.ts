@@ -15,7 +15,11 @@ export abstract class DepthSideGridRecordStore {
     private _openPopulatedSuccess = false;
     private _openPopulatedResolves = new Array<DepthSideGridRecordStore.OpenPopulatedResolve>();
 
-    constructor(protected readonly _marketsService: MarketsService, readonly styleId: DepthStyleId, readonly sideId: OrderSideId) { }
+    constructor(
+        protected readonly _marketsService: MarketsService,
+        readonly styleId: DepthStyleId,
+        readonly sideId: OrderSideId
+    ) { }
 
     setRecordEventers(recordsEventers: RevRecordStore.RecordsEventers): void {
         this._recordsEventers = recordsEventers;

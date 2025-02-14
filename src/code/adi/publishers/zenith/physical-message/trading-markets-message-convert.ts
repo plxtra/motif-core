@@ -12,20 +12,43 @@ import {
     ZenithMarketParts,
     ZenithProtocolCommon
 } from '../../../common/internal-api';
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace TradingMarketsMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class TradingMarketsMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryTradingMarketsDataDefinition) {
-            return createPublishMessage(request, definition);
+            return this.createPublishMessage(request, definition);
         } else {
             throw new AssertInternalError('TMMCCRM36881', definition.description);
         }
     }
 
-    function createPublishMessage(request: AdiPublisherRequest, definition: QueryTradingMarketsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        _actionId: ZenithConvert.MessageContainer.Action.Id,
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Trading) {
+            throw new ZenithDataError(ErrorCode.ZenithMessageConvert_TradingMarkets_Controller, message.Controller);
+        } else {
+            const dataMessage = new TradingMarketsDataMessage();
+            dataMessage.dataItemId = subscription.dataItemId;
+            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+            if (message.Topic as ZenithProtocol.TradingController.TopicName !== ZenithProtocol.TradingController.TopicName.QueryTradingMarkets) {
+                throw new ZenithDataError(ErrorCode.ZenithMessageConvert_TradingMarkets_Topic, message.Topic);
+            } else {
+                const publishMsg = message as ZenithProtocol.TradingController.TradingMarkets.PublishPayloadMessageContainer;
+                dataMessage.markets = this.parseData(publishMsg.Data);
+            }
+
+            return dataMessage;
+        }
+    }
+
+    private createPublishMessage(request: AdiPublisherRequest, definition: QueryTradingMarketsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         // const result: ZenithProtocol.TradingController.TradingMarkets.PublishMessageContainer = {
         //     Controller: ZenithProtocol.MessageContainer.Controller.Trading,
         //     Topic: ZenithProtocol.TradingController.TopicName.QueryTradingMarkets,
@@ -48,19 +71,19 @@ export namespace TradingMarketsMessageConvert {
 
         switch (unenvironmentFeedZenithCode) {
             case 'Motif': {
-                const ptxMarket = createMockPtxMarket(environmentZenithCode);
-                const fnsxMarket = createMockFnsxMarket(environmentZenithCode);
-                const daxMarket = createMockDaxMarket(environmentZenithCode);
+                const ptxMarket = this.createMockPtxMarket(environmentZenithCode);
+                const fnsxMarket = this.createMockFnsxMarket(environmentZenithCode);
+                const daxMarket = this.createMockDaxMarket(environmentZenithCode);
                 tradingMarketsDataMessage.markets= [ptxMarket, fnsxMarket, daxMarket];
                 break;
             }
             case 'CFMarkets': {
-                const cfxMarket = createMockCfxMarket(environmentZenithCode);
+                const cfxMarket = this.createMockCfxMarket(environmentZenithCode);
                 tradingMarketsDataMessage.markets= [cfxMarket];
                 break;
             }
             case 'Finplex': {
-                const fpsxMarket = createMockFpsxMarket(environmentZenithCode);
+                const fpsxMarket = this.createMockFpsxMarket(environmentZenithCode);
                 tradingMarketsDataMessage.markets= [fpsxMarket];
                 break;
             }
@@ -68,29 +91,7 @@ export namespace TradingMarketsMessageConvert {
         return new Err({ dataMessages: [tradingMarketsDataMessage], subscribed: true })
     }
 
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        _actionId: ZenithConvert.MessageContainer.Action.Id,
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Trading) {
-            throw new ZenithDataError(ErrorCode.ZenithMessageConvert_TradingMarkets_Controller, message.Controller);
-        } else {
-            const dataMessage = new TradingMarketsDataMessage();
-            dataMessage.dataItemId = subscription.dataItemId;
-            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-            if (message.Topic as ZenithProtocol.TradingController.TopicName !== ZenithProtocol.TradingController.TopicName.QueryTradingMarkets) {
-                throw new ZenithDataError(ErrorCode.ZenithMessageConvert_TradingMarkets_Topic, message.Topic);
-            } else {
-                const publishMsg = message as ZenithProtocol.TradingController.TradingMarkets.PublishPayloadMessageContainer;
-                dataMessage.markets = parseData(publishMsg.Data);
-            }
-
-            return dataMessage;
-        }
-    }
-
-    function parseData(data: ZenithProtocol.TradingController.TradingMarkets.Market[]) {
+    private parseData(data: ZenithProtocol.TradingController.TradingMarkets.Market[]) {
         const result = new Array<TradingMarketsDataMessage.Market>(data.length);
         let count = 0;
         for (let index = 0; index < data.length; index++) {
@@ -101,7 +102,7 @@ export namespace TradingMarketsMessageConvert {
         return result;
     }
 
-    function createMockPtxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
+    private createMockPtxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
         const exchangeCode = ZenithProtocolCommon.KnownExchange.Ptx;
         const zenithCode = ZenithMarketParts.createSymbolFromDestructured(exchangeCode, '', 'PTX', environmentZenithCode);
         const exchangeZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(exchangeCode, environmentZenithCode);
@@ -116,7 +117,7 @@ export namespace TradingMarketsMessageConvert {
         }
     }
 
-    function createMockFnsxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
+    private createMockFnsxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
         const exchangeCode = ZenithProtocolCommon.KnownExchange.Fnsx;
         const zenithCode = ZenithMarketParts.createSymbolFromDestructured(exchangeCode, '', 'FNSX', environmentZenithCode);
         const exchangeZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(exchangeCode, environmentZenithCode);
@@ -131,7 +132,7 @@ export namespace TradingMarketsMessageConvert {
         }
     }
 
-    function createMockFpsxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
+    private createMockFpsxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
         const exchangeCode = ZenithProtocolCommon.KnownExchange.Fpsx;
         const zenithCode = ZenithMarketParts.createSymbolFromDestructured(exchangeCode, '', 'FPSX', environmentZenithCode);
         const exchangeZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(exchangeCode, environmentZenithCode);
@@ -146,7 +147,7 @@ export namespace TradingMarketsMessageConvert {
         }
     }
 
-    function createMockCfxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
+    private createMockCfxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
         const exchangeCode = ZenithProtocolCommon.KnownExchange.Cfx;
         const zenithCode = ZenithMarketParts.createSymbolFromDestructured(exchangeCode, '', 'CFMX', environmentZenithCode);
         const exchangeZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(exchangeCode, environmentZenithCode);
@@ -161,7 +162,7 @@ export namespace TradingMarketsMessageConvert {
         }
     }
 
-    function createMockDaxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
+    private createMockDaxMarket(environmentZenithCode: ExchangeEnvironmentZenithCode): TradingMarketsDataMessage.Market {
         const exchangeCode = ZenithProtocolCommon.KnownExchange.Dax;
         const zenithCode = ZenithMarketParts.createSymbolFromDestructured(exchangeCode, '', 'DAXM', environmentZenithCode);
         const exchangeZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(exchangeCode, environmentZenithCode);

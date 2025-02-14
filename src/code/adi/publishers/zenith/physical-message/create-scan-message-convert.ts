@@ -9,22 +9,53 @@ import {
     ErrorPublisherSubscriptionDataMessage_PublishRequestError,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithNotifyConvert } from './zenith-notify-convert';
 
-export namespace CreateScanMessageConvert {
+export class CreateScanMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof CreateScanDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('CSMCCRM70317', definition.description);
         }
     }
 
-    export function createPublishMessage(definition: CreateScanDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        actionId: ZenithConvert.MessageContainer.Action.Id
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Notify) {
+            throw new ZenithDataError(ErrorCode.ZenithMessageConvert_Notify_Controller, message.Controller);
+        } else {
+            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
+                throw new ZenithDataError(ErrorCode.ZenithMessageConvert_CreateScan_Action, JSON.stringify(message));
+            } else {
+                if (message.Topic as ZenithProtocol.NotifyController.TopicName !== ZenithProtocol.NotifyController.TopicName.CreateScan) {
+                    throw new ZenithDataError(ErrorCode.ZenithMessageConvert_CreateScan_Topic, message.Topic);
+                } else {
+                    const responseMsg = message as ZenithProtocol.NotifyController.CreateScan.PublishPayloadMessageContainer;
+                    const responseData = responseMsg.Data;
+                    if (responseData === undefined || subscription.errorWarningCount > 0) {
+                        return ErrorPublisherSubscriptionDataMessage_PublishRequestError.createFromAdiPublisherSubscription(subscription);
+                    } else {
+                        const dataMessage = new CreateScanDataMessage();
+                        dataMessage.dataItemId = subscription.dataItemId;
+                        dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+                        dataMessage.scanId = responseData.ScanID;
+                        return dataMessage;
+                    }
+                }
+            }
+        }
+    }
+
+    private createPublishMessage(definition: CreateScanDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const convertMetadata: ZenithNotifyConvert.ScanMetadata = {
             versionNumber: definition.versionNumber,
             versionId: definition.versionId,
@@ -66,35 +97,5 @@ export namespace CreateScanMessageConvert {
         };
 
         return new Ok(result);
-    }
-
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        actionId: ZenithConvert.MessageContainer.Action.Id
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Notify) {
-            throw new ZenithDataError(ErrorCode.ZenithMessageConvert_Notify_Controller, message.Controller);
-        } else {
-            if (actionId !== ZenithConvert.MessageContainer.Action.Id.Publish) {
-                throw new ZenithDataError(ErrorCode.ZenithMessageConvert_CreateScan_Action, JSON.stringify(message));
-            } else {
-                if (message.Topic as ZenithProtocol.NotifyController.TopicName !== ZenithProtocol.NotifyController.TopicName.CreateScan) {
-                    throw new ZenithDataError(ErrorCode.ZenithMessageConvert_CreateScan_Topic, message.Topic);
-                } else {
-                    const responseMsg = message as ZenithProtocol.NotifyController.CreateScan.PublishPayloadMessageContainer;
-                    const responseData = responseMsg.Data;
-                    if (responseData === undefined || subscription.errorWarningCount > 0) {
-                        return ErrorPublisherSubscriptionDataMessage_PublishRequestError.createFromAdiPublisherSubscription(subscription);
-                    } else {
-                        const dataMessage = new CreateScanDataMessage();
-                        dataMessage.dataItemId = subscription.dataItemId;
-                        dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-                        dataMessage.scanId = responseData.ScanID;
-                        return dataMessage;
-                    }
-                }
-            }
-        }
     }
 }

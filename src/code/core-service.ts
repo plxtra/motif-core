@@ -2,6 +2,7 @@ import {
     RevSourcedFieldCustomHeadings,
     RevStandardSourcedFieldCustomHeadingsService
 } from '@xilytix/revgrid';
+import { DecimalFactory } from '@xilytix/sysutils';
 import { AdiPublisherFactory, AdiService, DataItemFactory, MarketsService } from './adi/internal-api';
 import { CommandRegisterService } from "./command/internal-api";
 import {
@@ -65,20 +66,20 @@ export class CoreService {
     private _referenceableDataSourcesService: ReferenceableDataSourcesService;
     private _activeColorSchemeName: string;
 
-    constructor() {
+    constructor(readonly decimalFactory: DecimalFactory) {
         this.warningsService = new WarningsService();
         this.idleService = new IdleService();
         const dataItemFactory = new DataItemFactory();
-        const adiPublisherFactory = new AdiPublisherFactory();
+        const adiPublisherFactory = new AdiPublisherFactory(decimalFactory);
         this.adiService = new AdiService(dataItemFactory, adiPublisherFactory);
         this.marketsService = new MarketsService(this.warningsService, this.adiService);
         this.motifServicesService = new MotifServicesService();
         this.appStorageService = new AppStorageService(this.marketsService);
         this.settingsService = new SettingsService(this.marketsService, this.idleService, this.motifServicesService, this.appStorageService);
-        dataItemFactory.setMarketsService(this.marketsService);
+        dataItemFactory.setServices(decimalFactory, this.marketsService);
         this.capabilitiesService = new CapabilitiesService();
         this.symbolsService = new SymbolsService(this.marketsService, this.settingsService);
-        this.symbolDetailCacheService = new SymbolDetailCacheService(this.marketsService, this.adiService.dataMgr, this.symbolsService);
+        this.symbolDetailCacheService = new SymbolDetailCacheService(decimalFactory, this.marketsService, this.adiService.dataMgr, this.symbolsService);
         this.watchmakerService = new WatchmakerService(this.adiService);
         this.notificationChannelsService = new NotificationChannelsService(this.adiService);
         this.scanFormulaZenithEncodingService = new ScanFormulaZenithEncodingService(this.marketsService);

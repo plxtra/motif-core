@@ -8,31 +8,21 @@ import {
     FeedsDataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace FeedsMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class FeedsMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof FeedsDataDefinition) {
-            return createSubUnsubRequestMessage(request);
+            return this.createSubUnsubRequestMessage(request);
         } else {
             throw new AssertInternalError('FMCCRM09993444447', definition.description);
         }
     }
 
-    function createSubUnsubRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.SubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Zenith,
-            Topic: ZenithProtocol.ZenithController.TopicName.Feeds,
-            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id,
@@ -50,14 +40,25 @@ export namespace FeedsMessageConvert {
                     throw new ZenithDataError(ErrorCode.FMCPMT5583200023, JSON.stringify(message));
                 } else {
                     const subMsg = message as ZenithProtocol.ZenithController.Feeds.PayloadMessageContainer;
-                    dataMessage.feeds = parseData(subMsg.Data);
+                    dataMessage.feeds = this.parseData(subMsg.Data);
                     return dataMessage;
                 }
             }
         }
     }
 
-    function parseData(data: ZenithProtocol.ZenithController.Feeds.Payload) {
+    private createSubUnsubRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.SubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Zenith,
+            Topic: ZenithProtocol.ZenithController.TopicName.Feeds,
+            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private parseData(data: ZenithProtocol.ZenithController.Feeds.Payload) {
         const result = new Array<FeedsDataMessage.Feed>(data.length);
         let count = 0;
         for (let index = 0; index < data.length; index++) {

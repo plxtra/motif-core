@@ -1,4 +1,4 @@
-import { Integer, newUndefinableDate, newUndefinableDecimal } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, newUndefinableDate } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import {
     IvemClassId, OrderInstructionId, OrderPriceUnitTypeId, OrderShortSellTypeId, OrderSideId, OrderTypeId, TimeInForceId
@@ -38,12 +38,14 @@ export class MarketOrderDetails extends OrderDetails {
     expiryDate: Date | undefined;
     shortSellTypeId: OrderShortSellTypeId | undefined;
 
-    constructor() {
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+    ) {
         super(IvemClassId.Market);
     }
 
     createCopy() {
-        const result = new MarketOrderDetails();
+        const result = new MarketOrderDetails(this._decimalFactory);
         result.assign(this);
         return result;
     }
@@ -51,7 +53,7 @@ export class MarketOrderDetails extends OrderDetails {
     protected override assign(other: MarketOrderDetails) {
         super.assign(other);
         this.typeId = other.typeId;
-        this.limitPrice = newUndefinableDecimal(other.limitPrice);
+        this.limitPrice = this._decimalFactory.newUndefinableDecimal(other.limitPrice);
         this.quantity = other.quantity;
         this.hiddenQuantity = other.hiddenQuantity;
         this.minimumQuantity = other.minimumQuantity;

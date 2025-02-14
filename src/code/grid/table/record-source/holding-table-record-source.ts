@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
 import {
     AdiService,
     AllHoldingsDataDefinition,
@@ -29,6 +29,7 @@ export class HoldingTableRecordSource
     extends BrokerageAccountGroupTableRecordSource<Holding, BrokerageAccountGroupRecordList<Holding>> {
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         textFormatter: TextFormatter,
         customHeadings: RevSourcedFieldCustomHeadings | undefined,
@@ -77,7 +78,7 @@ export class HoldingTableRecordSource
                 fieldSourceDefinition.typeId as HoldingTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
                 case TableFieldSourceDefinition.TypeId.Holding: {
-                    const valueSource = new HoldingTableValueSource(result.fieldCount, holding);
+                    const valueSource = new HoldingTableValueSource(this._decimalFactory, result.fieldCount, holding);
                     result.addSource(valueSource);
                     break;
                 }
@@ -87,7 +88,7 @@ export class HoldingTableRecordSource
                     break;
                 }
                 case TableFieldSourceDefinition.TypeId.SecurityDataItem: {
-                    const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, holding.defaultDataIvemId, this._adiService);
+                    const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, holding.defaultDataIvemId);
                     result.addSource(valueSource);
                     break;
                 }

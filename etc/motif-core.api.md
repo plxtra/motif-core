@@ -14,9 +14,11 @@ import { CommaText } from '@xilytix/sysutils';
 import { ComparableList } from '@xilytix/sysutils';
 import { CompareFtn } from '@xilytix/sysutils';
 import { ComparisonResult } from '@xilytix/sysutils';
+import { Config } from 'decimal.js-light';
 import { CorrectnessState } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import { DecimalConstructor } from '@xilytix/sysutils';
+import { DecimalFactory } from '@xilytix/sysutils';
 import { Err } from '@xilytix/sysutils';
 import { Guid } from '@xilytix/sysutils';
 import { IndexedRecord } from '@xilytix/sysutils';
@@ -312,6 +314,7 @@ export namespace AdiPublisher {
 //
 // @public (undocumented)
 export class AdiPublisherFactory implements AdiPublisher.Factory {
+    constructor(_decimalFactory: DecimalFactory);
     // (undocumented)
     createPublisher(typeId: AdiPublisherTypeId): AdiPublisher;
 }
@@ -995,16 +998,23 @@ export class AmendOrderDataItem extends OrderRequestDataItem {
     processMessage(msg: DataMessage): void;
 }
 
+// Warning: (ae-forgotten-export) The symbol "MessageConvert" needs to be exported by the entry point public-api.d.ts
+// Warning: (ae-missing-release-tag) "AmendOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "AmendOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
+// @public (undocumented)
+export class AmendOrderMessageConvert extends MessageConvert {
+    constructor(_decimalFactory: DecimalFactory);
+    // (undocumented)
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
+    // (undocumented)
+    parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): AmendOrderResponseDataMessage;
+}
+
 // @public (undocumented)
 export namespace AmendOrderMessageConvert {
     // (undocumented)
     export function createPublishMessage(request: AdiPublisherRequest | undefined, definition: AmendOrderRequestDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): AmendOrderResponseDataMessage;
 }
 
 // Warning: (ae-missing-release-tag) "AmendOrderRequestDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1101,9 +1111,9 @@ export function assigned<T>(value: T): value is Exclude<T, null | undefined>;
 // @public (undocumented)
 export namespace AsxIndexPoint {
     // (undocumented)
-    export function fromDollars(Value: Decimal): Decimal;
+    export function fromDollars(value: Decimal): Decimal;
     // (undocumented)
-    export function toDollars(Value: Decimal): Decimal;
+    export function toDollars(value: Decimal): Decimal;
 }
 
 // Warning: (ae-internal-missing-underscore) The name "AttributesDayTradesGridField" should be prefixed with an underscore because the declaration is marked as @internal
@@ -1547,7 +1557,7 @@ export namespace BadnessModule {
 //
 // @public (undocumented)
 export class Balances implements BrokerageAccountRecord {
-    constructor(_account: BrokerageAccount, _currencyId: CurrencyId, _correctnessId: CorrectnessId);
+    constructor(_decimalFactory: DecimalFactory, _account: BrokerageAccount, _currencyId: CurrencyId, _correctnessId: CorrectnessId);
     // (undocumented)
     get account(): BrokerageAccount;
     // (undocumented)
@@ -1600,7 +1610,7 @@ export namespace Balances {
         readonly type: string;
     }
     const // (undocumented)
-    initialiseValue: Decimal;
+    initialValueAsNumber = 0;
     // (undocumented)
     export type ChangedEventHandler = (valueChanges: ValueChange[]) => void;
     // (undocumented)
@@ -1886,7 +1896,7 @@ export namespace BalancesTableRecordDefinition {
 //
 // @public (undocumented)
 export class BalancesTableRecordSource extends BrokerageAccountGroupTableRecordSource<Balances, BrokerageAccountGroupRecordList<Balances>> {
-    constructor(_adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: BalancesTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: BalancesTableRecordSourceDefinition);
     // (undocumented)
     createDefinition(): BalancesTableRecordSourceDefinition;
     // (undocumented)
@@ -1925,7 +1935,7 @@ export namespace BalancesTableRecordSourceDefinition {
 //
 // @public (undocumented)
 export class BalancesTableValueSource extends CorrectnessTableValueSource<Balances> {
-    constructor(firstFieldIndexOffset: Integer, _balances: Balances);
+    constructor(_decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, _balances: Balances);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -1950,19 +1960,19 @@ export abstract class BaseDateCorrectnessTableValue extends GenericCorrectnessTa
 // Warning: (ae-missing-release-tag) "BaseDecimalCorrectnessTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<Decimal> {
+export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<FactoryisedDecimal> {
     // (undocumented)
-    get data(): Decimal | undefined;
-    set data(value: Decimal | undefined);
+    get data(): FactoryisedDecimal | undefined;
+    set data(value: FactoryisedDecimal | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "BaseDecimalTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class BaseDecimalTableValue extends GenericTableValue<Decimal> {
+export abstract class BaseDecimalTableValue extends GenericTableValue<FactoryisedDecimal> {
     // (undocumented)
-    get data(): Decimal | undefined;
-    set data(value: Decimal | undefined);
+    get data(): FactoryisedDecimal | undefined;
+    set data(value: FactoryisedDecimal | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "BaseDirectory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2002,10 +2012,10 @@ export abstract class BaseIntegerArrayTableValue extends GenericTableValue<Integ
 // Warning: (ae-missing-release-tag) "BaseNullableDecimalCorrectnessTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class BaseNullableDecimalCorrectnessTableValue extends GenericNullableCorrectnessTableValue<Decimal> {
+export abstract class BaseNullableDecimalCorrectnessTableValue extends GenericNullableCorrectnessTableValue<FactoryisedDecimal> {
     // (undocumented)
-    get data(): Decimal | null | undefined;
-    set data(value: Decimal | null | undefined);
+    get data(): FactoryisedDecimal | null | undefined;
+    set data(value: FactoryisedDecimal | null | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "BaseNullableIntegerCorrectnessArrayTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2419,6 +2429,7 @@ export class BrokerageAccountBalancesDataDefinition extends BalancesBrokerageAcc
 //
 // @public (undocumented)
 export class BrokerageAccountBalancesDataItem extends RecordsBrokerageAccountSubscriptionDataItem<Balances> implements BrokerageAccountGroupRecordList<Balances> {
+    constructor(_decimalFactory: DecimalFactory, marketsService: MarketsService, definition: DataDefinition);
     // (undocumented)
     processMessage(msg: DataMessage): void;
 }
@@ -3181,7 +3192,7 @@ export namespace CallPut {
 //
 // @public (undocumented)
 export class CallPutFromUnderlyingTableRecordSource extends SingleDataItemTableRecordSource {
-    constructor(_adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: CallPutFromUnderlyingTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: CallPutFromUnderlyingTableRecordSourceDefinition);
     // (undocumented)
     closeLocked(opener: LockOpenListItem.Opener): void;
     // (undocumented)
@@ -3368,7 +3379,7 @@ export namespace CallPutTableRecordDefinition {
 //
 // @public (undocumented)
 export class CallPutTableValueSource extends TableValueSource {
-    constructor(firstFieldIndexOffset: Integer, _callPut: CallPut);
+    constructor(_decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, _callPut: CallPut);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -3450,15 +3461,21 @@ export class CancelOrderDataItem extends OrderRequestDataItem {
 }
 
 // Warning: (ae-missing-release-tag) "CancelOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CancelOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
+// @public (undocumented)
+export class CancelOrderMessageConvert extends MessageConvert {
+    constructor(_decimalFactory: DecimalFactory);
+    // (undocumented)
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
+    // (undocumented)
+    parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): DataMessage;
+}
+
 // @public (undocumented)
 export namespace CancelOrderMessageConvert {
     // (undocumented)
     export function createPublishMessage(request: AdiPublisherRequest | undefined, definition: CancelOrderRequestDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): DataMessage;
 }
 
 // Warning: (ae-missing-release-tag) "CancelOrderRequestDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4915,7 +4932,7 @@ export class CopyWatchmakerListDataItem extends WatchmakerPublishDataItem {
 
 // @public (undocumented)
 export class CoreService {
-    constructor();
+    constructor(decimalFactory: DecimalFactory);
     // (undocumented)
     readonly adiService: AdiService;
     // (undocumented)
@@ -4928,6 +4945,8 @@ export class CoreService {
     readonly commandRegisterService: CommandRegisterService;
     // (undocumented)
     readonly customHeadingsService: RevSourcedFieldCustomHeadings;
+    // (undocumented)
+    readonly decimalFactory: DecimalFactory;
     // (undocumented)
     finalise(): void;
     // (undocumented)
@@ -5794,7 +5813,7 @@ export class DataItemFactory implements DataMgr.DataItemFactory {
     // (undocumented)
     createDataItem(dataDefinition: DataDefinition): DataItem;
     // (undocumented)
-    setMarketsService(value: MarketsService): void;
+    setServices(decimalFactory: DecimalFactory, marketsService: MarketsService): void;
 }
 
 // Warning: (ae-missing-release-tag) "DataItemId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -6227,7 +6246,7 @@ export class DataIvemBaseDetailTableValueSource extends TableValueSource {
 //
 // @public (undocumented)
 export class DataIvemDetailFromSearchSymbolsTableRecordSource extends SingleDataItemTableRecordSource {
-    constructor(_marketsService: MarketsService, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _marketsService: MarketsService, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition);
     // (undocumented)
     closeLocked(opener: LockOpenListItem.Opener): void;
     // (undocumented)
@@ -6287,7 +6306,7 @@ export namespace DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition {
     const // (undocumented)
     allowedFieldSourceDefinitionTypeIds: FieldSourceDefinitionTypeId[];
     // (undocumented)
-    export function createDefaultDataDefinition(): SearchSymbolsDataDefinition;
+    export function createDefaultDataDefinition(decimalFactory: DecimalFactory): SearchSymbolsDataDefinition;
     // (undocumented)
     export function createLayoutDefinition(fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactory, fieldIds: FieldId[]): RevColumnLayoutDefinition;
     // (undocumented)
@@ -6302,7 +6321,7 @@ export namespace DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition {
         request = "request";
     }
     // (undocumented)
-    export function tryCreateDataDefinitionFromJson(element: JsonElement | undefined): Result<SearchSymbolsDataDefinition>;
+    export function tryCreateDataDefinitionFromJson(decimalFactory: DecimalFactory, element: JsonElement | undefined): Result<SearchSymbolsDataDefinition>;
 }
 
 // Warning: (ae-missing-release-tag) "DataIvemExtendedDetailTableFieldSourceDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -6369,7 +6388,7 @@ export namespace DataIvemExtendedDetailTableFieldSourceDefinition {
 //
 // @public (undocumented)
 export class DataIvemExtendedDetailTableValueSource extends TableValueSource {
-    constructor(firstFieldIndexOffset: Integer, _dataIvemFullDetail: SearchSymbolsDataIvemFullDetail, _dataItem: SymbolsDataItem);
+    constructor(_decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, _dataIvemFullDetail: SearchSymbolsDataIvemFullDetail, _dataItem: SymbolsDataItem);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -6503,7 +6522,7 @@ export class DataIvemIdArrayTextFormattableValue extends GenericTextFormattableV
 //
 // @public (undocumented)
 export class DataIvemIdComparableListTableRecordSource extends BadnessListTableRecordSource<DataIvemId> {
-    constructor(_adiService: AdiService, _symbolDetailCacheService: SymbolDetailCacheService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: DataIvemIdComparableListTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, _symbolDetailCacheService: SymbolDetailCacheService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: DataIvemIdComparableListTableRecordSourceDefinition);
     // (undocumented)
     createDefinition(): DataIvemIdComparableListTableRecordSourceDefinition;
     // (undocumented)
@@ -6687,7 +6706,7 @@ export namespace DataIvemIdMatchesDataMessage {
 //
 // @public (undocumented)
 export class DataIvemIdPriceVolumeSequenceHistory extends SequenceHistory {
-    constructor(_symbolsService: SymbolsService, _adi: AdiService, _dataIvemId: DataIvemId);
+    constructor(_decimalFactory: DecimalFactory, _symbolsService: SymbolsService, _adi: AdiService, _dataIvemId: DataIvemId);
     // (undocumented)
     activate(dataIvemId: DataIvemId): void;
     // (undocumented)
@@ -8019,7 +8038,7 @@ export namespace DayTradesGridField {
     const // (undocumented)
     sourceDefinition: RevRecordSourcedFieldSourceDefinition;
     // (undocumented)
-    export function createField(id: Id, getDataItemCorrectnessIdEventHandler: GetDataItemCorrectnessIdEventHandler): DayTradesGridField;
+    export function createField(decimalFactory: DecimalFactory, id: Id, getDataItemCorrectnessIdEventHandler: GetDataItemCorrectnessIdEventHandler): DayTradesGridField;
     // (undocumented)
     export interface CreateTextFormattableValueResult {
         // (undocumented)
@@ -8098,8 +8117,8 @@ export class DecimalTableValue extends BaseDecimalTableValue {
 // Warning: (ae-missing-release-tag) "DecimalTextFormattableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DecimalTextFormattableValue extends GenericTextFormattableValue<Decimal> {
-    constructor(data: Decimal | undefined);
+export class DecimalTextFormattableValue extends GenericTextFormattableValue<FactoryisedDecimal> {
+    constructor(data: FactoryisedDecimal | undefined);
 }
 
 // @public (undocumented)
@@ -8615,7 +8634,7 @@ export namespace DepthLevelsDataMessage {
 
 // @public (undocumented)
 export abstract class DepthRecord implements IndexedRecord {
-    constructor(_marketsService: MarketsService, _typeId: DepthRecord.TypeId, index: Integer, _volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
+    constructor(_decimalFactory: DecimalFactory, _marketsService: MarketsService, _typeId: DepthRecord.TypeId, index: Integer, _volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
     // (undocumented)
     abstract acceptedByFilter(filterXrefs: string[]): boolean;
     // (undocumented)
@@ -8624,6 +8643,8 @@ export abstract class DepthRecord implements IndexedRecord {
     protected createVolumeTextFormattableValue(): DepthRecord.CreateTextFormattableValueResult;
     // (undocumented)
     get cumulativeQuantity(): number | undefined;
+    // (undocumented)
+    protected readonly _decimalFactory: DecimalFactory;
     // (undocumented)
     abstract getRenderVolume(): Integer | undefined;
     // (undocumented)
@@ -11009,6 +11030,21 @@ export namespace ExtStrings {
 // @public (undocumented)
 export const extStrings: string[][];
 
+// Warning: (ae-missing-release-tag) "FactoryisedDecimal" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class FactoryisedDecimal {
+    constructor(decimalFactory: DecimalFactory, value: Decimal);
+    // (undocumented)
+    createCloneConstructor(config: Config): DecimalConstructor;
+    // (undocumented)
+    createCopy(): FactoryisedDecimal;
+    // (undocumented)
+    readonly decimalFactory: DecimalFactory;
+    // (undocumented)
+    readonly value: Decimal;
+}
+
 // Warning: (ae-missing-release-tag) "FaultedTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -11812,7 +11848,7 @@ export namespace FullDepthSideGridField {
 //
 // @public (undocumented)
 export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore implements RevRecordStore {
-    constructor(marketsService: MarketsService, sessionInfoService: SessionInfoService, styleId: DepthStyleId, sideId: OrderSideId);
+    constructor(_decimalFactory: DecimalFactory, marketsService: MarketsService, sessionInfoService: SessionInfoService, styleId: DepthStyleId, sideId: OrderSideId);
     // (undocumented)
     close(): void;
     // (undocumented)
@@ -12655,7 +12691,7 @@ export namespace HoldingTableRecordDefinition {
 
 // @public (undocumented)
 export class HoldingTableRecordSource extends BrokerageAccountGroupTableRecordSource<Holding, BrokerageAccountGroupRecordList<Holding>> {
-    constructor(_adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: HoldingTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: HoldingTableRecordSourceDefinition);
     // (undocumented)
     createDefinition(): HoldingTableRecordSourceDefinition;
     // (undocumented)
@@ -12691,7 +12727,7 @@ export namespace HoldingTableRecordSourceDefinition {
 //
 // @public (undocumented)
 export class HoldingTableValueSource extends CorrectnessTableValueSource<Holding> {
-    constructor(firstFieldIndexOffset: Integer, _holding: Holding);
+    constructor(_decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, _holding: Holding);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -15616,7 +15652,7 @@ export namespace MarketListSelectItemUiAction {
 //
 // @public (undocumented)
 export class MarketOrderDetails extends OrderDetails {
-    constructor();
+    constructor(_decimalFactory: DecimalFactory);
     // (undocumented)
     protected assign(other: MarketOrderDetails): void;
     // (undocumented)
@@ -16891,15 +16927,21 @@ export class MoveOrderDataItem extends OrderRequestDataItem {
 }
 
 // Warning: (ae-missing-release-tag) "MoveOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "MoveOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
+// @public (undocumented)
+export class MoveOrderMessageConvert extends MessageConvert {
+    constructor(_decimalFactory: DecimalFactory);
+    // (undocumented)
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
+    // (undocumented)
+    parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): DataMessage;
+}
+
 // @public (undocumented)
 export namespace MoveOrderMessageConvert {
     // (undocumented)
     export function createPublishMessage(request: AdiPublisherRequest | undefined, definition: MoveOrderRequestDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): DataMessage;
 }
 
 // Warning: (ae-missing-release-tag) "MoveOrderRequestDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -18076,9 +18118,9 @@ export class Order implements BrokerageAccountRecord {
     // (undocumented)
     get triggerValue(): Decimal | undefined;
     // (undocumented)
-    get unitAmount(): Decimal;
+    get unitAmount(): Decimal | undefined;
     // (undocumented)
-    get unitTypeId(): OrderPriceUnitTypeId;
+    get unitTypeId(): OrderPriceUnitTypeId | undefined;
     // (undocumented)
     unsubscribeChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
     // (undocumented)
@@ -18098,7 +18140,7 @@ export namespace Order {
     // (undocumented)
     export type CorrectnessChangedEventHandler = (this: void) => void;
     // (undocumented)
-    export function createNotFoundOrder(marketsService: MarketsService, account: BrokerageAccount, orderId: string): Order;
+    export function createNotFoundOrder(decimalFactory: DecimalFactory, marketsService: MarketsService, account: BrokerageAccount, orderId: string): Order;
     // (undocumented)
     export namespace Field {
         // (undocumented)
@@ -18280,7 +18322,7 @@ export abstract class OrderDetails {
 //
 // @public (undocumented)
 export class OrderFullDepthRecord extends FullDepthRecord {
-    constructor(marketsService: MarketsService, index: Integer, _order: DepthDataItem.Order, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
+    constructor(decimalFactory: DecimalFactory, marketsService: MarketsService, index: Integer, _order: DepthDataItem.Order, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
     // (undocumented)
     acceptedByFilter(filterXrefs: string[]): boolean;
     // (undocumented)
@@ -18378,7 +18420,7 @@ export namespace OrderModule {
 //
 // @public (undocumented)
 export class OrderPad {
-    constructor(_marketsService: MarketsService, _symbolDetailCacheService: SymbolDetailCacheService, _adi: AdiService);
+    constructor(_decimalFactory: DecimalFactory, _marketsService: MarketsService, _symbolDetailCacheService: SymbolDetailCacheService, _adi: AdiService);
     // (undocumented)
     get account(): BrokerageAccount | undefined;
     // (undocumented)
@@ -18586,7 +18628,7 @@ export namespace OrderPad {
         cancelled: boolean;
     }
     // (undocumented)
-    export function createFromJson(marketsService: MarketsService, symbolDetailCacheService: SymbolDetailCacheService, adi: AdiService, orderPadJson: Json): OrderPad;
+    export function createFromJson(decimalFactory: DecimalFactory, marketsService: MarketsService, symbolDetailCacheService: SymbolDetailCacheService, adi: AdiService, orderPadJson: Json): OrderPad;
     // (undocumented)
     export class Field {
         constructor();
@@ -19507,9 +19549,9 @@ export namespace OrdersDataMessage {
         // (undocumented)
         trigger: OrderTrigger;
         // (undocumented)
-        unitAmount: Decimal;
+        unitAmount: Decimal | undefined;
         // (undocumented)
-        unitTypeId: OrderPriceUnitTypeId;
+        unitTypeId: OrderPriceUnitTypeId | undefined;
         // (undocumented)
         updatedDate: SourceTzOffsetDateTime;
     }
@@ -19888,7 +19930,7 @@ export namespace OrderTableRecordDefinition {
 
 // @public (undocumented)
 export class OrderTableRecordSource extends BrokerageAccountGroupTableRecordSource<Order, BrokerageAccountGroupRecordList<Order>> {
-    constructor(_adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: OrderTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: OrderTableRecordSourceDefinition);
     // (undocumented)
     createDefinition(): OrderTableRecordSourceDefinition;
     // (undocumented)
@@ -19924,7 +19966,7 @@ export namespace OrderTableRecordSourceDefinition {
 //
 // @public (undocumented)
 export class OrderTableValueSource extends CorrectnessTableValueSource<Order> {
-    constructor(firstFieldIndexOffset: Integer, _order: Order);
+    constructor(_decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, _order: Order);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -20358,15 +20400,21 @@ export class PlaceOrderDataItem extends OrderRequestDataItem {
 }
 
 // Warning: (ae-missing-release-tag) "PlaceOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PlaceOrderMessageConvert" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
+// @public (undocumented)
+export class PlaceOrderMessageConvert extends MessageConvert {
+    constructor(_decimalFactory: DecimalFactory);
+    // (undocumented)
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
+    // (undocumented)
+    parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): PlaceOrderResponseDataMessage;
+}
+
 // @public (undocumented)
 export namespace PlaceOrderMessageConvert {
     // (undocumented)
     export function createPublishMessage(request: AdiPublisherRequest | undefined, definition: PlaceOrderRequestDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages>;
-    // (undocumented)
-    export function parseMessage(subscription: AdiPublisherSubscription, message: ZenithProtocol.MessageContainer, actionId: ZenithConvert.MessageContainer.Action.Id): PlaceOrderResponseDataMessage;
 }
 
 // Warning: (ae-missing-release-tag) "PlaceOrderRequestDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -20487,6 +20535,7 @@ export class PriceCorrectnessTableValue extends BaseDecimalCorrectnessTableValue
 //
 // @internal (undocumented)
 export class PriceDayTradesGridField extends DayTradesGridField {
+    constructor(_decimalFactory: DecimalFactory, id: DayTradesDataItem.Field.Id, definition: RevRecordSourcedFieldDefinition, getDataItemCorrectnessIdEvent: DayTradesGridField.GetDataItemCorrectnessIdEventHandler);
     // (undocumented)
     protected compareValue(left: DayTradesDataItem.Record, right: DayTradesDataItem.Record, ascending: boolean): number;
     // (undocumented)
@@ -20503,7 +20552,7 @@ export namespace PriceHistoryPeriod {
 //
 // @public (undocumented)
 export class PriceLevelFullDepthRecord extends FullDepthRecord {
-    constructor(marketsService: MarketsService, index: Integer, firstOrder: DepthDataItem.Order, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
+    constructor(decimalFactory: DecimalFactory, marketsService: MarketsService, index: Integer, firstOrder: DepthDataItem.Order, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
     // (undocumented)
     acceptedByFilter(filterXrefs: string[]): boolean;
     // (undocumented)
@@ -20555,7 +20604,7 @@ export class PriceLevelFullDepthRecord extends FullDepthRecord {
 //
 // @public (undocumented)
 export class PriceOrderTrigger extends OrderTrigger {
-    constructor(_value: Decimal | undefined, _fieldId: PriceOrderTrigger.FieldId | undefined, _movementId: MovementId | undefined);
+    constructor(_decimalFactory: DecimalFactory, _value: Decimal | undefined, _fieldId: PriceOrderTrigger.FieldId | undefined, _movementId: MovementId | undefined);
     // (undocumented)
     createCopy(): PriceOrderTrigger;
     // (undocumented)
@@ -20618,7 +20667,7 @@ export namespace PriceOrRemainderAndHasUndisclosedTextFormattableValue {
 //
 // @public (undocumented)
 export class PriceOrRemainderTextFormattableValue extends GenericTextFormattableValue<PriceOrRemainder> {
-    constructor(data: PriceOrRemainder | undefined);
+    constructor(decimalFactory: DecimalFactory, data: PriceOrRemainder | undefined);
 }
 
 // Warning: (ae-missing-release-tag) "PriceStepperIncubator" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -20733,14 +20782,14 @@ export class PriceTableValue extends BaseDecimalTableValue {
 // Warning: (ae-missing-release-tag) "PriceTextFormattableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class PriceTextFormattableValue extends GenericTextFormattableValue<Decimal> {
-    constructor(data: Decimal | undefined);
+export class PriceTextFormattableValue extends GenericTextFormattableValue<FactoryisedDecimal> {
+    constructor(data: FactoryisedDecimal | undefined);
 }
 
 // @public (undocumented)
 export namespace PriceTextFormattableValue {
-    const // (undocumented)
-    decimalConstructor: DecimalConstructor;
+    // (undocumented)
+    export function getDecimalConstructor(decimalFactory: DecimalFactory): DecimalConstructor;
 }
 
 // Warning: (ae-missing-release-tag) "PublisherBroadcastDataMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -22084,7 +22133,7 @@ export namespace RankedDataIvemIdListStaticInitialise {
 //
 // @public (undocumented)
 export class RankedDataIvemIdListTableRecordSource extends SubscribeBadnessListTableRecordSource<RankedDataIvemId, RankedDataIvemIdList> {
-    constructor(_adiService: AdiService, _symbolDetailCacheService: SymbolDetailCacheService, _rankedDataIvemIdListFactoryService: RankedDataIvemIdListFactoryService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: RankedDataIvemIdListTableRecordSourceDefinition);
+    constructor(_decimalFactory: DecimalFactory, _adiService: AdiService, _symbolDetailCacheService: SymbolDetailCacheService, _rankedDataIvemIdListFactoryService: RankedDataIvemIdListFactoryService, textFormatter: TextFormatter, customHeadings: RevSourcedFieldCustomHeadings | undefined, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, correctnessBadness: CorrectnessBadness, definition: RankedDataIvemIdListTableRecordSourceDefinition);
     // (undocumented)
     createDefinition(): RankedDataIvemIdListTableRecordSourceDefinition;
     // (undocumented)
@@ -26411,7 +26460,7 @@ export namespace ScanTestTableRecordSourceDefinition {
 //
 // @public (undocumented)
 export class SearchSymbolsDataDefinition extends MarketSubscriptionDataDefinition {
-    constructor();
+    constructor(_decimalFactory: DecimalFactory);
     // (undocumented)
     protected assign(other: SearchSymbolsDataDefinition): void;
     // (undocumented)
@@ -26489,7 +26538,7 @@ export namespace SearchSymbolsDataDefinition {
     // (undocumented)
     export function copyConditions(conditions: Condition[] | undefined): Condition[] | undefined;
     // (undocumented)
-    export function tryCreateFromJson(_element: JsonElement): Result<SearchSymbolsDataDefinition>;
+    export function tryCreateFromJson(decimalFactory: DecimalFactory, _element: JsonElement): Result<SearchSymbolsDataDefinition>;
 }
 
 // Warning: (ae-missing-release-tag) "SearchSymbolsDataIvemBaseDetail" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -26659,7 +26708,7 @@ export class SecurityDataDefinition extends MarketSubscriptionDataDefinition {
 //
 // @public (undocumented)
 export class SecurityDataItem extends MarketSubscriptionDataItem {
-    constructor(marketsService: MarketsService, myDataDefinition: DataDefinition);
+    constructor(_decimalFactory: DecimalFactory, marketsService: MarketsService, myDataDefinition: DataDefinition);
     // (undocumented)
     get askCount(): number | undefined;
     // (undocumented)
@@ -26777,25 +26826,25 @@ export namespace SecurityDataItem {
     const // (undocumented)
     defaultAskCount = 0;
     const // (undocumented)
-    defaultAskQuantity: Decimal;
+    defaultAskQuantityAsNumber = 0;
     const // (undocumented)
     defaultAskUndisclosed = false;
     const // (undocumented)
     defaultBidCount = 0;
     const // (undocumented)
-    defaultBidQuantity: Decimal;
+    defaultBidQuantityAsNumber = 0;
     const // (undocumented)
     defaultBidUndisclosed = false;
     const // (undocumented)
     defaultNumberOfTrades = 0;
     const // (undocumented)
-    defaultVolume: Decimal;
+    defaultVolumeAsNumber = 0;
     const // (undocumented)
-    defaultValueTraded: Decimal;
+    defaultValueTradedAsNumber = 0;
     const // (undocumented)
     defaultOpenInterest = 0;
     const // (undocumented)
-    defaultShareIssue: Decimal;
+    defaultShareIssueAsNumber = 0;
     const // (undocumented)
     defaultStatusNote: readonly string[];
     // (undocumented)
@@ -26962,7 +27011,7 @@ export namespace SecurityDataItemTableFieldSourceDefinition {
 //
 // @public (undocumented)
 export class SecurityDataItemTableValueSource extends TableValueSource {
-    constructor(firstFieldIndexOffset: Integer, _dataIvemId: DataIvemId, _adi: AdiService);
+    constructor(_decimalFactory: DecimalFactory, _adi: AdiService, firstFieldIndexOffset: Integer, _dataIvemId: DataIvemId);
     // (undocumented)
     activate(): TableValue[];
     // (undocumented)
@@ -27559,7 +27608,7 @@ export namespace SettingsStaticInitialise {
 //
 // @public (undocumented)
 export class ShortDepthRecord extends DepthRecord {
-    constructor(marketsService: MarketsService, index: Integer, _level: DepthLevelsDataItem.Level, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
+    constructor(decimalFactory: DecimalFactory, marketsService: MarketsService, index: Integer, _level: DepthLevelsDataItem.Level, volumeAhead: Integer | undefined, auctionQuantity: Integer | undefined);
     // (undocumented)
     acceptedByFilter(filterXrefs: string[]): boolean;
     // (undocumented)
@@ -27658,6 +27707,7 @@ export namespace ShortDepthSideGridField {
 //
 // @public (undocumented)
 export class ShortDepthSideGridRecordStore extends DepthSideGridRecordStore implements RevRecordStore {
+    constructor(_decimalFactory: DecimalFactory, marketsService: MarketsService, styleId: DepthStyleId, sideId: OrderSideId);
     // (undocumented)
     close(): void;
     // (undocumented)
@@ -33294,7 +33344,7 @@ export abstract class SubscribeRecordListTableRecordSource<T, TList extends Reco
 //
 // @public (undocumented)
 export class SymbolDetailCacheService {
-    constructor(_marketsService: MarketsService, _dataMgr: DataMgr, _symbolsService: SymbolsService);
+    constructor(_decimalFactory: DecimalFactory, _marketsService: MarketsService, _dataMgr: DataMgr, _symbolsService: SymbolsService);
     // (undocumented)
     clear(): void;
     // (undocumented)
@@ -33399,7 +33449,7 @@ export namespace SymbolDetailCacheService {
     // (undocumented)
     export namespace FullDataIvemIdDetail {
         // (undocumented)
-        export function loadFromSymbolRecord(detail: FullDataIvemIdDetail, record: SymbolsDataItem.Record): void;
+        export function loadFromSymbolRecord(decimalFactory: DecimalFactory, detail: FullDataIvemIdDetail, record: SymbolsDataItem.Record): void;
     }
     // (undocumented)
     export interface IvemIdDetail extends Detail {
@@ -39028,7 +39078,7 @@ export namespace ZenithConvert {
     // (undocumented)
     export namespace Balances {
         // (undocumented)
-        export function toChange(balance: ZenithProtocol.TradingController.Balances.Balance): BalancesDataMessage.Change | string;
+        export function toChange(decimalFactory: DecimalFactory, balance: ZenithProtocol.TradingController.Balances.Balance): BalancesDataMessage.Change | string;
     }
     // (undocumented)
     export namespace CallOrPut {
@@ -39147,9 +39197,9 @@ export namespace ZenithConvert {
     // (undocumented)
     export namespace Holdings {
         // (undocumented)
-        export function toDataMessageAddUpdateChangeData(zenithHolding: ZenithProtocol.TradingController.Holdings.AddUpdateDetail): HoldingsDataMessage.AddUpdateChangeData;
+        export function toDataMessageAddUpdateChangeData(decimalFactory: DecimalFactory, zenithHolding: ZenithProtocol.TradingController.Holdings.AddUpdateDetail): HoldingsDataMessage.AddUpdateChangeData;
         // (undocumented)
-        export function toDataMessageChangeRecord(cr: ZenithProtocol.TradingController.Holdings.ChangeRecord): HoldingsDataMessage.ChangeRecord;
+        export function toDataMessageChangeRecord(decimalFactory: DecimalFactory, cr: ZenithProtocol.TradingController.Holdings.ChangeRecord): HoldingsDataMessage.ChangeRecord;
     }
     // (undocumented)
     export namespace HoldingStyle {
@@ -39226,9 +39276,9 @@ export namespace ZenithConvert {
             export function toId(value: ZenithProtocol.TradingController.OrderCondition.Reference): PriceOrderTrigger.FieldId;
         }
         // (undocumented)
-        export function toOrderTrigger(condition: ZenithProtocol.TradingController.OrderCondition | undefined): ImmediateOrderTrigger | PriceOrderTrigger | TrailingPriceOrderTrigger | PercentageTrailingPriceOrderTrigger;
+        export function toOrderTrigger(decimalFactory: DecimalFactory, condition: ZenithProtocol.TradingController.OrderCondition | undefined): ImmediateOrderTrigger | PriceOrderTrigger | TrailingPriceOrderTrigger | PercentageTrailingPriceOrderTrigger;
         // (undocumented)
-        export function toOrderTriggerArray(value: ZenithProtocol.TradingController.OrderCondition[]): OrderTrigger[];
+        export function toOrderTriggerArray(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.OrderCondition[]): OrderTrigger[];
         // (undocumented)
         export namespace TrailingStopLossOrderConditionType {
             // (undocumented)
@@ -39252,7 +39302,7 @@ export namespace ZenithConvert {
             readonly tax: Decimal | undefined;
         }
         // (undocumented)
-        export function toDecimal(value: ZenithProtocol.TradingController.OrderFees): AsDecimal;
+        export function toDecimal(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.OrderFees): AsDecimal;
     }
     // (undocumented)
     export namespace OrderInstruction {
@@ -39291,11 +39341,6 @@ export namespace ZenithConvert {
     export namespace OrderRequestResult {
         // (undocumented)
         export function toId(value: ZenithProtocol.TradingController.OrderRequestResult): OrderRequestResultId;
-    }
-    // (undocumented)
-    export namespace OrderRoute {
-        // (undocumented)
-        export function from(route: OrderRoute): ZenithProtocol.TradingController.OrderRoute;
     }
     // (undocumented)
     export namespace OrderRouteAlgorithm {
@@ -39338,7 +39383,7 @@ export namespace ZenithConvert {
         // (undocumented)
         export namespace Extended {
             // (undocumented)
-            export function toAdi(zenithExtended: ZenithProtocol.MarketController.Security.Extended): SecurityDataMessage.Extended;
+            export function toAdi(decimalFactory: DecimalFactory, zenithExtended: ZenithProtocol.MarketController.Security.Extended): SecurityDataMessage.Extended;
         }
     }
     // (undocumented)
@@ -39408,7 +39453,7 @@ export namespace ZenithConvert {
     // (undocumented)
     export namespace Trades {
         // (undocumented)
-        export function toDataMessageChange(zenithChange: ZenithProtocol.MarketController.Trades.Change): TradesDataMessage.Change;
+        export function toDataMessageChange(decimalFactory: DecimalFactory, zenithChange: ZenithProtocol.MarketController.Trades.Change): TradesDataMessage.Change;
     }
     // (undocumented)
     export namespace TradingMarket {
@@ -39423,14 +39468,19 @@ export namespace ZenithConvert {
     // (undocumented)
     export namespace Transactions {
         // (undocumented)
-        export function toAdiTransaction(detail: ZenithProtocol.TradingController.Transactions.Detail): MarketTransaction | ManagedFundTransaction;
+        export function toAdiTransaction(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.Detail): MarketTransaction | ManagedFundTransaction;
         // (undocumented)
-        export function toDataMessageChange(zenithChange: ZenithProtocol.TradingController.Transactions.Change): TransactionsDataMessage.InitialiseChange | TransactionsDataMessage.UpdateChange | TransactionsDataMessage.AddChange;
+        export function toDataMessageChange(decimalFactory: DecimalFactory, zenithChange: ZenithProtocol.TradingController.Transactions.Change): TransactionsDataMessage.InitialiseChange | TransactionsDataMessage.UpdateChange | TransactionsDataMessage.AddChange;
     }
     // (undocumented)
     export namespace Trend {
         // (undocumented)
         export function toId(value: ZenithProtocol.MarketController.Trend): MovementId;
+    }
+    // (undocumented)
+    export namespace ZenithOrderRoute {
+        // (undocumented)
+        export function from(route: OrderRoute): ZenithProtocol.TradingController.OrderRoute;
     }
 }
 
@@ -44337,7 +44387,7 @@ export namespace ZenithProtocolCommon {
 //
 // @public (undocumented)
 export class ZenithPublisher extends AdiPublisher {
-    constructor();
+    constructor(decimalFactory: DecimalFactory);
     // (undocumented)
     activateDataItemId(dataItemId: DataItemId, dataItemRequestNr: Integer): void;
     // (undocumented)
@@ -44487,6 +44537,7 @@ export const enum ZenithPublisherStateId {
 //
 // @public (undocumented)
 export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscriptionManager {
+    constructor(decimalFactory: DecimalFactory);
     // (undocumented)
     protected activateSubscription(subscription: AdiPublisherSubscription): void;
     // (undocumented)

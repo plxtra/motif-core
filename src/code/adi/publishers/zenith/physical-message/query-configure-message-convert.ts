@@ -3,32 +3,22 @@ import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, RequestErrorDataMessages } from '../../../common/internal-api';
 import { ZenithQueryConfigureDataDefinition } from '../zenith-data-definitions';
 import { ZenithQueryConfigureDataMessage } from '../zenith-data-messages';
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace QueryConfigureMessageConvert {
+export class QueryConfigureMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof ZenithQueryConfigureDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('QCMCCRM338843593', definition.description);
         }
     }
 
-    function createPublishMessage(definition: ZenithQueryConfigureDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.ControllersCommon.QueryConfigure.PublishMessageContainer = {
-            Controller: definition.controller,
-            Topic: ZenithProtocol.ControllersCommon.TopicName.QueryConfigure,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id,
@@ -40,7 +30,7 @@ export namespace QueryConfigureMessageConvert {
                 throw new ZenithDataError(ErrorCode.QCMCPMT10053584222, message.Topic);
             } else {
                 const responseMsg = message as ZenithProtocol.ControllersCommon.QueryConfigure.PayloadMessageContainer;
-                const {actionTimeout, subscriptionTimeout} = parseData(responseMsg.Data);
+                const {actionTimeout, subscriptionTimeout} = this.parseData(responseMsg.Data);
 
                 const dataMessage = new ZenithQueryConfigureDataMessage(subscription.dataItemId, subscription.dataItemRequestNr,
                     actionTimeout, subscriptionTimeout);
@@ -50,7 +40,18 @@ export namespace QueryConfigureMessageConvert {
         }
     }
 
-    function parseData(payload: ZenithProtocol.ControllersCommon.QueryConfigure.Payload) {
+    private createPublishMessage(definition: ZenithQueryConfigureDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.ControllersCommon.QueryConfigure.PublishMessageContainer = {
+            Controller: definition.controller,
+            Topic: ZenithProtocol.ControllersCommon.TopicName.QueryConfigure,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+        };
+
+        return new Ok(result);
+    }
+
+    private parseData(payload: ZenithProtocol.ControllersCommon.QueryConfigure.Payload) {
         const payloadActionTimeout = payload.ActionTimeout;
         let actionTimeout: SysTick.Span;
         if (payloadActionTimeout === undefined) {
@@ -77,7 +78,7 @@ export namespace QueryConfigureMessageConvert {
             }
         }
 
-        const parsedData: ParsedData = {
+        const parsedData: QueryConfigureMessageConvert.ParsedData = {
             actionTimeout,
             subscriptionTimeout,
         };

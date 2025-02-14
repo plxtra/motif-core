@@ -8,31 +8,22 @@ import {
     ZenithServerInfoDataDefinition,
     ZenithServerInfoDataMessage
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace ServerInfoMessageConvert {
+export class ServerInfoMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof ZenithServerInfoDataDefinition) {
-            return createSubUnsubMessage(request);
+            return this.createSubUnsubMessage(request);
         } else {
             throw new AssertInternalError('SIOMCCRM55583399', definition.description);
         }
     }
 
-    function createSubUnsubMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.SubUnsubMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Zenith,
-            Topic: ZenithProtocol.ZenithController.TopicName.ServerInfo,
-            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -61,5 +52,15 @@ export namespace ServerInfoMessageConvert {
                 }
             }
         }
+    }
+
+    private createSubUnsubMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.SubUnsubMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Zenith,
+            Topic: ZenithProtocol.ZenithController.TopicName.ServerInfo,
+            Action: ZenithConvert.MessageContainer.Action.fromRequestTypeId(request.typeId),
+        };
+
+        return new Ok(result);
     }
 }

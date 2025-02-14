@@ -9,36 +9,23 @@ import {
     QueryNotificationDistributionMethodDataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithChannelConvert } from './zenith-channel-convert';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace QueryNotificationDistributionMethodMessageConvert {
+export class QueryNotificationDistributionMethodMessageConvert extends MessageConvert {
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryNotificationDistributionMethodDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('CNDMMCCRM70317', definition.description);
         }
     }
 
-    function createPublishMessage(definition: QueryNotificationDistributionMethodDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.ChannelController.QueryMethod.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
-            Topic: ZenithProtocol.ChannelController.TopicName.QueryMethod,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                Type: ZenithChannelConvert.DistributionMethodType.fromId(definition.distributionMethodId),
-            }
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -74,5 +61,19 @@ export namespace QueryNotificationDistributionMethodMessageConvert {
                 }
             }
         }
+    }
+
+    private createPublishMessage(definition: QueryNotificationDistributionMethodDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.ChannelController.QueryMethod.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Channel,
+            Topic: ZenithProtocol.ChannelController.TopicName.QueryMethod,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                Type: ZenithChannelConvert.DistributionMethodType.fromId(definition.distributionMethodId),
+            }
+        };
+
+        return new Ok(result);
     }
 }

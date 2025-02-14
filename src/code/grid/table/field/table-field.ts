@@ -59,7 +59,7 @@ export class NumberTableField extends GenericTableField<number, NumberTableValue
 
 export class DecimalTableField extends TableField {
     protected compareDefined(left: TableValue, right: TableValue): number {
-        return compareDecimal((left as DecimalTableValue).definedData, (right as DecimalTableValue).definedData);
+        return compareDecimal((left as DecimalTableValue).definedData.value, (right as DecimalTableValue).definedData.value);
     }
 }
 export class DateTableField extends TableField {
@@ -136,8 +136,8 @@ export class NumberCorrectnessTableField extends GenericCorrectnessTableField<nu
 
 export class DecimalCorrectnessTableField extends CorrectnessTableField {
     protected compareDefined(left: CorrectnessTableValue, right: CorrectnessTableValue): number {
-        return compareDecimal((left as DecimalCorrectnessTableValue).definedData,
-            (right as DecimalCorrectnessTableValue).definedData);
+        return compareDecimal((left as DecimalCorrectnessTableValue).definedData.value,
+            (right as DecimalCorrectnessTableValue).definedData.value);
     }
 }
 export class DateCorrectnessTableField extends CorrectnessTableField {

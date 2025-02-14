@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, NotImplementedError, UnreachableCaseError, UsableListChangeType, UsableListChangeTypeId, moveElementsInArray } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, NotImplementedError, UnreachableCaseError, UsableListChangeType, UsableListChangeTypeId, moveElementsInArray } from '@xilytix/sysutils';
 import { AdiService, DataIvemBaseDetail, RankedDataIvemId } from '../../../adi/internal-api';
 import { TextFormatter } from '../../../services/internal-api';
 import { SymbolDetailCacheService } from '../../../services/symbol-detail-cache-service';
@@ -24,6 +24,7 @@ export class RankedDataIvemIdUsableListTableRecordSource extends UsableListTable
     readonly records = new Array<RankedDataIvemIdUsableListTableRecordSource.Record>();
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         private readonly _symbolDetailCacheService: SymbolDetailCacheService,
         textFormatter: TextFormatter,
@@ -99,7 +100,7 @@ export class RankedDataIvemIdUsableListTableRecordSource extends UsableListTable
                     }
 
                     case TableFieldSourceDefinition.TypeId.SecurityDataItem: {
-                        const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, rankedDataIvemId.dataIvemId, this._adiService);
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, rankedDataIvemId.dataIvemId);
                         result.addSource(valueSource);
                         break;
                     }

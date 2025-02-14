@@ -1,4 +1,4 @@
-import { IndexedRecord, Integer } from '@xilytix/sysutils';
+import { DecimalFactory, IndexedRecord, Integer } from '@xilytix/sysutils';
 import { MarketsService } from '../../../adi/internal-api';
 import { IntegerTextFormattableValue, TextFormattableValue } from '../../../services/internal-api';
 
@@ -8,6 +8,7 @@ export abstract class DepthRecord implements IndexedRecord {
     partialAuctionQuantity: Integer | undefined;
 
     constructor(
+        protected readonly _decimalFactory: DecimalFactory,
         protected readonly _marketsService: MarketsService,
         private _typeId: DepthRecord.TypeId,
         public index: Integer,

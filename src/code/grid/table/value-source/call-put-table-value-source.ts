@@ -1,5 +1,5 @@
-import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
-import { CallPut } from '../../../services/internal-api';
+import { DecimalFactory, Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { CallPut, FactoryisedDecimal } from '../../../services/internal-api';
 import { CallPutTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanTableValue,
@@ -15,7 +15,7 @@ import {
 import { TableValueSource } from './table-value-source';
 
 export class CallPutTableValueSource extends TableValueSource {
-    constructor(firstFieldIndexOffset: Integer, private _callPut: CallPut) {
+    constructor(private readonly _decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, private _callPut: CallPut) {
         super(firstFieldIndexOffset);
     }
 
@@ -53,7 +53,7 @@ export class CallPutTableValueSource extends TableValueSource {
     private loadValue(id: CallPut.FieldId, value: TableValue) {
         switch (id) {
             case CallPut.FieldId.ExercisePrice:
-                (value as PriceTableValue).data = this._callPut.exercisePrice;
+                (value as PriceTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._callPut.exercisePrice);
                 break;
             case CallPut.FieldId.ExpiryDate:
                 (value as DateTableValue).data = this._callPut.expiryDate.utcMidnight;
@@ -68,7 +68,7 @@ export class CallPutTableValueSource extends TableValueSource {
                 (value as DataIvemIdTableValue).data = this._callPut.putDataIvemId;
                 break;
             case CallPut.FieldId.ContractMultiplier:
-                (value as DecimalTableValue).data = this._callPut.contractMultiplier;
+                (value as DecimalTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._callPut.contractMultiplier);
                 break;
             case CallPut.FieldId.ExerciseTypeId:
                 (value as EnumTableValue).data = this._callPut.exerciseTypeId;

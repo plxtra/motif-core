@@ -1,6 +1,7 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     AssertInternalError,
+    DecimalFactory,
     Integer,
     LockOpenListItem,
     MultiEvent,
@@ -52,6 +53,7 @@ export class DataIvemDetailFromSearchSymbolsTableRecordSource extends SingleData
 
     // setting accountId to undefined will return orders for all accounts
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _marketsService: MarketsService,
         private readonly _adiService: AdiService,
         textFormatter: TextFormatter,
@@ -129,6 +131,7 @@ export class DataIvemDetailFromSearchSymbolsTableRecordSource extends SingleData
                     if (this._isFullDetail) {
                         const dataIvemFullDetail = dataIvemDetail;
                         const valueSource = new DataIvemExtendedDetailTableValueSource(
+                            this._decimalFactory,
                             result.fieldCount,
                             dataIvemFullDetail,
                             this._dataItem

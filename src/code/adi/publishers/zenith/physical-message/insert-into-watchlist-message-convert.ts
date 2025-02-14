@@ -9,37 +9,22 @@ import {
     RequestErrorDataMessages,
     WatchmakerListRequestAcknowledgeDataMessage
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithWatchlistConvert } from './zenith-watchlist-convert';
 
-export namespace InsertIntoWatchlistMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class InsertIntoWatchlistMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof DataIvemIdInsertIntoWatchmakerListDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('IWLMC32220', definition.description);
         }
     }
 
-    function createPublishMessage(definition: DataIvemIdInsertIntoWatchmakerListDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.WatchlistController.InsertIntoWatchlist.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Watchlist,
-            Topic: ZenithProtocol.WatchlistController.TopicName.InsertIntoWatchlist,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                WatchlistID: definition.listId,
-                Members: ZenithWatchlistConvert.Members.fromZenithSymbols(definition.members),
-                Offset: definition.offset,
-            }
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -66,5 +51,21 @@ export namespace InsertIntoWatchlistMessageConvert {
                 }
             }
         }
+    }
+
+    private createPublishMessage(definition: DataIvemIdInsertIntoWatchmakerListDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.WatchlistController.InsertIntoWatchlist.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Watchlist,
+            Topic: ZenithProtocol.WatchlistController.TopicName.InsertIntoWatchlist,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                WatchlistID: definition.listId,
+                Members: ZenithWatchlistConvert.Members.fromZenithSymbols(definition.members),
+                Offset: definition.offset,
+            }
+        };
+
+        return new Ok(result);
     }
 }

@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, UnreachableCaseError } from '@xilytix/sysutils';
 import { AdiService, DataIvemId } from '../../../adi/internal-api';
 import { SymbolDetailCacheService, TextFormatter } from '../../../services/internal-api';
 import { CorrectnessBadness, UiComparableList } from '../../../sys/internal-api';
@@ -18,6 +18,7 @@ export class DataIvemIdComparableListTableRecordSource extends BadnessListTableR
     declare readonly list: UiComparableList<DataIvemId>;
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         private readonly _symbolDetailCacheService: SymbolDetailCacheService,
         textFormatter: TextFormatter,
@@ -80,7 +81,7 @@ export class DataIvemIdComparableListTableRecordSource extends BadnessListTableR
                     }
 
                     case TableFieldSourceDefinition.TypeId.SecurityDataItem: {
-                        const valueSource = new SecurityDataItemTableValueSource(result.fieldCount, dataIvemId, this._adiService);
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, dataIvemId);
                         result.addSource(valueSource);
                         break;
                     }

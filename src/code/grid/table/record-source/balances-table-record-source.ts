@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
 import {
     AdiService,
     AllBalancesDataDefinition,
@@ -28,6 +28,7 @@ export class BalancesTableRecordSource
     extends BrokerageAccountGroupTableRecordSource<Balances, BrokerageAccountGroupRecordList<Balances>> {
 
     constructor(
+        private readonly _decimalFactory: DecimalFactory,
         private readonly _adiService: AdiService,
         textFormatter: TextFormatter,
         customHeadings: RevSourcedFieldCustomHeadings | undefined,
@@ -74,7 +75,7 @@ export class BalancesTableRecordSource
             const fieldSourceDefinitionTypeId = fieldSourceDefinition.typeId as BalancesTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
                 case TableFieldSourceDefinition.TypeId.Balances: {
-                    const valueSource = new BalancesTableValueSource(result.fieldCount, balances);
+                    const valueSource = new BalancesTableValueSource(this._decimalFactory, result.fieldCount, balances);
                     result.addSource(valueSource);
                     break;
                 }

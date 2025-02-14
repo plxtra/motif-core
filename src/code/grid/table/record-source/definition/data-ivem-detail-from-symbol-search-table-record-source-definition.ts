@@ -1,5 +1,5 @@
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { JsonElement, Ok, PickEnum, Result } from '@xilytix/sysutils';
+import { DecimalFactory, JsonElement, Ok, PickEnum, Result } from '@xilytix/sysutils';
 import { DataIvemAlternateCodes, DataIvemBaseDetail, Exchange, MarketsService, MyxDataIvemAttributes, SearchSymbolsDataDefinition, SearchSymbolsDataIvemFullDetail, ZenithProtocolCommon } from '../../../../adi/internal-api';
 import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
 import {
@@ -140,22 +140,22 @@ export namespace DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition {
         export const request = 'request';
     }
 
-    export function tryCreateDataDefinitionFromJson(element: JsonElement | undefined): Result<SearchSymbolsDataDefinition> {
+    export function tryCreateDataDefinitionFromJson(decimalFactory: DecimalFactory, element: JsonElement | undefined): Result<SearchSymbolsDataDefinition> {
         if (element === undefined) {
-            const definition = createDefaultDataDefinition();
+            const definition = createDefaultDataDefinition(decimalFactory);
             return new Ok(definition);
         } else {
             const requestElementResult = element.tryGetElement(DataIvemDetailFromSearchSymbolsTableRecordSourceDefinition.JsonName.request);
             if (requestElementResult.isErr()) {
                 return JsonElementErr.createOuter(requestElementResult.error, ErrorCode.DataIvemDetailsFromSearchSymbolsTableRecordSourceDefinition_RequestNotSpecified);
             } else {
-                return SearchSymbolsDataDefinition.tryCreateFromJson(requestElementResult.value);
+                return SearchSymbolsDataDefinition.tryCreateFromJson(decimalFactory, requestElementResult.value);
             }
         }
     }
 
-    export function createDefaultDataDefinition() {
-        return new SearchSymbolsDataDefinition();
+    export function createDefaultDataDefinition(decimalFactory: DecimalFactory) {
+        return new SearchSymbolsDataDefinition(decimalFactory);
     }
 
     export function createLayoutDefinition(

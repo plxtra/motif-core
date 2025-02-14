@@ -1,6 +1,7 @@
 import {
     CommaText,
     concatenateArrayUniquely,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     Err,
     Integer,
@@ -8,8 +9,6 @@ import {
     mSecsPerHour,
     mSecsPerMin,
     mSecsPerSec,
-    newDecimal,
-    newUndefinableDecimal,
     NotImplementedError,
     Ok,
     parseIntStrict,
@@ -2335,11 +2334,11 @@ export namespace ZenithConvert {
     }
 
     export namespace OrderFees {
-        export function toDecimal(value: ZenithProtocol.TradingController.OrderFees): AsDecimal {
+        export function toDecimal(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.OrderFees): AsDecimal {
             const valueBrokerage = value.Brokerage;
-            const brokerage = valueBrokerage === undefined ? undefined : newDecimal(valueBrokerage);
+            const brokerage = valueBrokerage === undefined ? undefined : decimalFactory.newDecimal(valueBrokerage);
             const valueTax = value.Tax;
-            const tax = valueTax === undefined ? undefined : newDecimal(valueTax);
+            const tax = valueTax === undefined ? undefined : decimalFactory.newDecimal(valueTax);
             return {
                 brokerage,
                 tax,
@@ -3186,17 +3185,17 @@ export namespace ZenithConvert {
 
     export namespace Security {
         export namespace Extended {
-            export function toAdi(zenithExtended: ZenithProtocol.MarketController.Security.Extended): SecurityDataMessage.Extended {
+            export function toAdi(decimalFactory: DecimalFactory, zenithExtended: ZenithProtocol.MarketController.Security.Extended): SecurityDataMessage.Extended {
                 const result: SecurityDataMessage.Extended = {
-                    pss: newUndefinableDecimal(zenithExtended.PSS),
-                    idss: newUndefinableDecimal(zenithExtended.IDSS),
-                    pdt: newUndefinableDecimal(zenithExtended.PDT),
-                    rss: newUndefinableDecimal(zenithExtended.RSS),
-                    high52: newUndefinableDecimal(zenithExtended.High52),
-                    low52: newUndefinableDecimal(zenithExtended.Low52),
-                    reference: newUndefinableDecimal(zenithExtended.Reference),
-                    highLimit: newUndefinableDecimal(zenithExtended.HighLimit),
-                    lowLimit: newUndefinableDecimal(zenithExtended.LowLimit),
+                    pss: decimalFactory.newUndefinableDecimal(zenithExtended.PSS),
+                    idss: decimalFactory.newUndefinableDecimal(zenithExtended.IDSS),
+                    pdt: decimalFactory.newUndefinableDecimal(zenithExtended.PDT),
+                    rss: decimalFactory.newUndefinableDecimal(zenithExtended.RSS),
+                    high52: decimalFactory.newUndefinableDecimal(zenithExtended.High52),
+                    low52: decimalFactory.newUndefinableDecimal(zenithExtended.Low52),
+                    reference: decimalFactory.newUndefinableDecimal(zenithExtended.Reference),
+                    highLimit: decimalFactory.newUndefinableDecimal(zenithExtended.HighLimit),
+                    lowLimit: decimalFactory.newUndefinableDecimal(zenithExtended.LowLimit),
                 }
 
                 return result;
@@ -3205,7 +3204,7 @@ export namespace ZenithConvert {
     }
 
     export namespace Trades {
-        export function toDataMessageChange(zenithChange: ZenithProtocol.MarketController.Trades.Change): TradesDataMessage.Change {
+        export function toDataMessageChange(decimalFactory: DecimalFactory, zenithChange: ZenithProtocol.MarketController.Trades.Change): TradesDataMessage.Change {
             const changeTypeId = ZenithConvert.AuiChangeType.toId(zenithChange.O);
             switch (changeTypeId) {
                 case AuiChangeTypeId.Add: {
@@ -3213,7 +3212,7 @@ export namespace ZenithConvert {
                     if (addDetail === undefined) {
                         throw new ZenithDataError(ErrorCode.ZCTTDMCRA15392887209, JSON.stringify(zenithChange));
                     } else {
-                        return toDataMessageAddChange(addDetail);
+                        return toDataMessageAddChange(decimalFactory, addDetail);
                     }
                 }
                 case AuiChangeTypeId.Update: {
@@ -3221,7 +3220,7 @@ export namespace ZenithConvert {
                     if (updateDetail === undefined) {
                         throw new ZenithDataError(ErrorCode.ZCTTDMCRU15392887209, JSON.stringify(zenithChange));
                     } else {
-                        return toDataMessageUpdateChange(updateDetail);
+                        return toDataMessageUpdateChange(decimalFactory, updateDetail);
                     }
                 }
                 case AuiChangeTypeId.Initialise: {
@@ -3236,7 +3235,7 @@ export namespace ZenithConvert {
             }
         }
 
-        function toDataMessageAddChange(tradeData: ZenithProtocol.MarketController.Trades.Data) {
+        function toDataMessageAddChange(decimalFactory: DecimalFactory, tradeData: ZenithProtocol.MarketController.Trades.Data) {
             // const { marketId, environmentId: environmentIdIgnored } = tradeData.Market
             //     ? ZenithConvert.EnvironmentedMarket.toId(tradeData.Market)
             //     : { marketId: undefined, environmentId: undefined };
@@ -3244,7 +3243,7 @@ export namespace ZenithConvert {
             const result: TradesDataMessage.AddChange = {
                 typeId: AuiChangeTypeId.Add,
                 id: tradeData.ID,
-                price: newUndefinableDecimal(tradeData.Price),
+                price: decimalFactory.newUndefinableDecimal(tradeData.Price),
                 quantity: tradeData.Quantity,
                 time: tradeData.Time === undefined ? undefined : Date.DateTimeIso8601.toSourceTzOffsetDateTime(tradeData.Time),
                 flagIds: TradeFlag.toIdArray(tradeData.Flags),
@@ -3266,7 +3265,7 @@ export namespace ZenithConvert {
             return result;
         }
 
-        function toDataMessageUpdateChange(tradeData: ZenithProtocol.MarketController.Trades.Data) {
+        function toDataMessageUpdateChange(decimalFactory: DecimalFactory, tradeData: ZenithProtocol.MarketController.Trades.Data) {
             // const { marketId, environmentId: environmentIdIgnored } = tradeData.Market
             //     ? ZenithConvert.EnvironmentedMarket.toId(tradeData.Market)
             //     : { marketId: undefined, environmentId: undefined };
@@ -3274,7 +3273,7 @@ export namespace ZenithConvert {
             const result: TradesDataMessage.UpdateChange = {
                 typeId: AuiChangeTypeId.Update,
                 id: tradeData.ID,
-                price: newUndefinableDecimal(tradeData.Price),
+                price: decimalFactory.newUndefinableDecimal(tradeData.Price),
                 quantity: tradeData.Quantity,
                 time: tradeData.Time === undefined ? undefined : Date.DateTimeIso8601.toSourceTzOffsetDateTime(tradeData.Time),
                 flagIds: TradeFlag.toIdArray(tradeData.Flags),
@@ -3357,9 +3356,9 @@ export namespace ZenithConvert {
     }
 
     export namespace Holdings {
-        export function toDataMessageChangeRecord(cr: ZenithProtocol.TradingController.Holdings.ChangeRecord) {
+        export function toDataMessageChangeRecord(decimalFactory: DecimalFactory, cr: ZenithProtocol.TradingController.Holdings.ChangeRecord) {
             const typeId = ZenithConvert.AbbreviatedAurcChangeType.toId(cr.O);
-            const changeData = toDataMessageChangeData(typeId, cr);
+            const changeData = toDataMessageChangeData(decimalFactory, typeId, cr);
 
             const result: HoldingsDataMessage.ChangeRecord = {
                 typeId,
@@ -3369,7 +3368,7 @@ export namespace ZenithConvert {
             return result;
         }
 
-        function toDataMessageChangeData(typeId: AurcChangeTypeId, cr: ZenithProtocol.TradingController.Holdings.ChangeRecord) {
+        function toDataMessageChangeData(decimalFactory: DecimalFactory, typeId: AurcChangeTypeId, cr: ZenithProtocol.TradingController.Holdings.ChangeRecord) {
             switch (typeId) {
                 case AurcChangeTypeId.Clear: {
                     const accountZenithCode = cr.Account;
@@ -3393,7 +3392,7 @@ export namespace ZenithConvert {
                     const addUpdateHolding = cr.Holding as ZenithProtocol.TradingController.Holdings.AddUpdateDetail;
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     if (addUpdateHolding !== undefined) {
-                        return toDataMessageAddUpdateChangeData(addUpdateHolding);
+                        return toDataMessageAddUpdateChangeData(decimalFactory, addUpdateHolding);
                     } else {
                         throw new ZenithDataError(ErrorCode.ZCHTDMHAU22920765, JSON.stringify(cr));
                     }
@@ -3425,7 +3424,7 @@ export namespace ZenithConvert {
             return data;
         }
 
-        export function toDataMessageAddUpdateChangeData(zenithHolding: ZenithProtocol.TradingController.Holdings.AddUpdateDetail):
+        export function toDataMessageAddUpdateChangeData(decimalFactory: DecimalFactory, zenithHolding: ZenithProtocol.TradingController.Holdings.AddUpdateDetail):
             HoldingsDataMessage.AddUpdateChangeData {
 
             const ivemClassId = HoldingStyle.toId(zenithHolding.Style);
@@ -3435,7 +3434,7 @@ export namespace ZenithConvert {
                 case IvemClassId.Market: {
                     // const environmentedExchangeId = ZenithConvert.EnvironmentedExchange.toId(zenithHolding.Exchange);
                     // const environmentedAccountId = ZenithConvert.EnvironmentedAccount.toId(zenithHolding.Account);
-                    const marketDetail = toMarketDetailChangeData(zenithHolding as ZenithProtocol.TradingController.Holdings.MarketDetail);
+                    const marketDetail = toMarketDetailChangeData(decimalFactory, zenithHolding as ZenithProtocol.TradingController.Holdings.MarketDetail);
                     const market: HoldingsDataMessage.MarketChangeData = {
                         // zenithExchangeCode: environmentedExchangeId.exchangeId,
                         // environmentId: environmentedAccountId.zenithEnvironmentCode,
@@ -3444,7 +3443,7 @@ export namespace ZenithConvert {
                         // zenithAccountCode: environmentedAccountId.accountId,
                         accountZenithCode: zenithHolding.Account,
                         styleId: IvemClassId.Market,
-                        cost: newDecimal(zenithHolding.Cost),
+                        cost: decimalFactory.newDecimal(zenithHolding.Cost),
                         currencyId: Currency.tryToId(zenithHolding.Currency),
                         marketDetail,
                     };
@@ -3461,7 +3460,7 @@ export namespace ZenithConvert {
                         // zenithAccountCode: managedFundEnvironmentedAccountId.accountId,
                         accountZenithCode: zenithHolding.Account,
                         styleId: IvemClassId.ManagedFund,
-                        cost: newDecimal(zenithHolding.Cost),
+                        cost: decimalFactory.newDecimal(zenithHolding.Cost),
                         currencyId: Currency.tryToId(zenithHolding.Currency),
                     };
                     return managedFund;
@@ -3471,18 +3470,18 @@ export namespace ZenithConvert {
             }
         }
 
-        function toMarketDetailChangeData(zenithMarketHolding: ZenithProtocol.TradingController.Holdings.MarketDetail) {
+        function toMarketDetailChangeData(decimalFactory: DecimalFactory, zenithMarketHolding: ZenithProtocol.TradingController.Holdings.MarketDetail) {
             const marketDetail: HoldingsDataMessage.MarketChangeData.Detail = {
                 totalQuantity: zenithMarketHolding.TotalQuantity,
                 totalAvailableQuantity: zenithMarketHolding.TotalAvailable,
-                averagePrice: newDecimal(zenithMarketHolding.AveragePrice),
+                averagePrice: decimalFactory.newDecimal(zenithMarketHolding.AveragePrice),
             };
             return marketDetail;
         }
     }
 
     export namespace Balances {
-        export function toChange(balance: ZenithProtocol.TradingController.Balances.Balance): BalancesDataMessage.Change | string {
+        export function toChange(decimalFactory: DecimalFactory, balance: ZenithProtocol.TradingController.Balances.Balance): BalancesDataMessage.Change | string {
             // const environmentedAccountId = EnvironmentedAccount.toId(balance.Account);
             if (balance.Type === '') {
                 const change: BalancesDataMessage.InitialiseAccountChange = {
@@ -3504,7 +3503,7 @@ export namespace ZenithConvert {
                         accountZenithCode: balance.Account,
                         balanceType: balance.Type,
                         currencyId,
-                        amount: newDecimal(balance.Amount)
+                        amount: decimalFactory.newDecimal(balance.Amount)
                     } as const;
                     return change;
                 }
@@ -3513,7 +3512,7 @@ export namespace ZenithConvert {
     }
 
     export namespace Transactions {
-        export function toDataMessageChange(zenithChange: ZenithProtocol.TradingController.Transactions.Change) {
+        export function toDataMessageChange(decimalFactory: DecimalFactory, zenithChange: ZenithProtocol.TradingController.Transactions.Change) {
             const changeTypeId = ZenithConvert.AuiChangeType.toId(zenithChange.O);
             switch (changeTypeId) {
                 case AuiChangeTypeId.Add: {
@@ -3521,7 +3520,7 @@ export namespace ZenithConvert {
                     if (addDetail === undefined) {
                         throw new ZenithDataError(ErrorCode.ZCTTDMCRA3339929166, JSON.stringify(zenithChange));
                     } else {
-                        return toDataMessageAddChange(addDetail);
+                        return toDataMessageAddChange(decimalFactory, addDetail);
                     }
                 }
                 case AuiChangeTypeId.Update: {
@@ -3529,7 +3528,7 @@ export namespace ZenithConvert {
                     if (updateDetail === undefined) {
                         throw new ZenithDataError(ErrorCode.ZCTTDMCRU3339929166, JSON.stringify(zenithChange));
                     } else {
-                        return toDataMessageUpdateChange(updateDetail);
+                        return toDataMessageUpdateChange(decimalFactory, updateDetail);
                     }
                 }
                 case AuiChangeTypeId.Initialise: {
@@ -3544,18 +3543,18 @@ export namespace ZenithConvert {
             }
         }
 
-        function toDataMessageAddChange(detail: ZenithProtocol.TradingController.Transactions.Detail) {
+        function toDataMessageAddChange(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.Detail) {
             const result: TransactionsDataMessage.AddChange = {
                 typeId: AuiChangeTypeId.Add,
-                transaction: toAdiTransaction(detail)
+                transaction: toAdiTransaction(decimalFactory, detail)
             };
             return result;
         }
 
-        function toDataMessageUpdateChange(detail: ZenithProtocol.TradingController.Transactions.Detail) {
+        function toDataMessageUpdateChange(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.Detail) {
             const result: TransactionsDataMessage.UpdateChange = {
                 typeId: AuiChangeTypeId.Update,
-                transaction: toAdiTransaction(detail)
+                transaction: toAdiTransaction(decimalFactory, detail)
             };
             return result;
         }
@@ -3571,21 +3570,21 @@ export namespace ZenithConvert {
             return result;
         }
 
-        export function toAdiTransaction(detail: ZenithProtocol.TradingController.Transactions.Detail) {
+        export function toAdiTransaction(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.Detail) {
             const ivemClassId = OrderStyle.toId(detail.Style);
             switch (ivemClassId) {
                 case IvemClassId.Unknown:
                     throw new ZenithDataError(ErrorCode.ZCTTATU5693483701, JSON.stringify(detail).substring(0, 200));
                 case IvemClassId.Market:
-                    return toAdiMarketTransaction(detail as ZenithProtocol.TradingController.Transactions.MarketDetail);
+                    return toAdiMarketTransaction(decimalFactory, detail as ZenithProtocol.TradingController.Transactions.MarketDetail);
                 case IvemClassId.ManagedFund:
-                    return toAdiManagedFundTransaction(detail as ZenithProtocol.TradingController.Transactions.ManagedFundDetail);
+                    return toAdiManagedFundTransaction(decimalFactory, detail as ZenithProtocol.TradingController.Transactions.ManagedFundDetail);
                 default:
                     throw new UnreachableCaseError('ZCTTAT684820111', ivemClassId);
             }
         }
 
-        function toAdiMarketTransaction(detail: ZenithProtocol.TradingController.Transactions.MarketDetail) {
+        function toAdiMarketTransaction(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.MarketDetail) {
             // const { exchangeId, environmentId } = ZenithConvert.EnvironmentedExchange.toId(detail.Exchange);
             // const { marketId } = ZenithConvert.EnvironmentedMarket.toId(detail.TradingMarket);
             const currencyId = (detail.Currency === undefined) ? undefined : ZenithConvert.Currency.tryToId(detail.Currency);
@@ -3610,13 +3609,13 @@ export namespace ZenithConvert {
                         orderStyleId: IvemClassId.Market,
                         tradeDate,
                         settlementDate,
-                        grossAmount: newDecimal(detail.GrossAmount),
-                        netAmount: newDecimal(detail.NetAmount),
-                        settlementAmount: newDecimal(detail.SettlementAmount),
+                        grossAmount: decimalFactory.newDecimal(detail.GrossAmount),
+                        netAmount: decimalFactory.newDecimal(detail.NetAmount),
+                        settlementAmount: decimalFactory.newDecimal(detail.SettlementAmount),
                         currencyId,
                         orderId: detail.OrderID,
                         totalQuantity: detail.TotalQuantity,
-                        averagePrice: newDecimal(detail.AveragePrice),
+                        averagePrice: decimalFactory.newDecimal(detail.AveragePrice),
                     };
 
                     return result;
@@ -3624,7 +3623,7 @@ export namespace ZenithConvert {
             }
         }
 
-        function toAdiManagedFundTransaction(detail: ZenithProtocol.TradingController.Transactions.ManagedFundDetail) {
+        function toAdiManagedFundTransaction(decimalFactory: DecimalFactory, detail: ZenithProtocol.TradingController.Transactions.ManagedFundDetail) {
             // const { exchangeId, environmentId } = ZenithConvert.EnvironmentedExchange.toId(detail.Exchange);
             // const { marketId } = ZenithConvert.EnvironmentedMarket.toId(detail.TradingMarket);
             const currencyId = (detail.Currency === undefined) ? undefined : ZenithConvert.Currency.tryToId(detail.Currency);
@@ -3649,13 +3648,13 @@ export namespace ZenithConvert {
                         orderStyleId: IvemClassId.ManagedFund,
                         tradeDate,
                         settlementDate,
-                        grossAmount: newDecimal(detail.GrossAmount),
-                        netAmount: newDecimal(detail.NetAmount),
-                        settlementAmount: newDecimal(detail.SettlementAmount),
+                        grossAmount: decimalFactory.newDecimal(detail.GrossAmount),
+                        netAmount: decimalFactory.newDecimal(detail.NetAmount),
+                        settlementAmount: decimalFactory.newDecimal(detail.SettlementAmount),
                         currencyId,
                         orderId: detail.OrderID,
-                        totalUnits: newDecimal(detail.TotalUnits),
-                        unitValue: newDecimal(detail.UnitValue),
+                        totalUnits: decimalFactory.newDecimal(detail.TotalUnits),
+                        unitValue: decimalFactory.newDecimal(detail.UnitValue),
                     };
 
                     return result;
@@ -3756,7 +3755,7 @@ export namespace ZenithConvert {
         }
     }
 
-    export namespace OrderRoute {
+    export namespace ZenithOrderRoute {
         function fromMarket(route: MarketOrderRoute): ZenithProtocol.TradingController.MarketOrderRoute {
             const result: ZenithProtocol.TradingController.MarketOrderRoute = {
                 Algorithm: ZenithProtocol.TradingController.OrderRouteAlgorithm.Market,
@@ -3894,58 +3893,58 @@ export namespace ZenithConvert {
             }
         }
 
-        export function toOrderTrigger(condition: ZenithProtocol.TradingController.OrderCondition | undefined) {
+        export function toOrderTrigger(decimalFactory: DecimalFactory, condition: ZenithProtocol.TradingController.OrderCondition | undefined) {
             if (condition === undefined) {
                 return new ImmediateOrderTrigger();
             } else {
                 switch (condition.Name) {
                     case ZenithProtocol.TradingController.OrderCondition.Name.StopLoss: {
                         const stopLossCondition = condition as ZenithProtocol.TradingController.StopLossOrderCondition;
-                        return toPriceOrderTrigger(stopLossCondition);
+                        return toPriceOrderTrigger(decimalFactory, stopLossCondition);
                     }
                     case ZenithProtocol.TradingController.OrderCondition.Name.TrailingStopLoss: {
                         const trailingStopLossCondition = condition as ZenithProtocol.TradingController.TrailingStopLossOrderCondition;
-                        return toTrailingPriceOrderTrigger(trailingStopLossCondition);
+                        return toTrailingPriceOrderTrigger(decimalFactory,trailingStopLossCondition);
                     }
                     default: throw new UnreachableCaseError('ZCTOC88871', condition.Name);
                 }
             }
         }
 
-        export function toOrderTriggerArray(value: ZenithProtocol.TradingController.OrderCondition[]): OrderTrigger[] {
+        export function toOrderTriggerArray(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.OrderCondition[]): OrderTrigger[] {
             const count = value.length;
             const result = new Array<OrderTrigger>(count);
             for (let i = 0; i < count; i++) {
-                result[i] = toOrderTrigger(value[i]);
+                result[i] = toOrderTrigger(decimalFactory, value[i]);
             }
             return result;
         }
 
-        function toPriceOrderTrigger(value: ZenithProtocol.TradingController.StopLossOrderCondition) {
-            const triggerValue = newUndefinableDecimal(value.Stop);
+        function toPriceOrderTrigger(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.StopLossOrderCondition) {
+            const triggerValue = decimalFactory.newUndefinableDecimal(value.Stop);
             const reference = value.Reference;
             const triggerFieldId = reference === undefined ? undefined : Reference.toId(reference);
             const direction = value.Direction;
             const triggerMovementId = direction === undefined ? undefined : Direction.toId(direction);
 
-            return new PriceOrderTrigger(triggerValue, triggerFieldId, triggerMovementId);
+            return new PriceOrderTrigger(decimalFactory, triggerValue, triggerFieldId, triggerMovementId);
         }
 
-        function toTrailingPriceOrderTrigger(value: ZenithProtocol.TradingController.TrailingStopLossOrderCondition) {
+        function toTrailingPriceOrderTrigger(decimalFactory: DecimalFactory, value: ZenithProtocol.TradingController.TrailingStopLossOrderCondition) {
             switch (value.Type) {
                 case ZenithProtocol.TradingController.TrailingStopLossOrderCondition.Type.Price: {
                     const trigger = new TrailingPriceOrderTrigger();
-                    trigger.value = newDecimal(value.Value);
-                    trigger.limit = newDecimal(value.Limit);
-                    trigger.stop = newUndefinableDecimal(value.Stop);
+                    trigger.value = decimalFactory.newDecimal(value.Value);
+                    trigger.limit = decimalFactory.newDecimal(value.Limit);
+                    trigger.stop = decimalFactory.newUndefinableDecimal(value.Stop);
                     return trigger;
                 }
 
                 case ZenithProtocol.TradingController.TrailingStopLossOrderCondition.Type.Percent: {
                     const percentTrigger = new PercentageTrailingPriceOrderTrigger();
-                    percentTrigger.value = newDecimal(value.Value);
-                    percentTrigger.limit = newDecimal(value.Limit);
-                    percentTrigger.stop = newUndefinableDecimal(value.Stop);
+                    percentTrigger.value = decimalFactory.newDecimal(value.Value);
+                    percentTrigger.limit = decimalFactory.newDecimal(value.Limit);
+                    percentTrigger.stop = decimalFactory.newUndefinableDecimal(value.Stop);
                     return percentTrigger;
                 }
 

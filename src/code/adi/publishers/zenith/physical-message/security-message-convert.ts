@@ -1,11 +1,11 @@
 import {
     AssertInternalError,
+    DecimalFactory,
     Err,
     InternalError,
-    newDecimal,
     Ok,
     Result,
-    UnexpectedCaseError,
+    UnexpectedCaseError
 } from '@xilytix/sysutils';
 import { StringId, Strings } from '../../../../res/internal-api';
 import {
@@ -26,25 +26,65 @@ import {
     unknownZenithCode,
     ZenithSymbol
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace SecurityMessageConvert {
+export class SecurityMessageConvert extends MessageConvert {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
+        super();
+    }
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof SecurityDataDefinition) {
-            return createSubUnsubMessage(request, definition);
+            return this.createSubUnsubMessage(request, definition);
         } else {
             if (definition instanceof QuerySecurityDataDefinition) {
-                return createPublishMessage(request, definition);
+                return this.createPublishMessage(request, definition);
             } else {
                 throw new AssertInternalError('SMCCRM1111999428', definition.description);
             }
         }
     }
 
-    function createPublishMessage(
+    parseMessage(
+        subscription: AdiPublisherSubscription,
+        message: ZenithProtocol.MessageContainer,
+        actionId: ZenithConvert.MessageContainer.Action.Id
+    ): DataMessage {
+        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
+            throw new ZenithDataError(ErrorCode.SMCPMC699483333434, message.Controller);
+        } else {
+            const dataMessage = new SecurityDataMessage();
+            dataMessage.dataItemId = subscription.dataItemId;
+            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+            switch (actionId) {
+                case ZenithConvert.MessageContainer.Action.Id.Publish:
+                    if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.QuerySecurity) {
+                        throw new ZenithDataError(ErrorCode.SMCPMP11995543833, message.Topic);
+                    } else {
+                        const publishMsg = message as ZenithProtocol.MarketController.Security.PayloadMessageContainer;
+                        dataMessage.securityInfo = this.parseData(publishMsg.Data);
+                    }
+                    break;
+                case ZenithConvert.MessageContainer.Action.Id.Sub:
+                    if (!message.Topic.startsWith(ZenithProtocol.MarketController.TopicName.Security)) {
+                        throw new ZenithDataError(ErrorCode.SMCPMS55845845454, message.Topic);
+                    } else {
+                        const subMsg = message as ZenithProtocol.MarketController.Security.PayloadMessageContainer;
+                        dataMessage.securityInfo = this.parseData(subMsg.Data);
+                    }
+                    break;
+                default:
+                    throw new UnexpectedCaseError('SMCPMD559324888222', actionId.toString(10));
+            }
+
+            return dataMessage;
+        }
+    }
+
+    private createPublishMessage(
         request: AdiPublisherRequest,
         definition: QuerySecurityDataDefinition,
     ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
@@ -69,7 +109,7 @@ export namespace SecurityMessageConvert {
         }
     }
 
-    function createSubUnsubMessage(
+    private createSubUnsubMessage(
         request: AdiPublisherRequest,
         definition: SecurityDataDefinition,
     ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
@@ -92,43 +132,7 @@ export namespace SecurityMessageConvert {
         }
     }
 
-    export function parseMessage(
-        subscription: AdiPublisherSubscription,
-        message: ZenithProtocol.MessageContainer,
-        actionId: ZenithConvert.MessageContainer.Action.Id
-    ): DataMessage {
-        if (message.Controller !== ZenithProtocol.MessageContainer.Controller.Market) {
-            throw new ZenithDataError(ErrorCode.SMCPMC699483333434, message.Controller);
-        } else {
-            const dataMessage = new SecurityDataMessage();
-            dataMessage.dataItemId = subscription.dataItemId;
-            dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-            switch (actionId) {
-                case ZenithConvert.MessageContainer.Action.Id.Publish:
-                    if (message.Topic as ZenithProtocol.MarketController.TopicName !== ZenithProtocol.MarketController.TopicName.QuerySecurity) {
-                        throw new ZenithDataError(ErrorCode.SMCPMP11995543833, message.Topic);
-                    } else {
-                        const publishMsg = message as ZenithProtocol.MarketController.Security.PayloadMessageContainer;
-                        dataMessage.securityInfo = parseData(publishMsg.Data);
-                    }
-                    break;
-                case ZenithConvert.MessageContainer.Action.Id.Sub:
-                    if (!message.Topic.startsWith(ZenithProtocol.MarketController.TopicName.Security)) {
-                        throw new ZenithDataError(ErrorCode.SMCPMS55845845454, message.Topic);
-                    } else {
-                        const subMsg = message as ZenithProtocol.MarketController.Security.PayloadMessageContainer;
-                        dataMessage.securityInfo = parseData(subMsg.Data);
-                    }
-                    break;
-                default:
-                    throw new UnexpectedCaseError('SMCPMD559324888222', actionId.toString(10));
-            }
-
-            return dataMessage;
-        }
-    }
-
-    function parseData(data: ZenithProtocol.MarketController.Security.Payload): SecurityDataMessage.Rec {
+    private parseData(data: ZenithProtocol.MarketController.Security.Payload): SecurityDataMessage.Rec {
         // let marketId: MarketId | undefined;
         // let exchangeId: ExchangeId | undefined;
         // let environmentId: DataEnvironmentId | undefined;
@@ -164,6 +168,26 @@ export namespace SecurityMessageConvert {
 
         const extended = data.Extended;
 
+        const strikePrice = this._decimalFactory.newUndefinableNullableDecimal(data.StrikePrice);
+        const contractSize = this._decimalFactory.newUndefinableNullableDecimal(data.ContractSize);
+        const open = this._decimalFactory.newUndefinableNullableDecimal(data.Open);
+        const high = this._decimalFactory.newUndefinableNullableDecimal(data.High);
+        const low = this._decimalFactory.newUndefinableNullableDecimal(data.Low);
+        const close = this._decimalFactory.newUndefinableNullableDecimal(data.Close);
+        const settlement = this._decimalFactory.newUndefinableNullableDecimal(data.Settlement);
+        const last = this._decimalFactory.newUndefinableNullableDecimal(data.Last);
+        const bestAsk = this._decimalFactory.newUndefinableNullableDecimal(data.BestAsk);
+        const askQuantity = this._decimalFactory.newUndefinableDecimal(data.AskQuantity);
+        const bestBid = this._decimalFactory.newUndefinableNullableDecimal(data.BestBid);
+        const bidQuantity = this._decimalFactory.newUndefinableDecimal(data.BidQuantity);
+        const volume = this._decimalFactory.newUndefinableDecimal(data.Volume);
+        const auctionPrice = this._decimalFactory.newUndefinableNullableDecimal(data.AuctionPrice);
+        const auctionQuantity = this._decimalFactory.newUndefinableNullableDecimal(data.AuctionQuantity);
+        const auctionRemainder = this._decimalFactory.newUndefinableNullableDecimal(data.AuctionRemainder);
+        const vWAP = this._decimalFactory.newUndefinableNullableDecimal(data.VWAP);
+        const valueTraded = this._decimalFactory.newUndefinableDecimal(data.ValueTraded);
+        const shareIssue = this._decimalFactory.newUndefinableNullableDecimal(data.ShareIssue);
+
         try {
             const result: SecurityDataMessage.Rec = {
                 code: data.Code,
@@ -177,38 +201,38 @@ export namespace SecurityMessageConvert {
                 tradingMarketZenithCodes,
                 isIndex: data.IsIndex === true,
                 expiryDate: getUndefinedNullOrFunctionResult(data.ExpiryDate, x => ZenithConvert.Date.DashedYyyyMmDdDate.toSourceTzOffsetDate(x)),
-                strikePrice: getUndefinedNullOrFunctionResult(data.StrikePrice, x => newDecimal(x)),
+                strikePrice,
                 callOrPutId: getUndefinedNullOrFunctionResult(data.CallOrPut, x => ZenithConvert.CallOrPut.toId(x)),
-                contractSize: getUndefinedNullOrFunctionResult(data.ContractSize, x => newDecimal(x)),
+                contractSize,
                 subscriptionDataTypeIds: ifDefined(data.SubscriptionData, x => ZenithConvert.SubscriptionData.toIdArray(x)),
                 quotationBasis: data.QuotationBasis,
                 currencyId: getUndefinedNullOrFunctionResult(data.Currency, x => ZenithConvert.Currency.tryToId(x)),
-                open: getUndefinedNullOrFunctionResult(data.Open, x => newDecimal(x)),
-                high: getUndefinedNullOrFunctionResult(data.High, x => newDecimal(x)),
-                low: getUndefinedNullOrFunctionResult(data.Low, x => newDecimal(x)),
-                close: getUndefinedNullOrFunctionResult(data.Close, x => newDecimal(x)),
-                settlement: getUndefinedNullOrFunctionResult(data.Settlement, x => newDecimal(x)),
-                last: getUndefinedNullOrFunctionResult(data.Last, x => newDecimal(x)),
+                open,
+                high,
+                low,
+                close,
+                settlement,
+                last,
                 trend: ifDefined(data.Trend, x => ZenithConvert.Trend.toId(x)),
-                bestAsk: getUndefinedNullOrFunctionResult(data.BestAsk, x => newDecimal(x)),
+                bestAsk,
                 askCount: data.AskCount,
-                askQuantity: ifDefined(data.AskQuantity, x => newDecimal(x)),
+                askQuantity,
                 askUndisclosed: data.AskUndisclosed,
-                bestBid: getUndefinedNullOrFunctionResult(data.BestBid, x => newDecimal(x)),
+                bestBid,
                 bidCount: data.BidCount,
-                bidQuantity: ifDefined(data.BidQuantity, x => newDecimal(x)),
+                bidQuantity,
                 bidUndisclosed: data.BidUndisclosed,
                 numberOfTrades: data.NumberOfTrades,
-                volume: ifDefined(data.Volume, x => newDecimal(x)),
-                auctionPrice: getUndefinedNullOrFunctionResult(data.AuctionPrice, x => newDecimal(x)),
-                auctionQuantity: getUndefinedNullOrFunctionResult(data.AuctionQuantity, x => newDecimal(x)),
-                auctionRemainder: getUndefinedNullOrFunctionResult(data.AuctionRemainder, x => newDecimal(x)),
-                vWAP: getUndefinedNullOrFunctionResult(data.VWAP, x => newDecimal(x)),
-                valueTraded: ifDefined(data.ValueTraded, x => newDecimal(x)),
+                volume,
+                auctionPrice,
+                auctionQuantity,
+                auctionRemainder,
+                vWAP,
+                valueTraded,
                 openInterest: data.OpenInterest,
-                shareIssue: getUndefinedNullOrFunctionResult(data.ShareIssue, x => newDecimal(x)),
+                shareIssue,
                 statusNote: data.StatusNote,
-                extended: getUndefinedNullOrFunctionResult(extended, value => ZenithConvert.Security.Extended.toAdi(value)),
+                extended: getUndefinedNullOrFunctionResult(extended, value => ZenithConvert.Security.Extended.toAdi(this._decimalFactory, value)),
             } as const;
             return result;
         } catch (error) {

@@ -3,10 +3,8 @@ import {
     Integer,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
-    newUndefinableDate,
-    newUndefinableDecimal
+    newUndefinableDate
 } from '@xilytix/sysutils';
-import { Decimal } from 'decimal.js-light';
 import { DataIvemId, IvemId } from '../../../adi/internal-api';
 import {
     BooleanTextFormattableValue,
@@ -15,6 +13,7 @@ import {
     DateTimeTextFormattableValue,
     DecimalTextFormattableValue,
     EnumTextFormattableValue,
+    FactoryisedDecimal,
     IntegerArrayTextFormattableValue,
     IntegerTextFormattableValue,
     IvemIdTextFormattableValue,
@@ -116,15 +115,11 @@ export class DataIvemIdTableValue extends GenericTableValue<DataIvemId> {
     }
 }
 
-export abstract class BaseDecimalTableValue extends GenericTableValue<Decimal> {
-    // protected createTextFormattableValue() {
-    //     return new DecimalTextFormattableValue(this.data);
-    // }
-
+export abstract class BaseDecimalTableValue extends GenericTableValue<FactoryisedDecimal> {
     override get data() { return super.data; }
 
-    override set data(value: Decimal | undefined) {
-        super.data = newUndefinableDecimal(value);
+    override set data(value: FactoryisedDecimal | undefined) {
+        super.data = value === undefined ? undefined : value.createCopy();
     }
 }
 export class DecimalTableValue extends BaseDecimalTableValue {
@@ -483,15 +478,11 @@ export class ReadonlyCorrectnessTableValue extends BooleanCorrectnessTableValue 
     }
 }
 
-export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<Decimal> {
-    // protected createTextFormattableValue() {
-    //     return new DecimalTextFormattableValue(this.data);
-    // }
-
+export abstract class BaseDecimalCorrectnessTableValue extends GenericCorrectnessTableValue<FactoryisedDecimal> {
     override get data() { return super.data; }
 
-    override set data(value: Decimal | undefined) {
-        super.data = newUndefinableDecimal(value);
+    override set data(value: FactoryisedDecimal | undefined) {
+        super.data = value === undefined ? undefined : value.createCopy();
     }
 }
 export class DecimalCorrectnessTableValue extends BaseDecimalCorrectnessTableValue {

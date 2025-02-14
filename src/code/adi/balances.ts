@@ -1,6 +1,7 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     Integer,
     MapKey,
@@ -8,7 +9,6 @@ import {
     UnreachableCaseError,
     isDecimalEqual,
     isDecimalGreaterThan,
-    newDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
@@ -28,22 +28,31 @@ import {
 export class Balances implements BrokerageAccountRecord {
     private _destroyed = false;
 
-    private _netBalance = Balances.initialiseValue;
-    private _trading = Balances.initialiseValue;
-    private _nonTrading = Balances.initialiseValue;
-    private _unfilledBuys = Balances.initialiseValue;
-    private _margin = Balances.initialiseValue;
+    private _netBalance: Decimal;
+    private _trading: Decimal;
+    private _nonTrading: Decimal;
+    private _unfilledBuys: Decimal;
+    private _margin: Decimal;
 
     private _mapKey: MapKey;
 
     private _changedMultiEvent = new MultiEvent<Balances.ChangedEventHandler>();
     private _correctnessChangedMultiEvent = new MultiEvent<Balances.FeedCorrectnessChangedEventHandler>();
 
-    constructor(private readonly _account: BrokerageAccount,
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        private readonly _account: BrokerageAccount,
         private readonly _currencyId: CurrencyId,
         private _correctnessId: CorrectnessId
     ) {
         this._mapKey = Balances.generateMapKey(this.account.id, this.currencyId);
+
+        const initialValue = this._decimalFactory.newDecimal(Balances.initialValueAsNumber);
+        this._netBalance = this._decimalFactory.newDecimal(initialValue);
+        this._trading = this._decimalFactory.newDecimal(initialValue);
+        this._nonTrading = this._decimalFactory.newDecimal(initialValue);
+        this._unfilledBuys = this._decimalFactory.newDecimal(initialValue);
+        this._margin = this._decimalFactory.newDecimal(initialValue);
     }
 
     get destroyed(): boolean { return this._destroyed; }
@@ -84,7 +93,8 @@ export class Balances implements BrokerageAccountRecord {
         let valueChangeCount = 0;
         for (let fieldId = 0; fieldId < Balances.Field.idCount; fieldId++) {
             if (Balances.Field.idIsValueChangeable(fieldId)) {
-                const recentChangeTypeId = this.updateField(fieldId, Balances.initialiseValue);
+                const initialValue = this._decimalFactory.newDecimal(Balances.initialValueAsNumber);
+                const recentChangeTypeId = this.updateField(fieldId, initialValue);
                 if (recentChangeTypeId) {
                     valueChanges[valueChangeCount++] = { fieldId, recentChangeTypeId };
                 }
@@ -204,7 +214,7 @@ export class Balances implements BrokerageAccountRecord {
 
 export namespace Balances {
     export type Id = string;
-    export const initialiseValue: Decimal = newDecimal(0);
+    export const initialValueAsNumber = 0;
 
     export interface BalanceValue {
         readonly type: string;

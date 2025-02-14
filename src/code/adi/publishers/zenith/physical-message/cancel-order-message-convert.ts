@@ -1,4 +1,4 @@
-import { AssertInternalError, Ok, Result } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Ok, Result } from '@xilytix/sysutils';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest, AdiPublisherSubscription, CancelOrderRequestDataDefinition,
@@ -6,47 +6,26 @@ import {
     DataMessage,
     RequestErrorDataMessages
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 import { ZenithOrderConvert } from './zenith-order-convert';
 
-export namespace CancelOrderMessageConvert {
+export class CancelOrderMessageConvert extends MessageConvert {
+    constructor(private readonly _decimalFactory: DecimalFactory) {
+        super();
+    }
 
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof CancelOrderRequestDataDefinition) {
-            return createPublishMessage(request, definition);
+            return CancelOrderMessageConvert.createPublishMessage(request, definition);
         } else {
             throw new AssertInternalError('COMCCRM55583399', definition.description);
         }
     }
 
-    export function createPublishMessage(
-        request: AdiPublisherRequest | undefined,
-        definition: CancelOrderRequestDataDefinition
-    ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.TradingController.CancelOrder.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
-            Topic: ZenithProtocol.TradingController.TopicName.CancelOrder,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                // Account: ZenithConvert.EnvironmentedAccount.fromId(definition.accountId),
-                Account: definition.accountZenithCode,
-                OrderID: definition.orderId,
-                Flags: definition.flags === undefined ? undefined : ZenithConvert.OrderRequestFlag.fromIdArray(definition.flags),
-            }
-        };
-
-        if (request !== undefined) {
-            const messageText = JSON.stringify(result);
-            window.motifLogger.logInfo('Cancel Order Request', messageText);
-        }
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -71,7 +50,7 @@ export namespace CancelOrderMessageConvert {
                     dataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
                     dataMessage.result = ZenithConvert.OrderRequestResult.toId(response.Result);
                     const order = response.Order;
-                    dataMessage.order = order === undefined ? undefined : ZenithOrderConvert.toAddUpdateChange(order);
+                    dataMessage.order = order === undefined ? undefined : ZenithOrderConvert.toAddUpdateChange(this._decimalFactory, order);
                     const errors = response.Errors;
                     dataMessage.errors = errors === undefined ? undefined : ZenithConvert.OrderRequestError.toErrorArray(errors);
 
@@ -79,5 +58,32 @@ export namespace CancelOrderMessageConvert {
                 }
             }
         }
+    }
+}
+
+export namespace CancelOrderMessageConvert {
+    export function createPublishMessage(
+        request: AdiPublisherRequest | undefined,
+        definition: CancelOrderRequestDataDefinition
+    ): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.TradingController.CancelOrder.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
+            Topic: ZenithProtocol.TradingController.TopicName.CancelOrder,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                // Account: ZenithConvert.EnvironmentedAccount.fromId(definition.accountId),
+                Account: definition.accountZenithCode,
+                OrderID: definition.orderId,
+                Flags: definition.flags === undefined ? undefined : ZenithConvert.OrderRequestFlag.fromIdArray(definition.flags),
+            }
+        };
+
+        if (request !== undefined) {
+            const messageText = JSON.stringify(result);
+            window.motifLogger.logInfo('Cancel Order Request', messageText);
+        }
+
+        return new Ok(result);
     }
 }

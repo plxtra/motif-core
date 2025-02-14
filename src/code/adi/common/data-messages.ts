@@ -286,8 +286,8 @@ export namespace OrdersDataMessage {
         expiryDate: SourceTzOffsetDateTime | undefined;
         shortSellTypeId: OrderShortSellTypeId | undefined;
         // managed fund details
-        unitTypeId: OrderPriceUnitTypeId;
-        unitAmount: Decimal;
+        unitTypeId: OrderPriceUnitTypeId | undefined;
+        unitAmount: Decimal | undefined;
         managedFundCurrency: string | undefined;
         physicalDelivery: boolean | undefined;
         // route

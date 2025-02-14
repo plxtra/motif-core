@@ -1,5 +1,6 @@
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
 import { Holding } from '../../../adi/internal-api';
+import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { HoldingTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,
@@ -16,7 +17,7 @@ import { TableValueSource } from './table-value-source';
 export class HoldingTableValueSource extends CorrectnessTableValueSource<Holding> {
     private _holdingChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 
-    constructor(firstFieldIndexOffset: Integer, private readonly _holding: Holding) {
+    constructor(private readonly _decimalFactory: DecimalFactory, firstFieldIndexOffset: Integer, private readonly _holding: Holding) {
         super(firstFieldIndexOffset);
     }
 
@@ -98,7 +99,7 @@ export class HoldingTableValueSource extends CorrectnessTableValueSource<Holding
                 (value as IvemClassIdCorrectnessTableValue).data = this._holding.styleId;
                 break;
             case Holding.FieldId.Cost:
-                (value as PriceCorrectnessTableValue).data = this._holding.cost;
+                (value as PriceCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._holding.cost);
                 break;
             case Holding.FieldId.Currency:
                 (value as CurrencyIdCorrectnessTableValue).data = this._holding.currencyId;
@@ -110,7 +111,7 @@ export class HoldingTableValueSource extends CorrectnessTableValueSource<Holding
                 (value as IntegerCorrectnessTableValue).data = this._holding.totalAvailableQuantity;
                 break;
             case Holding.FieldId.AveragePrice:
-                (value as PriceCorrectnessTableValue).data = this._holding.averagePrice;
+                (value as PriceCorrectnessTableValue).data = new FactoryisedDecimal(this._decimalFactory, this._holding.averagePrice);
                 break;
             default:
                 throw new UnreachableCaseError('HTVSTVSLV8851', id);

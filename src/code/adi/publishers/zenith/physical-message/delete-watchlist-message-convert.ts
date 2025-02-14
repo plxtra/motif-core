@@ -9,34 +9,21 @@ import {
     RequestErrorDataMessages,
     WatchmakerListRequestAcknowledgeDataMessage
 } from "../../../common/internal-api";
+import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 import { ZenithConvert } from './zenith-convert';
 
-export namespace DeleteWatchlistMessageConvert {
-    export function createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+export class DeleteWatchlistMessageConvert extends MessageConvert {
+    createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof DeleteWatchmakerListDataDefinition) {
-            return createPublishMessage(definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('DWLMC32220', definition.description);
         }
     }
 
-    function createPublishMessage(definition: DeleteWatchmakerListDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        const result: ZenithProtocol.WatchlistController.DeleteWatchlist.PublishMessageContainer = {
-            Controller: ZenithProtocol.MessageContainer.Controller.Watchlist,
-            Topic: ZenithProtocol.WatchlistController.TopicName.DeleteWatchlist,
-            Action: ZenithProtocol.MessageContainer.Action.Publish,
-            TransactionID: AdiPublisherRequest.getNextTransactionId(),
-            Data: {
-                WatchlistID: definition.listId,
-            }
-        };
-
-        return new Ok(result);
-    }
-
-    export function parseMessage(
+    parseMessage(
         subscription: AdiPublisherSubscription,
         message: ZenithProtocol.MessageContainer,
         actionId: ZenithConvert.MessageContainer.Action.Id
@@ -63,5 +50,19 @@ export namespace DeleteWatchlistMessageConvert {
                 }
             }
         }
+    }
+
+    private createPublishMessage(definition: DeleteWatchmakerListDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.WatchlistController.DeleteWatchlist.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Watchlist,
+            Topic: ZenithProtocol.WatchlistController.TopicName.DeleteWatchlist,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                WatchlistID: definition.listId,
+            }
+        };
+
+        return new Ok(result);
     }
 }

@@ -59,8 +59,8 @@ export class NullableNumberDataItemTableField extends GenericNullableDataItemTab
 
 export class NullableDecimalDataItemTableField extends NullableDataItemTableField {
     protected compareNonNull(left: NullableCorrectnessTableValue, right: NullableCorrectnessTableValue): number {
-        return compareDecimal((left as NullableDecimalCorrectnessTableValue).nonNullData,
-            (right as NullableDecimalCorrectnessTableValue).nonNullData);
+        return compareDecimal((left as NullableDecimalCorrectnessTableValue).nonNullData.value,
+            (right as NullableDecimalCorrectnessTableValue).nonNullData.value);
     }
 }
 

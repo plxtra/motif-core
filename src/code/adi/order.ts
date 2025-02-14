@@ -1,6 +1,7 @@
 import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
+    DecimalFactory,
     EnumInfoOutOfOrderError,
     Integer,
     MapKey,
@@ -10,7 +11,6 @@ import {
     isDecimalEqual,
     isSamePossiblyUndefinedArray,
     isUndefinableDecimalEqual,
-    newDecimal
 } from '@xilytix/sysutils';
 import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
@@ -88,8 +88,8 @@ export class Order implements BrokerageAccountRecord {
     private _expiryDate: SourceTzOffsetDateTime | undefined;
     private _shortSellTypeId: OrderShortSellTypeId | undefined;
     // managed fund details
-    private _unitTypeId: OrderPriceUnitTypeId;
-    private _unitAmount: Decimal;
+    private _unitTypeId: OrderPriceUnitTypeId | undefined;
+    private _unitAmount: Decimal | undefined;
     private _managedFundCurrency: string | undefined;
     private _physicalDelivery: boolean | undefined;
     // route
@@ -210,7 +210,7 @@ export class Order implements BrokerageAccountRecord {
     get expiryDate() { return this._expiryDate; }
     get shortSellTypeId() { return this._shortSellTypeId; }
     get unitTypeId() { return this._unitTypeId; }
-    get unitAmount(): Decimal { return this._unitAmount; }
+    get unitAmount(): Decimal | undefined { return this._unitAmount; }
     get managedFundCurrency() { return this._managedFundCurrency; }
     get physicalDelivery() { return this._physicalDelivery; }
     get trigger() { return this._trigger; }
@@ -1155,9 +1155,10 @@ export namespace Order {
         recentChangeTypeId: RevRecordValueRecentChangeTypeId | undefined;
     }
 
-    export function createNotFoundOrder(marketsService: MarketsService, account: BrokerageAccount, orderId: string) {
+    export function createNotFoundOrder(decimalFactory: DecimalFactory, marketsService: MarketsService, account: BrokerageAccount, orderId: string) {
         const route: MarketOrderRoute = { algorithmId: OrderRouteAlgorithmId.Market, marketZenithCode: marketsService.genericUnknownTradingMarket.zenithCode };
 
+        const zeroDecimal = decimalFactory.newDecimal(0);
         const msgData: OrdersDataMessage.AddChange = {
             accountZenithCode: account.zenithCode,
             id: orderId,
@@ -1166,11 +1167,11 @@ export namespace Order {
             status: '',
             tradingMarketZenithCode: '',
             currencyId: Currency.nullCurrencyId,
-            estimatedBrokerage: newDecimal(0),
-            currentBrokerage: newDecimal(0),
-            estimatedTax: newDecimal(0),
-            currentTax: newDecimal(0),
-            currentValue: newDecimal(0),
+            estimatedBrokerage: decimalFactory.newDecimal(zeroDecimal),
+            currentBrokerage: decimalFactory.newDecimal(zeroDecimal),
+            estimatedTax: decimalFactory.newDecimal(zeroDecimal),
+            currentTax: decimalFactory.newDecimal(zeroDecimal),
+            currentValue: decimalFactory.newDecimal(zeroDecimal),
             createdDate: SourceTzOffsetDateTime.nullDateTime,
             updatedDate: SourceTzOffsetDateTime.nullDateTime,
             children: undefined,
@@ -1191,7 +1192,7 @@ export namespace Order {
             expiryDate: undefined,
             shortSellTypeId: undefined,
             unitTypeId: OrderPriceUnitType.nullId,
-            unitAmount: newDecimal(0),
+            unitAmount: decimalFactory.newDecimal(zeroDecimal),
             managedFundCurrency: undefined,
             physicalDelivery: undefined,
             route,

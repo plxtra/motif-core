@@ -1,6 +1,6 @@
 import { RevRecordIndex, RevRecordStore } from '@xilytix/revgrid';
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
-import { DepthLevelsDataItem } from '../../../../adi/internal-api';
+import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { DepthLevelsDataItem, DepthStyleId, MarketsService, OrderSideId } from '../../../../adi/internal-api';
 import { CorrectnessId } from '../../../../sys/internal-api';
 import { DepthSideGridRecordStore } from '../depth-side-grid-record-store';
 import { ShortDepthRecord } from './short-depth-record';
@@ -16,6 +16,15 @@ export class ShortDepthSideGridRecordStore extends DepthSideGridRecordStore impl
     private _beforeLevelRemoveSubscriptionId: MultiEvent.SubscriptionId;
     private _levelChangeSubscriptionId: MultiEvent.SubscriptionId;
     private _levelsClearSubscriptionId: MultiEvent.SubscriptionId;
+
+    constructor(
+        private readonly _decimalFactory: DecimalFactory,
+        marketsService: MarketsService,
+        styleId: DepthStyleId,
+        sideId: OrderSideId
+    ) {
+        super(marketsService, styleId, sideId);
+    }
 
     get recordCount(): number { return this.getRecordCount(); }
 
@@ -139,7 +148,7 @@ export class ShortDepthSideGridRecordStore extends DepthSideGridRecordStore impl
             volumeAhead = prevRecord.cumulativeQuantity;
         }
         const level = this._levels[index];
-        const record = new ShortDepthRecord(this._marketsService, index, level, volumeAhead, this._auctionVolume);
+        const record = new ShortDepthRecord(this._decimalFactory, this._marketsService, index, level, volumeAhead, this._auctionVolume);
         this._records.splice(index, 0, record);
         this.reindexRecords(index + 1);
         const lastAffectedFollowingRecordIndex = this.processAuctionAndVolumeAhead(index, false);
@@ -179,7 +188,7 @@ export class ShortDepthSideGridRecordStore extends DepthSideGridRecordStore impl
             this._records.length = list.length;
             for (let i = 0; i < list.length; i++) {
                 const level = this._levels[i];
-                this._records[i] = new ShortDepthRecord(this._marketsService, i, level, 0, this._auctionVolume);
+                this._records[i] = new ShortDepthRecord(this._decimalFactory, this._marketsService, i, level, 0, this._auctionVolume);
             }
             this.processAuctionAndVolumeAhead(0, true);
         }

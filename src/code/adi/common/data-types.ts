@@ -11,7 +11,6 @@ import {
     mSecsPerHour,
     mSecsPerMin,
     mSecsPerSec,
-    newDecimal,
     secsPerHour,
     secsPerMin
 } from '@xilytix/sysutils';
@@ -8191,13 +8190,13 @@ export interface OrderRequestError {
 }
 
 export namespace AsxIndexPoint {
-    const dollarsToPointsFactor: Decimal = newDecimal(100.0);
+    const dollarsToPointsFactor = 100; // Should really be a Decimal but need factory to create Decimal from number
 
-    export function toDollars(Value: Decimal): Decimal {
-        return Value.div(dollarsToPointsFactor);
+    export function toDollars(value: Decimal): Decimal {
+        return value.div(dollarsToPointsFactor);
     }
-    export function fromDollars(Value: Decimal): Decimal {
-        return Value.times(dollarsToPointsFactor);
+    export function fromDollars(value: Decimal): Decimal {
+        return value.times(dollarsToPointsFactor);
     }
 }
 
