@@ -1403,28 +1403,23 @@ export class OrderPad {
     }
 
     private calculateAllowedTradingMarkets(details: readonly SymbolDetailCacheService.DataIvemIdDetail[]): readonly TradingMarket[] {
-        if (details.length === 0) {
-            return [];
-        } else {
-            const result = new Array<TradingMarket>();
-            for (let i = 1; i < details.length; i++) {
-                const detail = details[i];
+        const result = new Array<TradingMarket>();
+        for (let i = 0; i < details.length; i++) {
+            const detail = details[i];
 
-                const detailTradingMarkets = detail.tradingMarkets;
-                const detailTradingMarketCount = detailTradingMarkets.length;
-                for (let detailTradingMarketIdx = 0; detailTradingMarketIdx < detailTradingMarketCount; detailTradingMarketIdx++) {
-                    const detailTradingMarket = detailTradingMarkets[detailTradingMarketIdx];
-                    const allowedOrderTypeIds = detailTradingMarket.allowedOrderTypeIds;
-                    if (allowedOrderTypeIds.length > 0) {
-                        if (!result.includes(detailTradingMarket)) {
-                            result.push(detailTradingMarket);
-                        }
+            const detailTradingMarkets = detail.tradingMarkets;
+            const detailTradingMarketCount = detailTradingMarkets.length;
+            for (let detailTradingMarketIdx = 0; detailTradingMarketIdx < detailTradingMarketCount; detailTradingMarketIdx++) {
+                const detailTradingMarket = detailTradingMarkets[detailTradingMarketIdx];
+                const allowedOrderTypeIds = detailTradingMarket.allowedOrderTypeIds;
+                if (allowedOrderTypeIds.length > 0) {
+                    if (!result.includes(detailTradingMarket)) {
+                        result.push(detailTradingMarket);
                     }
                 }
             }
-
-            return result;
         }
+        return result;
     }
 
     private tryFindTradingMarketSymbolDetail(tradingMarket: TradingMarket, details: readonly SymbolDetailCacheService.DataIvemIdDetail[]): SymbolDetailCacheService.FullDataIvemIdDetail | undefined {
