@@ -28555,9 +28555,9 @@ export const enum StringId {
     // (undocumented)
     CannotDeleteWatchlist = 216,
     // (undocumented)
-    CategoryValueScanFieldConditionOperandsCaption_Category = 2412,
+    CategoryValueScanFieldConditionOperandsCaption_Category = 2414,
     // (undocumented)
-    CategoryValueScanFieldConditionOperandsTitle_Category = 2413,
+    CategoryValueScanFieldConditionOperandsTitle_Category = 2415,
     // (undocumented)
     Cfi = 196,
     // (undocumented)
@@ -28825,59 +28825,59 @@ export const enum StringId {
     // (undocumented)
     CommandContextDisplay_Root = 2066,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_All = 2408,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_All = 2410,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Compare = 2394,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Compare = 2396,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Contains = 2402,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Contains = 2404,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Equals = 2398,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Equals = 2400,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Has = 2404,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Has = 2406,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Includes = 2400,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Includes = 2402,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_InRange = 2396,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_InRange = 2398,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Is = 2406,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_Is = 2408,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_None = 2410,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindCaption_None = 2412,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_All = 2409,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_All = 2411,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Compare = 2395,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Compare = 2397,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Contains = 2403,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Contains = 2405,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Equals = 2399,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Equals = 2401,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Has = 2405,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Has = 2407,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Includes = 2401,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Includes = 2403,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_InRange = 2397,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_InRange = 2399,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Is = 2407,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_Is = 2409,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_None = 2411,
+    ConditionSetScanFormulaViewNgComponent_ConditionKindTitle_None = 2413,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_SetOperationCaption_All = 2392,
+    ConditionSetScanFormulaViewNgComponent_SetOperationCaption_All = 2394,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_SetOperationCaption_Any = 2390,
+    ConditionSetScanFormulaViewNgComponent_SetOperationCaption_Any = 2392,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_SetOperationTitle_All = 2393,
+    ConditionSetScanFormulaViewNgComponent_SetOperationTitle_All = 2395,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponent_SetOperationTitle_Any = 2391,
+    ConditionSetScanFormulaViewNgComponent_SetOperationTitle_Any = 2393,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponentCaption_NewCondition = 2388,
+    ConditionSetScanFormulaViewNgComponentCaption_NewCondition = 2390,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponentCaption_SetOperation = 2385,
+    ConditionSetScanFormulaViewNgComponentCaption_SetOperation = 2387,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponentTitle_Exclude = 2387,
+    ConditionSetScanFormulaViewNgComponentTitle_Exclude = 2389,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponentTitle_NewCondition = 2389,
+    ConditionSetScanFormulaViewNgComponentTitle_NewCondition = 2391,
     // (undocumented)
-    ConditionSetScanFormulaViewNgComponentTitle_SetOperation = 2386,
+    ConditionSetScanFormulaViewNgComponentTitle_SetOperation = 2388,
     // (undocumented)
     ConfigExternalError = 13,
     // (undocumented)
@@ -28909,9 +28909,9 @@ export const enum StringId {
     // (undocumented)
     CurrencyCode_Usd = 644,
     // (undocumented)
-    CurrencyOverlapsScanFieldConditionOperandsCaption_Values = 2414,
+    CurrencyOverlapsScanFieldConditionOperandsCaption_Values = 2416,
     // (undocumented)
-    CurrencyOverlapsScanFieldConditionOperandsTitle_Values = 2415,
+    CurrencyOverlapsScanFieldConditionOperandsTitle_Values = 2417,
     // (undocumented)
     CurrencySymbol_Aud = 643,
     // (undocumented)
@@ -29039,11 +29039,11 @@ export const enum StringId {
     // (undocumented)
     DataMarketsNgComponent_withBoardsListTitle = 2068,
     // (undocumented)
-    DateRangeValueScanFieldConditionOperandsTitle_Max = 2433,
+    DateRangeValueScanFieldConditionOperandsTitle_Max = 2435,
     // (undocumented)
-    DateRangeValueScanFieldConditionOperandsTitle_Min = 2432,
+    DateRangeValueScanFieldConditionOperandsTitle_Min = 2434,
     // (undocumented)
-    DateValueScanFieldConditionOperandsTitle_Value = 2426,
+    DateValueScanFieldConditionOperandsTitle_Value = 2428,
     // (undocumented)
     DayTradesDataItemRecordTypeIdDisplay_Cancelled = 1966,
     // (undocumented)
@@ -29431,9 +29431,9 @@ export const enum StringId {
     // (undocumented)
     ExchangeFullDisplay_Ptx = 499,
     // (undocumented)
-    ExchangeOverlapsScanFieldConditionOperandsCaption_Values = 2416,
+    ExchangeOverlapsScanFieldConditionOperandsCaption_Values = 2418,
     // (undocumented)
-    ExchangeOverlapsScanFieldConditionOperandsTitle_Values = 2417,
+    ExchangeOverlapsScanFieldConditionOperandsTitle_Values = 2419,
     // (undocumented)
     Exchanges = 188,
     // (undocumented)
@@ -29777,47 +29777,47 @@ export const enum StringId {
     // (undocumented)
     List = 225,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_ChannelId = 2441,
+    LockerScanAttachedNotificationChannelHeader_ChannelId = 2443,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_CultureCode = 2443,
+    LockerScanAttachedNotificationChannelHeader_CultureCode = 2445,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_MinimumElapsed = 2445,
+    LockerScanAttachedNotificationChannelHeader_MinimumElapsed = 2447,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_MinimumStable = 2444,
+    LockerScanAttachedNotificationChannelHeader_MinimumStable = 2446,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_Name = 2442,
+    LockerScanAttachedNotificationChannelHeader_Name = 2444,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_Topic = 2448,
+    LockerScanAttachedNotificationChannelHeader_Topic = 2450,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_Ttl = 2446,
+    LockerScanAttachedNotificationChannelHeader_Ttl = 2448,
     // (undocumented)
-    LockerScanAttachedNotificationChannelHeader_Urgency = 2447,
+    LockerScanAttachedNotificationChannelHeader_Urgency = 2449,
     // (undocumented)
-    LockOpenNotificationChannelDescription_Description = 2464,
+    LockOpenNotificationChannelDescription_Description = 2466,
     // (undocumented)
-    LockOpenNotificationChannelDescription_Enabled = 2460,
+    LockOpenNotificationChannelDescription_Enabled = 2462,
     // (undocumented)
-    LockOpenNotificationChannelDescription_Name = 2462,
+    LockOpenNotificationChannelDescription_Name = 2464,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Description = 2463,
+    LockOpenNotificationChannelHeader_Description = 2465,
     // (undocumented)
-    LockOpenNotificationChannelHeader_DistributionMethodId = 2467,
+    LockOpenNotificationChannelHeader_DistributionMethodId = 2469,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Enabled = 2459,
+    LockOpenNotificationChannelHeader_Enabled = 2461,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Faulted = 2469,
+    LockOpenNotificationChannelHeader_Faulted = 2471,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Favourite = 2465,
+    LockOpenNotificationChannelHeader_Favourite = 2467,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Id = 2457,
+    LockOpenNotificationChannelHeader_Id = 2459,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Name = 2461,
+    LockOpenNotificationChannelHeader_Name = 2463,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Settings = 2468,
+    LockOpenNotificationChannelHeader_Settings = 2470,
     // (undocumented)
-    LockOpenNotificationChannelHeader_StatusId = 2466,
+    LockOpenNotificationChannelHeader_StatusId = 2468,
     // (undocumented)
-    LockOpenNotificationChannelHeader_Valid = 2458,
+    LockOpenNotificationChannelHeader_Valid = 2460,
     // (undocumented)
     LogLevel_Debug = 1257,
     // (undocumented)
@@ -30001,9 +30001,9 @@ export const enum StringId {
     // (undocumented)
     MarketBoardIdDisplay_SouthPacificStockExchangeRestricted = 602,
     // (undocumented)
-    MarketBoardOverlapsScanFieldConditionOperandsCaption_Values = 2420,
+    MarketBoardOverlapsScanFieldConditionOperandsCaption_Values = 2422,
     // (undocumented)
-    MarketBoardOverlapsScanFieldConditionOperandsTitle_Values = 2421,
+    MarketBoardOverlapsScanFieldConditionOperandsTitle_Values = 2423,
     // (undocumented)
     MarketBoards = 193,
     // (undocumented)
@@ -30127,9 +30127,9 @@ export const enum StringId {
     // (undocumented)
     MarketFieldHeading_ZenithCode = 919,
     // (undocumented)
-    MarketOverlapsScanFieldConditionOperandsCaption_Values = 2418,
+    MarketOverlapsScanFieldConditionOperandsCaption_Values = 2420,
     // (undocumented)
-    MarketOverlapsScanFieldConditionOperandsTitle_Values = 2419,
+    MarketOverlapsScanFieldConditionOperandsTitle_Values = 2421,
     // (undocumented)
     Markets = 190,
     // (undocumented)
@@ -30287,45 +30287,45 @@ export const enum StringId {
     // (undocumented)
     NotificationChannel = 239,
     // (undocumented)
-    NotificationChannel_SourceSettings_Urgency_High = 2452,
+    NotificationChannel_SourceSettings_Urgency_High = 2454,
     // (undocumented)
-    NotificationChannel_SourceSettings_Urgency_Low = 2450,
+    NotificationChannel_SourceSettings_Urgency_Low = 2452,
     // (undocumented)
-    NotificationChannel_SourceSettings_Urgency_Normal = 2451,
+    NotificationChannel_SourceSettings_Urgency_Normal = 2453,
     // (undocumented)
-    NotificationChannel_SourceSettings_Urgency_VeryLow = 2449,
+    NotificationChannel_SourceSettings_Urgency_VeryLow = 2451,
     // (undocumented)
     NotificationChannels = 240,
     // (undocumented)
-    NotificationChannels_AddCaption = 2478,
+    NotificationChannels_AddCaption = 2480,
     // (undocumented)
-    NotificationChannels_AddDescription = 2479,
+    NotificationChannels_AddDescription = 2481,
     // (undocumented)
-    NotificationChannels_RefreshAllCaption = 2476,
+    NotificationChannels_RefreshAllCaption = 2478,
     // (undocumented)
-    NotificationChannels_RefreshAllDescription = 2477,
+    NotificationChannels_RefreshAllDescription = 2479,
     // (undocumented)
-    NotificationChannels_RemoveSelectedCaption = 2480,
+    NotificationChannels_RemoveSelectedCaption = 2482,
     // (undocumented)
-    NotificationChannels_RemoveSelectedDescription = 2481,
+    NotificationChannels_RemoveSelectedDescription = 2483,
     // (undocumented)
-    NotificationChannels_SelectAllCaption = 2482,
+    NotificationChannels_SelectAllCaption = 2484,
     // (undocumented)
-    NotificationChannels_SelectAllDescription = 2483,
+    NotificationChannels_SelectAllDescription = 2485,
     // (undocumented)
     NotificationChannelsGrid = 241,
     // (undocumented)
-    NotificationDistributionMethodDisplay_ApplePush = 2474,
+    NotificationDistributionMethodDisplay_ApplePush = 2476,
     // (undocumented)
-    NotificationDistributionMethodDisplay_Debug = 2470,
+    NotificationDistributionMethodDisplay_Debug = 2472,
     // (undocumented)
-    NotificationDistributionMethodDisplay_Email = 2471,
+    NotificationDistributionMethodDisplay_Email = 2473,
     // (undocumented)
-    NotificationDistributionMethodDisplay_GooglePush = 2475,
+    NotificationDistributionMethodDisplay_GooglePush = 2477,
     // (undocumented)
-    NotificationDistributionMethodDisplay_Sms = 2472,
+    NotificationDistributionMethodDisplay_Sms = 2474,
     // (undocumented)
-    NotificationDistributionMethodDisplay_WebPush = 2473,
+    NotificationDistributionMethodDisplay_WebPush = 2475,
     // (undocumented)
     Notifications = 251,
     // (undocumented)
@@ -30343,15 +30343,15 @@ export const enum StringId {
     // (undocumented)
     NotString = 122,
     // (undocumented)
-    NumericComparisonValueScanFieldConditionOperandsCaption_Operator = 2434,
+    NumericComparisonValueScanFieldConditionOperandsCaption_Operator = 2436,
     // (undocumented)
-    NumericComparisonValueScanFieldConditionOperandsTitle_Operator = 2435,
+    NumericComparisonValueScanFieldConditionOperandsTitle_Operator = 2437,
     // (undocumented)
-    NumericRangeValueScanFieldConditionOperandsTitle_Max = 2431,
+    NumericRangeValueScanFieldConditionOperandsTitle_Max = 2433,
     // (undocumented)
-    NumericRangeValueScanFieldConditionOperandsTitle_Min = 2430,
+    NumericRangeValueScanFieldConditionOperandsTitle_Min = 2432,
     // (undocumented)
-    NumericValueScanFieldConditionOperandsTitle_Value = 2425,
+    NumericValueScanFieldConditionOperandsTitle_Value = 2427,
     // (undocumented)
     Of = 205,
     // (undocumented)
@@ -30367,9 +30367,9 @@ export const enum StringId {
     // (undocumented)
     OpenColorSchemeTitle = 286,
     // (undocumented)
-    OpenWatchlistDialog_ListName_Caption = 2502,
+    OpenWatchlistDialog_ListName_Caption = 2504,
     // (undocumented)
-    OpenWatchlistDialog_ListName_Description = 2503,
+    OpenWatchlistDialog_ListName_Description = 2505,
     // (undocumented)
     Options = 203,
     // (undocumented)
@@ -31351,9 +31351,9 @@ export const enum StringId {
     // (undocumented)
     RangeError = 28,
     // (undocumented)
-    RangeScanFieldConditionOperandsCaption_Max = 2429,
+    RangeScanFieldConditionOperandsCaption_Max = 2431,
     // (undocumented)
-    RangeScanFieldConditionOperandsCaption_Min = 2428,
+    RangeScanFieldConditionOperandsCaption_Min = 2430,
     // (undocumented)
     Rank = 236,
     // (undocumented)
@@ -31409,13 +31409,13 @@ export const enum StringId {
     // (undocumented)
     Revert = 66,
     // (undocumented)
-    ReviewOrderRequest_InvalidAmendOrderZenithMessage = 2505,
+    ReviewOrderRequest_InvalidAmendOrderZenithMessage = 2507,
     // (undocumented)
-    ReviewOrderRequest_InvalidCancelOrderZenithMessage = 2507,
+    ReviewOrderRequest_InvalidCancelOrderZenithMessage = 2509,
     // (undocumented)
-    ReviewOrderRequest_InvalidMoveOrderZenithMessage = 2506,
+    ReviewOrderRequest_InvalidMoveOrderZenithMessage = 2508,
     // (undocumented)
-    ReviewOrderRequest_InvalidPlaceOrderZenithMessage = 2504,
+    ReviewOrderRequest_InvalidPlaceOrderZenithMessage = 2506,
     // (undocumented)
     Right = 44,
     // (undocumented)
@@ -31475,13 +31475,13 @@ export const enum StringId {
     // (undocumented)
     ScanEditorAttachedNotificationChannels = 242,
     // (undocumented)
-    ScanEditorAttachNotificationChannels_AttachDescription = 2453,
+    ScanEditorAttachNotificationChannels_AttachDescription = 2455,
     // (undocumented)
-    ScanEditorAttachNotificationChannels_DetachSelectedChannelsCaption = 2455,
+    ScanEditorAttachNotificationChannels_DetachSelectedChannelsCaption = 2457,
     // (undocumented)
-    ScanEditorAttachNotificationChannels_DetachSelectedChannelsTitle = 2456,
+    ScanEditorAttachNotificationChannels_DetachSelectedChannelsTitle = 2458,
     // (undocumented)
-    ScanEditorAttachNotificationChannels_EditGridColumns = 2454,
+    ScanEditorAttachNotificationChannels_EditGridColumns = 2456,
     // (undocumented)
     ScanEditorComponent_ApplyTitle = 2244,
     // (undocumented)
@@ -31495,129 +31495,129 @@ export const enum StringId {
     // (undocumented)
     ScanEditorTargetsComponent_EditMultiSymbolList = 2248,
     // (undocumented)
-    ScanField_BooleanOperationDescription_All = 2321,
+    ScanField_BooleanOperationDescription_All = 2323,
     // (undocumented)
-    ScanField_BooleanOperationDescription_Any = 2323,
+    ScanField_BooleanOperationDescription_Any = 2325,
     // (undocumented)
-    ScanField_BooleanOperationDescription_Xor = 2325,
+    ScanField_BooleanOperationDescription_Xor = 2327,
     // (undocumented)
-    ScanField_BooleanOperationDisplay_All = 2320,
+    ScanField_BooleanOperationDisplay_All = 2322,
     // (undocumented)
-    ScanField_BooleanOperationDisplay_Any = 2322,
+    ScanField_BooleanOperationDisplay_Any = 2324,
     // (undocumented)
-    ScanField_BooleanOperationDisplay_Xor = 2324,
+    ScanField_BooleanOperationDisplay_Xor = 2326,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotContainsValue = 2384,
+    ScanFieldConditionOperandsEditor_NotContainsValue = 2386,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotEqualsValue = 2380,
+    ScanFieldConditionOperandsEditor_NotEqualsValue = 2382,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotHasValue = 2383,
+    ScanFieldConditionOperandsEditor_NotHasValue = 2385,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotInRange = 2381,
+    ScanFieldConditionOperandsEditor_NotInRange = 2383,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotIsCategory = 2379,
+    ScanFieldConditionOperandsEditor_NotIsCategory = 2381,
     // (undocumented)
-    ScanFieldConditionOperandsEditor_NotOverlaps = 2382,
+    ScanFieldConditionOperandsEditor_NotOverlaps = 2384,
     // (undocumented)
-    ScanFieldConditionOperandsEditorCaption_DeleteMe = 2377,
+    ScanFieldConditionOperandsEditorCaption_DeleteMe = 2379,
     // (undocumented)
-    ScanFieldConditionOperandsEditorTitle_DeleteMe = 2378,
+    ScanFieldConditionOperandsEditorTitle_DeleteMe = 2380,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_Contains = 2365,
+    ScanFieldConditionOperatorDescription_Contains = 2367,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_Equals = 2349,
+    ScanFieldConditionOperatorDescription_Equals = 2351,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_GreaterThan = 2353,
+    ScanFieldConditionOperatorDescription_GreaterThan = 2355,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_GreaterThanOrEqual = 2355,
+    ScanFieldConditionOperatorDescription_GreaterThanOrEqual = 2357,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_HasValue = 2345,
+    ScanFieldConditionOperatorDescription_HasValue = 2347,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_InRange = 2361,
+    ScanFieldConditionOperatorDescription_InRange = 2363,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_Is = 2373,
+    ScanFieldConditionOperatorDescription_Is = 2375,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_LessThan = 2357,
+    ScanFieldConditionOperatorDescription_LessThan = 2359,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_LessThanOrEqual = 2359,
+    ScanFieldConditionOperatorDescription_LessThanOrEqual = 2361,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotContains = 2367,
+    ScanFieldConditionOperatorDescription_NotContains = 2369,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotEquals = 2351,
+    ScanFieldConditionOperatorDescription_NotEquals = 2353,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotHasValue = 2347,
+    ScanFieldConditionOperatorDescription_NotHasValue = 2349,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotInRange = 2363,
+    ScanFieldConditionOperatorDescription_NotInRange = 2365,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotIs = 2375,
+    ScanFieldConditionOperatorDescription_NotIs = 2377,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_NotOverlaps = 2371,
+    ScanFieldConditionOperatorDescription_NotOverlaps = 2373,
     // (undocumented)
-    ScanFieldConditionOperatorDescription_Overlaps = 2369,
+    ScanFieldConditionOperatorDescription_Overlaps = 2371,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_Contains = 2364,
+    ScanFieldConditionOperatorDisplay_Contains = 2366,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_Equals = 2348,
+    ScanFieldConditionOperatorDisplay_Equals = 2350,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_GreaterThan = 2352,
+    ScanFieldConditionOperatorDisplay_GreaterThan = 2354,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_GreaterThanOrEqual = 2354,
+    ScanFieldConditionOperatorDisplay_GreaterThanOrEqual = 2356,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_HasValue = 2344,
+    ScanFieldConditionOperatorDisplay_HasValue = 2346,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_InRange = 2360,
+    ScanFieldConditionOperatorDisplay_InRange = 2362,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_Is = 2372,
+    ScanFieldConditionOperatorDisplay_Is = 2374,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_LessThan = 2356,
+    ScanFieldConditionOperatorDisplay_LessThan = 2358,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_LessThanOrEqual = 2358,
+    ScanFieldConditionOperatorDisplay_LessThanOrEqual = 2360,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotContains = 2366,
+    ScanFieldConditionOperatorDisplay_NotContains = 2368,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotEquals = 2350,
+    ScanFieldConditionOperatorDisplay_NotEquals = 2352,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotHasValue = 2346,
+    ScanFieldConditionOperatorDisplay_NotHasValue = 2348,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotInRange = 2362,
+    ScanFieldConditionOperatorDisplay_NotInRange = 2364,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotIs = 2374,
+    ScanFieldConditionOperatorDisplay_NotIs = 2376,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_NotOverlaps = 2370,
+    ScanFieldConditionOperatorDisplay_NotOverlaps = 2372,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_OrEqual = 2376,
+    ScanFieldConditionOperatorDisplay_OrEqual = 2378,
     // (undocumented)
-    ScanFieldConditionOperatorDisplay_Overlaps = 2368,
+    ScanFieldConditionOperatorDisplay_Overlaps = 2370,
     // (undocumented)
-    ScanFieldEditor_AddConditionDescription = 2333,
+    ScanFieldEditor_AddConditionDescription = 2335,
     // (undocumented)
-    ScanFieldEditor_AddConditionDisplay = 2332,
+    ScanFieldEditor_AddConditionDisplay = 2334,
     // (undocumented)
-    ScanFieldEditor_Conditions = 2331,
+    ScanFieldEditor_Conditions = 2333,
     // (undocumented)
-    ScanFieldEditor_DeleteMeDescription = 2330,
+    ScanFieldEditor_DeleteMeDescription = 2332,
     // (undocumented)
-    ScanFieldEditor_DeleteMeDisplay = 2329,
+    ScanFieldEditor_DeleteMeDisplay = 2331,
     // (undocumented)
-    ScanFieldEditor_FieldName = 2326,
+    ScanFieldEditor_FieldName = 2328,
     // (undocumented)
-    ScanFieldEditor_OneOrMoreConditionsInvalid = 2334,
+    ScanFieldEditor_OneOrMoreConditionsInvalid = 2336,
     // (undocumented)
-    ScanFieldEditor_RequiresDescription = 2328,
+    ScanFieldEditor_RequiresDescription = 2330,
     // (undocumented)
-    ScanFieldEditor_RequiresDisplay = 2327,
+    ScanFieldEditor_RequiresDisplay = 2329,
     // (undocumented)
-    ScanFieldEditor_XorRequiresExactly2Conditions = 2335,
+    ScanFieldEditor_XorRequiresExactly2Conditions = 2337,
     // (undocumented)
-    ScanFieldEditorFrameFieldHeading_ConditionCount = 2343,
+    ScanFieldEditorFrameFieldHeading_ConditionCount = 2345,
     // (undocumented)
-    ScanFieldEditorFrameFieldHeading_ConditionsOperationId = 2342,
+    ScanFieldEditorFrameFieldHeading_ConditionsOperationId = 2344,
     // (undocumented)
-    ScanFieldEditorFrameFieldHeading_ErrorText = 2341,
+    ScanFieldEditorFrameFieldHeading_ErrorText = 2343,
     // (undocumented)
-    ScanFieldEditorFrameFieldHeading_Name = 2339,
+    ScanFieldEditorFrameFieldHeading_Name = 2341,
     // (undocumented)
-    ScanFieldEditorFrameFieldHeading_Valid = 2340,
+    ScanFieldEditorFrameFieldHeading_Valid = 2342,
     // (undocumented)
     ScanFieldEditorFramesGrid = 243,
     // (undocumented)
@@ -31661,51 +31661,51 @@ export const enum StringId {
     // (undocumented)
     ScanFieldHeading_ZenithRankSource = 2279,
     // (undocumented)
-    ScanFieldSetEditor_AddAField = 2336,
+    ScanFieldSetEditor_AddAField = 2338,
     // (undocumented)
-    ScanFieldSetEditor_AddAnAltCodeBasedField = 2338,
+    ScanFieldSetEditor_AddAnAltCodeBasedField = 2340,
     // (undocumented)
-    ScanFieldSetEditor_AddAnAttributeBasedField = 2337,
+    ScanFieldSetEditor_AddAnAttributeBasedField = 2339,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_AllConditionNotSupported = 2495,
+    ScanFieldSetLoadErrorTypeDisplay_AllConditionNotSupported = 2497,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_AndFieldHasOrChild = 2484,
+    ScanFieldSetLoadErrorTypeDisplay_AndFieldHasOrChild = 2486,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_AndFieldHasXorChild = 2485,
+    ScanFieldSetLoadErrorTypeDisplay_AndFieldHasXorChild = 2487,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_AndFieldOperatorCannotBeNegated = 2492,
+    ScanFieldSetLoadErrorTypeDisplay_AndFieldOperatorCannotBeNegated = 2494,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_FactoryCreateFieldConditionError = 2501,
+    ScanFieldSetLoadErrorTypeDisplay_FactoryCreateFieldConditionError = 2503,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_FactoryCreateFieldError = 2500,
+    ScanFieldSetLoadErrorTypeDisplay_FactoryCreateFieldError = 2502,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_FieldConditionsOperationIdMismatch = 2497,
+    ScanFieldSetLoadErrorTypeDisplay_FieldConditionsOperationIdMismatch = 2499,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_NoneConditionNotSupported = 2496,
+    ScanFieldSetLoadErrorTypeDisplay_NoneConditionNotSupported = 2498,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_NumericComparisonBooleanNodeDoesNotHaveANumberOperand = 2499,
+    ScanFieldSetLoadErrorTypeDisplay_NumericComparisonBooleanNodeDoesNotHaveANumberOperand = 2501,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_NumericComparisonBooleanNodeDoesNotHaveANumericFieldValueGetOperand = 2498,
+    ScanFieldSetLoadErrorTypeDisplay_NumericComparisonBooleanNodeDoesNotHaveANumericFieldValueGetOperand = 2500,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_OrFieldHasAndChild = 2486,
+    ScanFieldSetLoadErrorTypeDisplay_OrFieldHasAndChild = 2488,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_OrFieldHasXorChild = 2487,
+    ScanFieldSetLoadErrorTypeDisplay_OrFieldHasXorChild = 2489,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_OrFieldOperatorCannotBeNegated = 2493,
+    ScanFieldSetLoadErrorTypeDisplay_OrFieldOperatorCannotBeNegated = 2495,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_XorFieldDoesNotHave2Children = 2488,
+    ScanFieldSetLoadErrorTypeDisplay_XorFieldDoesNotHave2Children = 2490,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasAndChild = 2489,
+    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasAndChild = 2491,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasOrChild = 2490,
+    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasOrChild = 2492,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasXorChild = 2491,
+    ScanFieldSetLoadErrorTypeDisplay_XorFieldHasXorChild = 2493,
     // (undocumented)
-    ScanFieldSetLoadErrorTypeDisplay_XorFieldOperatorCannotBeNegated = 2494,
+    ScanFieldSetLoadErrorTypeDisplay_XorFieldOperatorCannotBeNegated = 2496,
     // (undocumented)
-    ScanFormulaIsNodeCategoryCaption_Index = 2318,
+    ScanFormulaIsNodeCategoryCaption_Index = 2320,
     // (undocumented)
-    ScanFormulaIsNodeCategoryTitle_Index = 2319,
+    ScanFormulaIsNodeCategoryTitle_Index = 2321,
     // (undocumented)
     ScanFormulaZenithEncodingError_AltCodeSubFieldContainsSubFieldIsUnknown = 2136,
     // (undocumented)
@@ -32465,9 +32465,9 @@ export const enum StringId {
     // (undocumented)
     StatusDitem_Zenith = 2076,
     // (undocumented)
-    StringOverlapsScanFieldConditionOperandsCaption_Values = 2422,
+    StringOverlapsScanFieldConditionOperandsCaption_Values = 2424,
     // (undocumented)
-    StringOverlapsScanFieldConditionOperandsTitle_Values = 2423,
+    StringOverlapsScanFieldConditionOperandsTitle_Values = 2425,
     // (undocumented)
     SubscribabilityExtentDisplay_All = 776,
     // (undocumented)
@@ -32733,17 +32733,17 @@ export const enum StringId {
     // (undocumented)
     Test = 68,
     // (undocumented)
-    TextContainsScanFieldConditionOperandsTitle_Exact = 2439,
+    TextContainsScanFieldConditionOperandsTitle_Exact = 2441,
     // (undocumented)
-    TextContainsScanFieldConditionOperandsTitle_FromEnd = 2438,
+    TextContainsScanFieldConditionOperandsTitle_FromEnd = 2440,
     // (undocumented)
-    TextContainsScanFieldConditionOperandsTitle_FromStart = 2437,
+    TextContainsScanFieldConditionOperandsTitle_FromStart = 2439,
     // (undocumented)
-    TextContainsScanFieldConditionOperandsTitle_IgnoreCase = 2440,
+    TextContainsScanFieldConditionOperandsTitle_IgnoreCase = 2442,
     // (undocumented)
-    TextContainsScanFieldConditionOperandsTitle_Value = 2436,
+    TextContainsScanFieldConditionOperandsTitle_Value = 2438,
     // (undocumented)
-    TextValueScanFieldConditionOperandsTitle_Value = 2427,
+    TextValueScanFieldConditionOperandsTitle_Value = 2429,
     // (undocumented)
     TimeInForceDisplay_AllOrNone = 808,
     // (undocumented)
@@ -33003,9 +33003,11 @@ export const enum StringId {
     // (undocumented)
     UpdateScan = 301,
     // (undocumented)
-    UserAlert_ChangesSavedOkToLeaveOrRestorePage = 2317,
+    UserAlert_ChangesSaved = 2318,
     // (undocumented)
-    UserAlert_PleaseWaitSavingChanges = 2316,
+    UserAlert_ChangesSavedOkToLeaveOrRestorePage = 2319,
+    // (undocumented)
+    UserAlert_PleaseWaitSavingChanges = 2317,
     // (undocumented)
     UserAlert_RestartReason_AttemptingSessionRenewal = 2314,
     // (undocumented)
@@ -33015,13 +33017,15 @@ export const enum StringId {
     // (undocumented)
     UserAlert_RestartReason_UserAction = 2315,
     // (undocumented)
+    UserAlert_SavingChanges = 2316,
+    // (undocumented)
     Valid = 115,
     // (undocumented)
     ValueNotFound = 30,
     // (undocumented)
     ValueRequired = 153,
     // (undocumented)
-    ValueScanFieldConditionOperandsCaption_Value = 2424,
+    ValueScanFieldConditionOperandsCaption_Value = 2426,
     // (undocumented)
     Version = 98,
     // (undocumented)

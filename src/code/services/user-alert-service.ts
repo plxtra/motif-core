@@ -144,15 +144,15 @@ export namespace UserAlertService {
                     error: false,
                     cancellable: false,
                     restartable: false,
-                    restartReasonStringId: undefined,
+                    restartReasonStringId: StringId.UserAlert_PleaseWaitSavingChanges,
                 },
                 CanLeave: {
                     id: Id.CanLeave,
                     name: 'CanLeave',
                     error: false,
                     cancellable: false,
-                    restartable: false,
-                    restartReasonStringId: undefined,
+                    restartable: true,
+                    restartReasonStringId: StringId.UserAlert_ChangesSavedOkToLeaveOrRestorePage,
                 },
             } as const;
 

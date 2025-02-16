@@ -2318,7 +2318,9 @@ export const enum StringId {
     UserAlert_RestartReason_NewSessionRequired,
     UserAlert_RestartReason_AttemptingSessionRenewal,
     UserAlert_RestartReason_UserAction,
+    UserAlert_SavingChanges,
     UserAlert_PleaseWaitSavingChanges,
+    UserAlert_ChangesSaved,
     UserAlert_ChangesSavedOkToLeaveOrRestorePage,
     ScanFormulaIsNodeCategoryCaption_Index,
     ScanFormulaIsNodeCategoryTitle_Index,
@@ -14139,14 +14141,24 @@ export namespace I18nStrings {
                 en: 'Restart required due to user action',
             }
         },
+        UserAlert_SavingChanges: {
+            id: StringId.UserAlert_SavingChanges, translations: {
+                en: 'Saving changes',
+            }
+        },
         UserAlert_PleaseWaitSavingChanges: {
             id: StringId.UserAlert_PleaseWaitSavingChanges, translations: {
                 en: 'Please wait - saving changes.',
             }
         },
+        UserAlert_ChangesSaved: {
+            id: StringId.UserAlert_ChangesSaved, translations: {
+                en: 'Changes saved',
+            }
+        },
         UserAlert_ChangesSavedOkToLeaveOrRestorePage: {
             id: StringId.UserAlert_ChangesSavedOkToLeaveOrRestorePage, translations: {
-                en: 'Changes saved! Ok to leave or restore page.',
+                en: 'Changes saved! Ok to leave or restore page',
             }
         },
         ScanFormulaIsNodeCategoryCaption_Index: {
