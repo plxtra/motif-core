@@ -7,7 +7,7 @@ import { SymbolsService } from '../services/internal-api';
 export class IvemIdUiAction extends UiAction {
     private _value: IvemId | undefined;
     private _definedValue: IvemId;
-    private _parseDetails: SymbolsService.IvemIdParseDetails;
+    private _parseDetails: SymbolsService.IvemIdParseDetails | undefined;
 
     private readonly _ivemIdPushMultiEvent = new MultiEvent<IvemIdUiAction.PushEventHandlersInterface>();
 
@@ -22,9 +22,9 @@ export class IvemIdUiAction extends UiAction {
     get definedValue() { return this._definedValue; }
     get parseDetails() { return this._parseDetails; }
 
-    commitValue(parseDetails: SymbolsService.IvemIdParseDetails, typeId: UiAction.CommitTypeId) {
+    commitValue(parseDetails: SymbolsService.IvemIdParseDetails | undefined, typeId: UiAction.CommitTypeId) {
         this._parseDetails = parseDetails;
-        this._value = parseDetails.ivemId; // owns value
+        this._value = parseDetails === undefined ? undefined : parseDetails.ivemId; // owns value
         this.setDefinedValue();
         this.commit(typeId);
     }

@@ -6,7 +6,7 @@ import { SymbolsService } from '../services/internal-api';
 export class MarketIvemIdUiAction<T extends Market> extends UiAction {
     private _value: MarketIvemId<T> | undefined;
     private _definedValue: MarketIvemId<T>;
-    private _parseDetails: SymbolsService.MarketIvemIdParseDetails<T>;
+    private _parseDetails: SymbolsService.MarketIvemIdParseDetails<T> | undefined;
 
     private _marketIvemIdPushMultiEvent = new MultiEvent<MarketIvemIdUiAction.PushEventHandlersInterface<T>>();
 
@@ -25,9 +25,9 @@ export class MarketIvemIdUiAction<T extends Market> extends UiAction {
     get definedValue() { return this._definedValue; }
     get parseDetails() { return this._parseDetails; }
 
-    commitValue(parseDetails: SymbolsService.MarketIvemIdParseDetails<T>, typeId: UiAction.CommitTypeId) {
+    commitValue(parseDetails: SymbolsService.MarketIvemIdParseDetails<T> | undefined, typeId: UiAction.CommitTypeId) {
         this._parseDetails = parseDetails;
-        this._value = parseDetails.marketIvemId; // owns value
+        this._value = parseDetails === undefined ? undefined : parseDetails.marketIvemId; // owns value
         this.setDefinedValue();
         this.commit(typeId);
     }

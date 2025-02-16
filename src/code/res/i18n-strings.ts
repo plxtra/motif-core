@@ -155,7 +155,6 @@ export const enum StringId {
     ErrorDeleting,
     ErrorLoadingColumnLayout,
     ValueRequired,
-    CodeMissing,
     ExchangeDoesNotHaveDefaultLitMarket,
     MarketDoesNotSupportSymbolsFromExchange,
     InvalidExchange,
@@ -629,6 +628,14 @@ export const enum StringId {
     MarketBoardIdDisplay_FpsxMain,
     MarketBoardIdDisplay_CfxMain,
     MarketBoardIdDisplay_DaxMain,
+    SymbolCodeError_Missing,
+    SymbolCodeError_MustContainAtLeast3Characters,
+    SymbolCodeError_MustContainAtLeast4Characters,
+    SymbolCodeError_CanOnlyContainDigits,
+    SymbolSelect_SearchForCodeOrName,
+    SymbolSelect_NoMarkets,
+    SymbolSelect_NoDataSymbolAvailable,
+    SymbolSelect_NotFoundInMarket,
     CallOrPutDisplay_Call,
     CallOrPutDisplay_Put,
     PublisherSubscriptionDataTypeDisplay_Asset,
@@ -3309,11 +3316,6 @@ export namespace I18nStrings {
                 en: 'Value required',
             }
         },
-        CodeMissing: {
-            id: StringId.CodeMissing, translations: {
-                en: 'Code missing',
-            }
-        },
         ExchangeDoesNotHaveDefaultLitMarket: {
             id: StringId.ExchangeDoesNotHaveDefaultLitMarket, translations: {
                 en: 'Exchange does not have a default lit market',
@@ -5678,6 +5680,46 @@ export namespace I18nStrings {
         MarketBoardIdDisplay_DaxMain: {
             id: StringId.MarketBoardIdDisplay_DaxMain, translations: {
                 en: 'DAX Main',
+            }
+        },
+        SymbolCodeError_Missing: {
+            id: StringId.SymbolCodeError_Missing, translations: {
+                en: 'Code missing',
+            }
+        },
+        SymbolCodeError_MustContainAtLeast3Characters: {
+            id: StringId.SymbolCodeError_MustContainAtLeast3Characters, translations: {
+                en: 'Code must contain at least 3 characters',
+            }
+        },
+        SymbolCodeError_MustContainAtLeast4Characters: {
+            id: StringId.SymbolCodeError_MustContainAtLeast4Characters, translations: {
+                en: 'Code must contain at least 4 characters',
+            }
+        },
+        SymbolCodeError_CanOnlyContainDigits: {
+            id: StringId.SymbolCodeError_CanOnlyContainDigits, translations: {
+                en: 'Code only contain digits',
+            }
+        },
+        SymbolSelect_SearchForCodeOrName: {
+            id: StringId.SymbolSelect_SearchForCodeOrName, translations: {
+                en: 'Search for code or name',
+            }
+        },
+        SymbolSelect_NoMarkets: {
+            id: StringId.SymbolSelect_NoMarkets, translations: {
+                en: 'No markets',
+            }
+        },
+        SymbolSelect_NoDataSymbolAvailable: {
+            id: StringId.SymbolSelect_NoDataSymbolAvailable, translations: {
+                en: 'No data symbol available',
+            }
+        },
+        SymbolSelect_NotFoundInMarket: {
+            id: StringId.SymbolSelect_NotFoundInMarket, translations: {
+                en: 'Not found in market',
             }
         },
         CallOrPutDisplay_Call: {

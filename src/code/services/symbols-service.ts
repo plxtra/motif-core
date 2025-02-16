@@ -323,7 +323,7 @@ export class SymbolsService {
         const calcululatedParseMode = this.calculateParseMode(value);
         // move to extension
         if (!calcululatedParseMode.valid) {
-            return SymbolsService.IvemIdParseDetails.createFail(value, calcululatedParseMode.errorText);
+            return SymbolsService.IvemIdParseDetails.createFail(this._marketsService, value, calcululatedParseMode.errorText);
         } else {
             switch (calcululatedParseMode.id) {
                 // case SymbolsManager.ParseModeId.Ric: return this.parseRicIvemId(calcululatedParseMode.parseText);
@@ -388,48 +388,89 @@ export class SymbolsService {
         }
     }
 
-    tryCreateValidDataIvemId(code: string, exchange: Exchange | undefined, market: DataMarket | undefined) {
-        return this.tryCreateValidMarketIvemId(Market.TypeId.Data, code, exchange, market, DataIvemId);
-    }
+    // tryCreateValidDataIvemId(code: string, exchange: Exchange | undefined, market: DataMarket | undefined) {
+    //     return this.tryCreateValidMarketIvemId(Market.TypeId.Data, code, exchange, market, DataIvemId);
+    // }
 
-    tryCreateValidTradingIvemId(code: string, exchange: Exchange | undefined, market: TradingMarket | undefined) {
-        return this.tryCreateValidMarketIvemId(Market.TypeId.Data, code, exchange, market, TradingIvemId);
-    }
+    // tryCreateValidTradingIvemId(code: string, exchange: Exchange | undefined, market: TradingMarket | undefined) {
+    //     return this.tryCreateValidMarketIvemId(Market.TypeId.Data, code, exchange, market, TradingIvemId);
+    // }
 
-    tryCreateValidMarketIvemId<T extends Market>(
-        marketTypeId: Market.TypeId,
-        code: string,
-        exchange: Exchange | undefined,
-        market: T | undefined,
-        constructor: MarketIvemId.Constructor<T>
-    ) {
-        code = code.toUpperCase();
-        if (market !== undefined) {
-            const marketExchange = market.exchange;
-            if (exchange === undefined) {
-                exchange = marketExchange;
-            } else {
-                if (exchange !== marketExchange) {
-                    return undefined;
-                }
-            }
-        } else {
-            if (exchange === undefined) {
-                exchange = this.defaultExchange;
-            }
-            market = exchange.getDefaultMarket(marketTypeId) as unknown as T; // Hack;
-        }
+    // tryCreateValidMarketIvemId<T extends Market>(
+    //     marketTypeId: Market.TypeId,
+    //     code: string,
+    //     exchange: Exchange | undefined,
+    //     market: T | undefined,
+    //     constructor: MarketIvemId.Constructor<T>
+    // ) {
+    //     code = code.toUpperCase();
+    //     if (market !== undefined) {
+    //         const marketExchange = market.exchange;
+    //         if (exchange === undefined) {
+    //             exchange = marketExchange;
+    //         } else {
+    //             if (exchange !== marketExchange) {
+    //                 return undefined;
+    //             }
+    //         }
+    //     } else {
+    //         if (exchange === undefined) {
+    //             exchange = this.defaultExchange;
+    //         }
+    //         market = exchange.getDefaultMarket<T>(marketTypeId);
+    //     }
 
-        if (this.isValidCode(code, exchange)) {
-            return new constructor(code, market);
-        } else {
-            return undefined;
-        }
-    }
+    //     if (this.getCodeError(code, exchange)) {
+    //         return new constructor(code, market);
+    //     } else {
+    //         return undefined;
+    //     }
+    // }
 
+    // forceCreateMarketIvemId<T extends Market>(
+    //     marketTypeId: Market.TypeId,
+    //     code: string,
+    //     exchange: Exchange | undefined,
+    //     market: T | undefined,
+    //     constructor: MarketIvemId.Constructor<T>
+    // ): SymbolsService.ForceCreateMarketIvemIdResult<T> {
+    //     let errorId: SymbolsService.ForceCreateMarketIvemIdResult.ErrorId | undefined;
+    //     code = code.toUpperCase();
+    //     if (market !== undefined) {
+    //         const marketExchange = market.exchange;
+    //         if (exchange === undefined) {
+    //             exchange = marketExchange;
+    //         } else {
+    //             if (exchange !== marketExchange) {
+    //                 market = this._marketsService.getGenericUnknownMarket<T>(marketTypeId);
+    //                 errorId = SymbolsService.ForceCreateMarketIvemIdResult.ErrorId.ExchangeDoesNotSupportMarket;
+    //             }
+    //         }
+    //     } else {
+    //         if (exchange === undefined) {
+    //             exchange = this.defaultExchange;
+    //         }
+    //         market = exchange.getDefaultMarket<T>(marketTypeId);
+    //     }
+
+    //     if (this.isValidCode(code, exchange)) {
+    //         return new constructor(code, market);
+    //     } else {
+    //         return undefined;
+    //     }
+    // }
     getDefaultDataIvemIdFromIvemId(ivemId: IvemId) {
         const market = ivemId.exchange.defaultLitMarket;
         return new DataIvemId(ivemId.code, market);
+    }
+
+    tryGetBestDataIvemIdFromMarketIvemId<T extends Market>(marketIvemId: MarketIvemId<T>): DataIvemId | undefined {
+        if (marketIvemId.market.typeId === Market.TypeId.Data) {
+            return marketIvemId as unknown as DataIvemId;
+        } else {
+            const tradingIvemId = marketIvemId as unknown as TradingIvemId;
+            return this.tryGetBestDataIvemIdFromTradingIvemId(tradingIvemId);
+        }
     }
 
     tryGetBestDataIvemIdFromTradingIvemId(tradingIvemId: TradingIvemId): DataIvemId | undefined {
@@ -963,14 +1004,16 @@ export class SymbolsService {
         zenithSymbologySupportLevelId: SymbolsService.ZenithSymbologySupportLevelId,
         constructor: MarketIvemId.Constructor<T>,
     ): SymbolsService.MarketIvemIdParseDetails<T> {
+        const marketTypeId = allMarkets.marketTypeId;
         const upperValue = value.trim().toUpperCase();
-        let errorText = '';
+        let errorText: string | undefined;
         let marketIvemId: MarketIvemId<T> | undefined;
-        let exchange: Exchange | undefined;
         let code = upperValue;
         let marketAnnouncerPos = -1; // prevent compiler warning
         let marketSymbologyCode: string | undefined;
+        let marketValidAndExplicit: boolean;
         let exchangeSymbologyCode: string | undefined;
+        let exchangeValidAndExplicit: boolean;
         let isZenith: boolean;
 
         for (let i = upperValue.length - 1; i >= 0; i--) {
@@ -992,79 +1035,106 @@ export class SymbolsService {
             }
         }
 
-        if (code === '') {
-            errorText = Strings[StringId.CodeMissing];
-            isZenith = false;
-        } else {
-            if (exchangeSymbologyCode !== undefined) {
-                exchange = this._defaultExchangeEnvironmentExchanges.findFirstSymbologyCode(exchangeSymbologyCode);
-                // exchange = this._pscExchangeDisplayCodeMap.findId(exchangeSymbologyCode);
+        if (exchangeSymbologyCode !== undefined) {
+            const explicitExchange = this._defaultExchangeEnvironmentExchanges.findFirstSymbologyCode(exchangeSymbologyCode);
 
-                if (exchange === undefined) {
-                    const canTryParseZenithSymbol =
-                        zenithSymbologySupportLevelId !== SymbolsService.ZenithSymbologySupportLevelId.None &&
-                        this._pscExchangeAnnouncerChar === ZenithProtocolCommon.codeMarketSeparator &&
-                        marketSymbologyCode === undefined;
-                    if (canTryParseZenithSymbol) {
-                        isZenith = true;
-                        const market = allMarkets.findZenithCode(exchangeSymbologyCode); // treat exchangeSymbologyCode as a market Zenith code
-                        if (market === undefined) {
-                            errorText = `${Strings[StringId.InvalidExchangeOrZenithMarket]}: "${exchangeSymbologyCode}"`;
-                        } else {
-                            marketIvemId = new constructor(code, market);
-                        }
+            if (explicitExchange === undefined) {
+                exchangeValidAndExplicit = false;
+                const canTryParseZenithSymbol =
+                    zenithSymbologySupportLevelId !== SymbolsService.ZenithSymbologySupportLevelId.None &&
+                    this._pscExchangeAnnouncerChar === ZenithProtocolCommon.codeMarketSeparator &&
+                    marketSymbologyCode === undefined;
+                if (canTryParseZenithSymbol) {
+                    isZenith = true;
+                    const market = allMarkets.findZenithCode(exchangeSymbologyCode); // treat exchangeSymbologyCode as a market Zenith code
+                    if (market === undefined) {
+                        errorText = `${Strings[StringId.InvalidExchangeOrZenithMarket]}: "${exchangeSymbologyCode}"`;
+                        marketValidAndExplicit = false;
+                        marketIvemId = new constructor(code, this._marketsService.getGenericUnknownMarket(marketTypeId));
                     } else {
-                        isZenith = false;
-                        errorText = `${Strings[StringId.InvalidExchange]}: "${exchangeSymbologyCode}"`;
+                        marketValidAndExplicit = true;
+                        marketIvemId = new constructor(code, market);
                     }
                 } else {
                     isZenith = false;
-                    if (marketSymbologyCode !== undefined) {
-                        const parseResult = this.parseMarketIvemIdMarket(defaultEnvironmentMarkets, code, exchange, marketSymbologyCode, constructor);
-                        if (parseResult.isErr()) {
-                            errorText = parseResult.error;
-                        } else {
-                            marketIvemId = parseResult.value;
-                        }
+                    errorText = `${Strings[StringId.InvalidExchange]}: "${exchangeSymbologyCode}"`;
+                    let market: T;
+                    if (marketSymbologyCode === undefined) {
+                        market = this._marketsService.getGenericUnknownMarket(marketTypeId);
+                        marketValidAndExplicit = false;
                     } else {
-                        const market = exchange.getDefaultMarket(allMarkets.marketTypeId) as unknown as T; // Hack
-                        if (market.unknown) {
-                            const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
-                            errorText = `${errorName}: ${exchange.abbreviatedDisplay}`;
+                        const foundMarket = allMarkets.findZenithCode(marketSymbologyCode);
+                        if (foundMarket === undefined) {
+                            marketValidAndExplicit = false;
+                            market = this._marketsService.getGenericUnknownMarket(marketTypeId);
                         } else {
-                            marketIvemId = new constructor(code, market);
+                            marketValidAndExplicit = true;
+                            market = foundMarket;
                         }
                     }
+                    marketIvemId = new constructor(code, market);
                 }
             } else {
                 isZenith = false;
                 if (marketSymbologyCode !== undefined) {
-                    const parseResult = this.parseMarketIvemIdMarket(defaultEnvironmentMarkets, code, exchange, marketSymbologyCode, constructor);
+                    const parseResult = this.parseMarketIvemIdMarket(defaultEnvironmentMarkets, code, explicitExchange, marketSymbologyCode, constructor);
                     if (parseResult.isErr()) {
                         errorText = parseResult.error;
+                        marketIvemId = new constructor(code, this._marketsService.getGenericUnknownMarket(marketTypeId));
+                        marketValidAndExplicit = false;
                     } else {
                         marketIvemId = parseResult.value;
+                        marketValidAndExplicit = true;
                     }
                 } else {
-                    exchange = this.defaultExchange;
-                    const market = exchange.getDefaultMarket(allMarkets.marketTypeId) as unknown as T; // Hack;
+                    marketValidAndExplicit = false;
+                    const market = explicitExchange.getDefaultMarket<T>(allMarkets.marketTypeId);
+                    marketIvemId = new constructor(code, market);
                     if (market.unknown) {
                         const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
-                        errorText = `${errorName}: ${exchange.abbreviatedDisplay}`;
-                    } else {
-                        marketIvemId = new constructor(code, market);
+                        errorText = `${errorName}: ${explicitExchange.abbreviatedDisplay}`;
                     }
+                }
+                exchangeValidAndExplicit = marketValidAndExplicit;
+            }
+        } else {
+            exchangeValidAndExplicit = false;
+            isZenith = false;
+            if (marketSymbologyCode !== undefined) {
+                const parseResult = this.parseMarketIvemIdMarket(defaultEnvironmentMarkets, code, undefined, marketSymbologyCode, constructor);
+                if (parseResult.isErr()) {
+                    errorText = parseResult.error;
+                    marketIvemId = new constructor(code, this._marketsService.getGenericUnknownMarket(marketTypeId));
+                    marketValidAndExplicit = false;
+                } else {
+                    marketIvemId = parseResult.value;
+                    marketValidAndExplicit = true;
+                }
+            } else {
+                marketValidAndExplicit = false;
+                const defaultExchange = this.defaultExchange;
+                const market = defaultExchange.getDefaultMarket<T>(allMarkets.marketTypeId);
+                marketIvemId = new constructor(code, market);
+                if (market.unknown) {
+                    const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
+                    errorText = `${errorName}: ${defaultExchange.abbreviatedDisplay}`;
                 }
             }
         }
 
+        if (errorText === undefined) {
+            const codeError = this.getCodeError(code, marketIvemId.market.exchange);
+            if (codeError !== undefined) {
+                errorText = codeError;
+            }
+        }
+
         const result: SymbolsService.MarketIvemIdParseDetails<T> = {
-            success: errorText === '',
+            errorText,
             marketIvemId,
             isZenith,
-            sourceIdExplicit: exchangeSymbologyCode !== undefined,
-            marketIdExplicit: marketSymbologyCode !== undefined,
-            errorText,
+            exchangeValidAndExplicit,
+            marketValidAndExplicit,
             value,
         };
 
@@ -1121,61 +1191,65 @@ export class SymbolsService {
 
     private parsePscIvemId(value: string, zenithSymbologySupportLevelId: SymbolsService.ZenithSymbologySupportLevelId) {
         const upperValue = value.trim().toUpperCase();
-        let errorText = '';
-        let ivemId: IvemId | undefined;
+        let errorText: string | undefined;
         let exchange: Exchange | undefined;
         let code = upperValue;
+        let exchangeSymbologyCode: string | undefined;
+        let exchangeValidAndExplicit: boolean;
         let isZenith = false;
 
         for (let i = upperValue.length - 1; i >= 0; i--) {
             if (upperValue[i] === this._pscExchangeAnnouncerChar) {
-                const exchangeSymbologyCode = upperValue.substring(i + 1);
-
-                // exchange = this._pscExchangeDisplayCodeMap.findId(exchangeSymbologyCode);
-                exchange = this._defaultExchangeEnvironmentExchanges.findFirstSymbologyCode(exchangeSymbologyCode);
-
-                if (exchange === undefined) {
-                    const canTryParseZenithSymbol =
-                        zenithSymbologySupportLevelId !== SymbolsService.ZenithSymbologySupportLevelId.None &&
-                        this._pscExchangeAnnouncerChar === ZenithProtocolCommon.codeMarketSeparator
-                    if (!canTryParseZenithSymbol) {
-                        errorText = `${Strings[StringId.InvalidExchange]}: "${exchangeSymbologyCode}"`;
-                    } else {
-                        isZenith = true;
-                        exchange = this._exchanges.findZenithCode(exchangeSymbologyCode);
-                        if (exchange === undefined) {
-                            errorText = `${Strings[StringId.InvalidExchangeOrZenithExchange]}: "${exchangeSymbologyCode}"`;
-                        }
-                    }
-                } else {
-                    code = upperValue.substring(0, i);
-                    if (code === '') {
-                        errorText = Strings[StringId.CodeMissing];
-                    }
-                }
-
+                exchangeSymbologyCode = upperValue.substring(i + 1);
+                code = upperValue.substring(0, i);
                 break;
             }
         }
 
-        if (errorText === '') {
+        if (exchangeSymbologyCode === undefined) {
+            exchange = this.defaultExchange;
+            exchangeValidAndExplicit = false;
+        } else {
+            exchange = this._defaultExchangeEnvironmentExchanges.findFirstSymbologyCode(exchangeSymbologyCode);
+
             if (exchange !== undefined) {
-                ivemId = new IvemId(code, exchange);
+                exchangeValidAndExplicit = true;
             } else {
-                if (code === '') {
-                    errorText = Strings[StringId.CodeMissing];
+                const canTryParseZenithSymbol =
+                    zenithSymbologySupportLevelId !== SymbolsService.ZenithSymbologySupportLevelId.None &&
+                    this._pscExchangeAnnouncerChar === ZenithProtocolCommon.codeMarketSeparator
+                if (!canTryParseZenithSymbol) {
+                    exchange = this._marketsService.genericUnknownExchange;
+                    errorText = `${Strings[StringId.InvalidExchange]}: "${exchangeSymbologyCode}"`;
+                    exchangeValidAndExplicit = false;
                 } else {
-                    ivemId = new IvemId(code, this.defaultExchange);
+                    isZenith = true;
+                    exchange = this._exchanges.findZenithCode(exchangeSymbologyCode);
+                    if (exchange !== undefined) {
+                        exchangeValidAndExplicit = true;
+                    } else {
+                        exchange = this._marketsService.genericUnknownExchange;
+                        errorText = `${Strings[StringId.InvalidExchangeOrZenithExchange]}: "${exchangeSymbologyCode}"`;
+                        exchangeValidAndExplicit = false;
+                    }
                 }
             }
         }
 
+        const ivemId = new IvemId(code, exchange);
+
+        if (errorText === undefined) {
+            const codeError = this.getCodeError(code, exchange);
+            if (codeError !== undefined) {
+                errorText = codeError;
+            }
+        }
+
         const result: SymbolsService.IvemIdParseDetails = {
-            success: errorText === '',
+            errorText,
             ivemId,
             isZenith,
-            sourceIdExplicit: exchange !== undefined,
-            errorText,
+            exchangeValidAndExplicit,
             value,
         };
 
@@ -1295,7 +1369,7 @@ export class SymbolsService {
 
             let displayMarketAsLocal: boolean;
             let marketHidden: boolean;
-            if (resolvedDefaultMarketHidden && market === exchange.getDefaultMarket(market.typeId) as unknown as T) {
+            if (resolvedDefaultMarketHidden && market === exchange.getDefaultMarket<T>(market.typeId)) {
                 marketHidden = true;
                 displayMarketAsLocal = false; // actually may be local but since market is hidden we dont care
             } else {
@@ -1352,44 +1426,49 @@ export class SymbolsService {
         }
     }
 
-    private isValidCode(code: string, exchange: Exchange) {
-        switch (exchange.unenvironmentedZenithCode as ZenithProtocolCommon.KnownExchange) {
-            case ZenithProtocolCommon.KnownExchange.Myx: {
-                const codeCharCount = code.length;
-                if (codeCharCount < 4) {
-                    return false;
-                } else {
-                    for (let i = 0; i < 4; i++) {
-                        const charCode = code.charCodeAt(i);
-                        if (!isDigitCharCode(charCode)) {
-                            return false;
+    private getCodeError(code: string, exchange: Exchange): string | undefined {
+        if (code.length === 0) {
+            return Strings[StringId.SymbolCodeError_Missing];
+        } else {
+            // This should be moved into markets config
+            switch (exchange.unenvironmentedZenithCode as ZenithProtocolCommon.KnownExchange) {
+                case ZenithProtocolCommon.KnownExchange.Myx: {
+                    const codeCharCount = code.length;
+                    if (codeCharCount < 4) {
+                        return `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast4Characters]}`;
+                    } else {
+                        for (let i = 0; i < 4; i++) {
+                            const charCode = code.charCodeAt(i);
+                            if (!isDigitCharCode(charCode)) {
+                                return `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_CanOnlyContainDigits]}`;
+                            }
                         }
+                        return undefined;
                     }
-                    return true;
                 }
+                case ZenithProtocolCommon.KnownExchange.Asx: {
+                    return code.length >= 3 ? undefined : `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast3Characters]}`;
+                }
+                case ZenithProtocolCommon.KnownExchange.Nzx: {
+                    return code.length >= 3 ? undefined : `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast3Characters]}`;
+                }
+                case ZenithProtocolCommon.KnownExchange.Ptx: {
+                    return code.length >= 3 ? undefined : `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast3Characters]}`;
+                }
+                case ZenithProtocolCommon.KnownExchange.Fnsx: {
+                    return code.length >= 3 ? undefined : `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast3Characters]}`;
+                }
+                case ZenithProtocolCommon.KnownExchange.Fpsx: {
+                    return code.length >= 3 ? undefined : `${exchange.abbreviatedDisplay} ${Strings[StringId.SymbolCodeError_MustContainAtLeast3Characters]}`;
+                }
+                default:
+                    return undefined;
             }
-            case ZenithProtocolCommon.KnownExchange.Asx: {
-                return code.length >= 3;
-            }
-            case ZenithProtocolCommon.KnownExchange.Nzx: {
-                return code.length >= 3;
-            }
-            case ZenithProtocolCommon.KnownExchange.Ptx: {
-                return code.length >= 3;
-            }
-            case ZenithProtocolCommon.KnownExchange.Fnsx: {
-                return code.length >= 3;
-            }
-            case ZenithProtocolCommon.KnownExchange.Fpsx: {
-                return code.length >= 3;
-            }
-            default:
-                return false;
         }
     }
 
     private findExchangeMarketWithExchangeSuffixCode<T extends Market>(marketTypeId: Market.TypeId, exchange: Exchange, suffixCode: string): T | undefined {
-        const exchangeMarkets = exchange.getMarkets(marketTypeId) as unknown as T[]; // Hack
+        const exchangeMarkets = exchange.getMarkets<T>(marketTypeId);
         const exchangeMarketCount = exchangeMarkets.length;
         for (let i = 0; i < exchangeMarketCount; i++) {
             const exchangeMarket = exchangeMarkets[i];
@@ -1472,81 +1551,86 @@ export namespace SymbolsService {
     export const defaultExplicitSearchFieldsEnabled = false;
     export const defaultExplicitSearchFieldIds = [SymbolFieldId.Code, SymbolFieldId.Name];
 
-    // export type AllowedMarketIdsChangedEventHandler = (this: void) => void;
-    // export type AllowedExchangeIdsChangedEventHandler = (this: void) => void;
+    // export interface ForceCreateMarketIvemIdResult<T extends Market> {
+    //     marketIvemId: MarketIvemId<T>;
+    //     errorId: ForceCreateMarketIvemIdResult.ErrorId | undefined;
+    // }
 
-    // export type AllowedMarketIdsUsableResolve = (this: void, value: MarketId[] | undefined) => void;
-    // export type AllowedExchangeIdsUsableResolve = (this: void, value: ExchangeId[] | undefined) => void;
+    export namespace ForceCreateMarketIvemIdResult {
+        export const enum ErrorId {
+            CodeMissing,
+            InvalidExchange,
+            InvalidMarket,
+            ExchangeDoesNotSupportMarket,
+            ExchangeDoesNotHaveDefaultLitMarket,
+        }
+    }
 
     export interface MarketIvemIdParseDetails<T extends Market> {
-        success: boolean;
-        marketIvemId: MarketIvemId<T> | undefined;
+        errorText: string | undefined;
+        marketIvemId: MarketIvemId<T>;
         isZenith: boolean;
-        sourceIdExplicit: boolean;
-        marketIdExplicit: boolean;
-        errorText: string;
+        exchangeValidAndExplicit: boolean;
+        marketValidAndExplicit: boolean;
         value: string;
     }
 
     export namespace MarketIvemIdParseDetails {
         export function createFail<T extends Market>(unknownMarket: T, marketIvemIdConstructor: MarketIvemId.Constructor<T>, value: string, errorText: string) {
             const result: MarketIvemIdParseDetails<T> = {
-                success: false,
+                errorText,
                 marketIvemId: MarketIvemId.createUnknown(unknownMarket, marketIvemIdConstructor),
                 isZenith: false,
-                sourceIdExplicit: false,
-                marketIdExplicit: false,
-                errorText,
+                exchangeValidAndExplicit: false,
+                marketValidAndExplicit: false,
                 value
             };
             return result;
         }
-        export function createUndefinedSuccess<T extends Market>(value: string) {
-            const result: MarketIvemIdParseDetails<T> = {
-                success: true,
-                marketIvemId: undefined,
-                isZenith: false,
-                sourceIdExplicit: false,
-                marketIdExplicit: false,
-                errorText: '',
-                value,
-            };
-            return result;
-        }
+        // export function createUndefinedSuccess<T extends Market>(value: string) {
+        //     const result: MarketIvemIdParseDetails<T> = {
+        //         success: true,
+        //         marketIvemId: undefined,
+        //         isZenith: false,
+        //         exchangeExplicit: false,
+        //         marketExplicit: false,
+        //         errorText: '',
+        //         value,
+        //     };
+        //     return result;
+        // }
     }
 
     export interface IvemIdParseDetails {
-        success: boolean;
-        ivemId: IvemId | undefined;
+        errorText: string | undefined;
+        ivemId: IvemId;
         isZenith: boolean;
-        sourceIdExplicit: boolean;
-        errorText: string;
+        exchangeValidAndExplicit: boolean;
         value: string;
     }
 
     export namespace IvemIdParseDetails {
-        export function createFail(value: string, errorText: string) {
+        export function createFail(marketsService: MarketsService, value: string, errorText: string) {
             const result: IvemIdParseDetails = {
-                success: false,
-                ivemId: undefined,
-                isZenith: false,
-                sourceIdExplicit: false,
                 errorText,
+                ivemId: IvemId.createUnknown(marketsService.genericUnknownExchange),
+                isZenith: false,
+                exchangeValidAndExplicit: false,
                 value
             };
             return result;
         }
-        export function createUndefinedSuccess() {
-            const result: IvemIdParseDetails = {
-                success: true,
-                ivemId: undefined,
-                isZenith: false,
-                sourceIdExplicit: false,
-                errorText: '',
-                value: ''
-            };
-            return result;
-        }
+        // export function createUndefinedSuccess() {
+        //     const result: IvemIdParseDetails = {
+        //         success: true,
+        //         ivemId: undefined,
+        //         isZenith: false,
+        //         exchangeExplicit: false,
+        //         errorText: '',
+        //         value: ''
+        //     };
+        //     return result;
+        // }
     }
 
     export class CalculatedParseModeId {

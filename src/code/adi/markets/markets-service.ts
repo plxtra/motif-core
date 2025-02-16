@@ -232,8 +232,8 @@ export class MarketsService {
         }
     }
 
-    getAllMarkets(marketTypeId: Market.TypeId): MarketsService.AllKnownDataMarkets | MarketsService.AllKnownTradingMarkets {
-        return marketTypeId === Market.TypeId.Data ? this.dataMarkets : this.tradingMarkets;
+    getAllMarkets<T extends Market>(marketTypeId: Market.TypeId): MarketsService.AllKnownMarkets<T> {
+        return marketTypeId === Market.TypeId.Data ? this.dataMarkets as unknown as MarketsService.AllKnownMarkets<T> : this.tradingMarkets as unknown as MarketsService.AllKnownMarkets<T>;
     }
 
     // getAllMarketsGeneric<T extends Market, K extends Market.TypeId>(marketTypeId: K): MarketsService.AllKnownMarkets<T> {
@@ -244,8 +244,14 @@ export class MarketsService {
     //     return lookup[marketTypeId];
     // }
 
-    getDefaultExchangeEnvironmentMarkets(marketTypeId: Market.TypeId): MarketsService.DefaultExchangeEnvironmentKnownDataMarkets | MarketsService.DefaultExchangeEnvironmentKnownTradingMarkets {
-        return marketTypeId === Market.TypeId.Data ? this.defaultExchangeEnvironmentDataMarkets : this.defaultExchangeEnvironmentTradingMarkets;
+    getGenericUnknownMarket<T extends Market>(marketTypeId: Market.TypeId): T {
+        return marketTypeId === Market.TypeId.Data ? this.genericUnknownDataMarket as unknown as T : this.genericUnknownTradingMarket as unknown as T;
+    }
+
+    getDefaultExchangeEnvironmentMarkets<T extends Market>(marketTypeId: Market.TypeId): MarketsService.DefaultExchangeEnvironmentKnownMarkets<T> {
+        return marketTypeId === Market.TypeId.Data
+            ? this.defaultExchangeEnvironmentDataMarkets as unknown as MarketsService.DefaultExchangeEnvironmentKnownMarkets<T>
+            : this.defaultExchangeEnvironmentTradingMarkets as unknown as MarketsService.DefaultExchangeEnvironmentKnownMarkets<T>;
     }
 
     tryGetExchangeEnvironment(zenithCode: ExchangeEnvironmentZenithCode, unknownAllowed: boolean): ExchangeEnvironment | undefined {

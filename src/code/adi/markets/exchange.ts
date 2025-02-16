@@ -166,12 +166,12 @@ export class Exchange {
         this.endChange();
     }
 
-    getMarkets(marketTypeId: Market.TypeId): Market[] {
-        return marketTypeId === Market.TypeId.Data ? this._dataMarkets : this._tradingMarkets; // want to return T[] - not Market[]
+    getMarkets<T extends Market>(marketTypeId: Market.TypeId): T[] {
+        return marketTypeId === Market.TypeId.Data ? this._dataMarkets as unknown as T[] : this._tradingMarkets as unknown as T[];
     }
 
-    getDefaultMarket(marketTypeId: Market.TypeId): Market {
-        return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket : this._defaultTradingMarket; // want to return T - not Market
+    getDefaultMarket<T extends Market>(marketTypeId: Market.TypeId): T {
+        return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket as unknown as T : this._defaultTradingMarket as unknown as T;
     }
 
     subscribeFieldValuesChangedEvent(handler: Exchange.FieldValuesChangedHandler) {
