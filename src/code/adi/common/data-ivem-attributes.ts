@@ -1,5 +1,6 @@
+import { isArrayEqualUniquely } from '@xilytix/sysutils';
 
-export abstract class DataIvemAttributes {
+export class DataIvemAttributes {
     private _unrecognisedAttributes: DataIvemAttributes.UnrecognisedAttributes = [];
 
     constructor(readonly zenithExchangeCode: string) { }
@@ -15,7 +16,9 @@ export abstract class DataIvemAttributes {
         this._unrecognisedAttributes.push(attribute);
     }
 
-    abstract isEqualTo(other: DataIvemAttributes): boolean;
+    isEqualTo(other: DataIvemAttributes): boolean {
+        return isArrayEqualUniquely(this._unrecognisedAttributes, other._unrecognisedAttributes);
+    }
 }
 
 export namespace DataIvemAttributes {

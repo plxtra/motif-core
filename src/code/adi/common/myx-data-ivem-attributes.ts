@@ -25,19 +25,22 @@ export class MyxDataIvemAttributes extends DataIvemAttributes {
         super(ZenithProtocolCommon.KnownExchange.Myx);
     }
 
-    isEqualTo(other: DataIvemAttributes): boolean {
+    override isEqualTo(other: DataIvemAttributes): boolean {
         if (!MyxDataIvemAttributes.isMyx(other)) {
             throw new AssertInternalError('MLIAIET99801', other.zenithExchangeCode);
         } else {
-            const result: boolean =
-                this.category === other.category &&
-                this.marketClassificationId === other.marketClassificationId &&
-                this.deliveryBasisId === other.deliveryBasisId &&
-                this.maxRss === other.maxRss &&
-                this.sector === other.sector &&
-                isUndefinableArrayEqualUniquely(this.short, other.short) &&
-                this.shortSuspended === other.shortSuspended &&
-                this.subSector === other.subSector;
+            let result = super.isEqualTo(other);
+            if (result) {
+                result =
+                    this.category === other.category &&
+                    this.marketClassificationId === other.marketClassificationId &&
+                    this.deliveryBasisId === other.deliveryBasisId &&
+                    this.maxRss === other.maxRss &&
+                    this.sector === other.sector &&
+                    isUndefinableArrayEqualUniquely(this.short, other.short) &&
+                    this.shortSuspended === other.shortSuspended &&
+                    this.subSector === other.subSector;
+            }
 
             return result;
         }

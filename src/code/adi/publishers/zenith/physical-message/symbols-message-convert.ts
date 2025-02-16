@@ -7,7 +7,6 @@ import {
 } from '@xilytix/sysutils';
 import {
     ErrorCode,
-    ErrorCodeLogger,
     ifDefined,
     ZenithDataError
 } from "../../../../sys/internal-api";
@@ -511,9 +510,17 @@ export class SymbolsMessageConvert extends MessageConvert {
                 case ZenithProtocolCommon.KnownExchange.Myx:
                     result = ZenithMarketMyxConvert.Symbols.Attributes.toDataIvem(attributes);
                     break;
-                default:
-                    ErrorCodeLogger.logDataError('SMCPA35009', zenithExchangeCode);
-                    result = undefined;
+                default: {
+                    const entries = Object.entries(attributes);
+                    const result = new DataIvemAttributes(zenithExchangeCode);
+                    for (const [key, value] of entries) {
+                        if (value !== undefined) {
+                            result.addUnrecognised(key, value);
+                        }
+                    }
+
+                    return result;
+                }
             }
             return result;
         }

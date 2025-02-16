@@ -6026,12 +6026,12 @@ export class DataIvemAlternateCodesTableValueSource extends TableValueSource {
 // Warning: (ae-missing-release-tag) "DataIvemAttributes" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export abstract class DataIvemAttributes {
+export class DataIvemAttributes {
     constructor(zenithExchangeCode: string);
     // (undocumented)
     addUnrecognised(key: string, value: string): void;
     // (undocumented)
-    abstract isEqualTo(other: DataIvemAttributes): boolean;
+    isEqualTo(other: DataIvemAttributes): boolean;
     // (undocumented)
     get unrecognisedAttributes(): DataIvemAttributes.UnrecognisedAttributes;
     // (undocumented)
