@@ -1127,7 +1127,7 @@ export const invalidDataItemRequestNr: DataItemRequestNr = 0;
 export const firstDataItemRequestNr: DataItemRequestNr = 1;
 export const broadcastDataItemRequestNr: DataItemRequestNr = -1;
 
-export const unknownZenithCode = '|Unknown|';
+export const unknownZenithCode = '?';
 
 export interface ZenithIvemId {
     readonly code: string;

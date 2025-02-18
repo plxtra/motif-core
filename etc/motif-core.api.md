@@ -16129,7 +16129,7 @@ export namespace MarketsService {
         // (undocumented)
         readonly defaultExchangeEnvironmentMarkets: DefaultExchangeEnvironmentKnownMarkets<T>;
         // (undocumented)
-        tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
+        tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined;
     }
     // (undocumented)
     export class AllKnownTradingMarkets extends AllKnownMarkets<TradingMarket> {
@@ -16188,7 +16188,7 @@ export namespace MarketsService {
     // (undocumented)
     export abstract class DefaultExchangeEnvironmentKnownMarkets<T extends Market> extends KnownMarkets<T> {
         // (undocumented)
-        tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
+        tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined;
     }
     // (undocumented)
     export class DefaultExchangeEnvironmentKnownTradingMarkets extends DefaultExchangeEnvironmentKnownMarkets<TradingMarket> {
@@ -16333,7 +16333,9 @@ export namespace MarketsService {
         // (undocumented)
         readonly marketTypeId: Market.TypeId;
         // (undocumented)
-        abstract tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
+        abstract tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined;
+        // (undocumented)
+        tryGetFirstUnenvironmentedZenithCode(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined;
         // (undocumented)
         tryGetMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
     }
@@ -16403,7 +16405,7 @@ export namespace MarketsService {
         // (undocumented)
         protected findUnknownFromZenithCode(zenithCode: string): T | undefined;
         // (undocumented)
-        tryGetDefaultEnvironmentMarket(_zenithCode: string, _unknownAllowed: boolean): T | undefined;
+        tryGetDefaultEnvironmentMarket(_unenvironmentedZenithCode: string, _unknownAllowed: boolean): T | undefined;
     }
     // (undocumented)
     export class UnknownTradingMarkets extends UnknownMarkets<TradingMarket> {
@@ -38013,7 +38015,7 @@ export class UndisclosedTextFormattableValue extends BooleanTextFormattableValue
 // Warning: (ae-missing-release-tag) "unknownZenithCode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unknownZenithCode = "|Unknown|";
+export const unknownZenithCode = "?";
 
 // Warning: (ae-missing-release-tag) "UpdateNotificationChannelDataDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

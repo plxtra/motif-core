@@ -252,7 +252,7 @@ export namespace MarketIvemId {
                 if (environmentSpecified) {
                     market = markets.tryGetMarket(marketZenithCode, unknownAllowed);
                 } else {
-                    market = markets.tryGetDefaultEnvironmentMarket(marketZenithCode, unknownAllowed);
+                    market = markets.tryGetDefaultEnvironmentMarket(marketZenithCode, unknownAllowed); // marketZenithCode does not have environment
                 }
 
                 if (market === undefined) {

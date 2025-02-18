@@ -2115,6 +2115,15 @@ export namespace MarketsService {
             }
         }
 
+        tryGetFirstUnenvironmentedZenithCode(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined {
+            let market = this.findFirstUnenvironmentedZenithCode(unenvironmentedZenithCode);
+            if (market === undefined && unknownAllowed) {
+                const unknownEnvironmentedZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(unenvironmentedZenithCode, unknownZenithCode)
+                market = this.getMarketOrUnknown(unknownEnvironmentedZenithCode);
+            }
+            return market;
+        }
+
         getMarketOrUnknown(zenithCode: string): T {
             const foundMarket = this.findZenithCode(zenithCode);
 
@@ -2166,7 +2175,7 @@ export namespace MarketsService {
         }
 
         abstract createEmptyCopy(compareFtn: CompareFtn<Market>): Markets<T>;
-        abstract tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined;
+        abstract tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined;
         protected abstract findUnknownFromZenithCode(zenithCode: string): T | undefined;
         protected abstract addUnknownMarket(market: T): void;
         protected abstract createUnknownMarket(exchangeEnvironment: ExchangeEnvironment, exchange: Exchange, zenithCode: string): T;
@@ -2181,7 +2190,7 @@ export namespace MarketsService {
     }
 
     export abstract class UnknownMarkets<T extends Market> extends Markets<T> {
-        tryGetDefaultEnvironmentMarket(_zenithCode: string, _unknownAllowed: boolean): T | undefined {
+        tryGetDefaultEnvironmentMarket(_unenvironmentedZenithCode: string, _unknownAllowed: boolean): T | undefined {
             throw new AssertInternalError('MSUMTGDEM22201');
         }
 
@@ -2228,8 +2237,8 @@ export namespace MarketsService {
     }
 
     export abstract class DefaultExchangeEnvironmentKnownMarkets<T extends Market> extends KnownMarkets<T> {
-        tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined {
-            return this.tryGetMarket(zenithCode, unknownAllowed);
+        tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined {
+            return this.tryGetFirstUnenvironmentedZenithCode(unenvironmentedZenithCode, unknownAllowed);
         }
     }
 
@@ -2258,8 +2267,8 @@ export namespace MarketsService {
             );
         }
 
-        tryGetDefaultEnvironmentMarket(zenithCode: string, unknownAllowed: boolean): T | undefined {
-            return this.defaultExchangeEnvironmentMarkets.tryGetMarket(zenithCode, unknownAllowed);
+        tryGetDefaultEnvironmentMarket(unenvironmentedZenithCode: string, unknownAllowed: boolean): T | undefined {
+            return this.defaultExchangeEnvironmentMarkets.tryGetFirstUnenvironmentedZenithCode(unenvironmentedZenithCode, unknownAllowed);
         }
     }
 
