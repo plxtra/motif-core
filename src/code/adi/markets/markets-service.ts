@@ -4,7 +4,7 @@ import { Badness, BadnessComparableList, ConfigError, ErrorCode, WarningsService
 import { FeedsDataDefinition, MarketsDataDefinition } from '../common/data-definition';
 import { ExchangeEnvironmentZenithCode, unknownZenithCode, ZenithEnvironmentedValueParts, ZenithMarketParts } from '../common/internal-api';
 import { AdiService } from '../data-item/internal-api';
-import { FeedsDataItem } from '../feed/internal-api';
+import { FeedsDataItem, TradingFeed } from '../feed/internal-api';
 import { DataMarket } from './data-market';
 import { Exchange } from './exchange';
 import { ExchangeEnvironment } from './exchange-environment';
@@ -47,7 +47,7 @@ export class MarketsService {
 
     private _marketsDataItem: MarketsDataItem | undefined;
     private _zenithDataMarkets: BadnessComparableList<ZenithDataMarket>;
-    private _tradingFeedMarkets: FeedsDataItem.TradingFeedMarket[] | undefined;
+    private _tradingFeedMarkets: readonly TradingFeed.Market[] | undefined;
 
     private _defaultDefaultExchange: Exchange;
 
@@ -1565,7 +1565,7 @@ export class MarketsService {
     }
 
     private createUnresolvedNewTradingMarkets(
-        feedMarket: FeedsDataItem.TradingFeedMarket,
+        feedMarket: TradingFeed.Market,
         newExchangeEnvironments: ExchangeEnvironment[],
         unresolvedNewExchanges: MarketsService.UnresolvedNewExchange[],
         unresolvedNewDataMarkets: MarketsService.UnresolvedNewDataMarket[], // will contain all DataMarkets as not yet added to DataMarket lists

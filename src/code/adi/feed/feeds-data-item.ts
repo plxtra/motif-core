@@ -29,15 +29,16 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
         }
     }
 
-    getReadyTradingFeedMarketsForMarketsService(): Promise<FeedsDataItem.TradingFeedMarket[] | undefined> {
-        const markets = this.tryGetReadyTradingFeedMarkets();
-        if (markets !== undefined) {
-            return Promise.resolve(markets);
+    getReadyTradingFeedMarketsForMarketsService(): Promise<TradingFeed.Markets | undefined> {
+        if (this.usable) {
+            return new Promise<TradingFeed.Markets | undefined>(
+                (resolve) => this.getAllTradingMarketsWhenReady(resolve)
+            );
         } else {
             if (this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
                 throw new AssertInternalError('FDIGRTFMFMS20112'); // Can only be called by MarketsService and only once
             } else {
-                return new Promise<FeedsDataItem.TradingFeedMarket[] | undefined>(
+                return new Promise<TradingFeed.Markets | undefined>(
                     (resolve) => this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn = resolve
                 );
             }
@@ -60,6 +61,12 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
                     this.endUpdate();
                 }
             }
+        }
+    }
+
+    protected override processUsableChanged(): void {
+        if (this.usable && this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
+            this.getAllTradingMarketsWhenReady(this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn);
         }
     }
 
@@ -94,23 +101,6 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
                 () => { this.unsubscribeDataItem(orderStatusesDataItem); },
             );
             this.tradingFeeds.push(tradingFeed);
-            const getMarketsPromise = tradingFeed.getMarketsForFieldsDataItem();
-            getMarketsPromise.then(
-                (feedMarkets) => {
-                    if (feedMarkets !== undefined) {
-                        window.motifLogger.logInfo(`${Strings[StringId.Feed]} ${Strings[StringId.Trading]} ${Strings[StringId.Markets]} ${Strings[StringId.Available]}: ${FeedClass.idToDisplay(result.classId)}`);
-
-                        if (this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
-                            const allTradingFeedMarkets = this.tryGetReadyTradingFeedMarkets();
-                            if (allTradingFeedMarkets !== undefined) {
-                                this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn(allTradingFeedMarkets);
-                                this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn = undefined;
-                            }
-                        }
-                    }
-                },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'FDICFGMPR30117'); }
-            );
             result = tradingFeed;
         } else {
             result = new Feed(classId, zenithCode, msgFeed.statusId, this.correctnessId);
@@ -166,62 +156,109 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
         this.checkApplyAddRange(msg.feeds, addStartMsgIdx, msg.feeds.length);
     }
 
-    private tryGetReadyTradingFeedMarkets(): FeedsDataItem.TradingFeedMarket[] | undefined {
-        if (!this.usable) {
-            return undefined;
-        } else {
-            const feeds = this.tradingFeeds;
-            const feedCount = feeds.length;
+    // private tryGetReadyTradingFeedMarkets(): FeedsDataItem.TradingFeedMarket[] | undefined {
+    //     const feeds = this.tradingFeeds;
+    //     const feedCount = feeds.length;
 
-            if (feedCount === 0) {
-                return [];
-            } else {
-                if (feedCount === 1) {
-                    const feed = feeds[0];
-                    if (feed.marketsReady) {
-                        return this.createTradingFeedMarketsFromFeed(feed);
-                    } else {
-                        return undefined;
-                    }
+    //     if (feedCount === 0) {
+    //         return [];
+    //     } else {
+    //         if (feedCount === 1) {
+    //             const feed = feeds[0];
+    //             if (feed.marketsReady) {
+    //                 return this.createTradingFeedMarketsFromFeed(feed);
+    //             } else {
+    //                 return undefined;
+    //             }
+    //         } else {
+    //             for (let i = 0; i < feedCount; i++) {
+    //                 const feed = feeds[i];
+    //                 if (!feed.marketsReady) {
+    //                     return undefined;
+    //                 }
+    //             }
+
+    //             let readyMarkets = this.createTradingFeedMarketsFromFeed(feeds[0]);
+    //             for (let i = 1; i < feedCount; i++) {
+    //                 const feed = feeds[i];
+    //                 const feedMarkets = this.createTradingFeedMarketsFromFeed(feed);
+    //                 readyMarkets = [...readyMarkets, ...feedMarkets];
+    //             }
+    //             return readyMarkets;
+    //         }
+    //     }
+    // }
+
+    // private createTradingFeedMarketsFromFeed(feed: TradingFeed): FeedsDataItem.TradingFeedMarket[] {
+    //     const markets = feed.markets;
+    //     const count = markets.length;
+    //     const result = new Array<FeedsDataItem.TradingFeedMarket>(count);
+    //     for (let i = 0; i < count; i++) {
+    //         const market = markets[i];
+    //         result[i] = {
+    //             feed,
+    //             ...market,
+    //         };
+    //     }
+    //     return result;
+    // }
+
+    private getAllTradingMarketsWhenReady(resolveFtn: FeedsDataItem.GetReadyTradingFeedMarketsForMarketsServiceResolveFtn): void {
+        const tradingFeeds = this.tradingFeeds;
+        const tradingFeedCount = tradingFeeds.length;
+        const promises = new Array<Promise<TradingFeed.Markets | undefined>>(tradingFeedCount)
+        for (let i = 0; i < tradingFeedCount; i++) {
+            const tradingFeed = tradingFeeds[i];
+            promises[i] = tradingFeed.getMarketsForFieldsDataItem();
+        }
+
+        const allPromises = Promise.all(promises);
+        allPromises.then(
+            (marketArrays) => {
+                const marketArrayCount = marketArrays.length;
+                if (marketArrayCount === 0) {
+                    resolveFtn([]);
                 } else {
-                    for (let i = 0; i < feedCount; i++) {
-                        const feed = feeds[i];
-                        if (!feed.marketsReady) {
-                            return undefined;
+                    let allAreUndefined = marketArrays[0] === undefined;
+                    let allMarkets = marketArrays[0] === undefined ? [] : marketArrays[0];
+                    for (let i = 1; i < marketArrays.length; i++) {
+                        const marketArray = marketArrays[i];
+                        if (marketArray !== undefined) {
+                            allAreUndefined = false;
+                            allMarkets = [...allMarkets, ...marketArray];
                         }
                     }
 
-                    let readyMarkets = this.createTradingFeedMarketsFromFeed(feeds[0]);
-                    for (let i = 1; i < feedCount; i++) {
-                        const feed = feeds[i];
-                        const feedMarkets = this.createTradingFeedMarketsFromFeed(feed);
-                        readyMarkets = [...readyMarkets, ...feedMarkets];
+                    if (allAreUndefined) {
+                        resolveFtn(undefined);
+                    } else {
+                        resolveFtn(allMarkets);
                     }
-                    return readyMarkets;
                 }
-            }
-        }
-    }
+            },
+            (reason) => { throw AssertInternalError.createIfNotError(reason, '') }
+        );
+        //     getMarketsPromise.then(
+        //         (feedMarkets) => {
+        //             if (feedMarkets !== undefined) {
+        //                 window.motifLogger.logInfo(`${Strings[StringId.Feed]} ${Strings[StringId.Trading]} ${Strings[StringId.Markets]} ${Strings[StringId.Available]}: ${tradingFeed.zenithCode}`);
 
-    private createTradingFeedMarketsFromFeed(feed: TradingFeed): FeedsDataItem.TradingFeedMarket[] {
-        const markets = feed.markets;
-        const count = markets.length;
-        const result = new Array<FeedsDataItem.TradingFeedMarket>(count);
-        for (let i = 0; i < count; i++) {
-            const market = markets[i];
-            result[i] = {
-                feed,
-                ...market,
-            };
-        }
-        return result;
+        //                 if (this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn !== undefined) {
+        //                     const allTradingFeedMarkets = this.tryGetReadyTradingFeedMarkets();
+        //                     if (allTradingFeedMarkets !== undefined) {
+        //                         this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn(allTradingFeedMarkets);
+        //                         this._getReadyTradingFeedMarketsForMarketsServiceResolveFtn = undefined;
+        //                     }
+        //                 }
+        //             }
+        //         },
+        //         (reason) => { throw AssertInternalError.createIfNotError(reason, 'FDICFGMPR30117'); }
+        //     );
+        // }
+
     }
 }
 
 export namespace FeedsDataItem {
-    export type GetReadyTradingFeedMarketsForMarketsServiceResolveFtn = (this: void, markets: TradingFeedMarket[] | undefined) => void;
-
-    export interface TradingFeedMarket extends TradingFeed.Market {
-        feed: TradingFeed;
-    }
+    export type GetReadyTradingFeedMarketsForMarketsServiceResolveFtn = (this: void, markets: TradingFeed.Markets | undefined) => void;
 }

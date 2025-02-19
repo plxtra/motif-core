@@ -11328,11 +11328,13 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
     // (undocumented)
     getFeed(classId: FeedClassId, zenithCodeOrFirstInClass: string | undefined): Feed | undefined;
     // (undocumented)
-    getReadyTradingFeedMarketsForMarketsService(): Promise<FeedsDataItem.TradingFeedMarket[] | undefined>;
+    getReadyTradingFeedMarketsForMarketsService(): Promise<TradingFeed.Markets | undefined>;
     // (undocumented)
     protected processCorrectnessChanged(): void;
     // (undocumented)
     processMessage(msg: DataMessage): void;
+    // (undocumented)
+    protected processUsableChanged(): void;
     // (undocumented)
     readonly tradingFeeds: TradingFeed[];
 }
@@ -11340,12 +11342,7 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
 // @public (undocumented)
 export namespace FeedsDataItem {
     // (undocumented)
-    export type GetReadyTradingFeedMarketsForMarketsServiceResolveFtn = (this: void, markets: TradingFeedMarket[] | undefined) => void;
-    // (undocumented)
-    export interface TradingFeedMarket extends TradingFeed.Market {
-        // (undocumented)
-        feed: TradingFeed;
-    }
+    export type GetReadyTradingFeedMarketsForMarketsServiceResolveFtn = (this: void, markets: TradingFeed.Markets | undefined) => void;
 }
 
 // Warning: (ae-missing-release-tag) "FeedsDataMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -36900,13 +36897,9 @@ export class TradingFeed extends Feed {
     // (undocumented)
     getMarketsForFieldsDataItem(): Promise<TradingFeed.Markets | undefined>;
     // (undocumented)
-    get marketCount(): Integer;
-    // (undocumented)
-    get markets(): TradingFeed.Markets;
+    get markets(): TradingFeed.Markets | undefined;
     // (undocumented)
     get marketsBadness(): Badness;
-    // (undocumented)
-    get marketsReady(): boolean;
     // (undocumented)
     get orderStatusCount(): Integer | undefined;
     // (undocumented)
@@ -36926,7 +36919,10 @@ export namespace TradingFeed {
     // (undocumented)
     export type GetMarketsForFieldsDataItemResolveFtn = (this: void, markets: TradingFeed.Markets | undefined) => void;
     // (undocumented)
-    export type Market = TradingMarketsDataMessage.Market;
+    export interface Market extends TradingMarketsDataMessage.Market {
+        // (undocumented)
+        feed: TradingFeed;
+    }
     // (undocumented)
     export type Markets = readonly Market[];
     // (undocumented)
@@ -37126,9 +37122,7 @@ export class TradingMarketsDataItem extends FeedStatusSubscriptionDataItem {
     // (undocumented)
     protected getFeedDisplay(): string;
     // (undocumented)
-    getMarket(zenithCode: string): TradingMarketsDataMessage.Market | undefined;
-    // (undocumented)
-    readonly markets: TradingMarketsDataMessage.Market[];
+    get markets(): readonly TradingMarketsDataMessage.Market[] | undefined;
     // (undocumented)
     processMessage(msg: DataMessage): void;
     // (undocumented)

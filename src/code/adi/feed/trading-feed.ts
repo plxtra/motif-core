@@ -20,7 +20,7 @@ export class TradingFeed extends Feed {
     tradingMarketsDataItemNoLongerRequiredEventer: TradingFeed.TradingMarketsDataItemNoLongerRequiredEventer | undefined;
     orderStatusesDataItemNoLongerRequiredEventer: TradingFeed.OrderStatusesDataItemNoLongerRequiredEventer | undefined;
 
-    private _markets: TradingFeed.Markets;
+    private _markets: TradingFeed.Markets | undefined;
     private _tradingMarketsDataItem: TradingMarketsDataItem | undefined;
     private _tradingMarketsDataItemCorrectnessChangedSubscriptionId: MultiEvent.SubscriptionId;
     private _getMarketsForFieldsDataItemResolveFtn: TradingFeed.GetMarketsForFieldsDataItemResolveFtn | undefined;
@@ -43,15 +43,20 @@ export class TradingFeed extends Feed {
 
         // classId, zenithName and orderStatusesDataItemNoLongerRequiredEventer will be undefined for null trade feed
         if (tradingMarketsDataItem !== undefined && tradingMarketsDataItemNoLongerRequiredEventer !== undefined) {
+            this._tradingMarketsDataItem = tradingMarketsDataItem;
             this.tradingMarketsDataItemNoLongerRequiredEventer = tradingMarketsDataItemNoLongerRequiredEventer;
 
             tradingMarketsDataItem.setFeedStatusId(statusId);
 
-            if (Correctness.idIsUsable(tradingMarketsDataItem.correctnessId)) {
-                this._markets = tradingMarketsDataItem.markets;
-                this.processTradingMarketsDataItemCorrectnessChangedEvent()
+            if (tradingMarketsDataItem.usable) {
+                const markets = tradingMarketsDataItem.markets;
+                if (markets === undefined) {
+                    throw new AssertInternalError('TFCTMU20092');
+                } else {
+                    this._markets = this.createTradingFeedMarkets(markets);
+                    this.processTradingMarketsDataItemCorrectnessChangedEvent()
+                }
             } else {
-                this._tradingMarketsDataItem = tradingMarketsDataItem;
                 this._tradingMarketsDataItemCorrectnessChangedSubscriptionId = this._tradingMarketsDataItem.subscribeCorrectnessChangedEvent(
                     () => this.processTradingMarketsDataItemCorrectnessChangedEvent()
                 );
@@ -60,6 +65,7 @@ export class TradingFeed extends Feed {
 
         // classId, zenithName and orderStatusesDataItemNoLongerRequiredEventer will be undefined for null trade feed
         if (orderStatusesDataItem !== undefined && orderStatusesDataItemNoLongerRequiredEventer !== undefined) {
+            this._orderStatusesDataItem = orderStatusesDataItem;
             this.orderStatusesDataItemNoLongerRequiredEventer = orderStatusesDataItemNoLongerRequiredEventer;
 
             orderStatusesDataItem.setFeedStatusId(statusId);
@@ -68,7 +74,6 @@ export class TradingFeed extends Feed {
                 this._orderStatuses = orderStatusesDataItem.orderStatuses;
                 this.processOrderStatusesDataItemCorrectnessChangedEvent()
             } else {
-                this._orderStatusesDataItem = orderStatusesDataItem;
                 this._orderStatusesDataItemCorrectnessChangedSubscriptionId = this._orderStatusesDataItem.subscribeCorrectnessChangedEvent(
                     () => this.processOrderStatusesDataItemCorrectnessChangedEvent()
                 );
@@ -76,10 +81,8 @@ export class TradingFeed extends Feed {
         }
     }
 
-    get marketsReady() { return this.tradingMarketsDataItemNoLongerRequiredEventer === undefined}
     get marketsBadness() { return this._tradingMarketsDataItem === undefined ? Badness.notBad : this._tradingMarketsDataItem.badness; }
     get markets() { return this._markets; }
-    get marketCount(): Integer { return this._markets.length; }
 
     get orderStatusesBadness() { return this._orderStatusesDataItem === undefined ? Badness.notBad : this._orderStatusesDataItem.badness; }
     get orderStatuses() { return this._orderStatuses; }
@@ -104,7 +107,7 @@ export class TradingFeed extends Feed {
     }
 
     getMarketsForFieldsDataItem(): Promise<TradingFeed.Markets | undefined> {
-        if (this.marketsReady) {
+        if (this._tradingMarketsDataItem === undefined) {
             return Promise.resolve(this._markets);
         } else {
             if (this._getMarketsForFieldsDataItemResolveFtn !== undefined) {
@@ -150,8 +153,13 @@ export class TradingFeed extends Feed {
             throw new AssertInternalError('TFPOSFC23688399993');
         } else {
             if (Correctness.idIsUsable(dataItem.correctnessId)) {
-                this._markets = dataItem.markets;
-                this.processMarketsReadyOrAbort(this._markets);
+                const dataItemMarkets = dataItem.markets;
+                if (dataItemMarkets === undefined) {
+                    throw new AssertInternalError('TFPTMDICCE20091');
+                } else {
+                    this._markets = this.createTradingFeedMarkets(dataItemMarkets);
+                    this.processMarketsReadyOrAbort(this._markets);
+                }
             }
             this.updateCorrectness();
         }
@@ -185,6 +193,19 @@ export class TradingFeed extends Feed {
             this._orderStatusesDataItem = undefined;
         }
     }
+
+    private createTradingFeedMarkets(dataMessageMarkets: readonly TradingMarketsDataMessage.Market[]): TradingFeed.Market[] {
+        const count = dataMessageMarkets.length;
+        const result = new Array<TradingFeed.Market>(count);
+        for (let i = 0; i < count; i++) {
+            const dataMessageMarket = dataMessageMarkets[i];
+            result[i] = {
+                ...dataMessageMarket,
+                feed: this,
+            };
+        }
+        return result;
+    }
 }
 
 export namespace TradingFeed {
@@ -193,7 +214,9 @@ export namespace TradingFeed {
     export type OrderStatusesDataItemNoLongerRequiredEventer = (this: void) => void;
     export type GetMarketsForFieldsDataItemResolveFtn = (this: void, markets: TradingFeed.Markets | undefined) => void;
 
-    export type Market = TradingMarketsDataMessage.Market;
+    export interface Market extends TradingMarketsDataMessage.Market {
+        feed: TradingFeed;
+    }
     export type Markets = readonly Market[];
 
     export const enum TradingFieldId {
