@@ -65,9 +65,9 @@ export class MarketsService {
     ) {
         const genericUnknownExchangeEnvironment = ExchangeEnvironment.createUnknown(unknownZenithCode);
         this.genericUnknownExchangeEnvironment = genericUnknownExchangeEnvironment;
-        const environmentedUnknownZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(unknownZenithCode, genericUnknownExchangeEnvironment.zenithCode);
-        const genericUnknownExchange = Exchange.createUnknown(genericUnknownExchangeEnvironment, environmentedUnknownZenithCode, undefined, undefined);
+        const genericUnknownExchange = Exchange.createUnknown(genericUnknownExchangeEnvironment, unknownZenithCode, undefined, undefined);
         this.genericUnknownExchange = genericUnknownExchange;
+        const environmentedUnknownZenithCode = ZenithEnvironmentedValueParts.toStringFromDestructured(unknownZenithCode, genericUnknownExchangeEnvironment.zenithCode);
         const genericUnknownDataMarket = DataMarket.createUnknown(this._adiService, genericUnknownExchangeEnvironment, genericUnknownExchange, environmentedUnknownZenithCode);
         this.genericUnknownDataMarket = genericUnknownDataMarket;
         const genericUnknownTradingMarket = TradingMarket.createUnknown(genericUnknownExchangeEnvironment, genericUnknownExchange, environmentedUnknownZenithCode);
@@ -603,9 +603,9 @@ export class MarketsService {
     private getUnknownExchange(zenithCode: string): Exchange {
         let result = this.unknownExchanges.findZenithCode(zenithCode);
         if (result === undefined) {
-            const environmentZenithCode = ZenithEnvironmentedValueParts.getEnvironmentFromString(zenithCode);
+            const { value: unenvironmentedExchangeZenithCode, environmentZenithCode } = ZenithEnvironmentedValueParts.fromString(zenithCode);
             const exchangeEnvironment = this.getExchangeEnvironmentOrUnknown(environmentZenithCode);
-            result = Exchange.createUnknown(exchangeEnvironment, zenithCode, this.genericUnknownDataMarket, this.genericUnknownTradingMarket);
+            result = Exchange.createUnknown(exchangeEnvironment, unenvironmentedExchangeZenithCode, this.genericUnknownDataMarket, this.genericUnknownTradingMarket);
             this.beginChange();
             this.unknownExchanges.binaryInsert(result);
             this.endChange();
@@ -1478,10 +1478,10 @@ export class MarketsService {
         unresolvedNewMarket.market.setSymbologySupportedExchanges(symbologySupportedExchanges);
     }
 
-    private calculateExchangeDefaultLitMarket(exchange: Exchange, configDefaultLitMarketZenithCode: string | null | undefined): DataMarket {
+    private calculateExchangeDefaultLitMarket(exchange: Exchange, configDefaultLitMarketZenithCode: string | null | undefined): DataMarket | undefined {
         if (configDefaultLitMarketZenithCode === null) {
-            // No lit markets - return unknown
-            return this.genericUnknownDataMarket;
+            // Config specified no lit markets
+            return undefined;
         } else {
             const markets = exchange.dataMarkets;
             const marketCount = markets.length;
@@ -1514,14 +1514,18 @@ export class MarketsService {
             }
 
             // No market was lit - return unknown
-            return this.genericUnknownDataMarket;
+            return undefined;
         }
     }
 
-    private calculateExchangeDefaultTradingMarket(exchange: Exchange, configDefaultTradingMarketZenithCode: string | null | undefined, defaultLitMarket: DataMarket | undefined): TradingMarket {
+    private calculateExchangeDefaultTradingMarket(
+        exchange: Exchange,
+        configDefaultTradingMarketZenithCode: string | null | undefined,
+        defaultLitMarket: DataMarket | undefined
+    ): TradingMarket | undefined {
         if (configDefaultTradingMarketZenithCode === null) {
-            // No trading markets
-            return this.genericUnknownTradingMarket;
+            // Config specified no trading markets
+            return undefined;
         } else {
             const tradingMarkets = exchange.tradingMarkets;
             const tradingMarketCount = tradingMarkets.length;
@@ -1560,7 +1564,7 @@ export class MarketsService {
             }
 
             // No markets - return unknown
-            return this.genericUnknownTradingMarket;
+            return undefined;
         }
     }
 

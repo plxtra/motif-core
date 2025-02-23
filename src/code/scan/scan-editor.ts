@@ -1077,8 +1077,12 @@ export class ScanEditor extends OpenableScanEditor {
         this.setDescription('');
         this.setSymbolListEnabled(ScanEditor.DefaultSymbolListEnabled);
         this.setTargetTypeId(ScanEditor.DefaultScanTargetTypeId);
-        const defaultExchange = this._symbolsService.defaultExchange;
-        this.setTargetMarkets([defaultExchange.defaultLitMarket]);
+        const defaultLitMarket = this._symbolsService.defaultExchange.defaultLitMarket;
+        if (defaultLitMarket === undefined) {
+            this.setTargetMarkets([]);
+        } else {
+            this.setTargetMarkets([defaultLitMarket]);
+        }
         this.setTargetTypeId(ScanTargetTypeId.Markets);
         this.setMaxMatchCount(ScanEditor.DefaultMaxMatchCount);
         this.setCriteria(ScanEditor.DefaultCriteria, undefined);

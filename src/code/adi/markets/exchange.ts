@@ -39,8 +39,8 @@ export class Exchange {
     private _isDefaultDefault: boolean;
     private _exchangeEnvironmentIsDefault: boolean;
     private _symbologyCode: string;
-    private _defaultLitMarket: DataMarket;
-    private _defaultTradingMarket: TradingMarket;
+    private _defaultLitMarket: DataMarket | undefined;
+    private _defaultTradingMarket: TradingMarket | undefined;
 
     private _beginChangeCount = 0;
     private _changedValueFieldIds = new Array<Exchange.FieldId>();
@@ -96,8 +96,8 @@ export class Exchange {
     get symbologyCode(): string { return this._symbologyCode; }
     get dataMarkets(): readonly DataMarket[] { return this._dataMarkets; }
     get tradingMarkets(): readonly TradingMarket[] { return this._tradingMarkets; }
-    get defaultLitMarket(): DataMarket { return this._defaultLitMarket; }
-    get defaultTradingMarket(): TradingMarket { return this._defaultTradingMarket; }
+    get defaultLitMarket(): DataMarket | undefined { return this._defaultLitMarket; }
+    get defaultTradingMarket(): TradingMarket | undefined { return this._defaultTradingMarket; }
 
     destroy() {
         this._destroyed = true;
@@ -131,7 +131,7 @@ export class Exchange {
         }
     }
 
-    setDefaultMarkets(defaultLitMarket: DataMarket, defaultTradingMarket: TradingMarket) {
+    setDefaultMarkets(defaultLitMarket: DataMarket | undefined, defaultTradingMarket: TradingMarket | undefined) {
         this._defaultLitMarket = defaultLitMarket;
         this._defaultTradingMarket = defaultTradingMarket;
     }
@@ -436,10 +436,15 @@ export namespace Exchange {
         return CommaText.fromStringArray(abbreviatedDisplays);
     }
 
-    export function createUnknown(exchangeEnvironment: ExchangeEnvironment, zenithCode: string, defaultLitMarket: DataMarket | undefined, defaultTradingMarket: TradingMarket | undefined) {
+    export function createUnknown(
+        exchangeEnvironment: ExchangeEnvironment,
+        unenvironmentedExchangeZenithCode: string,
+        defaultLitMarket: DataMarket | undefined,
+        defaultTradingMarket: TradingMarket | undefined
+    ) {
         const allowedSymbolNameFields = [SymbolFieldId.Code];
         const config: MarketsConfig.Exchange = {
-            zenithCode,
+            zenithCode: ZenithEnvironmentedValueParts.toStringFromDestructured(unenvironmentedExchangeZenithCode, exchangeEnvironment.zenithCode),
             defaultExchangeEnvironmentZenithCode: exchangeEnvironment.zenithCode,
             symbologyCode: '!',
             allowedSymbolNameFields,
@@ -454,7 +459,7 @@ export namespace Exchange {
             defaultLitMarketZenithCode: null,
             defaultTradingMarketZenithCode: null,
         }
-        const result = new Exchange(zenithCode, exchangeEnvironment, config, true);
+        const result = new Exchange(unenvironmentedExchangeZenithCode, exchangeEnvironment, config, true);
         result.setIsDefaultDefault(false);
         result.setIsExchangeEnvironmentDefault(false);
         result.setSymbologyCode('');

@@ -1184,33 +1184,39 @@ export class OrderPad {
         if (this._readonly) {
             throw new AssertInternalError('OPLFH342834');
         } else {
-            this.beginChanges();
-            try {
-                this._requestTypeId = OrderRequestTypeId.Place;
+            const tradingIvemId = holding.defaultTradingIvemId;
+            if (tradingIvemId === undefined) {
+                return false;
+            } else {
+                this.beginChanges();
+                try {
+                    this._requestTypeId = OrderRequestTypeId.Place;
 
-                this.internalSetTriggerTypeId(OrderTriggerTypeId.Immediate);
-                this.internalSetAccountZenithCode(holding.account.zenithCode);
+                    this.internalSetTriggerTypeId(OrderTriggerTypeId.Immediate);
+                    this.internalSetAccountZenithCode(holding.account.zenithCode);
 
-                const tradingIvemId = this.createTradingIvemIdFromHolding(holding);
-                this.internalSetTradingIvemId(tradingIvemId);
+                    this.internalSetTradingIvemId(tradingIvemId);
 
-                if (sideId === OrderTradeTypeId.Sell) {
-                    this.internalSetTotalQuantity(holding.totalAvailableQuantity);
+                    if (sideId === OrderTradeTypeId.Sell) {
+                        this.internalSetTotalQuantity(holding.totalAvailableQuantity);
+                    }
+
+                    this.internalSetSideId(sideId);
+                } finally {
+                    this.endChanges();
                 }
 
-                this.internalSetSideId(sideId);
-            } finally {
-                this.endChanges();
+                return true;
             }
         }
     }
 
     loadBuyFromHolding(holding: Holding) {
-        this.loadFromHolding(holding, OrderTradeTypeId.Buy);
+        return this.loadFromHolding(holding, OrderTradeTypeId.Buy);
     }
 
     loadSellFromHolding(holding: Holding) {
-        this.loadFromHolding(holding, OrderTradeTypeId.Sell);
+        return this.loadFromHolding(holding, OrderTradeTypeId.Sell);
     }
 
     resetModified() {
@@ -3042,10 +3048,14 @@ export class OrderPad {
         return new TradingIvemId(order.code, order.tradingMarket);
     }
 
-    private createTradingIvemIdFromHolding(holding: Holding): TradingIvemId {
+    private createTradingIvemIdFromHolding(holding: Holding): TradingIvemId | undefined {
         const exchange = holding.exchange;
         const tradingMarket = exchange.defaultTradingMarket;
-        return new TradingIvemId(holding.code, tradingMarket);
+        if (tradingMarket === undefined) {
+            return undefined;
+        } else {
+            return new TradingIvemId(holding.code, tradingMarket);
+        }
     }
 }
 
@@ -4112,6 +4122,10 @@ export namespace OrderPad {
 
     export function initialise() {
         Field.initialiseField();
+    }
+
+    export function canLoadFromHolding(holding: Holding) {
+        return holding.defaultDataIvemIdAvailable;
     }
 }
 

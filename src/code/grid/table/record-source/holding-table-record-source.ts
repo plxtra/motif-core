@@ -88,8 +88,11 @@ export class HoldingTableRecordSource
                     break;
                 }
                 case TableFieldSourceDefinition.TypeId.SecurityDataItem: {
-                    const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, holding.defaultDataIvemId);
-                    result.addSource(valueSource);
+                    const defaultDataIvemId = holding.defaultDataIvemId;
+                    if (defaultDataIvemId !== undefined) {
+                        const valueSource = new SecurityDataItemTableValueSource(this._decimalFactory, this._adiService, result.fieldCount, defaultDataIvemId);
+                        result.addSource(valueSource);
+                    }
                     break;
                 }
                 default:

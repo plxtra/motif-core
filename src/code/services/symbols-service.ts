@@ -249,11 +249,6 @@ export class SymbolsService {
         }
     }
 
-    getMarketGlobalCode(market: DataMarket) {
-        return market.symbologyCode;
-        // return this._pscMarketMap.getGlobalCode(marketId);
-    }
-
     parseDataIvemId(value: string): SymbolsService.MarketIvemIdParseDetails<DataMarket> {
         const calculatedParseMode = this.calculateParseMode(value);
         if (!calculatedParseMode.valid) {
@@ -459,9 +454,22 @@ export class SymbolsService {
     //         return undefined;
     //     }
     // }
-    getDefaultDataIvemIdFromIvemId(ivemId: IvemId) {
+    tryGetDefaultDataIvemIdFromIvemId(ivemId: IvemId) {
         const market = ivemId.exchange.defaultLitMarket;
-        return new DataIvemId(ivemId.code, market);
+        if (market === undefined) {
+            return undefined;
+        } else {
+            return new DataIvemId(ivemId.code, market);
+        }
+    }
+
+    tryGetDefaultTradingIvemIdFromIvemId(ivemId: IvemId) {
+        const market = ivemId.exchange.defaultTradingMarket;
+        if (market === undefined) {
+            return undefined;
+        } else {
+            return new TradingIvemId(ivemId.code, market);
+        }
     }
 
     tryGetBestDataIvemIdFromMarketIvemId<T extends Market>(marketIvemId: MarketIvemId<T>): DataIvemId | undefined {
@@ -1383,7 +1391,7 @@ export class SymbolsService {
                         return `${code}${this.pscExchangeAnnouncerChar}${exchange.symbologyCode}`;
                     } else {
                         const marketDisplay = displayMarketAsLocal ? market.symbologyExchangeSuffixCode : market.symbologyCode;
-                        return `${code}${this.pscExchangeAnnouncerChar}{${exchange.symbologyCode}${this.pscMarketAnnouncerChar}${marketDisplay}`;
+                        return `${code}${this.pscExchangeAnnouncerChar}${exchange.symbologyCode}${this.pscMarketAnnouncerChar}${marketDisplay}`;
                     }
                 }
 

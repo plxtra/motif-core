@@ -24,7 +24,7 @@ import {
     IvemClassId
 } from './common/internal-api';
 import { Exchange, MarketsService } from './markets/internal-api';
-import { DataIvemId, IvemId } from './symbol-id/internal-api';
+import { DataIvemId, IvemId, TradingIvemId } from './symbol-id/internal-api';
 
 export class Holding implements BrokerageAccountRecord {
     private _destroyed = false;
@@ -98,12 +98,24 @@ export class Holding implements BrokerageAccountRecord {
         return this._mapKey;
     }
     get accountMapKey() { return this._account.mapKey; }
+    get ivemId() { return new IvemId(this.code, this.exchange); }
+    get defaultDataIvemIdAvailable(): boolean { return this.exchange.defaultLitMarket !== undefined; }
     get defaultDataIvemId() {
         const market = this.exchange.defaultLitMarket;
-        return new DataIvemId(this.code, market);
+        if (market === undefined) {
+            return undefined;
+        } else {
+            return new DataIvemId(this.code, market);
+        }
     }
-    get ivemId() {
-        return new IvemId(this.code, this.exchange);
+    get defaultTradingIvemIdAvailable(): boolean { return this.exchange.defaultLitMarket !== undefined; }
+    get defaultTradingIvemId() {
+        const market = this.exchange.defaultTradingMarket;
+        if (market === undefined) {
+            return undefined;
+        } else {
+            return new TradingIvemId(this.code, market);
+        }
     }
 
     destroy() {
