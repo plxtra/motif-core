@@ -1399,11 +1399,19 @@ export class ErrorPublisherSubscriptionDataMessage_Offlined extends ErrorPublish
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_UserNotAuthorised extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string) {
         super(dataItemId, dataItemRequestNr,
             AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised, errorText,
+            AdiPublisherSubscription.AllowedRetryTypeId.Never,
+            true);
+    }
+}
+
+export class ErrorPublisherSubscriptionDataMessage_SubscriptionError extends ErrorPublisherSubscriptionDataMessage {
+    constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string) {
+        super(dataItemId, dataItemRequestNr,
+            AdiPublisherSubscription.ErrorTypeId.SubscriptionError, errorText,
             AdiPublisherSubscription.AllowedRetryTypeId.Never,
             true);
     }
@@ -1456,12 +1464,12 @@ export namespace ErrorPublisherSubscriptionDataMessage_InvalidRequest {
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export class ErrorPublisherSubscriptionDataMessage_SubRequestError extends ErrorPublisherSubscriptionDataMessage {
+export class ErrorPublisherSubscriptionDataMessage_SubcriptionWarning extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
         allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId
     ) {
         super(dataItemId, dataItemRequestNr,
-            AdiPublisherSubscription.ErrorTypeId.SubRequestError, errorText, allowedRetryTypeId,
+            AdiPublisherSubscription.ErrorTypeId.SubscriptionWarning, errorText, allowedRetryTypeId,
             true);
     }
 }
@@ -1497,7 +1505,8 @@ export class ZenithCounterDataMessage extends DataMessage {
     requestTimeoutSubscriptionErrorCount: Integer;
     offlinedSubscriptionErrorCount: Integer;
     publishRequestErrorSubscriptionErrorCount: Integer;
-    subRequestErrorSubscriptionErrorCount: Integer;
+    subscriptionErrorCount: Integer;
+    subscriptionWarningCount: Integer;
     dataErrorSubscriptionErrorCount: Integer;
     userNotAuthorisedSubscriptionErrorCount: Integer;
     serverWarningSubscriptionErrorCount: Integer;

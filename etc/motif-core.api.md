@@ -394,7 +394,7 @@ export namespace AdiPublisherSubscription {
     // (undocumented)
     export const enum ErrorTypeId {
         // (undocumented)
-        DataError = 7,
+        DataError = 8,
         // (undocumented)
         Internal = 0,
         // (undocumented)
@@ -402,11 +402,13 @@ export namespace AdiPublisherSubscription {
         // (undocumented)
         Offlined = 2,
         // (undocumented)
-        PublishRequestError = 5,
+        PublishRequestError = 6,
         // (undocumented)
         RequestTimeout = 3,
         // (undocumented)
-        SubRequestError = 6,
+        SubscriptionError = 5,
+        // (undocumented)
+        SubscriptionWarning = 7,
         // (undocumented)
         UserNotAuthorised = 4
     }
@@ -1387,17 +1389,17 @@ export namespace Badness {
         // (undocumented)
         PublisherSubscriptionError_Offlined_Suspect = 7,
         // (undocumented)
-        PublisherSubscriptionError_PublishRequestError_Error = 13,
+        PublisherSubscriptionError_PublishRequestError_Error = 14,
         // (undocumented)
-        PublisherSubscriptionError_PublishRequestError_Suspect = 12,
+        PublisherSubscriptionError_PublishRequestError_Suspect = 13,
         // (undocumented)
         PublisherSubscriptionError_RequestTimeout_Error = 10,
         // (undocumented)
         PublisherSubscriptionError_RequestTimeout_Suspect = 9,
         // (undocumented)
-        PublisherSubscriptionError_SubRequestError_Error = 15,
+        PublisherSubscriptionError_SubscriptionError_Error = 12,
         // (undocumented)
-        PublisherSubscriptionError_SubRequestError_Suspect = 14,
+        PublisherSubscriptionError_SubscriptionWarning_Suspect = 15,
         // (undocumented)
         PublisherSubscriptionError_UserNotAuthorised_Error = 11,
         // (undocumented)
@@ -10329,11 +10331,18 @@ export class ErrorPublisherSubscriptionDataMessage_RequestTimeout extends ErrorP
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string);
 }
 
-// Warning: (ae-missing-release-tag) "ErrorPublisherSubscriptionDataMessage_SubRequestError" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ErrorPublisherSubscriptionDataMessage_SubcriptionWarning" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class ErrorPublisherSubscriptionDataMessage_SubRequestError extends ErrorPublisherSubscriptionDataMessage {
+export class ErrorPublisherSubscriptionDataMessage_SubcriptionWarning extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string, allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId);
+}
+
+// Warning: (ae-missing-release-tag) "ErrorPublisherSubscriptionDataMessage_SubscriptionError" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ErrorPublisherSubscriptionDataMessage_SubscriptionError extends ErrorPublisherSubscriptionDataMessage {
+    constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string);
 }
 
 // Warning: (ae-missing-release-tag) "ErrorPublisherSubscriptionDataMessage_UserNotAuthorised" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -10364,13 +10373,13 @@ export class Exchange {
     // (undocumented)
     get dataMarkets(): readonly DataMarket[];
     // (undocumented)
-    get defaultLitMarket(): DataMarket;
+    get defaultLitMarket(): DataMarket | undefined;
     // (undocumented)
     readonly defaultSymbolNameFieldId: SymbolFieldId;
     // (undocumented)
     readonly defaultSymbolSearchFieldIds: readonly SymbolFieldId[];
     // (undocumented)
-    get defaultTradingMarket(): TradingMarket;
+    get defaultTradingMarket(): TradingMarket | undefined;
     // (undocumented)
     destroy(): void;
     // (undocumented)
@@ -10394,7 +10403,7 @@ export class Exchange {
     // (undocumented)
     readonly mapKey: string;
     // (undocumented)
-    setDefaultMarkets(defaultLitMarket: DataMarket, defaultTradingMarket: TradingMarket): void;
+    setDefaultMarkets(defaultLitMarket: DataMarket | undefined, defaultTradingMarket: TradingMarket | undefined): void;
     // (undocumented)
     setIsDefaultDefault(value: boolean): void;
     // (undocumented)
@@ -10440,7 +10449,7 @@ export namespace Exchange {
     // (undocumented)
     export type CorrectnessChangedEventHandler = (this: void) => void;
     // (undocumented)
-    export function createUnknown(exchangeEnvironment: ExchangeEnvironment, zenithCode: string, defaultLitMarket: DataMarket | undefined, defaultTradingMarket: TradingMarket | undefined): Exchange;
+    export function createUnknown(exchangeEnvironment: ExchangeEnvironment, unenvironmentedExchangeZenithCode: string, defaultLitMarket: DataMarket | undefined, defaultTradingMarket: TradingMarket | undefined): Exchange;
     // (undocumented)
     export namespace Field {
         const // (undocumented)
@@ -12414,7 +12423,13 @@ export class Holding implements BrokerageAccountRecord {
     // (undocumented)
     get currencyId(): CurrencyId | undefined;
     // (undocumented)
-    get defaultDataIvemId(): DataIvemId;
+    get defaultDataIvemId(): DataIvemId | undefined;
+    // (undocumented)
+    get defaultDataIvemIdAvailable(): boolean;
+    // (undocumented)
+    get defaultTradingIvemId(): TradingIvemId | undefined;
+    // (undocumented)
+    get defaultTradingIvemIdAvailable(): boolean;
     // (undocumented)
     destroy(): void;
     // (undocumented)
@@ -18528,13 +18543,13 @@ export class OrderPad {
     // (undocumented)
     loadBuy(accountZenithCode?: string): void;
     // (undocumented)
-    loadBuyFromHolding(holding: Holding): void;
+    loadBuyFromHolding(holding: Holding): boolean;
     // (undocumented)
     loadBuyFromOrder(order: Order): void;
     // (undocumented)
     loadCancelFromOrder(order: Order): void;
     // (undocumented)
-    loadFromHolding(holding: Holding, sideId?: OrderTradeTypeId): void;
+    loadFromHolding(holding: Holding, sideId?: OrderTradeTypeId): boolean;
     // (undocumented)
     loadFromJson(orderPadJson: Json): void;
     // (undocumented)
@@ -18546,7 +18561,7 @@ export class OrderPad {
     // (undocumented)
     loadSell(accountZenithCode?: string): void;
     // (undocumented)
-    loadSellFromHolding(holding: Holding): void;
+    loadSellFromHolding(holding: Holding): boolean;
     // (undocumented)
     loadSellFromOrder(order: Order): void;
     // (undocumented)
@@ -18629,6 +18644,8 @@ export namespace OrderPad {
         cancelled: boolean;
     }
     // (undocumented)
+    export function canLoadFromHolding(holding: Holding): boolean;
+    // (undocumented)
     export function createFromJson(decimalFactory: DecimalFactory, marketsService: MarketsService, symbolDetailCacheService: SymbolDetailCacheService, adi: AdiService, orderPadJson: Json): OrderPad;
     // (undocumented)
     export class Field {
@@ -18652,6 +18669,18 @@ export namespace OrderPad {
         // (undocumented)
         statusReasonId: Field.StatusReasonId;
     }
+    const // (undocumented)
+    minVisibleQuantity = 5000;
+    const // (undocumented)
+    minHiddenQuantity = 500000;
+    const // (undocumented)
+    myxNormalBaseQuantity = 100;
+    const // (undocumented)
+    defaultAllowedTriggerTypeIds: OrderTriggerTypeId[];
+    const // (undocumented)
+    defaultAllowedSideIds: OrderTradeTypeId[];
+    const // (undocumented)
+    defaultAllowedOrderTypeIds: OrderTypeId[];
     // (undocumented)
     export namespace Field {
         // (undocumented)
@@ -18864,18 +18893,6 @@ export namespace OrderPad {
         // (undocumented)
         export function tryNameToId(name: string): Id | undefined;
     }
-    const // (undocumented)
-    minVisibleQuantity = 5000;
-    const // (undocumented)
-    minHiddenQuantity = 500000;
-    const // (undocumented)
-    myxNormalBaseQuantity = 100;
-    const // (undocumented)
-    defaultAllowedTriggerTypeIds: OrderTriggerTypeId[];
-    const // (undocumented)
-    defaultAllowedSideIds: OrderTradeTypeId[];
-    const // (undocumented)
-    defaultAllowedOrderTypeIds: OrderTypeId[];
     // (undocumented)
     export const enum FieldId {
         // (undocumented)
@@ -20990,7 +21007,7 @@ export namespace PublisherSubscriptionDataItem {
         // (undocumented)
         export function idIsSubscribed(id: Id): boolean;
         // (undocumented)
-        export function idToBadnessReasonId(id: Id): Badness.ReasonId.NotBad | Badness.ReasonId.Inactive | Badness.ReasonId.Custom_Usable | Badness.ReasonId.Custom_Suspect | Badness.ReasonId.Custom_Error | Badness.ReasonId.PublisherSubscriptionError_Internal_Error | Badness.ReasonId.PublisherSubscriptionError_InvalidRequest_Error | Badness.ReasonId.PublisherSubscriptionError_Offlined_Suspect | Badness.ReasonId.PublisherSubscriptionError_Offlined_Error | Badness.ReasonId.PublisherSubscriptionError_RequestTimeout_Suspect | Badness.ReasonId.PublisherSubscriptionError_RequestTimeout_Error | Badness.ReasonId.PublisherSubscriptionError_UserNotAuthorised_Error | Badness.ReasonId.PublisherSubscriptionError_PublishRequestError_Suspect | Badness.ReasonId.PublisherSubscriptionError_PublishRequestError_Error | Badness.ReasonId.PublisherSubscriptionError_SubRequestError_Suspect | Badness.ReasonId.PublisherSubscriptionError_SubRequestError_Error | Badness.ReasonId.PublisherSubscriptionError_DataError_Suspect | Badness.ReasonId.PublisherSubscriptionError_DataError_Error | Badness.ReasonId.PublisherServerWarning_Usable | Badness.ReasonId.PublisherServerWarning_Suspect | Badness.ReasonId.PublisherServerError | Badness.ReasonId.PublisherSubscriptionState_NeverSubscribed | Badness.ReasonId.PublisherSubscriptionState_PublisherOnlineWaiting | Badness.ReasonId.PublisherSubscriptionState_PublisherOfflining | Badness.ReasonId.PublisherSubscriptionState_ResponseWaiting | Badness.ReasonId.PublisherSubscriptionState_SynchronisationWaiting | Badness.ReasonId.PublisherSubscriptionState_Synchronised | Badness.ReasonId.PublisherSubscriptionState_UnsubscribedSynchronised | Badness.ReasonId.PreUsable_Clear | Badness.ReasonId.PreUsable_Add | Badness.ReasonId.ConnectionOffline | Badness.ReasonId.FeedsWaiting | Badness.ReasonId.FeedsError | Badness.ReasonId.FeedWaiting | Badness.ReasonId.FeedError | Badness.ReasonId.FeedNotAvailable | Badness.ReasonId.NoAuthorityFeed | Badness.ReasonId.MarketsWaiting | Badness.ReasonId.MarketsError | Badness.ReasonId.MarketWaiting | Badness.ReasonId.MarketError | Badness.ReasonId.MarketNotAvailable | Badness.ReasonId.BrokerageAccountsWaiting | Badness.ReasonId.BrokerageAccountsError | Badness.ReasonId.BrokerageAccountWaiting | Badness.ReasonId.BrokerageAccountError | Badness.ReasonId.BrokerageAccountNotAvailable | Badness.ReasonId.OrderStatusesError | Badness.ReasonId.FeedStatus_Unknown | Badness.ReasonId.FeedStatus_Initialising | Badness.ReasonId.FeedStatus_Impaired | Badness.ReasonId.FeedStatus_Expired | Badness.ReasonId.Opening | Badness.ReasonId.Reading | Badness.ReasonId.SymbolMatching_None | Badness.ReasonId.SymbolMatching_Ambiguous | Badness.ReasonId.SymbolOkWaitingForData | Badness.ReasonId.DataRetrieving | Badness.ReasonId.MarketTradingStatesRetrieving | Badness.ReasonId.OrderStatusesFetching | Badness.ReasonId.BrokerageAccountDataListsIncubating | Badness.ReasonId.OneOrMoreAccountsInError | Badness.ReasonId.MultipleUsable | Badness.ReasonId.MultipleSuspect | Badness.ReasonId.MultipleError | Badness.ReasonId.StatusWarnings | Badness.ReasonId.StatusRetrieving | Badness.ReasonId.StatusErrors | Badness.ReasonId.LockError;
+        export function idToBadnessReasonId(id: Id): Badness.ReasonId.NotBad | Badness.ReasonId.Inactive | Badness.ReasonId.Custom_Usable | Badness.ReasonId.Custom_Suspect | Badness.ReasonId.Custom_Error | Badness.ReasonId.PublisherSubscriptionError_Internal_Error | Badness.ReasonId.PublisherSubscriptionError_InvalidRequest_Error | Badness.ReasonId.PublisherSubscriptionError_Offlined_Suspect | Badness.ReasonId.PublisherSubscriptionError_Offlined_Error | Badness.ReasonId.PublisherSubscriptionError_RequestTimeout_Suspect | Badness.ReasonId.PublisherSubscriptionError_RequestTimeout_Error | Badness.ReasonId.PublisherSubscriptionError_UserNotAuthorised_Error | Badness.ReasonId.PublisherSubscriptionError_SubscriptionError_Error | Badness.ReasonId.PublisherSubscriptionError_PublishRequestError_Suspect | Badness.ReasonId.PublisherSubscriptionError_PublishRequestError_Error | Badness.ReasonId.PublisherSubscriptionError_SubscriptionWarning_Suspect | Badness.ReasonId.PublisherSubscriptionError_DataError_Suspect | Badness.ReasonId.PublisherSubscriptionError_DataError_Error | Badness.ReasonId.PublisherServerWarning_Usable | Badness.ReasonId.PublisherServerWarning_Suspect | Badness.ReasonId.PublisherServerError | Badness.ReasonId.PublisherSubscriptionState_NeverSubscribed | Badness.ReasonId.PublisherSubscriptionState_PublisherOnlineWaiting | Badness.ReasonId.PublisherSubscriptionState_PublisherOfflining | Badness.ReasonId.PublisherSubscriptionState_ResponseWaiting | Badness.ReasonId.PublisherSubscriptionState_SynchronisationWaiting | Badness.ReasonId.PublisherSubscriptionState_Synchronised | Badness.ReasonId.PublisherSubscriptionState_UnsubscribedSynchronised | Badness.ReasonId.PreUsable_Clear | Badness.ReasonId.PreUsable_Add | Badness.ReasonId.ConnectionOffline | Badness.ReasonId.FeedsWaiting | Badness.ReasonId.FeedsError | Badness.ReasonId.FeedWaiting | Badness.ReasonId.FeedError | Badness.ReasonId.FeedNotAvailable | Badness.ReasonId.NoAuthorityFeed | Badness.ReasonId.MarketsWaiting | Badness.ReasonId.MarketsError | Badness.ReasonId.MarketWaiting | Badness.ReasonId.MarketError | Badness.ReasonId.MarketNotAvailable | Badness.ReasonId.BrokerageAccountsWaiting | Badness.ReasonId.BrokerageAccountsError | Badness.ReasonId.BrokerageAccountWaiting | Badness.ReasonId.BrokerageAccountError | Badness.ReasonId.BrokerageAccountNotAvailable | Badness.ReasonId.OrderStatusesError | Badness.ReasonId.FeedStatus_Unknown | Badness.ReasonId.FeedStatus_Initialising | Badness.ReasonId.FeedStatus_Impaired | Badness.ReasonId.FeedStatus_Expired | Badness.ReasonId.Opening | Badness.ReasonId.Reading | Badness.ReasonId.SymbolMatching_None | Badness.ReasonId.SymbolMatching_Ambiguous | Badness.ReasonId.SymbolOkWaitingForData | Badness.ReasonId.DataRetrieving | Badness.ReasonId.MarketTradingStatesRetrieving | Badness.ReasonId.OrderStatusesFetching | Badness.ReasonId.BrokerageAccountDataListsIncubating | Badness.ReasonId.OneOrMoreAccountsInError | Badness.ReasonId.MultipleUsable | Badness.ReasonId.MultipleSuspect | Badness.ReasonId.MultipleError | Badness.ReasonId.StatusWarnings | Badness.ReasonId.StatusRetrieving | Badness.ReasonId.StatusErrors | Badness.ReasonId.LockError;
         // (undocumented)
         export function staticConstructor(): void;
     }
@@ -28346,13 +28363,13 @@ export const enum StringId {
     // (undocumented)
     BadnessReasonId_PublisherSubscriptionError_Offlined_Suspect = 1870,
     // (undocumented)
-    BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Error = 1876,
+    BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Error = 1877,
     // (undocumented)
-    BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect = 1875,
+    BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect = 1876,
     // (undocumented)
-    BadnessReasonId_PublisherSubscriptionError_SubRequestError_Error = 1878,
+    BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error = 1875,
     // (undocumented)
-    BadnessReasonId_PublisherSubscriptionError_SubRequestError_Suspect = 1877,
+    BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect = 1878,
     // (undocumented)
     BadnessReasonId_PublisherSubscriptionError_Timeout_Error = 1873,
     // (undocumented)
@@ -33796,10 +33813,6 @@ export class SymbolsService {
     // (undocumented)
     finalise(): void;
     // (undocumented)
-    getDefaultDataIvemIdFromIvemId(ivemId: IvemId): DataIvemId;
-    // (undocumented)
-    getMarketGlobalCode(market: DataMarket): string;
-    // (undocumented)
     ivemIdToDisplay(ivemId: IvemId | undefined): string;
     // (undocumented)
     marketIvemIdToDisplay<T extends Market>(marketIvemId: MarketIvemId<T> | undefined): string;
@@ -33848,6 +33861,10 @@ export class SymbolsService {
     tryGetBestDataIvemIdFromTradingIvemId(tradingIvemId: TradingIvemId): DataIvemId | undefined;
     // (undocumented)
     tryGetBestTradingIvemIdFromDataIvemId(dataIvemId: DataIvemId): TradingIvemId | undefined;
+    // (undocumented)
+    tryGetDefaultDataIvemIdFromIvemId(ivemId: IvemId): DataIvemId | undefined;
+    // (undocumented)
+    tryGetDefaultTradingIvemIdFromIvemId(ivemId: IvemId): TradingIvemId | undefined;
     // (undocumented)
     get zenithSymbologySupportLevelId(): SymbolsService.ZenithSymbologySupportLevel.Id;
     set zenithSymbologySupportLevelId(value: SymbolsService.ZenithSymbologySupportLevel.Id);
@@ -39540,7 +39557,9 @@ export class ZenithCounterDataMessage extends DataMessage {
     // (undocumented)
     socketShortLivedClosedSuccessiveErrorCount: Integer;
     // (undocumented)
-    subRequestErrorSubscriptionErrorCount: Integer;
+    subscriptionErrorCount: Integer;
+    // (undocumented)
+    subscriptionWarningCount: Integer;
     // (undocumented)
     timeoutCount: Integer;
     // (undocumented)
@@ -40461,8 +40480,6 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     // (undocumented)
     protected stop(): void;
     // (undocumented)
-    get subRequestErrorSubscriptionErrorCount(): number;
-    // (undocumented)
     subscribePublisherOnlineChangeEvent(handler: ZenithExtConnectionDataItem.PublisherOnlineChangeEventHandler): number;
     // (undocumented)
     subscribePublisherStateChangeEvent(handler: ZenithExtConnectionDataItem.PublisherStateChangeEventHandler): number;
@@ -40474,6 +40491,10 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     subscribeZenithSelectedEndpointChangedEvent(handler: ZenithExtConnectionDataItem.SelectedEndpointChangedEventHandler): number;
     // (undocumented)
     subscribeZenithSessionTerminatedEvent(handler: ZenithExtConnectionDataItem.SessionTerminatedEventHandler): number;
+    // (undocumented)
+    get subscriptionErrorCount(): number;
+    // (undocumented)
+    get subscriptionWarningCount(): number;
     // (undocumented)
     get timeoutCount(): number;
     // (undocumented)
@@ -44579,9 +44600,9 @@ export namespace ZenithPublisherSubscriptionManager {
     // (undocumented)
     export type AuthMessageReceivedEvent = (this: void, message: ZenithProtocol.MessageContainer) => void;
     // (undocumented)
-    export interface ErrorSubscription {
+    export interface ErrorActionSubscription {
         // (undocumented)
-        readonly errorTypeId: AdiPublisherSubscription.ErrorTypeId.PublishRequestError | AdiPublisherSubscription.ErrorTypeId.SubRequestError;
+        readonly errorTypeId: AdiPublisherSubscription.ErrorTypeId.PublishRequestError | AdiPublisherSubscription.ErrorTypeId.SubscriptionWarning;
         // (undocumented)
         readonly subscription: AdiPublisherSubscription;
     }

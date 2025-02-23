@@ -62,7 +62,8 @@ export class ZenithPublisher extends AdiPublisher {
     private _requestTimeoutSubscriptionErrorCount = 0;
     private _offlinedSubscriptionErrorCount = 0;
     private _publishRequestErrorSubscriptionErrorCount = 0;
-    private _subRequestErrorSubscriptionErrorCount = 0;
+    private _subscriptionErrorCount = 0;
+    private _subscriptionWarningCount = 0;
     private _dataErrorSubscriptionErrorCount = 0;
     private _userNotAuthorisedSubscriptionErrorCount = 0;
     private _serverWarningSubscriptionErrorCount = 0;
@@ -303,14 +304,17 @@ export class ZenithPublisher extends AdiPublisher {
             case AdiPublisherSubscription.ErrorTypeId.PublishRequestError:
                 this._publishRequestErrorSubscriptionErrorCount++;
                 break;
-            case AdiPublisherSubscription.ErrorTypeId.SubRequestError:
-                this._subRequestErrorSubscriptionErrorCount++;
+            case AdiPublisherSubscription.ErrorTypeId.SubscriptionWarning:
+                this._subscriptionWarningCount++;
                 break;
             case AdiPublisherSubscription.ErrorTypeId.DataError:
                 this._dataErrorSubscriptionErrorCount++;
                 break;
             case AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised:
                 this._userNotAuthorisedSubscriptionErrorCount++;
+                break;
+            case AdiPublisherSubscription.ErrorTypeId.SubscriptionError:
+                this._subscriptionErrorCount++;
                 break;
             default:
                 throw new UnreachableCaseError('ZFSHRESEEU11185492', typeId);
@@ -676,7 +680,8 @@ export class ZenithPublisher extends AdiPublisher {
         dataMessage.requestTimeoutSubscriptionErrorCount = this._requestTimeoutSubscriptionErrorCount;
         dataMessage.offlinedSubscriptionErrorCount = this._offlinedSubscriptionErrorCount;
         dataMessage.publishRequestErrorSubscriptionErrorCount = this._publishRequestErrorSubscriptionErrorCount;
-        dataMessage.subRequestErrorSubscriptionErrorCount = this._subRequestErrorSubscriptionErrorCount;
+        dataMessage.subscriptionErrorCount = this._subscriptionErrorCount;
+        dataMessage.subscriptionWarningCount = this._subscriptionWarningCount;
         dataMessage.dataErrorSubscriptionErrorCount = this._dataErrorSubscriptionErrorCount;
         dataMessage.userNotAuthorisedSubscriptionErrorCount = this._userNotAuthorisedSubscriptionErrorCount;
         dataMessage.serverWarningSubscriptionErrorCount = this._serverWarningSubscriptionErrorCount;

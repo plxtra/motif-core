@@ -50,7 +50,8 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     private _requestTimeoutSubscriptionErrorCount = 0;
     private _offlinedSubscriptionErrorCount = 0;
     private _publishRequestErrorSubscriptionErrorCount = 0;
-    private _subRequestErrorSubscriptionErrorCount = 0;
+    private _subscriptionErrorCount = 0;
+    private _subscriptionWarningCount = 0;
     private _dataErrorSubscriptionErrorCount = 0;
     private _userNotAuthorisedSubscriptionErrorCount = 0;
     private _serverWarningSubscriptionErrorCount = 0;
@@ -98,7 +99,8 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     get requestTimeoutSubscriptionErrorCount() { return this._requestTimeoutSubscriptionErrorCount; }
     get offlinedSubscriptionErrorCount() { return this._offlinedSubscriptionErrorCount; }
     get publishRequestErrorSubscriptionErrorCount() { return this._publishRequestErrorSubscriptionErrorCount; }
-    get subRequestErrorSubscriptionErrorCount() { return this._subRequestErrorSubscriptionErrorCount; }
+    get subscriptionErrorCount() { return this._subscriptionErrorCount; }
+    get subscriptionWarningCount() { return this._subscriptionWarningCount; }
     get dataErrorSubscriptionErrorCount() { return this._dataErrorSubscriptionErrorCount; }
     get userNotAuthorisedSubscriptionErrorCount() { return this._userNotAuthorisedSubscriptionErrorCount; }
     get serverWarningSubscriptionErrorCount() { return this._serverWarningSubscriptionErrorCount; }
@@ -211,7 +213,8 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
         this._requestTimeoutSubscriptionErrorCount = msg.requestTimeoutSubscriptionErrorCount;
         this._offlinedSubscriptionErrorCount = msg.offlinedSubscriptionErrorCount;
         this._publishRequestErrorSubscriptionErrorCount = msg.publishRequestErrorSubscriptionErrorCount;
-        this._subRequestErrorSubscriptionErrorCount = msg.subRequestErrorSubscriptionErrorCount;
+        this._subscriptionErrorCount = msg.subscriptionErrorCount;
+        this._subscriptionWarningCount = msg.subscriptionWarningCount;
         this._dataErrorSubscriptionErrorCount = msg.dataErrorSubscriptionErrorCount;
         this._userNotAuthorisedSubscriptionErrorCount = msg.userNotAuthorisedSubscriptionErrorCount;
         this._serverWarningSubscriptionErrorCount = msg.serverWarningSubscriptionErrorCount;

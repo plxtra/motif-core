@@ -70,8 +70,9 @@ export namespace AdiPublisherSubscription {
         Offlined,
         RequestTimeout,
         UserNotAuthorised,
+        SubscriptionError,
         PublishRequestError,
-        SubRequestError,
+        SubscriptionWarning,
         DataError,
     }
 

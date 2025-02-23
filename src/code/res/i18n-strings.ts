@@ -1876,10 +1876,10 @@ export const enum StringId {
     BadnessReasonId_PublisherSubscriptionError_Timeout_Suspect,
     BadnessReasonId_PublisherSubscriptionError_Timeout_Error,
     BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error,
+    BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error,
     BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect,
     BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Error,
-    BadnessReasonId_PublisherSubscriptionError_SubRequestError_Suspect,
-    BadnessReasonId_PublisherSubscriptionError_SubRequestError_Error,
+    BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect,
     BadnessReasonId_PublisherSubscriptionError_DataError_Suspect,
     BadnessReasonId_PublisherSubscriptionError_DataError_Error,
     BadnessReasonId_PublisherServerWarning,
@@ -11928,6 +11928,11 @@ export namespace I18nStrings {
                 en: 'User authorisation error',
             },
         },
+        BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error: {
+            id: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error, translations: {
+                en: 'Feed subscription error',
+            },
+        },
         BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect: {
             id: StringId.BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect, translations: {
                 en: 'Feed request error (retrying)',
@@ -11938,14 +11943,9 @@ export namespace I18nStrings {
                 en: 'Feed request error',
             },
         },
-        BadnessReasonId_PublisherSubscriptionError_SubRequestError_Suspect: {
-            id: StringId.BadnessReasonId_PublisherSubscriptionError_SubRequestError_Suspect, translations: {
-                en: 'Feed request error (retrying)',
-            },
-        },
-        BadnessReasonId_PublisherSubscriptionError_SubRequestError_Error: {
-            id: StringId.BadnessReasonId_PublisherSubscriptionError_SubRequestError_Error, translations: {
-                en: 'Feed request error',
+        BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect: {
+            id: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect, translations: {
+                en: 'Feed subscription warning',
             },
         },
         BadnessReasonId_PublisherSubscriptionError_DataError_Suspect: {

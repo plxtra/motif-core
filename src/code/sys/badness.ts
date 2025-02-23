@@ -23,10 +23,10 @@ export namespace Badness {
         PublisherSubscriptionError_RequestTimeout_Suspect,
         PublisherSubscriptionError_RequestTimeout_Error,
         PublisherSubscriptionError_UserNotAuthorised_Error,
+        PublisherSubscriptionError_SubscriptionError_Error,
         PublisherSubscriptionError_PublishRequestError_Suspect,
         PublisherSubscriptionError_PublishRequestError_Error,
-        PublisherSubscriptionError_SubRequestError_Suspect,
-        PublisherSubscriptionError_SubRequestError_Error,
+        PublisherSubscriptionError_SubscriptionWarning_Suspect,
         PublisherSubscriptionError_DataError_Suspect,
         PublisherSubscriptionError_DataError_Error,
         PublisherServerWarning_Usable,
@@ -239,6 +239,11 @@ export namespace Badness {
                 correctnessId: CorrectnessId.Error,
                 displayId: StringId.BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error,
             },
+            PublisherSubscriptionError_SubscriptionError_Error: {
+                id: ReasonId.PublisherSubscriptionError_SubscriptionError_Error,
+                correctnessId: CorrectnessId.Error,
+                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error,
+            },
             PublisherSubscriptionError_PublishRequestError_Suspect: {
                 id: ReasonId.PublisherSubscriptionError_PublishRequestError_Suspect,
                 correctnessId: CorrectnessId.Suspect,
@@ -249,15 +254,10 @@ export namespace Badness {
                 correctnessId: CorrectnessId.Error,
                 displayId: StringId.BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Error,
             },
-            PublisherSubscriptionError_SubRequestError_Suspect: {
-                id: ReasonId.PublisherSubscriptionError_SubRequestError_Suspect,
+            PublisherSubscriptionError_SubscriptionWarning_Suspect: {
+                id: ReasonId.PublisherSubscriptionError_SubscriptionWarning_Suspect,
                 correctnessId: CorrectnessId.Suspect,
-                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_SubRequestError_Suspect,
-            },
-            PublisherSubscriptionError_SubRequestError_Error: {
-                id: ReasonId.PublisherSubscriptionError_SubRequestError_Error,
-                correctnessId: CorrectnessId.Error,
-                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_SubRequestError_Error,
+                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect,
             },
             PublisherSubscriptionError_DataError_Suspect: {
                 id: ReasonId.PublisherSubscriptionError_DataError_Suspect,
