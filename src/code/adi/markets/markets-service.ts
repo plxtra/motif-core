@@ -884,12 +884,12 @@ export class MarketsService {
         const newExchangeEnvironmentCount = newExchangeEnvironments.length;
         if (newExchangeEnvironmentCount > 0) {
             if (this.exchangeEnvironments.count === 0) {
-                this.exchangeEnvironments.addRange(newExchangeEnvironments);
+                this.exchangeEnvironments.addRangeAndUpdateProductionFlags(newExchangeEnvironments);
                 this.exchangeEnvironments.sort();
             } else {
                 for (let i = 0; i < newExchangeEnvironmentCount; i++) {
                     const newExchangeEnvironment = newExchangeEnvironments[i];
-                    this.exchangeEnvironments.binaryInsert(newExchangeEnvironment);
+                    this.exchangeEnvironments.binaryInsertAndUpdateProductionFlags(newExchangeEnvironment);
                 }
             }
         }
@@ -2740,6 +2740,56 @@ export namespace MarketsService {
     }
 
     export class ExchangeEnvironments extends ZenithCodedEnvironments<ExchangeEnvironment> {
+        private _atLeastOneProduction = false;
+        private _allProduction = false;
+
+        get atLeastOneProduction() { return this._atLeastOneProduction; }
+        get allProduction() { return this._allProduction; }
+
+        addRangeAndUpdateProductionFlags(values: readonly ExchangeEnvironment[]): void {
+            const firstAddition = this.count === 0;
+            this.addRange(values);
+            this.updateProductionFlagsFromAddArray(values, firstAddition);
+        }
+
+        binaryInsertAndUpdateProductionFlags(value: ExchangeEnvironment) {
+            this.binaryInsert(value);
+            if (value.production) {
+                this._atLeastOneProduction = true;
+            } else {
+                this._allProduction = false;
+            }
+        }
+
+        private updateProductionFlagsFromAddArray(addedExchangeEnvironments: readonly ExchangeEnvironment[], firstAddition: boolean) {
+            const addArrayCount = addedExchangeEnvironments.length;
+            let atLeastOneNewProduction = false;
+            let allNewProduction = true;
+            for (let i = 0; i < addArrayCount; i++) {
+                const newExchangeEnvironment = addedExchangeEnvironments[i];
+                if (newExchangeEnvironment.production) {
+                    atLeastOneNewProduction = true;
+                } else {
+                    allNewProduction = false;
+                }
+
+                if (atLeastOneNewProduction && !allNewProduction) {
+                    break;
+                }
+            }
+
+            if (atLeastOneNewProduction) {
+                this._atLeastOneProduction = true;
+            }
+
+            if (firstAddition) {
+                this._allProduction = allNewProduction;
+            } else {
+                if (!allNewProduction) {
+                    this._allProduction = false;
+                }
+            }
+        }
     }
 
     export interface UnresolvedNewMarket<T extends Market> {
