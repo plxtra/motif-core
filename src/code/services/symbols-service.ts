@@ -90,9 +90,6 @@ export class SymbolsService {
         this._defaultExchangeEnvironmentDataMarkets = this._marketsService.defaultExchangeEnvironmentDataMarkets;
         this._tradingMarkets = this._marketsService.tradingMarkets;
         this._defaultExchangeEnvironmentTradingMarkets = this._marketsService.defaultExchangeEnvironmentTradingMarkets;
-        // this._pscExchangeDisplayCodeMap = new SymbolsService.PscExchangeDisplayCodeMap();
-        // this._pscMarketMap = new SymbolsService.PscMarketMap();
-        this._defaultExchange = this._marketsService.defaultDefaultExchange;
     }
 
     get settingsServiceLinked() {
@@ -235,6 +232,10 @@ export class SymbolsService {
         this._explicitDefaultParseModeId = value;
         this.updateDefaultParseModeId();
         this.notifyFormattedSettingChanged(ScalarSettings.Id.Symbol_ExplicitDefaultParseModeId);
+    }
+
+    initialise() {
+        this._defaultExchange = this._marketsService.defaultDefaultExchange;
     }
 
     finalise() {

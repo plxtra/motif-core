@@ -16214,6 +16214,14 @@ export namespace MarketsService {
     }
     // (undocumented)
     export class ExchangeEnvironments extends ZenithCodedEnvironments<ExchangeEnvironment> {
+        // (undocumented)
+        addRangeAndUpdateProductionFlags(values: readonly ExchangeEnvironment[]): void;
+        // (undocumented)
+        get allProduction(): boolean;
+        // (undocumented)
+        get atLeastOneProduction(): boolean;
+        // (undocumented)
+        binaryInsertAndUpdateProductionFlags(value: ExchangeEnvironment): void;
     }
     // (undocumented)
     export class Exchanges extends ChangeSubscribableComparableList<Exchange> {
@@ -33812,6 +33820,8 @@ export class SymbolsService {
     set explicitSearchFieldsEnabled(value: boolean);
     // (undocumented)
     finalise(): void;
+    // (undocumented)
+    initialise(): void;
     // (undocumented)
     ivemIdToDisplay(ivemId: IvemId | undefined): string;
     // (undocumented)
