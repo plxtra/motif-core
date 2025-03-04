@@ -4,6 +4,7 @@ export const enum ErrorCode {
     CommaText_UnexpectedCharAfterQuotedElement = 'CTUCAQE69316',
     CommaText_QuotesNotClosedInLastElement = 'CTQNCALE69316',
     CommaText_InvalidIntegerString = 'CTIIS69316',
+    Zenith_InvalidBrokerageAccountCurrency = 'ZIBAC34334',
     JsonElement_InvalidJsonText = 'JEIJT11145',
     JsonElement_ElementIsNotDefined = 'JEEIND11145',
     JsonElement_JsonValueIsNotDefined = 'JEJVIND11145',

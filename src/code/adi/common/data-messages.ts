@@ -168,6 +168,7 @@ export namespace BrokerageAccountsDataMessage {
         // id: BrokerageAccountId;
         zenithCode: string;
         name: string | undefined;
+        currencyId: CurrencyId | undefined;
         // environmentId: TradingEnvironmentId;
         // tradingFeedId: FeedId | undefined;
         zenithTradingFeedCode: string | undefined;

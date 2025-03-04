@@ -83,12 +83,14 @@ export class BrokerageAccountsDataItem extends KeyedCorrectnessSettableListFeedS
                     throw new ZenithDataError(ErrorCode.BADICAFTF0109922349, `${zenithCode}: ${name}`);
                 } else {
                     const id = BrokerageAccountEnvironmentedId.createFromZenithCode(this._marketsService, zenithCode)
+                    const currencyId = msgAccount.currencyId;
 
                     const result = new BrokerageAccount(
                         zenithCode,
                         id,
                         tradingFeed,
                         name,
+                        currencyId,
                         msgAccount.brokerCode ?? undefined,
                         msgAccount.branchCode ?? undefined,
                         msgAccount.advisorCode ?? undefined,

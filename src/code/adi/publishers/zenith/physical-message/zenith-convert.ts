@@ -431,6 +431,19 @@ export namespace ZenithConvert {
             }
         }
 
+        export function undefinableToId(value: ZenithProtocol.Currency | undefined, errorCode: ErrorCode): CurrencyId | undefined {
+            if (value === undefined) {
+                return undefined;
+            } else {
+                const result = Currency.tryToId(value);
+                if (result === undefined) {
+                    throw new ZenithDataError(errorCode, value)
+                } else {
+                    return result;
+                }
+            }
+        }
+
         export function fromId(value: CurrencyId): ZenithProtocol.Currency {
             switch (value) {
                 case CurrencyId.Aud: return ZenithProtocol.Currency.Aud;
@@ -3314,43 +3327,28 @@ export namespace ZenithConvert {
                     JSON.stringify(accountState).substring(0, 300)
                 );
             } else {
-                // const { accountId, environmentId } = ZenithConvert.EnvironmentedAccount.toId(accountState.ID);
-                // if (accountId === '') {
-                //     throw new ZenithDataError(ErrorCode.ZCATDMA10588824494, JSON.stringify(accountState).substring(0, 300));
-                // } else {
-                //     const tradingFeedZenithName = accountState.Provider;
-                //     let tradingFeedId: FeedId | undefined;
-                //     if (tradingFeedZenithName === undefined) {
-                //         tradingFeedId = undefined;
-                //     } else {
-                //         const environmentedTradingFeedId = Feed.EnvironmentedTradingFeed.toId(tradingFeedZenithName);
-                //         tradingFeedId = environmentedTradingFeedId.feedId;
-                //     }
+                let brokerCode: string | null | undefined;
+                let branchCode: string | null | undefined;
+                let advisorCode: string | null | undefined;
+                const attributes = accountState.Attributes;
+                if (attributes !== undefined) {
+                    brokerCode = (attributes['BrokerCode'] ?? attributes['BrokerId']) ?? null;
+                    branchCode = attributes['BranchCode'] ?? null;
+                    advisorCode = (attributes['AdvisorCode'] ?? attributes['DealerId']) ?? null;
+                }
 
-                    let brokerCode: string | null | undefined;
-                    let branchCode: string | null | undefined;
-                    let advisorCode: string | null | undefined;
-                    const attributes = accountState.Attributes;
-                    if (attributes !== undefined) {
-                        brokerCode = (attributes['BrokerCode'] ?? attributes['BrokerId']) ?? null;
-                        branchCode = attributes['BranchCode'] ?? null;
-                        advisorCode = (attributes['AdvisorCode'] ?? attributes['DealerId']) ?? null;
-                    }
+                const result: BrokerageAccountsDataMessage.Account = {
+                    zenithCode: accountState.ID,
+                    name: accountState.Name,
+                    currencyId: Currency.undefinableToId(accountState.Currency, ErrorCode.Zenith_InvalidBrokerageAccountCurrency),
+                    feedStatusId: ZenithConvert.FeedStatus.toId(accountState.Feed),
+                    zenithTradingFeedCode: accountState.Provider,
+                    brokerCode,
+                    branchCode,
+                    advisorCode,
+                } as const;
 
-                    const result: BrokerageAccountsDataMessage.Account = {
-                        // id: accountId,
-                        // environmentId,
-                        zenithCode: accountState.ID,
-                        name: accountState.Name,
-                        feedStatusId: ZenithConvert.FeedStatus.toId(accountState.Feed),
-                        // tradingFeedId,
-                        zenithTradingFeedCode: accountState.Provider,
-                        brokerCode,
-                        branchCode,
-                        advisorCode,
-                    } as const;
-                    return result;
-                // }
+                return result;
             }
         }
     }

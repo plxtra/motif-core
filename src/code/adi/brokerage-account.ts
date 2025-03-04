@@ -14,6 +14,7 @@ import {
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import {
     BrokerageAccountsDataMessage,
+    CurrencyId,
     FeedStatus
 } from './common/internal-api';
 import { TradingFeed } from './feed/internal-api';
@@ -41,6 +42,7 @@ export class BrokerageAccount implements KeyedCorrectnessListItem {
         // private _environmentId: TradingEnvironmentId,
         readonly tradingFeed: TradingFeed,
         private _name: string,
+        private _currencyId: CurrencyId | undefined,
         private _brokerCode: string | undefined,
         private _branchCode: string | undefined,
         private _advisorCode: string | undefined,
@@ -62,6 +64,7 @@ export class BrokerageAccount implements KeyedCorrectnessListItem {
     get destroyed(): boolean { return this._destroyed; }
 
     get name() { return this._name; }
+    get currencyId(): CurrencyId | undefined { return this._currencyId; }
     get upperName() { return this._upperName; }
     // get environmentId() { return this._environmentId; }
     get brokerCode() { return this._brokerCode; }
@@ -103,6 +106,15 @@ export class BrokerageAccount implements KeyedCorrectnessListItem {
             this._upperName = newName.toUpperCase();
             valueChanges[changedCount++] = {
                 fieldId: BrokerageAccount.FieldId.Name,
+                recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update
+            };
+        }
+
+        const newCurrencyId = msgAccount.currencyId;
+        if (newCurrencyId !== undefined && newCurrencyId !== this.currencyId) {
+            this._currencyId = newCurrencyId;
+            valueChanges[changedCount++] = {
+                fieldId: BrokerageAccount.FieldId.Currency,
                 recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update
             };
         }
@@ -226,6 +238,7 @@ export namespace BrokerageAccount {
         IdDisplay,
         EnvironmentZenithCode,
         Name,
+        Currency,
         // eslint-disable-next-line @typescript-eslint/no-shadow
         BrokerCode,
         BranchCode,
@@ -273,6 +286,13 @@ export namespace BrokerageAccount {
                 displayId: StringId.BrokerageAccountFieldDisplay_Name,
                 headingId: StringId.BrokerageAccountFieldHeading_Name,
             },
+            Currency: {
+                id: FieldId.Currency,
+                name: 'Currency',
+                dataTypeId: FieldDataTypeId.Enumeration,
+                displayId: StringId.BrokerageAccountFieldDisplay_CurrencyId,
+                headingId: StringId.BrokerageAccountFieldHeading_CurrencyId,
+            },
             // FeedName: {
             //     id: FieldId.FeedName,
             //     name: 'FeedName',
@@ -311,8 +331,8 @@ export namespace BrokerageAccount {
         };
 
         export const readonlyCount = 2; // Id and ZenithEnvironmentCode
-        export const idCount = Object.keys(infoObjects).length;
         const infos = Object.values(infoObjects);
+        export const idCount = infos.length;
 
         export function idToName(id: FieldId) {
             return infos[id].name;

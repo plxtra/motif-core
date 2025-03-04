@@ -2322,7 +2322,7 @@ export const broadcastDataItemRequestNr: DataItemRequestNr;
 //
 // @public (undocumented)
 export class BrokerageAccount implements KeyedCorrectnessListItem {
-    constructor(zenithCode: string, id: BrokerageAccountEnvironmentedId, tradingFeed: TradingFeed, _name: string, _brokerCode: string | undefined, _branchCode: string | undefined, _advisorCode: string | undefined, _listCorrectnessId: CorrectnessId);
+    constructor(zenithCode: string, id: BrokerageAccountEnvironmentedId, tradingFeed: TradingFeed, _name: string, _currencyId: CurrencyId | undefined, _brokerCode: string | undefined, _branchCode: string | undefined, _advisorCode: string | undefined, _listCorrectnessId: CorrectnessId);
     // (undocumented)
     get advisorCode(): string | undefined;
     // (undocumented)
@@ -2333,6 +2333,8 @@ export class BrokerageAccount implements KeyedCorrectnessListItem {
     change(msgAccount: BrokerageAccountsDataMessage.Account): void;
     // (undocumented)
     get correctnessId(): CorrectnessId;
+    // (undocumented)
+    get currencyId(): CurrencyId | undefined;
     // (undocumented)
     destroy(): void;
     // (undocumented)
@@ -2391,11 +2393,13 @@ export namespace BrokerageAccount {
     // (undocumented)
     export const enum FieldId {
         // (undocumented)
-        AdvisorCode = 5,
+        AdvisorCode = 6,
         // (undocumented)
-        BranchCode = 4,
+        BranchCode = 5,
         // (undocumented)
-        BrokerCode = 3,
+        BrokerCode = 4,
+        // (undocumented)
+        Currency = 3,
         // (undocumented)
         EnvironmentZenithCode = 1,
         // (undocumented)
@@ -2822,6 +2826,8 @@ export namespace BrokerageAccountsDataMessage {
         branchCode: string | null | undefined;
         // (undocumented)
         brokerCode: string | null | undefined;
+        // (undocumented)
+        currencyId: CurrencyId | undefined;
         // (undocumented)
         feedStatusId: FeedStatusId;
         // (undocumented)
@@ -10006,6 +10012,8 @@ export const enum ErrorCode {
     ZCTTDMCRU15392887209 = "ZCTTDMCRU15392887209",
     // (undocumented)
     ZCTTDMCRU3339929166 = "ZCTTDMCRU3339929166",
+    // (undocumented)
+    Zenith_InvalidBrokerageAccountCurrency = "ZIBAC34334",
     // (undocumented)
     ZenithCalculateMarketBoardId_UnsupportedCfxM2Node = "ZCMBIUCFXM2N91007",
     // (undocumented)
@@ -39148,6 +39156,8 @@ export namespace ZenithConvert {
         export function fromId(value: CurrencyId): ZenithProtocol.Currency;
         // (undocumented)
         export function tryToId(value: ZenithProtocol.Currency): CurrencyId | undefined;
+        // (undocumented)
+        export function undefinableToId(value: ZenithProtocol.Currency | undefined, errorCode: ErrorCode): CurrencyId | undefined;
     }
     // (undocumented)
     export namespace Date {
@@ -42693,6 +42703,8 @@ export namespace ZenithProtocol {
                 Attributes?: Attributes;
                 // (undocumented)
                 Categories?: string[];
+                // (undocumented)
+                Currency?: Currency;
                 // (undocumented)
                 Feed: FeedStatus;
                 // (undocumented)

@@ -11,11 +11,13 @@ import {
 } from "../../../../sys/internal-api";
 import {
     CorrectnessTableField,
+    EnumCorrectnessTableField,
     StringCorrectnessTableField,
     TableField
 } from '../../field/internal-api';
 import {
     CorrectnessTableValue,
+    CurrencyIdCorrectnessTableValue,
     StringCorrectnessTableValue
 } from '../../value/internal-api';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
@@ -95,6 +97,8 @@ export namespace BrokerageAccountTableFieldSourceDefinition {
                     return [StringCorrectnessTableField, StringCorrectnessTableValue];
                 case BrokerageAccount.FieldId.Name:
                     return [StringCorrectnessTableField, StringCorrectnessTableValue];
+                case BrokerageAccount.FieldId.Currency:
+                    return [EnumCorrectnessTableField, CurrencyIdCorrectnessTableValue];
                 case BrokerageAccount.FieldId.EnvironmentZenithCode:
                     return [StringCorrectnessTableField, StringCorrectnessTableValue];
                 case BrokerageAccount.FieldId.BrokerCode:

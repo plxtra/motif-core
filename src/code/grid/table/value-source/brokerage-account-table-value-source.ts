@@ -4,6 +4,7 @@ import { Correctness } from '../../../sys/internal-api';
 import { BrokerageAccountTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,
+    CurrencyIdCorrectnessTableValue,
     StringCorrectnessTableValue,
     TableValue
 } from '../value/internal-api';
@@ -99,6 +100,9 @@ export class BrokerageAccountTableValueSource extends TableValueSource {
                 break;
             case BrokerageAccount.FieldId.Name:
                 (value as StringCorrectnessTableValue).data = this._account.name;
+                break;
+            case BrokerageAccount.FieldId.Currency:
+                (value as CurrencyIdCorrectnessTableValue).data = this._account.currencyId;
                 break;
             case BrokerageAccount.FieldId.BrokerCode:
                 (value as StringCorrectnessTableValue).data = this._account.brokerCode;
