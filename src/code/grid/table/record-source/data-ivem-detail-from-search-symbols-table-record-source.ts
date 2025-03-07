@@ -1,4 +1,3 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     DecimalFactory,
@@ -7,7 +6,8 @@ import {
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     AdiService,
     Exchange,

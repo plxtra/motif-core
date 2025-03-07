@@ -1,4 +1,4 @@
-import { AssertInternalError, UnexpectedTypeError } from '@xilytix/sysutils';
+import { AssertInternalError, UnexpectedTypeError } from '@pbkware/js-utils';
 import { assert, Badness, Correctness } from '../../sys/internal-api';
 import {
     DataDefinition,

@@ -1,5 +1,5 @@
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { JsonElement, Ok, PickEnum, Result } from '@xilytix/sysutils';
+import { JsonElement, Ok, PickEnum, Result } from '@pbkware/js-utils';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
 import { DataIvemId, MarketIvemId, MarketsService } from '../../../../adi/internal-api';
 import { ErrorCode, JsonElementErr, UiComparableList } from '../../../../sys/internal-api';
 import {

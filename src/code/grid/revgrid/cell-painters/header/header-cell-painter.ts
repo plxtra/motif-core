@@ -1,4 +1,4 @@
-import { RevCachedCanvasRenderingContext2D, RevCellPainter, RevDataServer, RevViewCell } from '@xilytix/revgrid';
+import { RevCachedCanvasRenderingContext2D, RevCellPainter, RevDataServer, RevViewCell } from 'revgrid';
 import { ColorSettings, ScalarSettings, SettingsService } from '../../../../services/internal-api';
 import { GridField } from '../../../field/internal-api';
 import { SourcedFieldGrid } from '../../adapted-revgrid/internal-api';

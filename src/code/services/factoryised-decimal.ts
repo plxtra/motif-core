@@ -1,4 +1,4 @@
-import { DecimalConstructor, DecimalFactory } from '@xilytix/sysutils';
+import { DecimalConstructor, DecimalFactory } from '@pbkware/js-utils';
 import { Config, Decimal } from 'decimal.js-light';
 
 export class FactoryisedDecimal {

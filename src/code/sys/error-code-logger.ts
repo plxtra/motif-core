@@ -1,4 +1,4 @@
-import { Logger } from '@xilytix/sysutils';
+import { Logger } from '@pbkware/js-utils';
 
 /** @public */
 export namespace ErrorCodeLogger {

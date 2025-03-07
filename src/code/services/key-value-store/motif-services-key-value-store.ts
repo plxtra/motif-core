@@ -1,4 +1,4 @@
-import { Result } from '@xilytix/sysutils';
+import { Result } from '@pbkware/js-utils';
 import { MotifServicesService } from '../motif-services-service';
 import { KeyValueStore } from './key-value-store';
 

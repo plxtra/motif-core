@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { Correctness } from '../../sys/internal-api';
 import { DataMessage, DataMessageTypeId, FeedClass, FeedClassId, FeedsDataMessage, FeedStatus, OrderStatusesDataDefinition, QueryTradingMarketsDataDefinition } from '../common/internal-api';

@@ -1,4 +1,4 @@
-import { SysTick } from '@xilytix/sysutils';
+import { SysTick } from '@pbkware/js-utils';
 import { AdiPublisherSubscription } from './adi-publisher-subscription';
 
 export interface AdiPublisherRequest {

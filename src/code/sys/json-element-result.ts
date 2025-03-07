@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { Err, JsonElement, Ok, UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, JsonElement, Ok, UnreachableCaseError } from '@pbkware/js-utils';
 import { I18nStrings, StringId } from '../res/internal-api';
 import { ErrorCode } from './error-code';
 

@@ -4,7 +4,7 @@ import {
     getErrorMessage,
     Ok,
     Result
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ErrorCode,
     ifDefined,

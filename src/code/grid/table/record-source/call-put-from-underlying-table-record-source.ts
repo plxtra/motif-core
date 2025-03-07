@@ -1,4 +1,3 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     DecimalFactory,
@@ -8,8 +7,9 @@ import {
     SourceTzOffsetDate,
     UnreachableCaseError,
     UsableListChangeTypeId,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     AdiService,
     CallOrPutId,

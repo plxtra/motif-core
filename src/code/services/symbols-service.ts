@@ -8,7 +8,7 @@ import {
     Result,
     UnreachableCaseError,
     isDigitCharCode
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     DataIvemAlternateCodes,
     DataIvemId,

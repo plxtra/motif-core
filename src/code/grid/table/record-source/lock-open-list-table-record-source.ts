@@ -1,4 +1,4 @@
-import { LockOpenListItem } from '@xilytix/sysutils';
+import { LockOpenListItem } from '@pbkware/js-utils';
 import { BadnessList } from '../../../sys/internal-api';
 import { SubscribeBadnessListTableRecordSource } from './subscribe-badness-list-table-record-source';
 

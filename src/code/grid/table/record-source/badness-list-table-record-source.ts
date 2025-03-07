@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { LockOpenListItem } from '@xilytix/sysutils';
+import { LockOpenListItem } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { TextFormatter } from '../../../services/internal-api';
 import { BadnessList, CorrectnessBadness } from '../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';

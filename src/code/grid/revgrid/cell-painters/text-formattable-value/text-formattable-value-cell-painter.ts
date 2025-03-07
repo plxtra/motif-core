@@ -1,5 +1,5 @@
-import { RevCachedCanvasRenderingContext2D, RevDataServer, RevRectangle, RevSelectionAreaTypeId, RevViewCell } from '@xilytix/revgrid';
-import { IndexSignatureHack } from '@xilytix/sysutils';
+import { IndexSignatureHack } from '@pbkware/js-utils';
+import { RevCachedCanvasRenderingContext2D, RevDataServer, RevRectangle, RevSelectionAreaTypeId, RevViewCell } from 'revgrid';
 import { ColorScheme, ColorSettings, ScalarSettings, SettingsService, TextFormattableValue } from '../../../../services/internal-api';
 import { GridField } from '../../../field/internal-api';
 import { SourcedFieldGrid } from '../../adapted-revgrid/sourced-field-grid';

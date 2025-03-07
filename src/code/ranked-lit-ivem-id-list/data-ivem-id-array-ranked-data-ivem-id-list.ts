@@ -1,6 +1,6 @@
 import {
     AssertInternalError, Integer
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import {

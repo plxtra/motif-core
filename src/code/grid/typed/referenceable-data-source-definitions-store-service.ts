@@ -1,4 +1,4 @@
-import { RevReferenceableDataSourceDefinitionsStore } from '@xilytix/revgrid';
+import { RevReferenceableDataSourceDefinitionsStore } from 'revgrid';
 
 /** @public */
 export class ReferenceableDataSourceDefinitionsStoreService implements RevReferenceableDataSourceDefinitionsStore {

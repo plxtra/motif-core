@@ -1,5 +1,5 @@
-import { SysTick } from '@xilytix/sysutils';
-import { UiAction } from '@xilytix/ui-action';
+import { SysTick } from '@pbkware/js-utils';
+import { UiAction } from '@pbkware/ui-action';
 import { Command } from '../command/internal-api';
 import { StringId } from '../res/internal-api';
 import { ErrorCode, ExtensionHandle, ExtensionOrInternalError } from '../sys/internal-api';

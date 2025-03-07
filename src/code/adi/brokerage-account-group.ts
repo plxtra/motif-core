@@ -9,7 +9,7 @@ import {
     JsonElement,
     Ok,
     Result
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ErrorCode,
     JsonElementErr,

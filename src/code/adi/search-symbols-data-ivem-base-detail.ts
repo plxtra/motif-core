@@ -1,4 +1,4 @@
-import { MultiEvent, isArrayEqualUniquely, isUndefinableArrayEqualUniquely } from '@xilytix/sysutils';
+import { MultiEvent, isArrayEqualUniquely, isUndefinableArrayEqualUniquely } from '@pbkware/js-utils';
 import {
     DataIvemAlternateCodes,
     IvemClassId,

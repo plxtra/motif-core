@@ -4,7 +4,7 @@ import {
     isUndefinableArrayEqualUniquely,
     MultiEvent, RecordList, SourceTzOffsetDate,
     SourceTzOffsetDateTime, UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import {
     Correctness,

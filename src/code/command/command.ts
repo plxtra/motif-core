@@ -1,4 +1,4 @@
-import { Integer, ModifierKey } from '@xilytix/sysutils';
+import { Integer, ModifierKey } from '@pbkware/js-utils';
 import { ExtStringId } from '../res/internal-api';
 import { ExtensionHandle, Handle } from '../sys/internal-api';
 

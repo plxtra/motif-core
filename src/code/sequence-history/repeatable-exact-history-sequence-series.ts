@@ -1,4 +1,4 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 import { HistorySequenceSeries } from './history-sequence-series';
 import { RepeatableExactHistorySequencer } from './repeatable-exact-history-sequencer';
 

@@ -1,4 +1,4 @@
-import { RevBehavioredColumnSettings } from '@xilytix/revgrid';
+import { RevBehavioredColumnSettings } from 'revgrid';
 import { AdaptedRevgridColumnSettings } from './adapted-revgrid-column-settings';
 
 /** @public */

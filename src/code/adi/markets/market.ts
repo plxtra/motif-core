@@ -1,4 +1,4 @@
-import { CommaText, compareString, compareUndefinableNumber, ComparisonResult } from '@xilytix/sysutils';
+import { CommaText, compareString, compareUndefinableNumber, ComparisonResult } from '@pbkware/js-utils';
 import { ZenithEnvironmentedValueParts } from '../common/internal-api';
 // eslint-disable-next-line import/no-cycle
 import { Exchange } from './exchange';

@@ -1,4 +1,4 @@
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { UnreachableCaseError } from '@pbkware/js-utils';
 import { NotificationChannel } from '../../../common/internal-api';
 import { ZenithProtocol } from './protocol/internal-api';
 

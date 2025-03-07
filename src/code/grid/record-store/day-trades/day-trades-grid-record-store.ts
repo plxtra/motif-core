@@ -1,11 +1,11 @@
-import { RevRecordStore } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordStore } from 'revgrid';
 import { DayTradesDataItem } from '../../../adi/internal-api';
 
 export class DayTradesGridRecordStore implements RevRecordStore {

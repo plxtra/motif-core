@@ -4,7 +4,7 @@ import {
     MultiEvent,
     RecordList,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     KeyedCorrectnessList,
     KeyedCorrectnessListItem,

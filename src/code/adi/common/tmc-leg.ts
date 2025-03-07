@@ -1,4 +1,4 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 import { OrderSideId, ZenithIvemId } from './data-types';
 
 export interface TmcLeg {

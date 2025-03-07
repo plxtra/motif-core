@@ -1,4 +1,4 @@
-import { AssertInternalError, Guid, IndexedRecord, Integer, LockOpenListItem, LockOpenManager, MapKey, Ok, Result, UnexpectedCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Guid, IndexedRecord, Integer, LockOpenListItem, LockOpenManager, MapKey, Ok, Result, UnexpectedCaseError } from '@pbkware/js-utils';
 import { AdiService } from '../adi/internal-api';
 import { ScansService } from '../scan/internal-api';
 import { ErrorCode } from "../sys/internal-api";

@@ -1,5 +1,5 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@xilytix/sysutils';
+import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi/internal-api';
 import { LockOpenNotificationChannel } from '../notification-channel/internal-api';
 import { StringId, Strings } from '../res/internal-api';

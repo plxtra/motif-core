@@ -1,4 +1,4 @@
-import { RevAllowedRecordSourcedField } from '@xilytix/revgrid';
+import { RevAllowedRecordSourcedField } from 'revgrid';
 import { TextFormattableValue } from '../../services/text-formattable-value';
 
 // AllowedGridField is used in Column selector

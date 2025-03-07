@@ -1,8 +1,8 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { RankedDataIvemIdListDirectoryItem } from '../../../../services/internal-api';
 import {
     FieldDataType,

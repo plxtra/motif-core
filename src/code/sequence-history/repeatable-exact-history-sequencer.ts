@@ -8,7 +8,7 @@ import {
     isDateEqual,
     MultiEvent,
     SourceTzOffsetDateTime
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { HistorySequencer } from './history-sequencer';
 
 export class RepeatableExactHistorySequencer extends HistorySequencer {

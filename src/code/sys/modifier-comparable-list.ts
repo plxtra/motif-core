@@ -1,4 +1,4 @@
-import { CompareFtn, Integer, MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { CompareFtn, Integer, MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { BadnessComparableList } from './badness-comparable-list';
 
 export class ModifierComparableList<out T extends U, Modifier = void, in U = T> extends BadnessComparableList<T, U> {

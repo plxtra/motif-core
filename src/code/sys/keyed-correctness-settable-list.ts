@@ -1,4 +1,4 @@
-import { Integer, MapKey, MultiEvent } from '@xilytix/sysutils';
+import { Integer, MapKey, MultiEvent } from '@pbkware/js-utils';
 import { BadnessList } from './badness-list';
 import { KeyedCorrectnessSettableListItem } from './keyed-correctness-settable-list-item';
 

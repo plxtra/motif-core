@@ -3,7 +3,7 @@ import {
     Integer,
     MapKey,
     MultiEvent,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     CorrectnessId,
     ErrorCode,

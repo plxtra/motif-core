@@ -1,5 +1,5 @@
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { PickEnum } from '@xilytix/sysutils';
+import { PickEnum } from '@pbkware/js-utils';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
 import { BrokerageAccount, BrokerageAccountGroup, Order } from '../../../../adi/internal-api';
 import { BrokerageAccountTableFieldSourceDefinition, OrderTableFieldSourceDefinition, TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { BrokerageAccountGroupTableRecordSourceDefinition } from './brokerage-account-group-table-record-source-definition';

@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { DecimalFactory, Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, LockOpenListItem, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     AdiService,
     AllOrdersDataDefinition,

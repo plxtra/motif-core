@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { BadnessList, ErrorCodeLogger } from '../../sys/internal-api';
 import { AurcChangeTypeId, DataDefinition, DataMessage, DataMessageTypeId, FeedClassId, ScanStatusedDescriptorsDataMessage } from '../common/internal-api';
 import { FeedSubscriptionDataItem } from '../feed/internal-api';

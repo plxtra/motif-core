@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, LockOpenListItem, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, LockOpenListItem, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { AdiService, Feed, FeedsDataDefinition, FeedsDataItem } from '../../../adi/internal-api';
 import { TextFormatter } from '../../../services/internal-api';
 import { CorrectnessBadness, KeyedCorrectnessList } from '../../../sys/internal-api';

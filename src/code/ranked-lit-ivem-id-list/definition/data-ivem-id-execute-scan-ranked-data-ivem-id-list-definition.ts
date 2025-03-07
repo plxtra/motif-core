@@ -1,4 +1,4 @@
-import { Err, JsonElement, Result } from '@xilytix/sysutils';
+import { Err, JsonElement, Result } from '@pbkware/js-utils';
 import { DataIvemIdExecuteScanDataDefinition } from '../../adi/internal-api';
 import { ErrorCode } from "../../sys/internal-api";
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';

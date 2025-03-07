@@ -1,4 +1,4 @@
-import { AssertInternalError, Ok, Result } from '@xilytix/sysutils';
+import { AssertInternalError, Ok, Result } from '@pbkware/js-utils';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, ErrorPublisherSubscriptionDataMessage_PublishRequestError, RequestErrorDataMessages, UpdateScanDataDefinition, UpdateScanDataMessage } from '../../../common/internal-api';
 import { MessageConvert } from './message-convert';

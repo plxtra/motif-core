@@ -1,4 +1,4 @@
-import { CommaText } from '@xilytix/sysutils';
+import { CommaText } from '@pbkware/js-utils';
 import { ZenithProtocolCommon } from './zenith-protocol-common';
 
 export interface ZenithSymbol {

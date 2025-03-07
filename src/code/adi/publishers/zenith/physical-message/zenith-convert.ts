@@ -18,7 +18,7 @@ import {
     SourceTzOffsetDateTime,
     UnexpectedCaseError,
     UnreachableCaseError,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../../../../res/internal-api';
 import {

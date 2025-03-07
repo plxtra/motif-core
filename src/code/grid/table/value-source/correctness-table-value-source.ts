@@ -1,4 +1,4 @@
-import { MultiEvent } from '@xilytix/sysutils';
+import { MultiEvent } from '@pbkware/js-utils';
 import { Correctness, CorrectnessRecord } from '../../../sys/internal-api';
 import { TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';

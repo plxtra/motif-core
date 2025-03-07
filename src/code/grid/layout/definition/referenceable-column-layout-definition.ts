@@ -1,5 +1,5 @@
-import { RevReferenceableColumnLayoutDefinition } from '@xilytix/revgrid';
-import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevReferenceableColumnLayoutDefinition } from 'revgrid';
 import { ErrorCode } from '../../../sys/internal-api';
 
 export namespace ReferenceableColumnLayoutDefinition {

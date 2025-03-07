@@ -1,5 +1,5 @@
-import { RevHorizontalAlignId, RevSourcedField } from '@xilytix/revgrid';
-import { AssertInternalError, Integer } from '@xilytix/sysutils';
+import { AssertInternalError, Integer } from '@pbkware/js-utils';
+import { RevHorizontalAlignId, RevSourcedField } from 'revgrid';
 import { GridField } from '../../../field/internal-api';
 import {
     StringTableField,

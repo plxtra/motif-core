@@ -1,3 +1,4 @@
+import { IndexSignatureHack, Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import {
     RevDataServer,
     RevHorizontalAlignId,
@@ -5,8 +6,7 @@ import {
     RevRecordValueRecentChangeTypeId,
     RevStandardTextPainter,
     RevViewCell
-} from '@xilytix/revgrid';
-import { IndexSignatureHack, Integer, UnreachableCaseError } from '@xilytix/sysutils';
+} from 'revgrid';
 import { HigherLowerId, OrderSideId } from '../../../../adi/internal-api';
 import { ColorScheme, ColorTextFormattableValue, SettingsService, TextFormattableValue, TextFormatter } from '../../../../services/internal-api';
 import { CorrectnessId } from '../../../../sys/internal-api';

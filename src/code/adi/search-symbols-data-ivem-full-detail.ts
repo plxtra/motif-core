@@ -5,7 +5,7 @@ import {
     SourceTzOffsetDate,
     isUndefinableArrayEqualUniquely,
     isUndefinableDecimalEqual
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { StringId, Strings } from '../res/internal-api';
 import { FieldDataTypeId } from '../sys/internal-api';

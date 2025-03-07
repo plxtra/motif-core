@@ -1,4 +1,3 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
@@ -7,7 +6,8 @@ import {
     UnreachableCaseError,
     UsableListChangeTypeId,
     newUndefinableDate
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     AdiService,
     DataIvemId,

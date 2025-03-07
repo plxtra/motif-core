@@ -1,5 +1,5 @@
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
-import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
 import { ErrorCode } from '../../../sys/internal-api';
 
 /** @public */

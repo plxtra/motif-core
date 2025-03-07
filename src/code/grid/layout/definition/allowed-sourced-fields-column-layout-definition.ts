@@ -1,4 +1,4 @@
-import { RevAllowedRecordSourcedFieldsColumnLayoutDefinition } from '@xilytix/revgrid';
+import { RevAllowedRecordSourcedFieldsColumnLayoutDefinition } from 'revgrid';
 import { TextFormattableValue } from '../../../services/internal-api';
 import { BidAskPair } from '../../../sys/internal-api';
 

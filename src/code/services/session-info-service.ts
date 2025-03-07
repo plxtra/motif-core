@@ -1,4 +1,4 @@
-import { IndexSignatureHack, Integer, MultiEvent } from '@xilytix/sysutils';
+import { IndexSignatureHack, Integer, MultiEvent } from '@pbkware/js-utils';
 import { ExchangeEnvironment, MarketIvemId, PublisherSessionTerminatedReasonId } from '../adi/internal-api';
 import { SessionStateId } from './session-state';
 

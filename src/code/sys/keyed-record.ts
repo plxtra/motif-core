@@ -1,4 +1,4 @@
-import { MapKey } from '@xilytix/sysutils';
+import { MapKey } from '@pbkware/js-utils';
 
 export interface KeyedRecord {
     readonly mapKey: MapKey;

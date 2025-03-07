@@ -1,4 +1,4 @@
-import { parseIntStrict, parseNumberStrict, UnreachableCaseError } from '@xilytix/sysutils';
+import { parseIntStrict, parseNumberStrict, UnreachableCaseError } from '@pbkware/js-utils';
 import { ErrorCodeLogger } from '../../../../sys/internal-api';
 import { DataIvemAlternateCodes, ZenithProtocolCommon } from '../../../common/internal-api';
 import { MyxDataIvemAttributes } from '../../../common/myx-data-ivem-attributes';

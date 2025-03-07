@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, MultiEvent } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, MultiEvent } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 import { FieldDataTypeId } from '../sys/internal-api';
 import {

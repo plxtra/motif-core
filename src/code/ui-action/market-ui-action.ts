@@ -1,5 +1,5 @@
-import { MultiEvent } from '@xilytix/sysutils';
-import { UiAction } from '@xilytix/ui-action';
+import { MultiEvent } from '@pbkware/js-utils';
+import { UiAction } from '@pbkware/ui-action';
 import { Market, MarketsService } from '../adi/internal-api';
 
 export class MarketUiAction<T extends Market> extends UiAction {

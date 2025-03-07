@@ -1,5 +1,5 @@
-import { RevDataSource, RevReferenceableDataSources } from '@xilytix/revgrid';
-import { JsonElement, SysTick, mSecsPerSec } from '@xilytix/sysutils';
+import { JsonElement, SysTick, mSecsPerSec } from '@pbkware/js-utils';
+import { RevDataSource, RevReferenceableDataSources } from 'revgrid';
 import { TextFormattableValue } from '../../services/internal-api';
 import { Badness, LockOpenList } from '../../sys/internal-api';
 import { ReferenceableColumnLayoutsService } from '../layout/internal-api';

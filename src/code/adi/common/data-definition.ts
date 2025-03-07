@@ -10,7 +10,7 @@ import {
     NotImplementedError,
     Ok,
     Result,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { AdiPublisherSubscriptionDelayRetryAlgorithmId } from './adi-publisher-subscription-delay-retry-algorithm';
 import {

@@ -1,34 +1,33 @@
 {
-  "name": "@motifmarkets/motif-core",
-  "version": "0.1.0",
+  "name": "@plxtra/motif-core",
+  "version": "0.4.0",
   "description": "Core library for Motif",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/motifmarkets/motif-core.git"
+    "url": "git+ssh://git@github.com/plxtra/motif-core.git"
   },
   "keywords": [
     "Motif",
-    "MotifMarkets",
+    "plxtra",
     "Core"
   ],
-  "homepage": "https://www.motifmarkets.com/platform/documentation/motif/",
+  "homepage": "https://plxtra.org",
   "author": {
-    "name": "Motif Markets",
-    "url": "https://www.motifmarkets.com/"
+    "name": "Plxtra contributors",
+    "url": "https://plxtra.org/"
   },
-  "license": "SEE LICENSE IN license.txt",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/motifmarkets/motif-core/issues"
+    "url": "https://github.com/plxtra/motif-core/issues"
   },
   "module": "dist/code/public-api.js",
   "typings": "dist/types/public-api.d.ts",
   "files": [
     "dist/**/*",
-    "src/**/*.ts",
-    "license.txt"
+    "src/**/*.ts"
   ],
   "scripts": {
-    "link-xilytix": "npm link @xilytix/sysutils @xilytix/revgrid @xilytix/ui-action",
+    "link-plxtra": "npm link @plxtra/js-utils @plxtra/ui-action revgrid",
     "lint": "eslint -c .eslintrc.json --ext .ts src/",
     "build": "tsc --build ./tsconfig.json",
     "force-build": "tsc --build --force ./tsconfig.json",
@@ -43,11 +42,11 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
-    "@xilytix/revgrid": "^0.9.0",
-    "@xilytix/sysutils": "^0.0.3",
-    "@xilytix/ui-action": "^0.0.3",
+    "@pbkware/js-utils": "^0.8.0",
+    "@pbkware/ui-action": "^0.9.0",
     "decimal.js-light": "^2.5.1",
-    "nanoid": "^5.0.6"
+    "nanoid": "^5.0.6",
+    "revgrid": "^0.9.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.48.1",

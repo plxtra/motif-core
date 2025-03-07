@@ -1,4 +1,4 @@
-import { SysTick } from '@xilytix/sysutils';
+import { SysTick } from '@pbkware/js-utils';
 import { ExerciseTimer } from '../../sys/internal-api';
 import { AdiPublisher, DataDefinition } from '../common/internal-api';
 import { DataItem } from './data-item';

@@ -1,7 +1,7 @@
 // We are trying not to use null - only undefined.  If it does become necessary to use null table grid values, then
 // the classes below can be used.  However try to avoid this
 
-import { Integer, newUndefinableDate } from '@xilytix/sysutils';
+import { Integer, newUndefinableDate } from '@pbkware/js-utils';
 import {
     BooleanTextFormattableValue,
     DateTextFormattableValue,

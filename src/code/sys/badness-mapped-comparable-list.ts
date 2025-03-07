@@ -1,5 +1,5 @@
 
-import { CompareFtn, CorrectnessState, Mappable, MappedComparableList, MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { CompareFtn, CorrectnessState, Mappable, MappedComparableList, MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { Badness } from './badness';
 import { BadnessList } from './badness-list';
 import { CorrectnessId } from './correctness';

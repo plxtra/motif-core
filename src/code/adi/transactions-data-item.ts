@@ -4,7 +4,7 @@ import {
     NotImplementedError,
     UnexpectedTypeError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     assert,
     Badness,

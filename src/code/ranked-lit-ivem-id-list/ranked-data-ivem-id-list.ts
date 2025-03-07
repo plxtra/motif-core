@@ -1,4 +1,4 @@
-import { Integer, LockOpenListItem, Result } from '@xilytix/sysutils';
+import { Integer, LockOpenListItem, Result } from '@pbkware/js-utils';
 import { DataIvemId } from '../adi/internal-api';
 import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
 import { BadnessList } from '../sys/internal-api';

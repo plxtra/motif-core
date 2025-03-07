@@ -1,4 +1,4 @@
-import { RevTableFieldSourceDefinitionFactory } from '@xilytix/revgrid';
+import { RevTableFieldSourceDefinitionFactory } from 'revgrid';
 import { TextFormattableValue } from '../../../../services/internal-api';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
 

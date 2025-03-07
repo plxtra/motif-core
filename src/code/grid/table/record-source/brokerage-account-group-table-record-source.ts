@@ -1,4 +1,4 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     BrokerageAccountGroup,
     BrokerageAccountGroupRecordList,

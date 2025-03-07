@@ -1,4 +1,4 @@
-import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent, SourceTzOffsetDateTime } from '@xilytix/sysutils';
+import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent, SourceTzOffsetDateTime } from '@pbkware/js-utils';
 import { SequenceHistory } from './sequence-history';
 
 export abstract class HistorySequencer {

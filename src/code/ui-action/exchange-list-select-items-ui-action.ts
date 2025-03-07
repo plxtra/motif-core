@@ -1,5 +1,5 @@
-import { MultiEvent } from '@xilytix/sysutils';
-import { SelectItemsUiAction } from '@xilytix/ui-action';
+import { MultiEvent } from '@pbkware/js-utils';
+import { SelectItemsUiAction } from '@pbkware/ui-action';
 import { Exchange, MarketsService } from '../adi/internal-api';
 
 /** @public */

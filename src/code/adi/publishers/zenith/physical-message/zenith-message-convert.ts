@@ -1,4 +1,4 @@
-import { AssertInternalError, DecimalFactory, getErrorMessage, Result, UnexpectedCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, getErrorMessage, Result, UnexpectedCaseError } from '@pbkware/js-utils';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

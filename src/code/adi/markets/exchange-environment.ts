@@ -2,7 +2,7 @@ import {
     EnumInfoOutOfOrderError,
     Integer,
     MultiEvent
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import {
     FieldDataTypeId

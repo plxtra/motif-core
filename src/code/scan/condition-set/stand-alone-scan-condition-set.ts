@@ -1,4 +1,4 @@
-import { Err, Ok, Result, SourceTzOffsetDate, UnreachableCaseError } from '@xilytix/sysutils';
+import { Err, Ok, Result, SourceTzOffsetDate, UnreachableCaseError } from '@pbkware/js-utils';
 import { UiComparableList } from '../../sys/internal-api';
 import { ScanFormula } from '../formula/internal-api';
 import { ScanConditionSetLoadError, ScanConditionSetLoadErrorTypeId } from './common/internal-api';

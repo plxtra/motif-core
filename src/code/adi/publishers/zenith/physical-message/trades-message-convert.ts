@@ -1,4 +1,4 @@
-import { AssertInternalError, DecimalFactory, Err, Ok, Result, UnexpectedCaseError, } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Err, Ok, Result, UnexpectedCaseError, } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../../../res/internal-api';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {

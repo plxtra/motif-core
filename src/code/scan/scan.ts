@@ -1,4 +1,3 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     EnumInfoOutOfOrderError,
@@ -14,7 +13,8 @@ import {
     isUndefinableArrayEqualUniquely,
     isUndefinableDateEqual,
     isUndefinableStringNumberBooleanNestArrayEqual
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import {
     ActiveFaultedStatusId,
     AdiService,

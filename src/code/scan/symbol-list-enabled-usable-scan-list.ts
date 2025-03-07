@@ -1,4 +1,4 @@
-import { Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { BadnessMappedComparableList } from '../sys/internal-api';
 import { Scan } from './scan';
 import { ScanList } from './scan-list';

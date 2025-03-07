@@ -1,4 +1,4 @@
-import { compareString, ComparisonResult } from '@xilytix/sysutils';
+import { compareString, ComparisonResult } from '@pbkware/js-utils';
 import { ExchangeEnvironmentZenithCode } from '../common/internal-api';
 
 export interface ZenithCodedEnvironment {

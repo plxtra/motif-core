@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer } from '@xilytix/sysutils';
+import { AssertInternalError, Integer } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { BadnessComparableList } from '../../sys/badness-comparable-list';
 import { Correctness } from '../../sys/correctness';

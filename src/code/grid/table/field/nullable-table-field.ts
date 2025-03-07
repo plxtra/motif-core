@@ -1,7 +1,7 @@
 // We are trying not to use null - only undefined.  If it does become necessary to use null table grid fields, then
 // the classes below can be used.  However try to avoid this
 
-import { compareArray, compareDate, compareDecimal, compareString, compareValue, Integer } from '@xilytix/sysutils';
+import { compareArray, compareDate, compareDecimal, compareString, compareValue, Integer } from '@pbkware/js-utils';
 import {
     GenericNullableCorrectnessTableValue,
     NullableCorrectnessTableValue,

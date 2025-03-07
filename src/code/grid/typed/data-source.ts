@@ -1,5 +1,5 @@
-import { RevColumnLayoutOrReferenceDefinition, RevDataSource } from '@xilytix/revgrid';
-import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevColumnLayoutOrReferenceDefinition, RevDataSource } from 'revgrid';
 import { TextFormattableValue } from '../../services/internal-api';
 import { Badness, ErrorCode } from '../../sys/internal-api';
 import { ColumnLayoutOrReference } from '../layout/internal-api';

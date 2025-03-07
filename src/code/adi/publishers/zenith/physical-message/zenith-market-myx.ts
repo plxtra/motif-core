@@ -1,4 +1,4 @@
-import { PickEnum } from '@xilytix/sysutils';
+import { PickEnum } from '@pbkware/js-utils';
 import { ZenithProtocolCommon } from '../../../common/zenith-protocol/internal-api';
 
 export namespace ZenithMarketMyx {

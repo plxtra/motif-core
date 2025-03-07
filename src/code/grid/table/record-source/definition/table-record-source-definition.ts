@@ -1,4 +1,3 @@
-import { RevSourcedFieldCustomHeadings, RevTableRecordSourceDefinition } from '@xilytix/revgrid';
 import {
     EnumInfoOutOfOrderError,
     Err,
@@ -7,7 +6,8 @@ import {
     Ok,
     Result,
     compareNumber
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings, RevTableRecordSourceDefinition } from 'revgrid';
 import { StringId, Strings } from '../../../../res/internal-api';
 import { TextFormattableValue } from '../../../../services/internal-api';
 import {

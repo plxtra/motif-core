@@ -1,4 +1,4 @@
-import { Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { Ok, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { ErrorCode, ErrorCodeWithExtra, ErrorCodeWithExtraErr } from '../../../sys/internal-api';
 import { ExchangeEnvironmentZenithCode } from './exchange-environment-zenith-code';
 import { ZenithProtocolCommon } from './zenith-protocol-common';

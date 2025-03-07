@@ -1,5 +1,5 @@
-import { MultiEvent } from '@xilytix/sysutils';
-import { UiAction } from '@xilytix/ui-action';
+import { MultiEvent } from '@pbkware/js-utils';
+import { UiAction } from '@pbkware/ui-action';
 import { Market, MarketIvemId, MarketsService } from '../adi/internal-api';
 import { SymbolsService } from '../services/internal-api';
 

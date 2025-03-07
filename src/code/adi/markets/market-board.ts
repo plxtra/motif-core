@@ -1,4 +1,4 @@
-import { compareString, ComparisonResult, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@xilytix/sysutils';
+import { compareString, ComparisonResult, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { FieldDataTypeId } from '../../sys/internal-api';
 import { TradingState, ZenithEnvironmentedValueParts, ZenithMarketBoard } from '../common/internal-api';

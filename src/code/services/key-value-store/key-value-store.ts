@@ -1,4 +1,4 @@
-import { Result } from '@xilytix/sysutils';
+import { Result } from '@pbkware/js-utils';
 
 /** @public */
 export interface KeyValueStore {

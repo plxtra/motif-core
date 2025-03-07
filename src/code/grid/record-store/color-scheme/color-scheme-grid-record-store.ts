@@ -1,9 +1,9 @@
-import { RevRecordIndex, RevRecordStore } from '@xilytix/revgrid';
 import {
     IndexedRecord,
     Integer,
     MultiEvent
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordIndex, RevRecordStore } from 'revgrid';
 import {
     ColorScheme,
     ColorSettings,

@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, parseIntStrict, parseNumberStrict } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, parseIntStrict, parseNumberStrict } from '@pbkware/js-utils';
 import { OrderType, OrderTypeId, TimeInForce, TimeInForceId } from '../../adi/internal-api';
 
 export namespace TypedKeyValueSettings {

@@ -1,4 +1,4 @@
-import { CommaText, EnumInfoOutOfOrderError, isArrayEqualUniquely } from '@xilytix/sysutils';
+import { CommaText, EnumInfoOutOfOrderError, isArrayEqualUniquely } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { FieldDataTypeId } from '../../sys/internal-api';
 

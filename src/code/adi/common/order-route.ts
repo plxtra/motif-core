@@ -1,4 +1,4 @@
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { UnreachableCaseError } from '@pbkware/js-utils';
 import { OrderRouteAlgorithmId } from './data-types';
 
 export interface OrderRoute {

@@ -1,4 +1,4 @@
-import { AssertInternalError } from '@xilytix/sysutils';
+import { AssertInternalError } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import {
     DataDefinition,

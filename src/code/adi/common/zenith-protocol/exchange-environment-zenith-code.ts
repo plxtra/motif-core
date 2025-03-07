@@ -1,4 +1,4 @@
-import { compareString, ComparisonResult } from '@xilytix/sysutils';
+import { compareString, ComparisonResult } from '@pbkware/js-utils';
 import { ZenithProtocolCommon } from './zenith-protocol-common';
 
 export type ExchangeEnvironmentZenithCode = string | null;

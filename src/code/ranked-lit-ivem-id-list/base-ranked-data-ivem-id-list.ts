@@ -13,7 +13,7 @@ import {
     compareNumber,
     moveElementsInArray,
     rangedAnyBinarySearch
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
 import {

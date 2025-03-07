@@ -1,6 +1,6 @@
 import {
     AssertInternalError, Ok, Result, UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ErrorCode, ZenithDataError
 } from '../../../../sys/internal-api';

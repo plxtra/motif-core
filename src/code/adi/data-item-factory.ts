@@ -3,7 +3,7 @@ import {
     DecimalFactory,
     NotImplementedError,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { AllBalancesDataItem } from './all-balances-data-item';
 import { AllHoldingsDataItem } from './all-holdings-data-item';
 import { AllOrdersDataItem } from './all-orders-data-item';

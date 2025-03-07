@@ -1,4 +1,4 @@
-import { AssertInternalError } from '@xilytix/sysutils';
+import { AssertInternalError } from '@pbkware/js-utils';
 import { Exchange, MarketsConfig, SymbolField, SymbolFieldId } from '../../adi/internal-api';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 

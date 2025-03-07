@@ -1,4 +1,3 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import {
     CorrectnessState,
     Integer,
@@ -7,7 +6,8 @@ import {
     RecordList,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { TextFormatter } from '../../../services/internal-api';
 import { Badness } from '../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';

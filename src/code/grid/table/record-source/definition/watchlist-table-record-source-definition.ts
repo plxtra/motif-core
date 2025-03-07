@@ -1,4 +1,4 @@
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
 import { SecurityDataItem } from '../../../../adi/internal-api';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition, ScanIdRankedDataIvemIdListDefinition

@@ -6,7 +6,7 @@ import {
     SourceTzOffsetDate,
     UnexpectedCaseError,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
 import { FactoryisedDecimal, TextFormattableValue } from '../../../services/internal-api';

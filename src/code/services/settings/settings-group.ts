@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Err, Integer, JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Err, Integer, JsonElement, Ok, Result } from '@pbkware/js-utils';
 import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
 
 export abstract class SettingsGroup {

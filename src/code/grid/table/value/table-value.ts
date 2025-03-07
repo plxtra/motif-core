@@ -1,10 +1,10 @@
-import { RevTableValue } from '@xilytix/revgrid';
 import {
     Integer,
     SourceTzOffsetDate,
     SourceTzOffsetDateTime,
     newUndefinableDate
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevTableValue } from 'revgrid';
 import { DataIvemId, IvemId } from '../../../adi/internal-api';
 import {
     BooleanTextFormattableValue,

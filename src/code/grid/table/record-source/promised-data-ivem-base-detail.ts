@@ -1,4 +1,4 @@
-import { AssertInternalError, MultiEvent, isArrayEqualUniquely } from '@xilytix/sysutils';
+import { AssertInternalError, MultiEvent, isArrayEqualUniquely } from '@pbkware/js-utils';
 import { DataIvemAlternateCodes, DataIvemBaseDetail, DataIvemId, DataMarket, Exchange, IvemClassId, PublisherSubscriptionDataTypeId, TradingMarket } from '../../../adi/internal-api';
 import { StringId, Strings } from '../../../res/internal-api';
 import { SymbolDetailCacheService } from '../../../services/symbol-detail-cache-service';

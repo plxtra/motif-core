@@ -1,4 +1,4 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 import { defined, ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 

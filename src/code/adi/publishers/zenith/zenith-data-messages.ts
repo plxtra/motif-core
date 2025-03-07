@@ -1,4 +1,4 @@
-import { Integer, SysTick } from '@xilytix/sysutils';
+import { Integer, SysTick } from '@pbkware/js-utils';
 import { DataItemId, DataMessage, DataMessageTypeId } from '../../common/internal-api';
 
 export class ZenithQueryConfigureDataMessage extends DataMessage {

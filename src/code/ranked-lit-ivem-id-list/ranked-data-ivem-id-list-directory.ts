@@ -4,7 +4,7 @@ import {
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { RankedDataIvemIdListDirectoryItem } from '../services/internal-api';
 import {
     Badness,

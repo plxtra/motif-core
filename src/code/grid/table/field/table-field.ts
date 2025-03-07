@@ -1,4 +1,3 @@
-import { RevTableField } from '@xilytix/revgrid';
 import {
     Integer,
     SourceTzOffsetDate,
@@ -8,7 +7,8 @@ import {
     compareDecimal,
     compareString,
     compareValue
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevTableField } from 'revgrid';
 import { IvemId, MarketIvemId } from '../../../adi/internal-api';
 import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
 import {

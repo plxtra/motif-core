@@ -1,4 +1,4 @@
-import { CompareFtn, Integer } from '@xilytix/sysutils';
+import { CompareFtn, Integer } from '@pbkware/js-utils';
 import { ModifierComparableList } from './modifier-comparable-list';
 
 export class UiComparableList<out T extends U, in U = T> extends ModifierComparableList<T, boolean, U> {

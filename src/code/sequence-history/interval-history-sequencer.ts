@@ -5,7 +5,7 @@ import {
     EnumInfoOutOfOrderError,
     Integer, isDateEqual, mSecsPerDay, mSecsPerHour, mSecsPerMin, mSecsPerSec, MultiEvent, newDate, newNullDate, SourceTzOffsetDateTime,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { HistorySequencer } from './history-sequencer';
 
 export class IntervalHistorySequencer extends HistorySequencer {

@@ -1,4 +1,4 @@
-import { AssertInternalError } from '@xilytix/sysutils';
+import { AssertInternalError } from '@pbkware/js-utils';
 import { AdiService, DataIvemIdExecuteScanDataDefinition, DataIvemIdScanMatchesDataItem, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import { DataIvemIdExecuteScanRankedDataIvemIdListDefinition } from './definition/internal-api';

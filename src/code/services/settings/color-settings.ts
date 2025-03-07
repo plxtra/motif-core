@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, HtmlTypes, Integer, JsonElement, UnreachableCaseError } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, HtmlTypes, Integer, JsonElement, UnreachableCaseError } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { ColorScheme } from './color-scheme';
 import { ColorSchemePreset } from './color-scheme-preset';

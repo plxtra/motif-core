@@ -1,4 +1,3 @@
-import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     compareDecimal,
@@ -9,8 +8,9 @@ import {
     isArrayEqualUniquely,
     uniqueElementArraysOverlap,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
 import {
     CountAndXrefsTextFormattableValue,

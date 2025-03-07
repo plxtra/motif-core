@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 // Version 3
 
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 import { ZenithEncodedScanFormula, ZenithProtocolCommon } from '../../../../common/zenith-protocol/internal-api';
 
 export namespace ZenithProtocol {

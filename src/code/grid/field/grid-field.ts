@@ -1,5 +1,5 @@
-import { RevRecordSourcedField, RevSourcedField } from '@xilytix/revgrid';
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { UnreachableCaseError } from '@pbkware/js-utils';
+import { RevRecordSourcedField, RevSourcedField } from 'revgrid';
 import { StringId, Strings } from '../../res/internal-api';
 import { TextFormattableValue } from '../../services/internal-api';
 

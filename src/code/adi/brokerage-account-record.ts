@@ -1,4 +1,4 @@
-import { MapKey } from '@xilytix/sysutils';
+import { MapKey } from '@pbkware/js-utils';
 import { KeyedCorrectnessListItem } from '../sys/internal-api';
 
 export interface BrokerageAccountRecord extends KeyedCorrectnessListItem {

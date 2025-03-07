@@ -1,5 +1,5 @@
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { PickEnum } from '@xilytix/sysutils';
+import { PickEnum } from '@pbkware/js-utils';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
 import { RankedDataIvemIdListDirectory } from '../../../../ranked-lit-ivem-id-list/internal-api';
 import { RankedDataIvemIdListDirectoryItem } from '../../../../services/internal-api';
 import {

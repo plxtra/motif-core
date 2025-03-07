@@ -1,5 +1,5 @@
-import { RevSourcedField } from '@xilytix/revgrid';
-import { AssertInternalError, Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevSourcedField } from 'revgrid';
 import { GridField } from '../../field/internal-api';
 import { GridFieldTableFieldSourceDefinition } from '../field-source/internal-api';
 import {

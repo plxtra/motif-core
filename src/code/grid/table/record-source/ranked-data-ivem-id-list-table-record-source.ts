@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { AssertInternalError, DecimalFactory, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, DecimalFactory, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { AdiService, RankedDataIvemId } from '../../../adi/internal-api';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition,

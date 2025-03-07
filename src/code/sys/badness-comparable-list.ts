@@ -1,4 +1,4 @@
-import { ChangeSubscribableComparableList, CompareFtn, MultiEvent } from '@xilytix/sysutils';
+import { ChangeSubscribableComparableList, CompareFtn, MultiEvent } from '@pbkware/js-utils';
 import { Badness } from './badness';
 import { BadnessList } from './badness-list';
 import { CorrectnessId } from './correctness';

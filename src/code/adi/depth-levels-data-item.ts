@@ -1,10 +1,10 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     Integer,
     MultiEvent,
     UnexpectedCaseError,
     UnreachableCaseError,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import {
     ErrorCodeLogger,
     PriceOrRemainder,

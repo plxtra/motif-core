@@ -1,10 +1,10 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     EnumInfoOutOfOrderError,
     IndexedRecord,
     Integer,
     MultiEvent,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { StringId, Strings } from '../../../res/internal-api';
 import {
     FieldDataTypeId,

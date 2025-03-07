@@ -4,7 +4,7 @@ declare global {
     }
 }
 
-import { Integer, Logger } from '@xilytix/sysutils';
+import { Integer, Logger } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 
 // export {

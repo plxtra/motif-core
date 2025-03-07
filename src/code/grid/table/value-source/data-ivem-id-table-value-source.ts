@@ -1,4 +1,4 @@
-import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { DataIvemId, MarketIvemId } from '../../../adi/internal-api';
 import { DataIvemIdTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import { DataIvemIdTableValue, StringTableValue, TableValue } from '../value/internal-api';

@@ -1,4 +1,4 @@
-import { Integer, MultiEvent } from '@xilytix/sysutils';
+import { Integer, MultiEvent } from '@pbkware/js-utils';
 
 export interface HistorySequenceSeriesInterface {
     pointCount: number;

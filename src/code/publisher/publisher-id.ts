@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Err, JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Err, JsonElement, Ok, Result } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 import { ErrorCode, JsonElementErr } from '../sys/internal-api';
 

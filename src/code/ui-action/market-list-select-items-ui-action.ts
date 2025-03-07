@@ -1,5 +1,5 @@
-import { MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
-import { SelectItemsUiAction } from '@xilytix/ui-action';
+import { MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
+import { SelectItemsUiAction } from '@pbkware/ui-action';
 import { DataMarket, MarketsService } from '../adi/internal-api';
 
 /** @public */

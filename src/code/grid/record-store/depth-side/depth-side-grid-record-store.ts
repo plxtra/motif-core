@@ -1,6 +1,6 @@
-import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from '@xilytix/revgrid';
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from 'revgrid';
 import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi/internal-api';
 import { DepthRecord } from './depth-record';
 

@@ -1,4 +1,3 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     EnumInfoOutOfOrderError,
@@ -9,7 +8,8 @@ import {
     MultiEvent,
     Ok,
     Result,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { ActiveFaultedStatusId, NotificationChannel, NotificationDistributionMethodId, ZenithProtocolCommon } from '../adi/internal-api';
 import { StringId, Strings } from '../res/internal-api';
 import {

@@ -1,9 +1,9 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { RankedDataIvemId } from '../../../../adi/internal-api';
 import {
     FieldDataType,

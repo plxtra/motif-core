@@ -1,4 +1,4 @@
-import { Result } from '@xilytix/sysutils';
+import { Result } from '@pbkware/js-utils';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, RequestErrorDataMessages } from '../../../common/internal-api';
 import { ZenithProtocol } from './protocol/internal-api';
 import { ZenithConvert } from './zenith-convert';

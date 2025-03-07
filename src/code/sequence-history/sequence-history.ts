@@ -1,4 +1,4 @@
-import { AssertInternalError } from '@xilytix/sysutils';
+import { AssertInternalError } from '@pbkware/js-utils';
 import { Badness, CorrectnessId } from '../sys/internal-api';
 
 export abstract class SequenceHistory {

@@ -1,4 +1,4 @@
-import { MultiEvent } from '@xilytix/sysutils';
+import { MultiEvent } from '@pbkware/js-utils';
 import { CorrectnessId } from './correctness';
 import { UsableList } from './usable-list';
 

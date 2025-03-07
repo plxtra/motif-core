@@ -1,4 +1,4 @@
-import { RevRecordSourcedFieldGrid } from '@xilytix/revgrid';
+import { RevRecordSourcedFieldGrid } from 'revgrid';
 import { TextFormattableValue } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 import { AdaptedRevgridBehavioredColumnSettings, AdaptedRevgridBehavioredGridSettings } from '../settings/internal-api';

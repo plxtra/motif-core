@@ -1,4 +1,4 @@
-import { RevGridSettings } from '@xilytix/revgrid';
+import { RevGridSettings } from 'revgrid';
 import { AdaptedRevgridOnlyGridSettings } from './adapted-revgrid-only-grid-settings';
 
 /** @public */

@@ -1,4 +1,4 @@
-import { AssertInternalError, Guid, Integer, LockItemByKeyList, LockOpenListItem, MapKey, Ok, Result, UsableListChangeType, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { AssertInternalError, Guid, Integer, LockItemByKeyList, LockOpenListItem, MapKey, Ok, Result, UsableListChangeType, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { BadnessList } from './badness-list';
 import { BadnessMappedComparableList } from './badness-mapped-comparable-list';
 

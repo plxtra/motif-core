@@ -1,4 +1,4 @@
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { MyxDataIvemAttributes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi/internal-api';
 import { MyxDataIvemAttributesTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {

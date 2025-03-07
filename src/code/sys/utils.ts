@@ -1,5 +1,5 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { ComparisonResult, compareDecimal, isDecimalEqual } from '@xilytix/sysutils';
+import { ComparisonResult, compareDecimal, isDecimalEqual } from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { PriceOrRemainder } from './types';
 
 /** @public */

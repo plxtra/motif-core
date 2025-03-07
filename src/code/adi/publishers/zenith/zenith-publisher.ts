@@ -9,7 +9,7 @@ import {
     newNowDate,
     SysTick,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { WebsocketCloseCode } from '../../../sys/internal-api';
 import { AdiPublisher } from '../../common/adi-publisher';
 import {

@@ -1,4 +1,4 @@
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { UnreachableCaseError } from '@pbkware/js-utils';
 import { CapabilityId } from './capability';
 
 export class CapabilitiesService {

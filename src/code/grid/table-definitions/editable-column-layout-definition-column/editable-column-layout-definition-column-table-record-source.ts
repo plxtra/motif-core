@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { Integer, LockOpenListItem, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { Integer, LockOpenListItem, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { TextFormatter } from '../../../services/internal-api';
 import { Badness, CorrectnessBadness } from '../../../sys/internal-api';
 import {

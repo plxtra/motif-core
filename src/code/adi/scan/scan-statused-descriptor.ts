@@ -4,7 +4,7 @@ import {
     Guid,
     Integer,
     MultiEvent,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ErrorCode,
     ZenithDataError

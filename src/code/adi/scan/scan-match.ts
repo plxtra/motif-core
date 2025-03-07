@@ -1,4 +1,4 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 
 export interface ScanMatch<T> {
     readonly index: Integer;

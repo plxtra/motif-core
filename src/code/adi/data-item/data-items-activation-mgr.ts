@@ -1,4 +1,4 @@
-import { AssertInternalError, Logger, SysTick } from '@xilytix/sysutils';
+import { AssertInternalError, Logger, SysTick } from '@pbkware/js-utils';
 import { assert } from '../../sys/internal-api';
 import { DataItemId } from '../common/internal-api';
 import { DataItem } from './data-item';

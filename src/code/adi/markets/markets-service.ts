@@ -1,4 +1,4 @@
-import { AssertInternalError, BinaryFind, ChangeSubscribableComparableList, CompareFtn, EnumInfoOutOfOrderError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { AssertInternalError, BinaryFind, ChangeSubscribableComparableList, CompareFtn, EnumInfoOutOfOrderError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/internal-api';
 import { Badness, BadnessComparableList, ConfigError, ErrorCode, WarningsService, ZenithDataError } from '../../sys/internal-api';
 import { FeedsDataDefinition, MarketsDataDefinition } from '../common/data-definition';

@@ -1,5 +1,5 @@
-import { compareInteger, Integer, ModifierKey, SysTick } from '@xilytix/sysutils';
-import { UiAction } from '@xilytix/ui-action';
+import { compareInteger, Integer, ModifierKey, SysTick } from '@pbkware/js-utils';
+import { UiAction } from '@pbkware/ui-action';
 import { CommandContext } from '../command-context/internal-api';
 import { Command } from '../command/command';
 import { extStrings } from '../res/ext-strings';

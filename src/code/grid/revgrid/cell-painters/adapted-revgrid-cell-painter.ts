@@ -1,5 +1,5 @@
 // not used
-import { RevCellPainter, RevDataServer, RevViewCell } from '@xilytix/revgrid';
+import { RevCellPainter, RevDataServer, RevViewCell } from 'revgrid';
 import { GridField } from '../../field/internal-api';
 import { SourcedFieldGrid } from '../adapted-revgrid/sourced-field-grid';
 import { AdaptedRevgridBehavioredColumnSettings } from '../settings/internal-api';

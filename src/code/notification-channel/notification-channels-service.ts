@@ -1,4 +1,4 @@
-import { AssertInternalError, Err, Integer, LockOpenListItem, Ok, Result } from '@xilytix/sysutils';
+import { AssertInternalError, Err, Integer, LockOpenListItem, Ok, Result } from '@pbkware/js-utils';
 import { AdiService, CreateNotificationChannelDataDefinition, CreateNotificationChannelDataItem, DataItemIncubator, DeleteNotificationChannelDataDefinition, DeleteNotificationChannelDataItem, NotificationChannel, NotificationDistributionMethodId, QueryNotificationChannelDataDefinition, QueryNotificationChannelDataItem, QueryNotificationChannelsDataDefinition, QueryNotificationChannelsDataItem, QueryNotificationDistributionMethodsDataDefinition, QueryNotificationDistributionMethodsDataItem } from '../adi/internal-api';
 import { Badness } from '../sys/internal-api';
 import { LockOpenNotificationChannel } from './lock-open-notification-channel';

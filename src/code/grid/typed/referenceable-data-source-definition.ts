@@ -1,4 +1,4 @@
-import { RevReferenceableDataSourceDefinition } from '@xilytix/revgrid';
+import { RevReferenceableDataSourceDefinition } from 'revgrid';
 import { TextFormattableValue } from '../../services/internal-api';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 

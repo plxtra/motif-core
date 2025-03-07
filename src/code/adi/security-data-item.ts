@@ -1,4 +1,3 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     CommaText,
@@ -11,8 +10,9 @@ import {
     isUndefinableArrayEqualUniquely,
     MultiEvent,
     SourceTzOffsetDate,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { StringId, Strings } from '../res/internal-api';
 import {
     assert,

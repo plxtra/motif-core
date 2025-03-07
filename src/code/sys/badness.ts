@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 import { Correctness, CorrectnessId } from './correctness';
 

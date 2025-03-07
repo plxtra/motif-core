@@ -1,4 +1,4 @@
-import { JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { JsonElement, Ok, Result } from '@pbkware/js-utils';
 import { ErrorCode, JsonElementErr } from '../sys/internal-api';
 import { ExtensionId } from './extension-id';
 

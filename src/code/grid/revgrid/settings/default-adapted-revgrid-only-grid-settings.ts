@@ -1,4 +1,4 @@
-import { RevHorizontalAlignId, RevTextTruncateTypeId } from '@xilytix/revgrid';
+import { RevHorizontalAlignId, RevTextTruncateTypeId } from 'revgrid';
 import { AdaptedRevgridOnlyGridSettings } from './adapted-revgrid-only-grid-settings';
 
 /** @public */

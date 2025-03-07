@@ -1,4 +1,4 @@
-import { RevRecordField, RevRecordSourcedFieldSourceDefinition } from '@xilytix/revgrid';
+import { RevRecordField, RevRecordSourcedFieldSourceDefinition } from 'revgrid';
 import { TextFormattableValue } from '../../../services/internal-api';
 import { CorrectnessId } from '../../../sys/internal-api';
 import { GridField } from '../../field/internal-api';

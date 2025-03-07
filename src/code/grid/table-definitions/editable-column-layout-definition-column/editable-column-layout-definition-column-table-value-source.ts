@@ -1,5 +1,5 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { TextFormattableValue } from '../../../services/text-formattable-value';
 import { IntegerTableValue, StringTableValue, TableValue, TableValueSource, VisibleTableValue } from '../../table/internal-api';
 import { EditableColumnLayoutDefinitionColumn } from './editable-column-layout-definition-column';

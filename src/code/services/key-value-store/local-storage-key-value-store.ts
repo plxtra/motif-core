@@ -1,4 +1,4 @@
-import { Ok, Result } from '@xilytix/sysutils';
+import { Ok, Result } from '@pbkware/js-utils';
 import { KeyValueStore } from './key-value-store';
 
 export class LocalStorageKeyValueStore implements KeyValueStore {

@@ -5,7 +5,7 @@ import {
     Ok,
     Result,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { AdiService } from '../adi/internal-api';
 import { NotificationChannelsService } from '../notification-channel/internal-api';
 import { SymbolsService } from '../services/internal-api';

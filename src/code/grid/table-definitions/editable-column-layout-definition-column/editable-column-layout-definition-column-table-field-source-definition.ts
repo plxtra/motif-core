@@ -1,5 +1,5 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { EnumInfoOutOfOrderError, } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, } from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { FieldDataType } from '../../../sys/internal-api';
 import {
     BooleanTableField,

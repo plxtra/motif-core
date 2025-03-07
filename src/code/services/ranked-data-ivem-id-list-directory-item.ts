@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Integer, LockOpenListItem, MultiEvent } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Integer, LockOpenListItem, MultiEvent } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 import { CorrectnessRecord, CorrectnessSettableListItem, FieldDataTypeId } from '../sys/internal-api';
 

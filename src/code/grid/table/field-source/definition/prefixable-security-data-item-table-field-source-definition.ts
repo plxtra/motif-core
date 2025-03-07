@@ -1,10 +1,10 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
     UnexpectedCaseError,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { SecurityDataItem } from '../../../../adi/internal-api';
 import {
     FieldDataType,

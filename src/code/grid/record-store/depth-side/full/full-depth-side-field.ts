@@ -1,5 +1,5 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
-import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { DepthDataItem } from '../../../../adi/internal-api';
 
 export const enum FullDepthSideFieldId {

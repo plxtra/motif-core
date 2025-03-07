@@ -1,4 +1,4 @@
-import { CommaText, Err, Json, JsonElement, Ok, Result } from '@xilytix/sysutils';
+import { CommaText, Err, Json, JsonElement, Ok, Result } from '@pbkware/js-utils';
 import { I18nStrings } from '../../res/i18n-strings';
 import { ErrorCode } from '../../sys/error-code';
 import { JsonElementErr, JsonElementResult } from '../../sys/json-element-result';

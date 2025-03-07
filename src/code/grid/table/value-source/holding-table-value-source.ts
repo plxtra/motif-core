@@ -1,4 +1,4 @@
-import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { Holding } from '../../../adi/internal-api';
 import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { HoldingTableFieldSourceDefinition } from '../field-source/definition/internal-api';

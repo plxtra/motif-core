@@ -1,4 +1,4 @@
-import { RevHorizontalAlignId, RevInMemoryBehavioredColumnSettings, RevTextTruncateTypeId } from '@xilytix/revgrid';
+import { RevHorizontalAlignId, RevInMemoryBehavioredColumnSettings, RevTextTruncateTypeId } from 'revgrid';
 import { AdaptedRevgridBehavioredColumnSettings } from './adapted-revgrid-behaviored-column-settings';
 import { AdaptedRevgridColumnSettings } from './adapted-revgrid-column-settings';
 import { AdaptedRevgridGridSettings } from './adapted-revgrid-grid-settings';

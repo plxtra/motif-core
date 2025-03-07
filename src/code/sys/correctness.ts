@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, UnreachableCaseError } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, UnreachableCaseError } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 
 /** @public */

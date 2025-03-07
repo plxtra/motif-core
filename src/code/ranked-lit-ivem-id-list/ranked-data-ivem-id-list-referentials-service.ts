@@ -1,4 +1,4 @@
-import { AssertInternalError, JsonElement, UnexpectedCaseError, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, JsonElement, UnexpectedCaseError, UnreachableCaseError } from '@pbkware/js-utils';
 import { AdiService } from '../adi/internal-api';
 import { ScansService } from '../scan/internal-api';
 import { AppStorageService, IdleService, KeyValueStore } from '../services/internal-api';

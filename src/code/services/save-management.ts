@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, MultiEvent, Result } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, MultiEvent, Result } from '@pbkware/js-utils';
 
 export interface SaveManagement {
     save(): Promise<Result<void>>;

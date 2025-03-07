@@ -12,7 +12,7 @@ import {
     Ok,
     Result,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ActiveFaultedStatusId,
     AdiService,

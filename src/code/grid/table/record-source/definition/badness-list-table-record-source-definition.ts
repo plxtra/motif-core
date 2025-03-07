@@ -1,4 +1,4 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { BadnessList } from '../../../../sys/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';

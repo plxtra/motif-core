@@ -1,4 +1,4 @@
-import { RevCellPainter, RevDataRowArrayDataServer, RevDataServer, RevViewCell } from '@xilytix/revgrid';
+import { RevCellPainter, RevDataRowArrayDataServer, RevDataServer, RevViewCell } from 'revgrid';
 import {
     BigIntTextFormattableValue,
     DateTimeTextFormattableValue,

@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, SysTick } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, SysTick } from '@pbkware/js-utils';
 
 export class IdleService {
     callbackExecuteEventer: IdleService.CallbackExecuteEventer | undefined;

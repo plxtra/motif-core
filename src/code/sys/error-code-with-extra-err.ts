@@ -1,4 +1,4 @@
-import { Err } from '@xilytix/sysutils';
+import { Err } from '@pbkware/js-utils';
 import { ErrorCode } from './error-code';
 
 export interface ErrorCodeWithExtra {

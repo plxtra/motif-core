@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { JsonElement, PickEnum, Result } from '@xilytix/sysutils';
+import { JsonElement, PickEnum, Result } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     RankedDataIvemIdListDefinition,
     RankedDataIvemIdListDefinitionFactoryService

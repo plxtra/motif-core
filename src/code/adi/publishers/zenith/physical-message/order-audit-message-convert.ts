@@ -1,4 +1,4 @@
-import { NotImplementedError, Result } from '@xilytix/sysutils';
+import { NotImplementedError, Result } from '@pbkware/js-utils';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, RequestErrorDataMessages } from '../../../common/internal-api';
 import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';

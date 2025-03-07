@@ -1,4 +1,4 @@
-import { Guid, Integer } from '@xilytix/sysutils';
+import { Guid, Integer } from '@pbkware/js-utils';
 import { ActiveFaultedStatusId } from '../common/internal-api';
 
 export interface ScanStatusedDescriptorInterface {

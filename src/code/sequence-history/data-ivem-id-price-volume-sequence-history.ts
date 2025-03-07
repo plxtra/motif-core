@@ -12,7 +12,7 @@ import {
     SourceTzOffsetDateTime,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     AdiService,
     ChartHistoryDataItem,

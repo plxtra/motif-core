@@ -1,4 +1,4 @@
-import { ComparableList, compareDate, ComparisonResult, Integer, MultiEvent, newNullDate } from '@xilytix/sysutils';
+import { ComparableList, compareDate, ComparisonResult, Integer, MultiEvent, newNullDate } from '@pbkware/js-utils';
 import { IntervalHistorySequenceSeries } from './interval-history-sequence-series';
 import { IntervalHistorySequencer } from './interval-history-sequencer';
 import { NumberHistorySequenceSeriesInterface } from './number-history-sequence-series-interface';

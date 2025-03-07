@@ -1,5 +1,5 @@
 // import { ColorScheme, GridField, MultiEvent, SettingsService } from '@motifmarkets/motif-core';
-import { RevSourcedFieldGrid } from '@xilytix/revgrid';
+import { RevSourcedFieldGrid } from 'revgrid';
 import { ColorScheme, SettingsService } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 import {

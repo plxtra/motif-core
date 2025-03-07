@@ -1,5 +1,5 @@
-import { MultiEvent } from '@xilytix/sysutils';
-import { BooleanUiAction } from '@xilytix/ui-action';
+import { MultiEvent } from '@pbkware/js-utils';
+import { BooleanUiAction } from '@pbkware/ui-action';
 import { Command } from '../command/internal-api';
 import { extStrings } from '../res/internal-api';
 

@@ -2,7 +2,7 @@ import {
     CommaText,
     EnumInfoOutOfOrderError,
     Integer
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { StringId, Strings } from '../../res/i18n-strings';
 import {
     FieldDataTypeId,

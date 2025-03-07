@@ -1,4 +1,3 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     EnumInfoOutOfOrderError,
@@ -7,8 +6,9 @@ import {
     MultiEvent,
     isDecimalEqual,
     isDecimalGreaterThan
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { StringId, Strings } from '../res/internal-api';
 import {
     CorrectnessId,

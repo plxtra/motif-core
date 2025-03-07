@@ -8,7 +8,7 @@ import {
     MapKey,
     UnreachableCaseError,
     UsableListChangeTypeId,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     ErrorCode,
     ZenithDataError

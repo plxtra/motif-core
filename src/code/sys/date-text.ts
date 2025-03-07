@@ -1,4 +1,4 @@
-import { dateToDashedYyyyMmDd, Iso8601 } from '@xilytix/sysutils';
+import { dateToDashedYyyyMmDd, Iso8601 } from '@pbkware/js-utils';
 
 // Dates on the GUI are strings. This unit provides functions to check date strings match expected formats.
 /** @public */

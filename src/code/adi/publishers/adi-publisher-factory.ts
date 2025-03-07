@@ -1,4 +1,4 @@
-import { DecimalFactory, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, UnreachableCaseError } from '@pbkware/js-utils';
 import { AdiPublisher, AdiPublisherTypeId } from '../common/internal-api';
 import { ZenithPublisher } from './zenith/internal-api';
 

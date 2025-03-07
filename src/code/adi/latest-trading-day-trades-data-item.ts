@@ -5,7 +5,7 @@ import {
     newUndefinableDate,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     Badness,
 } from '../sys/internal-api';

@@ -1,4 +1,4 @@
-import { RevCellPainter, RevViewCell } from '@xilytix/revgrid';
+import { RevCellPainter, RevViewCell } from 'revgrid';
 import { TextFormattableValue } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 import { RecordGridDataServer } from '../record-grid/internal-api';

@@ -1,4 +1,4 @@
-import { RevReferenceableColumnLayout, RevReferenceableColumnLayoutDefinition, RevReferenceableColumnLayouts } from '@xilytix/revgrid';
+import { RevReferenceableColumnLayout, RevReferenceableColumnLayoutDefinition, RevReferenceableColumnLayouts } from 'revgrid';
 import { LockOpenList } from '../../sys/internal-api';
 
 export class ReferenceableColumnLayoutsService extends LockOpenList<RevReferenceableColumnLayout> implements RevReferenceableColumnLayouts {

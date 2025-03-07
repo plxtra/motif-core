@@ -1,4 +1,4 @@
-import { RevRecordDataServer } from '@xilytix/revgrid';
+import { RevRecordDataServer } from 'revgrid';
 import { ScalarSettings } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 

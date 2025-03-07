@@ -1,4 +1,4 @@
-import { Integer, MultiEvent, RecordList, UsableListChangeTypeId } from '@xilytix/sysutils';
+import { Integer, MultiEvent, RecordList, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { DataIvemId, RankScoredDataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
 import { Badness } from '../sys/badness';
 import { BadnessList } from '../sys/badness-list';

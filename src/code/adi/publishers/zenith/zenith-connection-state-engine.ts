@@ -5,7 +5,7 @@ import {
     Logger,
     SysTick,
     UnreachableCaseError,
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     WebsocketCloseCode
 } from '../../../sys/internal-api';

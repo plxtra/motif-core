@@ -1,8 +1,8 @@
+import { DecimalFactory } from '@pbkware/js-utils';
 import {
     RevSourcedFieldCustomHeadings,
     RevStandardSourcedFieldCustomHeadingsService
-} from '@xilytix/revgrid';
-import { DecimalFactory } from '@xilytix/sysutils';
+} from 'revgrid';
 import { AdiPublisherFactory, AdiService, DataItemFactory, MarketsService } from './adi/internal-api';
 import { CommandRegisterService } from "./command/internal-api";
 import {

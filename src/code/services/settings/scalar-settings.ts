@@ -1,5 +1,5 @@
 /* eslint-disable brace-style */
-import { Integer, SourceTzOffsetDateTime, SysTick } from '@xilytix/sysutils';
+import { Integer, SourceTzOffsetDateTime, SysTick } from '@pbkware/js-utils';
 import { OrderTypeId, TimeInForceId } from '../../adi/internal-api';
 import { SourceTzOffsetDateTimeTimezoneMode } from '../../sys/internal-api';
 import { TypedKeyValueScalarSettingsGroup } from './typed-key-value-scalar-settings-group';

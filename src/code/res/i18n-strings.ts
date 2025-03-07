@@ -3397,19 +3397,14 @@ export namespace I18nStrings {
                 en: 'MotifServices Response Status Error',
             }
         },
-        MotifServicesResponsePayloadParseError: {
-            id: StringId.MotifServicesResponsePayloadParseError, translations: {
-                en: 'MotifServices Response Payload Parse Error',
-            }
-        },
-        MotifServicesResponsePayloadError: {
-            id: StringId.MotifServicesResponsePayloadError, translations: {
-                en: 'MotifServices Response Payload Error',
-            }
-        },
         MotifServicesFetchError: {
             id: StringId.MotifServicesFetchError, translations: {
                 en: 'MotifServices Fetch Error',
+            }
+        },
+        MotifServicesFetchTextError: {
+            id: StringId.MotifServicesFetchTextError, translations: {
+                en: 'MotifServices Fetch Text Error',
             }
         },
         NodeType: {

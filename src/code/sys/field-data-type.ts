@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError } from '@pbkware/js-utils';
 
 export const enum FieldDataTypeId {
     // eslint-disable-next-line id-blacklist

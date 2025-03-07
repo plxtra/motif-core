@@ -1,5 +1,5 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { RankedDataIvemIdListDirectoryItem } from '../../../services/internal-api';
 import { RankedDataIvemIdListDirectoryItemTableFieldSourceDefinition } from '../field-source/internal-api';
 import { CorrectnessTableValue, RankedDataIvemIdListDirectoryItemTypeIdCorrectnessTableValue, ReadonlyCorrectnessTableValue, StringCorrectnessTableValue, TableValue } from '../value/internal-api';

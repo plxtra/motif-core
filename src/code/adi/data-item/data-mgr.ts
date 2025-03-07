@@ -9,7 +9,7 @@ import {
     mSecsPerSec,
     secsPerMin,
     SysTick
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import {
     assert,
     assigned,

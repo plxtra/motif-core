@@ -1,4 +1,4 @@
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { BrokerageAccount } from '../../../adi/internal-api';
 import { Correctness } from '../../../sys/internal-api';
 import { BrokerageAccountTableFieldSourceDefinition } from '../field-source/definition/internal-api';

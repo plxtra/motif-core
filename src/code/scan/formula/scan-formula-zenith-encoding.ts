@@ -7,7 +7,7 @@ import {
     Result,
     SourceTzOffsetDate,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Currency, CurrencyId, DataMarket, Exchange, MarketBoard, MarketsService, ZenithConvert, ZenithEncodedScanFormula, ZenithProtocolCommon } from '../../adi/internal-api';
 import { StringId, Strings } from '../../res/internal-api';
 import { ScanFormula } from './scan-formula';

@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, SourceTzOffsetDateTime } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, SourceTzOffsetDateTime } from '@pbkware/js-utils';
 import { StringId, Strings } from '../res/internal-api';
 
 /** @public */

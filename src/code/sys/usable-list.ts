@@ -1,5 +1,5 @@
 // import { MultiEvent } from './multi-event';
-import { RecordList } from '@xilytix/sysutils';
+import { RecordList } from '@pbkware/js-utils';
 
 export interface UsableList<Record> extends RecordList<Record> {
     readonly usable: boolean;

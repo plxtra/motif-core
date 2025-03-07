@@ -1,4 +1,4 @@
-import { Integer, MultiEvent, newNowDate, SysTick } from '@xilytix/sysutils';
+import { Integer, MultiEvent, newNowDate, SysTick } from '@pbkware/js-utils';
 import { assert, Badness } from '../sys/internal-api';
 import { AdiPublisher } from './common/adi-publisher';
 import {

@@ -1,5 +1,5 @@
-import { RevColumnLayoutOrReference } from '@xilytix/revgrid';
-import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevColumnLayoutOrReference } from 'revgrid';
 import { ErrorCode } from '../../sys/internal-api';
 
 export namespace ColumnLayoutOrReference {

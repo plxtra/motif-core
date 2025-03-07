@@ -1,4 +1,4 @@
-import { AssertInternalError, CommaText, Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, CommaText, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { Scan } from '../../../scan/internal-api';
 import { SymbolsService } from '../../../services/symbols-service';
 import { Correctness } from '../../../sys/internal-api';

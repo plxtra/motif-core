@@ -1,4 +1,4 @@
-import { RevTable } from '@xilytix/revgrid';
+import { RevTable } from 'revgrid';
 import { TextFormattableValue } from '../../services/internal-api';
 import { Badness } from "../../sys/internal-api";
 import { TableFieldSourceDefinition } from './field-source/internal-api';

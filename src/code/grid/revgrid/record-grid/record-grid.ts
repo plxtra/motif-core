@@ -1,11 +1,11 @@
+import { MultiEvent } from '@pbkware/js-utils';
 import {
     RevGridDefinition,
     RevGridOptions,
     RevRecordStore,
     RevSubgrid,
     RevViewLayout
-} from '@xilytix/revgrid';
-import { MultiEvent } from '@xilytix/sysutils';
+} from 'revgrid';
 import { SettingsService } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 import { RecordSourcedFieldGrid, SingleHeadingGridDataServer, SourcedFieldGrid } from '../adapted-revgrid/internal-api';

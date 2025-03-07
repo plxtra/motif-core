@@ -1,4 +1,4 @@
-import { Result } from '@xilytix/sysutils';
+import { Result } from '@pbkware/js-utils';
 import { ScanFormula } from '../../formula/internal-api';
 import { ScanConditionSetLoadError } from '../common/internal-api';
 import {

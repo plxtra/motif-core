@@ -1,4 +1,4 @@
-import { AssertInternalError, MultiEvent } from '@xilytix/sysutils';
+import { AssertInternalError, MultiEvent } from '@pbkware/js-utils';
 import { DataMessage, DataMessageTypeId, ZenithServerInfoDataMessage } from './common/internal-api';
 import { PublisherSubscriptionDataItem } from './publish-subscribe/internal-api';
 

@@ -1,4 +1,4 @@
-import { Integer, SourceTzOffsetDateTime } from '@xilytix/sysutils';
+import { Integer, SourceTzOffsetDateTime } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { CurrencyId, IvemClassId } from './data-types';
 

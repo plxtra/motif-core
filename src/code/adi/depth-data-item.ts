@@ -1,4 +1,3 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     BinarySearchResult,
@@ -12,8 +11,9 @@ import {
     isDecimalEqual,
     isDecimalGreaterThan,
     moveElementInArray
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import {
     ErrorCode,
     ZenithDataError,

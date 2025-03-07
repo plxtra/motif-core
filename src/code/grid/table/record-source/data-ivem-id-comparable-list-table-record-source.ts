@@ -1,5 +1,5 @@
-import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
-import { DecimalFactory, Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { DecimalFactory, Integer, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import { AdiService, DataIvemId } from '../../../adi/internal-api';
 import { SymbolDetailCacheService, TextFormatter } from '../../../services/internal-api';
 import { CorrectnessBadness, UiComparableList } from '../../../sys/internal-api';

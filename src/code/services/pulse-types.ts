@@ -1,4 +1,4 @@
-import { AssertInternalError, EnumInfoOutOfOrderError } from '@xilytix/sysutils';
+import { AssertInternalError, EnumInfoOutOfOrderError } from '@pbkware/js-utils';
 
 export const enum InstrumentMovementColorSetId {
     American,

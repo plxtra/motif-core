@@ -1,4 +1,4 @@
-import { isArrayEqualUniquely } from '@xilytix/sysutils';
+import { isArrayEqualUniquely } from '@pbkware/js-utils';
 
 export class DataIvemAttributes {
     private _unrecognisedAttributes: DataIvemAttributes.UnrecognisedAttributes = [];

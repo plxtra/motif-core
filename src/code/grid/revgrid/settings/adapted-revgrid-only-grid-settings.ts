@@ -1,4 +1,4 @@
-import { RevHorizontalAlignId, RevStandardTextPainter, RevTextTruncateTypeId } from '@xilytix/revgrid';
+import { RevHorizontalAlignId, RevStandardTextPainter, RevTextTruncateTypeId } from 'revgrid';
 
 
 /** @public */

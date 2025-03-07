@@ -1,4 +1,4 @@
-import { MultiEvent } from '@xilytix/sysutils';
+import { MultiEvent } from '@pbkware/js-utils';
 import { ExtensionHandle } from '../sys/internal-api';
 import { ExtensionInfo } from './extension-info';
 

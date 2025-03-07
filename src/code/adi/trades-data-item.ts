@@ -10,7 +10,7 @@ import {
     SysTick,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import {
     assert,

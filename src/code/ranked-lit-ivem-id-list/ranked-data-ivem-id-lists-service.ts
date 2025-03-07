@@ -1,4 +1,4 @@
-import { MultiEvent } from '@xilytix/sysutils';
+import { MultiEvent } from '@pbkware/js-utils';
 import { ScanList, ScansService } from '../scan/internal-api';
 
 export class RankedDataIvemIdListsService /* extends LockOpenList<RankedDataIvemIdList>*/ {

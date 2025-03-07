@@ -1,5 +1,5 @@
-import { RevColumnLayoutDefinition } from '@xilytix/revgrid';
-import { AnchoredRecordsList, Integer } from '@xilytix/sysutils';
+import { AnchoredRecordsList, Integer } from '@pbkware/js-utils';
+import { RevColumnLayoutDefinition } from 'revgrid';
 import { GridField } from '../../field/internal-api';
 import { EditableColumnLayoutDefinitionColumn } from './editable-column-layout-definition-column';
 

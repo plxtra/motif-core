@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { DataIvemId, DataMarket, ExerciseTypeId, IvemId } from '../adi/internal-api';
 import { StringId, Strings } from '../res/internal-api';

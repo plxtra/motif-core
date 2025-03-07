@@ -1,5 +1,5 @@
-import { RevColumnLayoutDefinition, RevRecordSourcedFieldDefinition, RevSourcedFieldDefinition } from '@xilytix/revgrid';
-import { UnreachableCaseError } from '@xilytix/sysutils';
+import { UnreachableCaseError } from '@pbkware/js-utils';
+import { RevColumnLayoutDefinition, RevRecordSourcedFieldDefinition, RevSourcedFieldDefinition } from 'revgrid';
 import { OrderSideId } from '../../../../adi/internal-api';
 import { TextFormattableValue } from '../../../../services/internal-api';
 import { CorrectnessId } from '../../../../sys/internal-api';

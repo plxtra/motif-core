@@ -1,3 +1,4 @@
+import { Integer, MultiEvent } from '@pbkware/js-utils';
 import {
     RevGridOptions,
     RevHorizontalAlignId,
@@ -5,8 +6,7 @@ import {
     RevSingleHeadingDataRowArraySourcedFieldDefinition,
     RevSingleHeadingDataRowArraySourcedFieldGrid,
     RevSubgrid
-} from '@xilytix/revgrid';
-import { Integer, MultiEvent } from '@xilytix/sysutils';
+} from 'revgrid';
 import { SettingsService } from '../../../services/internal-api';
 import { GridField } from '../../field/internal-api';
 import { SourcedFieldGrid } from '../adapted-revgrid/internal-api';

@@ -1,4 +1,4 @@
-import { SourceTzOffsetDate, SourceTzOffsetDateTime } from '@xilytix/sysutils';
+import { SourceTzOffsetDate, SourceTzOffsetDateTime } from '@pbkware/js-utils';
 import { FeedStatusId, MarketsDataMessage, ZenithMarketBoards } from '../common/internal-api';
 
 export class ZenithDataMarket implements MarketsDataMessage.Market {

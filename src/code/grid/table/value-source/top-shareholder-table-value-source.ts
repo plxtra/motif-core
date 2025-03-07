@@ -1,4 +1,4 @@
-import { Integer, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { TopShareholder, TopShareholdersDataItem } from '../../../adi/internal-api';
 import { TopShareholderTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {

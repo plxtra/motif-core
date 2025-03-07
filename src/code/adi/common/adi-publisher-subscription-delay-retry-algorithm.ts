@@ -1,4 +1,4 @@
-import { AssertInternalError, Integer, mSecsPerMin, mSecsPerSec, UnreachableCaseError } from '@xilytix/sysutils';
+import { AssertInternalError, Integer, mSecsPerMin, mSecsPerSec, UnreachableCaseError } from '@pbkware/js-utils';
 
 export const enum AdiPublisherSubscriptionDelayRetryAlgorithmId {
     Never,

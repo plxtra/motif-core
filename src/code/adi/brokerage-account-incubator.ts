@@ -1,4 +1,4 @@
-import { getErrorMessage } from '@xilytix/sysutils';
+import { getErrorMessage } from '@pbkware/js-utils';
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountsDataItem } from './brokerage-accounts-data-item';
 import { BrokerageAccountsDataDefinition } from './common/internal-api';

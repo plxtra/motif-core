@@ -1,4 +1,4 @@
-import { Integer } from '@xilytix/sysutils';
+import { Integer } from '@pbkware/js-utils';
 
 export class ZenithWebsocket {
     private static readonly _protocol = 'ZenithJson';

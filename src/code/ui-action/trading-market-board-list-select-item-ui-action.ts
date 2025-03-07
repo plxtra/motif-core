@@ -1,5 +1,5 @@
-import { MultiEvent, UsableListChangeTypeId } from '@xilytix/sysutils';
-import { SelectItemUiAction } from '@xilytix/ui-action';
+import { MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
+import { SelectItemUiAction } from '@pbkware/ui-action';
 import { MarketBoard, MarketsService } from '../adi/internal-api';
 
 /** @public */

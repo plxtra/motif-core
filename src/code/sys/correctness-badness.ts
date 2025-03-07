@@ -1,6 +1,6 @@
 // This is code from DataItem.  Eventually migrate DataItem, TableRecordDefinitionList, Table and SequenceHistory to descend from this.
 
-import { AssertInternalError, CorrectnessState, MultiEvent } from '@xilytix/sysutils';
+import { AssertInternalError, CorrectnessState, MultiEvent } from '@pbkware/js-utils';
 import { Badness } from './badness';
 import { CorrectnessId } from './correctness';
 import { CorrectnessRecord } from './correctness-record';

@@ -1,8 +1,8 @@
-import { RevHorizontalAlignId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
+import { RevHorizontalAlignId } from 'revgrid';
 import { Scan } from '../../../../scan/internal-api';
 import {
     FieldDataType,

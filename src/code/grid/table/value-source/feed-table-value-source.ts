@@ -1,5 +1,5 @@
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
-import { Integer, MultiEvent, UnreachableCaseError } from '@xilytix/sysutils';
+import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
+import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import { ExchangeEnvironmentZenithCode, Feed } from '../../../adi/internal-api';
 import { Correctness } from '../../../sys/internal-api';
 import { FeedTableFieldSourceDefinition } from '../field-source/definition/internal-api';

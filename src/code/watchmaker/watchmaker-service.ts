@@ -4,7 +4,7 @@ import {
     MultiEvent,
     UnreachableCaseError,
     UsableListChangeTypeId
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { AdiService, WatchmakerListDescriptorsDataDefinition, WatchmakerListDescriptorsDataItem } from '../adi/internal-api';
 import { LockOpenList } from '../sys/internal-api';
 import { WatchmakerList } from './watchmaker-list';

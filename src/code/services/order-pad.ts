@@ -14,7 +14,7 @@ import {
     newUndefinableDate,
     NotImplementedError,
     UnreachableCaseError
-} from '@xilytix/sysutils';
+} from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import {
     AdiService,

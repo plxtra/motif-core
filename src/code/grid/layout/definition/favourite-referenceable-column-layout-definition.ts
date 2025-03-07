@@ -1,4 +1,4 @@
-import { RevFavouriteReferenceableColumnLayoutDefinition } from '@xilytix/revgrid';
+import { RevFavouriteReferenceableColumnLayoutDefinition } from 'revgrid';
 
 /** @public */
 export class FavouriteReferenceableColumnLayoutDefinition extends RevFavouriteReferenceableColumnLayoutDefinition {

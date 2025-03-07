@@ -1,4 +1,4 @@
-import { CommaText, UnreachableCaseError } from '@xilytix/sysutils';
+import { CommaText, UnreachableCaseError } from '@pbkware/js-utils';
 import { Badness } from './badness';
 import { CorrectnessId } from './correctness';
 

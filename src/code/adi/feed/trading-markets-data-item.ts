@@ -1,4 +1,4 @@
-import { AssertInternalError } from '@xilytix/sysutils';
+import { AssertInternalError } from '@pbkware/js-utils';
 import { DataDefinition, DataMessage, DataMessageTypeId, FeedClass, FeedClassId, FeedStatusId, QueryTradingMarketsDataDefinition, TradingMarketsDataMessage } from '../common/internal-api';
 import { FeedStatusSubscriptionDataItem } from './feed-status-subscription-data-item';
 

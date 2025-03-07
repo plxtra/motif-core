@@ -1,4 +1,4 @@
-import { RevTableValueSource } from '@xilytix/revgrid';
+import { RevTableValueSource } from 'revgrid';
 import { TextFormattableValue } from '../../../services/internal-api';
 
 export abstract class TableValueSource extends RevTableValueSource<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {

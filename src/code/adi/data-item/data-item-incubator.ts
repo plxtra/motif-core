@@ -1,4 +1,4 @@
-import { AssertInternalError, MultiEvent } from '@xilytix/sysutils';
+import { AssertInternalError, MultiEvent } from '@pbkware/js-utils';
 import { Incubator } from '../../sys/internal-api';
 import { DataDefinition } from '../common/internal-api';
 import { AdiService } from './adi-service';

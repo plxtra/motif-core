@@ -1,4 +1,4 @@
-import { EnumInfoOutOfOrderError, Integer } from '@xilytix/sysutils';
+import { EnumInfoOutOfOrderError, Integer } from '@pbkware/js-utils';
 import { StringId } from '../res/i18n-strings';
 
 /** @public */
