@@ -4,7 +4,6 @@ import {
     MultiEvent,
     Ok,
     Result,
-    checkLimitTextLength,
     getErrorMessage
 } from '@xilytix/sysutils';
 import { StringId, Strings } from '../res/internal-api';
@@ -62,32 +61,27 @@ export class MotifServicesService {
         const body = JSON.stringify(request);
 
         const url = new URL(endpointPath, this._baseUrl);
+        let response: Response;
         try {
-            const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.GetResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.GetResponsePayload;
-                } catch (e) {
-                    const result = this.createPayloadParseErrorResult<string | undefined>(e, payloadText);
-                    return result;
-                }
-                if (payload.successful) {
-                    const result: Result<string | undefined> = new Ok(payload.data);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
-            } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
-            }
+            response = await fetch(url.href, { credentials, headers, method, body });
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
-            return Promise.resolve(result);
+            return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
+        }
+
+        switch (response.status) {
+            case 200:
+                try {
+                    const payloadText = await response.text();
+                    return new Ok(payloadText);
+                } catch (reason) {
+                    const errorText = getErrorMessage(reason);
+                    return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
+                }
+            case 404:
+                return new Ok(undefined);
+            default:
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
         }
     }
 
@@ -118,31 +112,14 @@ export class MotifServicesService {
         const url = new URL(endpointPath, this._baseUrl);
         try {
             const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.SetResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.SetResponsePayload;
-                } catch (e) {
-                    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-                    const result = this.createPayloadParseErrorResult<void>(e, payloadText);
-                    return Promise.resolve(result);
-                }
-                if (payload.successful) {
-                    const result: Result<void> = new Ok(undefined);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
+            if (response.status === 204) {
+                return new Ok(undefined);
             } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
             }
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
-            return Promise.resolve(result);
+            return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
         }
     }
 
@@ -166,30 +143,14 @@ export class MotifServicesService {
         const url = new URL(endpointPath, this._baseUrl);
         try {
             const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.DeleteResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.DeleteResponsePayload;
-                } catch (e) {
-                    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-                    const result = this.createPayloadParseErrorResult<void>(e, payloadText);
-                    return Promise.resolve(result);
-                }
-                if (payload.successful) {
-                    const result: Result<void> = new Ok(undefined);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
+            if (response.status === 204) {
+                return new Ok(undefined);
             } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
             }
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
+            const result = new Err(`${endpointPath}: ${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
             return Promise.resolve(result);
         }
     }
@@ -217,32 +178,27 @@ export class MotifServicesService {
         const body = JSON.stringify(request);
 
         const url = new URL(endpointPath, this._baseUrl);
+        let response: Response;
         try {
-            const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.GetResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.GetResponsePayload;
-                } catch (e) {
-                    const result = this.createPayloadParseErrorResult<string | undefined>(e, payloadText);
-                    return Promise.resolve(result);
-                }
-                if (payload.successful) {
-                    const result: Result<string | undefined> = new Ok(payload.data);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
-            } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
-            }
+            response = await fetch(url.href, { credentials, headers, method, body });
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
-            return Promise.resolve(result);
+            return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
+        }
+
+        switch (response.status) {
+            case 200:
+                try {
+                    const payloadText = await response.text();
+                    return new Ok(payloadText);
+                } catch (reason) {
+                    const errorText = getErrorMessage(reason);
+                    return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
+                }
+            case 404:
+                return new Ok(undefined);
+            default:
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
         }
     }
 
@@ -269,32 +225,27 @@ export class MotifServicesService {
         const body = JSON.stringify(request);
 
         const url = new URL(endpointPath, this._baseUrl);
+        let response: Response;
         try {
-            const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.GetResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.GetResponsePayload;
-                } catch (e) {
-                    const result = this.createPayloadParseErrorResult<string | undefined>(e, payloadText);
-                    return Promise.resolve(result);
-                }
-                if (payload.successful) {
-                    const result: Result<string | undefined> = new Ok(payload.data);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
-            } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
-            }
+            response = await fetch(url.href, { credentials, headers, method, body });
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
-            return Promise.resolve(result);
+            return new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
+        }
+
+        switch (response.status) {
+            case 200:
+                try {
+                    const payloadText = await response.text();
+                    return new Ok(payloadText);
+                } catch (reason) {
+                    const errorText = getErrorMessage(reason);
+                    return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
+                }
+            case 404:
+                return new Ok(undefined);
+            default:
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
         }
     }
 
@@ -321,32 +272,27 @@ export class MotifServicesService {
         const body = JSON.stringify(request);
 
         const url = new URL(endpointPath, this._baseUrl);
+        let response: Response;
         try {
-            const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 200) {
-                const payloadText = await response.text();
-                let payload: MotifServicesService.GetResponsePayload;
-                try {
-                    payload = JSON.parse(payloadText) as MotifServicesService.GetResponsePayload;
-                } catch (e) {
-                    const result = this.createPayloadParseErrorResult<string | undefined>(e, payloadText);
-                    return Promise.resolve(result);
-                }
-                if (payload.successful) {
-                    const result: Result<string | undefined> = new Ok(payload.data);
-                    return result;
-                } else {
-                    const result = new Err(`${Strings[StringId.MotifServicesResponsePayloadError]}: ${payload.reason}`);
-                    return result;
-                }
-            } else {
-                const result = new Err(`${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
-                return result;
-            }
+            response = await fetch(url.href, { credentials, headers, method, body });
         } catch (reason) {
             const errorText = getErrorMessage(reason);
-            const result = new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
-            return Promise.resolve(result);
+            return new Err(`${Strings[StringId.MotifServicesFetchError]}: ${errorText}`);
+        }
+
+        switch (response.status) {
+            case 200:
+                try {
+                    const payloadText = await response.text();
+                    return new Ok(payloadText);
+                } catch (reason) {
+                    const errorText = getErrorMessage(reason);
+                    return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
+                }
+            case 404:
+                return new Ok(undefined);
+            default:
+                return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
         }
     }
 
@@ -384,12 +330,6 @@ export class MotifServicesService {
     //         }
     //     }
     // }
-
-    private createPayloadParseErrorResult<T>(e: unknown, payloadText: string): Result<T | undefined> {
-        const message = getErrorMessage(e);
-        const limitedPayloadText = checkLimitTextLength(payloadText, 120);
-        return new Err(`${Strings[StringId.MotifServicesResponsePayloadParseError]}: "${message}": ${limitedPayloadText}`);
-    }
 }
 
 export namespace MotifServicesService {
@@ -419,28 +359,13 @@ export namespace MotifServicesService {
         SearchKey: string;
     }
 
-    export interface ResponsePayload {
-        readonly successful: boolean;
-        readonly reason: string;
-    }
-
-    export interface GetResponsePayload extends ResponsePayload {
-        data?: string;
-    }
-
-    export interface SetResponsePayload extends ResponsePayload {
-    }
-
-    export interface DeleteResponsePayload extends ResponsePayload {
-    }
-
     export namespace EndpointPath {
-        export const getUserSetting = '/api/Settings/GetUserSetting';
-        export const setUserSetting = '/api/Settings/SetUserSetting';
-        export const deleteUserSetting = '/api/Settings/DeleteUserSetting';
-        export const getKeysBeginningWith = '/api/Settings/SearchForKey/BeginsWith';
-        export const getKeysEndingWith = '/api/Settings/SearchForKey/EndsWith';
-        export const getKeysContaining = '/api/Settings/SearchForKey/Contains';
+        export const getUserSetting = '/api/configuration/GetUserSetting';
+        export const setUserSetting = '/api/configuration/SetUserSetting';
+        export const deleteUserSetting = '/api/configuration/DeleteUserSetting';
+        export const getKeysBeginningWith = '/api/configuration/SearchForKey/BeginsWith';
+        export const getKeysEndingWith = '/api/configuration/SearchForKey/EndsWith';
+        export const getKeysContaining = '/api/configuration/SearchForKey/Contains';
     }
 
     export const defaultApplicationFlavour = 'motif';
