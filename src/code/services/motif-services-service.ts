@@ -112,7 +112,7 @@ export class MotifServicesService {
         const url = new URL(endpointPath, this._baseUrl);
         try {
             const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 204) {
+            if (response.status === 200 || response.status === 204) {
                 return new Ok(undefined);
             } else {
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
@@ -143,7 +143,7 @@ export class MotifServicesService {
         const url = new URL(endpointPath, this._baseUrl);
         try {
             const response = await fetch(url.href, { credentials, headers, method, body });
-            if (response.status === 204) {
+            if (response.status === 200 || response.status === 204) {
                 return new Ok(undefined);
             } else {
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
