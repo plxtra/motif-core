@@ -2396,7 +2396,7 @@ export class OrderPad {
                 this.updateLimitUnit();
                 this.updatePriceStepper();
                 const ivemIdSymbolDetail = this._symbolDetailCacheService.getIvemIdFromCache(value.ivemId);
-                if (ivemIdSymbolDetail !== undefined) {
+                if (ivemIdSymbolDetail !== undefined && ivemIdSymbolDetail.full) {
                     this.setIvemIdSymbolDetail(ivemIdSymbolDetail, value);
                 } else {
                     // // Create a temporary IvemIdSymbolDetail so that errors are suppressed while real IvemIdSymbolDetail is retrieved
