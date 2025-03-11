@@ -1,4 +1,4 @@
-import { AssertInternalError, Err, Result } from '@pbkware/js-utils';
+import { AssertInternalError, Ok, Result } from '@pbkware/js-utils';
 import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
 import {
     AdiPublisherRequest,
@@ -20,7 +20,7 @@ export class TradingMarketsMessageConvert extends MessageConvert {
     createRequestMessage(request: AdiPublisherRequest): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
         const definition = request.subscription.dataDefinition;
         if (definition instanceof QueryTradingMarketsDataDefinition) {
-            return this.createPublishMessage(request, definition);
+            return this.createPublishMessage(definition);
         } else {
             throw new AssertInternalError('TMMCCRM36881', definition.description);
         }
@@ -48,47 +48,47 @@ export class TradingMarketsMessageConvert extends MessageConvert {
         }
     }
 
-    private createPublishMessage(request: AdiPublisherRequest, definition: QueryTradingMarketsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
-        // const result: ZenithProtocol.TradingController.TradingMarkets.PublishMessageContainer = {
-        //     Controller: ZenithProtocol.MessageContainer.Controller.Trading,
-        //     Topic: ZenithProtocol.TradingController.TopicName.QueryTradingMarkets,
-        //     Action: ZenithProtocol.MessageContainer.Action.Publish,
-        //     TransactionID: AdiPublisherRequest.getNextTransactionId(),
-        //     Data: {
-        //         Provider: definition.tradingFeedZenithCode,
+    private createPublishMessage(definition: QueryTradingMarketsDataDefinition): Result<ZenithProtocol.MessageContainer, RequestErrorDataMessages> {
+        const result: ZenithProtocol.TradingController.TradingMarkets.PublishMessageContainer = {
+            Controller: ZenithProtocol.MessageContainer.Controller.Trading,
+            Topic: ZenithProtocol.TradingController.TopicName.QueryTradingMarkets,
+            Action: ZenithProtocol.MessageContainer.Action.Publish,
+            TransactionID: AdiPublisherRequest.getNextTransactionId(),
+            Data: {
+                Provider: definition.tradingFeedZenithCode,
+            }
+        };
+
+        return new Ok(result);
+
+        // const tradingMarketsDataMessage = new TradingMarketsDataMessage();
+        // const subscription = request.subscription;
+        // tradingMarketsDataMessage.dataItemId = subscription.dataItemId;
+        // tradingMarketsDataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
+        // tradingMarketsDataMessage.markets= [];
+
+        // const { value: unenvironmentFeedZenithCode, environmentZenithCode } = ZenithEnvironmentedValueParts.fromString(definition.tradingFeedZenithCode);
+
+        // switch (unenvironmentFeedZenithCode) {
+        //     case 'Motif': {
+        //         const ptxMarket = this.createMockPtxMarket(environmentZenithCode);
+        //         const fnsxMarket = this.createMockFnsxMarket(environmentZenithCode);
+        //         const daxMarket = this.createMockDaxMarket(environmentZenithCode);
+        //         tradingMarketsDataMessage.markets= [ptxMarket, fnsxMarket, daxMarket];
+        //         break;
         //     }
-        // };
-
-        // return new Ok(result);
-
-        const tradingMarketsDataMessage = new TradingMarketsDataMessage();
-        const subscription = request.subscription;
-        tradingMarketsDataMessage.dataItemId = subscription.dataItemId;
-        tradingMarketsDataMessage.dataItemRequestNr = subscription.dataItemRequestNr;
-        tradingMarketsDataMessage.markets= [];
-
-        const { value: unenvironmentFeedZenithCode, environmentZenithCode } = ZenithEnvironmentedValueParts.fromString(definition.tradingFeedZenithCode);
-
-        switch (unenvironmentFeedZenithCode) {
-            case 'Motif': {
-                const ptxMarket = this.createMockPtxMarket(environmentZenithCode);
-                const fnsxMarket = this.createMockFnsxMarket(environmentZenithCode);
-                const daxMarket = this.createMockDaxMarket(environmentZenithCode);
-                tradingMarketsDataMessage.markets= [ptxMarket, fnsxMarket, daxMarket];
-                break;
-            }
-            case 'CFMarkets': {
-                const cfxMarket = this.createMockCfxMarket(environmentZenithCode);
-                tradingMarketsDataMessage.markets= [cfxMarket];
-                break;
-            }
-            case 'Finplex': {
-                const fpsxMarket = this.createMockFpsxMarket(environmentZenithCode);
-                tradingMarketsDataMessage.markets= [fpsxMarket];
-                break;
-            }
-        }
-        return new Err({ dataMessages: [tradingMarketsDataMessage], subscribed: true })
+        //     case 'CFMarkets': {
+        //         const cfxMarket = this.createMockCfxMarket(environmentZenithCode);
+        //         tradingMarketsDataMessage.markets= [cfxMarket];
+        //         break;
+        //     }
+        //     case 'Finplex': {
+        //         const fpsxMarket = this.createMockFpsxMarket(environmentZenithCode);
+        //         tradingMarketsDataMessage.markets= [fpsxMarket];
+        //         break;
+        //     }
+        // }
+        // return new Err({ dataMessages: [tradingMarketsDataMessage], subscribed: true })
     }
 
     private parseData(data: ZenithProtocol.TradingController.TradingMarkets.Market[]) {
