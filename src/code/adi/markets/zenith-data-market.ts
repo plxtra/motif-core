@@ -4,7 +4,7 @@ import { FeedStatusId, MarketsDataMessage, ZenithMarketBoards } from '../common/
 export class ZenithDataMarket implements MarketsDataMessage.Market {
     readonly zenithCode: string;
 
-    changedEventer: ZenithDataMarket.ChangedEventer | undefined; // Only MarketsService can use this
+    changedEventerForDataMarket: ZenithDataMarket.ChangedEventer | undefined; // Only DataMarket can use this
 
     private _feedStatusId: FeedStatusId;
     private _zenithMarketBoards: ZenithMarketBoards | undefined;
@@ -66,12 +66,12 @@ export class ZenithDataMarket implements MarketsDataMessage.Market {
     }
 
     private notifyChanged() {
-        if (this.changedEventer !== undefined) {
-            this.changedEventer(this);
+        if (this.changedEventerForDataMarket !== undefined) {
+            this.changedEventerForDataMarket();
         }
     }
 }
 
 export namespace ZenithDataMarket {
-    export type ChangedEventer = (this: void, market: ZenithDataMarket) => void;
+    export type ChangedEventer = (this: void) => void;
 }

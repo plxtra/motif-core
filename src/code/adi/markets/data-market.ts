@@ -36,6 +36,7 @@ import { MarketBoard } from './market-board';
 import { TradingStatesDataItem } from './trading-states-data-item';
 // eslint-disable-next-line import/no-cycle
 import { TradingMarket } from './trading-market';
+import { ZenithDataMarket } from './zenith-data-market';
 
 export class DataMarket extends Market implements KeyedCorrectnessListItem {
     readonly marketBoards = new DataMarket.MarketBoards();
@@ -78,18 +79,20 @@ export class DataMarket extends Market implements KeyedCorrectnessListItem {
         lit: boolean,
         displayPriority: number | undefined,
         unknown: boolean,
-        msgMarket: MarketsDataMessage.Market,
+        private readonly _zenithDataMarket: ZenithDataMarket,
 
         private _listCorrectnessId: CorrectnessId,
     ) {
         super(Market.TypeId.Data, zenithCode, name, display, exchange, exchangeEnvironment, lit, displayPriority, unknown);
 
-        this._feedStatusId = msgMarket.feedStatusId;
-        this._tradingDate = msgMarket.tradingDate;
-        this._marketTime = msgMarket.marketTime;
-        this.setStatus(msgMarket.status);
+        this._feedStatusId = _zenithDataMarket.feedStatusId;
+        this._tradingDate = _zenithDataMarket.tradingDate;
+        this._marketTime = _zenithDataMarket.marketTime;
+        this.setStatus(_zenithDataMarket.status);
 
-        this.updateMarketBoards(msgMarket.zenithMarketBoards);
+        this._zenithDataMarket.changedEventerForDataMarket = () => this.change(this._zenithDataMarket);
+
+        this.updateMarketBoards(_zenithDataMarket.zenithMarketBoards);
 
         this._marketBoardsListChangeSubscriptionId = this.subscribeMarketBoardListChange(
             (listChangeTypeId: UsableListChangeTypeId, idx: Integer, count: Integer) => {
@@ -138,6 +141,7 @@ export class DataMarket extends Market implements KeyedCorrectnessListItem {
 
     override destroy() {
         if (!this.destroyed) {
+            this._zenithDataMarket.changedEventerForDataMarket = undefined;
             this.marketBoards.unsubscribeListChangeEvent(this._marketBoardsListChangeSubscriptionId);
             this._marketBoardsListChangeSubscriptionId = undefined;
             this.marketBoards.destroy();
@@ -847,7 +851,9 @@ export namespace DataMarket {
             marketTime: undefined,
             status: undefined,
         };
-        const result = new DataMarket(adiService, zenithCode, zenithCode, zenithCode, exchange, exchangeEnvironment, [], false, undefined, true, msgMarket, CorrectnessId.Error);
+        const zenithDataMarket = new ZenithDataMarket(msgMarket);
+
+        const result = new DataMarket(adiService, zenithCode, zenithCode, zenithCode, exchange, exchangeEnvironment, [], false, undefined, true, zenithDataMarket, CorrectnessId.Error);
         result.setListCorrectness(CorrectnessId.Error);
         result.setExchangeEnvironmentIsDefault(false);
         result.setSymbologyExchangeSuffixCode('!');

@@ -156,6 +156,7 @@ export const enum StringId {
     ErrorLoadingColumnLayout,
     ValueRequired,
     ExchangeDoesNotHaveDefaultLitMarket,
+    ExchangeDoesNotHaveDefaultTradingMarket,
     MarketDoesNotSupportSymbolsFromExchange,
     InvalidExchange,
     InvalidExchangeOrZenithExchange,
@@ -314,6 +315,7 @@ export const enum StringId {
     Layout_SerialisationFormatNotDefinedLoadingDefault,
     Layout_SerialisationFormatIncompatibleLoadingDefault,
     Layout_GoldenNotDefinedLoadingDefault,
+    Layout_CouldNotSave,
     SecurityFieldDisplay_Symbol,
     SecurityFieldHeading_Symbol,
     SecurityFieldDisplay_Code,
@@ -854,6 +856,8 @@ export const enum StringId {
     TopShareholderFieldHeading_TotalShareIssue,
     TopShareholderFieldDisplay_SharesChanged,
     TopShareholderFieldHeading_SharesChanged,
+    FeedFieldDisplay_InstanceId,
+    FeedFieldHeading_InstanceId,
     FeedFieldDisplay_ClassId,
     FeedFieldHeading_ClassId,
     FeedFieldDisplay_ZenithCode,
@@ -3322,6 +3326,11 @@ export namespace I18nStrings {
                 en: 'Exchange does not have a default lit market',
             }
         },
+        ExchangeDoesNotHaveDefaultTradingMarket: {
+            id: StringId.ExchangeDoesNotHaveDefaultTradingMarket, translations: {
+                en: 'Exchange does not have a default trading market',
+            }
+        },
         MarketDoesNotSupportSymbolsFromExchange: {
             id: StringId.MarketDoesNotSupportSymbolsFromExchange, translations: {
                 en: 'Market does not support symbols from exchange',
@@ -4111,6 +4120,11 @@ export namespace I18nStrings {
         Layout_GoldenNotDefinedLoadingDefault: {
             id: StringId.Layout_GoldenNotDefinedLoadingDefault, translations: {
                 en: 'Layout golden not defined. Loading default',
+            }
+        },
+        Layout_CouldNotSave: {
+            id: StringId.Layout_CouldNotSave, translations: {
+                en: 'Could not save layout',
             }
         },
         SecurityFieldDisplay_Symbol: {
@@ -6811,6 +6825,16 @@ export namespace I18nStrings {
         TopShareholderFieldHeading_SharesChanged: {
             id: StringId.TopShareholderFieldHeading_SharesChanged, translations: {
                 en: 'SharesChanged',
+            }
+        },
+        FeedFieldDisplay_InstanceId: {
+            id: StringId.FeedFieldDisplay_InstanceId, translations: {
+                en: 'Instance ID',
+            }
+        },
+        FeedFieldHeading_InstanceId: {
+            id: StringId.FeedFieldHeading_InstanceId, translations: {
+                en: 'Id',
             }
         },
         FeedFieldDisplay_ClassId: {

@@ -6,6 +6,7 @@ import { FeedTableFieldSourceDefinition } from '../field-source/definition/inter
 import {
     CorrectnessTableValue,
     EnumCorrectnessTableValue,
+    IntegerCorrectnessTableValue,
     StringCorrectnessTableValue,
     TableValue
 } from '../value/internal-api';
@@ -89,6 +90,9 @@ export class FeedTableValueSource extends TableValueSource {
         value.dataCorrectnessId = this._feed.correctnessId;
 
         switch (id) {
+            case Feed.FieldId.InstanceId:
+                (value as IntegerCorrectnessTableValue).data = this._feed.instanceId;
+                break;
             case Feed.FieldId.ClassId:
                 (value as EnumCorrectnessTableValue).data = this._feed.classId;
                 break;

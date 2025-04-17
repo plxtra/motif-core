@@ -13,6 +13,7 @@ import {
 import { ExchangeEnvironmentZenithCode, FeedClass, FeedClassId, FeedStatus, FeedStatusId, ZenithEnvironmentedValueParts } from '../common/internal-api';
 
 export class Feed implements KeyedCorrectnessListItem {
+    readonly instanceId: Integer;
     readonly mapKey: string;
     readonly name: string;
     readonly environmentZenithCode: ExchangeEnvironmentZenithCode | undefined;
@@ -34,6 +35,7 @@ export class Feed implements KeyedCorrectnessListItem {
         private _statusId: FeedStatusId,
         private _listCorrectnessId: CorrectnessId,
     ) {
+        this.instanceId = Feed.getNextInstanceId();
         const className = FeedClass.idToName(classId);
         this.name = `${className}:${zenithCode}`;
         this.mapKey = this.name;
@@ -149,6 +151,7 @@ export namespace Feed {
     export type CorrectnessChangedEventHandler = (this: void) => void;
 
     export const enum FieldId {
+        InstanceId,
         ClassId,
         ZenithCode,
         Environment,
@@ -167,6 +170,13 @@ export namespace Feed {
 
         type InfosObject = { [id in keyof typeof FieldId]: Info };
         const infosObject: InfosObject = {
+            InstanceId: {
+                id: FieldId.InstanceId,
+                name: 'InstanceId',
+                dataTypeId: FieldDataTypeId.Integer,
+                displayId: StringId.FeedFieldDisplay_InstanceId,
+                headingId: StringId.FeedFieldHeading_InstanceId,
+            },
             ClassId: {
                 id: FieldId.ClassId,
                 name: 'ClassId',
@@ -237,6 +247,11 @@ export namespace Feed {
         export function idToHeading(id: FieldId) {
             return Strings[idToHeadingId(id)];
         }
+    }
+
+    let _nextInstanceId = 1;
+    export function getNextInstanceId() {
+        return ++_nextInstanceId;
     }
 
     export function generateDisplay(feedClassId: FeedClassId, feedZenithCode: string): string {

@@ -4,7 +4,7 @@ import { BadnessComparableList } from '../../sys/badness-comparable-list';
 import { Correctness } from '../../sys/correctness';
 import { DataDefinition, DataMessage, DataMessageTypeId, MarketsDataMessage } from '../common/internal-api';
 import { PublisherSubscriptionDataItem } from '../publish-subscribe/internal-api';
-import { ZenithDataMarket } from './zenith-market';
+import { ZenithDataMarket } from './zenith-data-market';
 
 export class MarketsDataItem extends /*RecordsPublisherSubscriptionDataItem<Market>*/ PublisherSubscriptionDataItem {
     readonly markets: BadnessComparableList<ZenithDataMarket>;

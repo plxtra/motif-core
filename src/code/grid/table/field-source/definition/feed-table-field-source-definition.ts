@@ -12,6 +12,7 @@ import {
 import {
     CorrectnessTableField,
     EnumCorrectnessTableField,
+    IntegerCorrectnessTableField,
     StringCorrectnessTableField,
     TableField
 } from '../../field/internal-api';
@@ -19,6 +20,7 @@ import {
     CorrectnessTableValue,
     FeedClassIdCorrectnessTableValue,
     FeedStatusIdCorrectnessTableValue,
+    IntegerCorrectnessTableValue,
     StringCorrectnessTableValue
 } from '../../value/internal-api';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
@@ -95,6 +97,8 @@ export namespace FeedTableFieldSourceDefinition {
         function idToTableGridConstructors(id: Feed.FieldId):
             TableFieldSourceDefinition.CorrectnessTableGridConstructors {
             switch (id) {
+                case Feed.FieldId.InstanceId:
+                    return [IntegerCorrectnessTableField, IntegerCorrectnessTableValue];
                 case Feed.FieldId.ClassId:
                     return [EnumCorrectnessTableField, FeedClassIdCorrectnessTableValue];
                 case Feed.FieldId.ZenithCode:

@@ -1097,12 +1097,19 @@ export class SymbolsService {
                     }
                 } else {
                     marketValidAndExplicit = false;
-                    const market = explicitExchange.getDefaultMarket<T>(allMarkets.marketTypeId);
-                    marketIvemId = new constructor(code, market);
-                    if (market.unknown) {
-                        const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
+                    let market = explicitExchange.getDefaultMarket<T>(allMarkets.marketTypeId);
+                    if (market === undefined) {
+                        market = this._marketsService.getGenericUnknownMarket(marketTypeId) as unknown as T;
+                        const stringId = marketTypeId === Market.TypeId.Data ? StringId.ExchangeDoesNotHaveDefaultLitMarket : StringId.ExchangeDoesNotHaveDefaultTradingMarket;
+                        const errorName = Strings[stringId];
                         errorText = `${errorName}: ${explicitExchange.abbreviatedDisplay}`;
+                    } else {
+                        if (market.unknown) {
+                            const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
+                            errorText = `${errorName}: ${explicitExchange.abbreviatedDisplay}`;
+                        }
                     }
+                    marketIvemId = new constructor(code, market);
                 }
                 exchangeValidAndExplicit = marketValidAndExplicit;
             }
@@ -1122,12 +1129,19 @@ export class SymbolsService {
             } else {
                 marketValidAndExplicit = false;
                 const defaultExchange = this.defaultExchange;
-                const market = defaultExchange.getDefaultMarket<T>(allMarkets.marketTypeId);
-                marketIvemId = new constructor(code, market);
-                if (market.unknown) {
-                    const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
+                let market = defaultExchange.getDefaultMarket<T>(marketTypeId);
+                if (market === undefined) {
+                    market = this._marketsService.getGenericUnknownMarket(marketTypeId) as unknown as T;
+                    const stringId = marketTypeId === Market.TypeId.Data ? StringId.ExchangeDoesNotHaveDefaultLitMarket : StringId.ExchangeDoesNotHaveDefaultTradingMarket;
+                    const errorName = Strings[stringId];
                     errorText = `${errorName}: ${defaultExchange.abbreviatedDisplay}`;
+                } else {
+                    if (market.unknown) {
+                        const errorName = Strings[StringId.ExchangeDoesNotHaveDefaultLitMarket];
+                        errorText = `${errorName}: ${defaultExchange.abbreviatedDisplay}`;
+                    }
                 }
+                marketIvemId = new constructor(code, market);
             }
         }
 

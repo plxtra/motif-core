@@ -14,7 +14,7 @@ import { MarketsConfig } from './markets-config';
 import { MarketsDataItem } from './markets-data-item';
 import { TradingMarket } from './trading-market';
 import { ZenithCodedEnvironment } from './zenith-coded-environment';
-import { ZenithDataMarket } from './zenith-market';
+import { ZenithDataMarket } from './zenith-data-market';
 
 export class MarketsService {
     readonly exchangeEnvironments: MarketsService.ExchangeEnvironments;
@@ -719,9 +719,9 @@ export class MarketsService {
 
         let addedZenithDataMarkets: ZenithDataMarket[];
         if (loading) {
-            addedZenithDataMarkets = this._zenithDataMarkets.rangeToArray(zenithDataMarketIdx, zenithDataMarketAddCount);
+            addedZenithDataMarkets = this._zenithDataMarkets.toArray(); // first time markets are added so make sure all are added
         } else {
-            addedZenithDataMarkets = this.resolveAddedZenithDataMarkets(zenithDataMarketIdx, zenithDataMarketAddCount);
+            addedZenithDataMarkets = this._zenithDataMarkets.rangeToArray(zenithDataMarketIdx, zenithDataMarketAddCount);
         }
 
         const newExchangeEnvironments = new Array<ExchangeEnvironment>();
@@ -790,26 +790,6 @@ export class MarketsService {
         }
 
         this.endChange();
-    }
-
-    private resolveAddedZenithDataMarkets(zenithDataMarketIdx: Integer, zenithDataMarketAddCount: Integer): ZenithDataMarket[] {
-        const result = new Array<ZenithDataMarket>(zenithDataMarketAddCount);
-        let resultCount = 0;
-
-        const lastIdxPlus1 = zenithDataMarketIdx + zenithDataMarketAddCount;
-        for (let i = zenithDataMarketIdx; i < lastIdxPlus1; i++) {
-            const zenithDataMarket = this._zenithDataMarkets.getAt(i);
-            const zenithCode = zenithDataMarket.zenithCode;
-            const dataMarket = this.dataMarkets.findZenithCode(zenithCode);
-            if (dataMarket === undefined) {
-                result[resultCount++] = zenithDataMarket;
-            } else {
-                dataMarket.change(zenithDataMarket); // ZenithDataMarket implements change message
-            }
-        }
-
-        result.length = resultCount;
-        return result;
     }
 
     private createNewExchangesAndMarkets(

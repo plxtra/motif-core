@@ -170,8 +170,8 @@ export class Exchange {
         return marketTypeId === Market.TypeId.Data ? this._dataMarkets as unknown as T[] : this._tradingMarkets as unknown as T[];
     }
 
-    getDefaultMarket<T extends Market>(marketTypeId: Market.TypeId): T {
-        return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket as unknown as T : this._defaultTradingMarket as unknown as T;
+    getDefaultMarket<T extends Market>(marketTypeId: Market.TypeId): T | undefined {
+        return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket as unknown as (T | undefined) : this._defaultTradingMarket as unknown as (T | undefined);
     }
 
     subscribeFieldValuesChangedEvent(handler: Exchange.FieldValuesChangedHandler) {
