@@ -78,7 +78,7 @@ export class MotifServicesService {
                     const errorText = getErrorMessage(reason);
                     return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
                 }
-            case 404:
+            case 204:
                 return new Ok(undefined);
             default:
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
@@ -195,7 +195,7 @@ export class MotifServicesService {
                     const errorText = getErrorMessage(reason);
                     return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
                 }
-            case 404:
+            case 204:
                 return new Ok(undefined);
             default:
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
@@ -242,7 +242,7 @@ export class MotifServicesService {
                     const errorText = getErrorMessage(reason);
                     return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
                 }
-            case 404:
+            case 204:
                 return new Ok(undefined);
             default:
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
@@ -289,7 +289,7 @@ export class MotifServicesService {
                     const errorText = getErrorMessage(reason);
                     return new Err(`${Strings[StringId.MotifServicesFetchTextError]}: ${errorText}`);
                 }
-            case 404:
+            case 204:
                 return new Ok(undefined);
             default:
                 return new Err(`${endpointPath}: ${Strings[StringId.MotifServicesResponseStatusError]}: ${response.status}: ${response.statusText}`);
