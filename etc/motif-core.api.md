@@ -9294,6 +9294,12 @@ export const enum ErrorCode {
     // (undocumented)
     Config_ServiceMissingOperator = "CSMO97432",
     // (undocumented)
+    ConfigService_InvalidDesktopBarLeftImageUrl = "CSIDBLIU40133",
+    // (undocumented)
+    ConfigService_InvalidStartupSplashWebPageUrl = "CSISSWPU40133",
+    // (undocumented)
+    ConfigService_LogoUrl = "CSLU40133",
+    // (undocumented)
     ConfigService_MarketsConfigCouldNotBeParsed = "CSMCCNBP40133",
     // (undocumented)
     CSDZLPJ788831131 = "CSDZLPJ788831131",
