@@ -9636,6 +9636,8 @@ export const enum ErrorCode {
     // (undocumented)
     MarketConfig_ExchangeDefaultExchangeEnvironmentZenithCodeIsBlankOrUnknown = "MCEDEEZCIBOU10997",
     // (undocumented)
+    MarketConfig_ExchangeEnvironmentProductionIsInvalid = "MCEEPII10997",
+    // (undocumented)
     MarketConfig_ExchangeEnvironmentZenithCodeIsBlankOrUnknown = "MCEEZCIBOU10997",
     // (undocumented)
     MarketConfig_ExchangeZenithCodeIsBlankOrUnknown = "MCEZCIBOU10997",
@@ -15924,6 +15926,8 @@ export namespace MarketsConfig {
     export interface ExchangeEnvironment {
         // (undocumented)
         display: string | undefined;
+        // (undocumented)
+        production: boolean | undefined;
         // (undocumented)
         zenithCode: ExchangeEnvironmentZenithCode;
     }

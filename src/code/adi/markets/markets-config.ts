@@ -700,6 +700,7 @@ export namespace MarketsConfig {
 
     export interface ExchangeEnvironment {
         zenithCode: ExchangeEnvironmentZenithCode;
+        production: boolean | undefined;
         display: string | undefined;
     }
 
@@ -708,6 +709,7 @@ export namespace MarketsConfig {
         type PropertyName = keyof ExchangeEnvironment;
 
         const zenithCodePropertyName: PropertyName = 'zenithCode';
+        const productionPropertyName: PropertyName = 'production';
         const displayPropertyName: PropertyName = 'display';
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -720,16 +722,24 @@ export namespace MarketsConfig {
                 if (zenithCode !== null && isZenithCodeBlankOrUnknown(zenithCode)) {
                     return new Err(ErrorCode.MarketConfig_ExchangeEnvironmentZenithCodeIsBlankOrUnknown)
                 } else {
-                    const displayResult = tryParseLanguagedDisplay(exchangeEnvironmentElement, displayPropertyName);
-                    if (displayResult.isErr()) {
-                        return displayResult.createType(zenithCode === null ? 'null' : zenithCode);
+                    const productionResult = exchangeEnvironmentElement.tryGetUndefinableBoolean(productionPropertyName);
+                    if (productionResult.isErr()) {
+                        return new Err(ErrorCode.MarketConfig_ExchangeEnvironmentProductionIsInvalid);
                     } else {
-                        const environment: ExchangeEnvironment = {
-                            zenithCode,
-                            display: displayResult.value,
-                        };
+                        const production = productionResult.value;
 
-                        return new Ok(environment);
+                        const displayResult = tryParseLanguagedDisplay(exchangeEnvironmentElement, displayPropertyName);
+                        if (displayResult.isErr()) {
+                            return displayResult.createType(zenithCode === null ? 'null' : zenithCode);
+                        } else {
+                            const environment: ExchangeEnvironment = {
+                                zenithCode,
+                                production,
+                                display: displayResult.value,
+                            };
+
+                            return new Ok(environment);
+                        }
                     }
                 }
             }

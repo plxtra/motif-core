@@ -54,6 +54,7 @@ export const enum ErrorCode {
     MarketConfig_MarketZenithCodeIsBlankOrUnknown = 'MCMZCIBOU10997',
     MarketConfig_MarketBoardZenithCodeIsBlankOrUnknown = 'MCMBZCIBOU10997',
     MarketConfig_ExchangeEnvironmentZenithCodeIsBlankOrUnknown = 'MCEEZCIBOU10997',
+    MarketConfig_ExchangeEnvironmentProductionIsInvalid = 'MCEEPII10997',
     MarketsService_ExhaustedMarketSymbologyExchangeSuffixCodesForExchange = 'MSEMSESCFE10997',
     MarketsService_ExhaustedExchangeSymbologyCodes = 'MSEESC10997',
     IvemId_CodeNotSpecified = 'IICNS45456',

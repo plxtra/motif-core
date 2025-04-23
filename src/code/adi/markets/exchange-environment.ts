@@ -42,8 +42,6 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment {
     ) {
         this.mapKey = ExchangeEnvironmentZenithCode.createMapKey(zenithCode);
 
-        this.production = productionExchangeEnvironmentListZenithCodes.includes(zenithCode);
-
         if (exchangeEnvironmentConfig === undefined) {
             this.display = ExchangeEnvironmentZenithCode.createDisplay(zenithCode);
         } else {
