@@ -70,6 +70,7 @@ export namespace UserAlertService {
             export const enum Id {
                 Exception,
                 UnhandledError,
+                SigninCouldNotBeProcessed,
                 NewSessionRequired,
                 AttemptingSessionRenewal,
                 SettingChanged,
@@ -105,6 +106,14 @@ export namespace UserAlertService {
                     cancellable: false,
                     restartable: true,
                     restartReasonStringId: StringId.UserAlert_RestartReason_Unstable,
+                },
+                SigninCouldNotBeProcessed: {
+                    id: Id.SigninCouldNotBeProcessed,
+                    name: 'SigninCouldNotBeProcessed',
+                    error: true,
+                    cancellable: false,
+                    restartable: true,
+                    restartReasonStringId: StringId.UserAlert_RestartReason_SigninCouldNotBeProcessed,
                 },
                 NewSessionRequired: {
                     id: Id.NewSessionRequired,

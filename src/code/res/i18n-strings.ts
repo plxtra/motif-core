@@ -2318,6 +2318,7 @@ export const enum StringId {
     DiagnosticsDitemGroup_DebugTitle,
     Diagnostics_CloseSocketConnection,
     UserAlert_RestartReason_Unstable,
+    UserAlert_RestartReason_SigninCouldNotBeProcessed,
     UserAlert_RestartReason_NewSessionRequired,
     UserAlert_RestartReason_AttemptingSessionRenewal,
     UserAlert_RestartReason_UserAction,
@@ -14142,6 +14143,11 @@ export namespace I18nStrings {
         UserAlert_RestartReason_Unstable: {
             id: StringId.UserAlert_RestartReason_Unstable, translations: {
                 en: 'Motif may be unstable! Click "Restart" to begin new session',
+            }
+        },
+        UserAlert_RestartReason_SigninCouldNotBeProcessed: {
+            id: StringId.UserAlert_RestartReason_SigninCouldNotBeProcessed, translations: {
+                en: 'Signin could not be processed! Check identity provider then click "Restart" to try again',
             }
         },
         UserAlert_RestartReason_NewSessionRequired: {
