@@ -53,7 +53,7 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     private _subscriptionErrorCount = 0;
     private _subscriptionWarningCount = 0;
     private _dataErrorSubscriptionErrorCount = 0;
-    private _userNotAuthorisedSubscriptionErrorCount = 0;
+    private _dataNotAvailableSubscriptionErrorCount = 0;
     private _serverWarningSubscriptionErrorCount = 0;
 
     private _authStatusId: AuthStatusId = AuthStatusId.NotAuthorised;
@@ -102,7 +102,7 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
     get subscriptionErrorCount() { return this._subscriptionErrorCount; }
     get subscriptionWarningCount() { return this._subscriptionWarningCount; }
     get dataErrorSubscriptionErrorCount() { return this._dataErrorSubscriptionErrorCount; }
-    get userNotAuthorisedSubscriptionErrorCount() { return this._userNotAuthorisedSubscriptionErrorCount; }
+    get dataNotAvailableSubscriptionErrorCount() { return this._dataNotAvailableSubscriptionErrorCount; }
     get serverWarningSubscriptionErrorCount() { return this._serverWarningSubscriptionErrorCount; }
 
     updateAccessToken(value: string) {
@@ -216,7 +216,7 @@ export class ZenithExtConnectionDataItem extends ExtConnectionDataItem {
         this._subscriptionErrorCount = msg.subscriptionErrorCount;
         this._subscriptionWarningCount = msg.subscriptionWarningCount;
         this._dataErrorSubscriptionErrorCount = msg.dataErrorSubscriptionErrorCount;
-        this._userNotAuthorisedSubscriptionErrorCount = msg.userNotAuthorisedSubscriptionErrorCount;
+        this._dataNotAvailableSubscriptionErrorCount = msg.dataNotAvailableSubscriptionErrorCount;
         this._serverWarningSubscriptionErrorCount = msg.serverWarningSubscriptionErrorCount;
 
         this.notifyCounter();

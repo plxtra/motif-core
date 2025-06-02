@@ -20,10 +20,10 @@ import {
     DataMessage,
     DataMessages,
     ErrorPublisherSubscriptionDataMessage,
+    ErrorPublisherSubscriptionDataMessage_DataNotAvailable,
     ErrorPublisherSubscriptionDataMessage_PublishRequestError,
     ErrorPublisherSubscriptionDataMessage_SubcriptionWarning,
     ErrorPublisherSubscriptionDataMessage_SubscriptionError,
-    ErrorPublisherSubscriptionDataMessage_UserNotAuthorised,
     WarningPublisherSubscriptionDataMessage
 } from "../../common/internal-api";
 import { ZenithProtocol } from './physical-message/protocol/zenith-protocol';
@@ -285,24 +285,35 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                     if (unsubSubscription === undefined) {
                         return []; // has already been unsubscribed
                     } else {
-                        if (parsedMessage.Confirm === true) {
+                        if (parsedMessage.Confirm !== true) {
                             // we never ask for confirmations of unsubscribes so this is an error
                             throw new ZenithDataError(ErrorCode.ZPSMPPM2994344434, JSON.stringify(parsedMessage));
                         } else {
-                            // data does not in exist (eg. the symbol was deleted) or you don't have access, or similar
+                            // subscription data is no longer available (eg. the symbol was deleted) or you don't have access, or similar
+                            let parsedErrorTexts: ZenithPublisherSubscriptionManager.ParsedErrorTexts | undefined;
+                            const data = parsedMessage.Data;
+                            if (data !== undefined && data !== null) {
+                                // Normally would not expect any data (should this be a protocol error?)
+                                parsedErrorTexts = this.checkGetResponseUpdateMessageErrorTexts(data);
+                                if (parsedErrorTexts === undefined) {
+                                    // No error texts. Protocol error but ignore it for now
+                                    window.motifLogger.logDebug('ZenithPublisherSubscriptionManager: processPhysicalMessage: unsub: Contains data but no error texts');
+                                }
+                            }
 
-                            let error = this.checkSubscriptionError(parsedMessage.Data);
-                            if (error === undefined) {
-                                // Unexpected. Use default UserNotAuthorised error
-                                error = {
+                            if (parsedErrorTexts === undefined) {
+                                parsedErrorTexts = {
                                     texts: [],
-                                    errorTypeId: AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised,
                                     delayRetryAllowedSpecified: false,
                                     limitedSpecified: false,
                                 };
                             }
-                            this.notifySubscriptionError(error.errorTypeId);
-                            const errorDataMessage = this.createSubscriptionErrorDataMessage(unsubSubscription, parsedMessage, error);
+                            const responseUpdateMessageError: ZenithPublisherSubscriptionManager.SubscriptionError = {
+                                ...parsedErrorTexts,
+                                errorTypeId: AdiPublisherSubscription.ErrorTypeId.DataNotAvailable,
+                            };
+                            this.notifySubscriptionError(responseUpdateMessageError.errorTypeId);
+                            const errorDataMessage = this.createSubscriptionErrorDataMessage(unsubSubscription, parsedMessage, responseUpdateMessageError);
 
                             if (errorDataMessage.allowedRetryTypeId === AdiPublisherSubscription.AllowedRetryTypeId.Never) {
                                 this.deleteSubscription(unsubSubscription, true);
@@ -324,45 +335,31 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                             case AdiPublisherSubscription.ErrorTypeId.PublishRequestError: {
                                 const subscription = errorActionSubscription.subscription;
 
-                                let delayRetryAllowedSpecified = false;
-                                let limitedSpecified = false;
-
-                                const texts = this.checkGetResponseUpdateMessageErrorTexts(parsedMessage.Data);
-                                if (texts !== undefined) {
-                                    for (let i = 0; i < texts.length; i++) {
-                                        const text = texts[i];
-                                        switch (text as ZenithProtocol.ResponseUpdateMessageContainer.Error.Code) {
-                                            case ZenithProtocol.ResponseUpdateMessageContainer.Error.Code.Retry:
-                                                delayRetryAllowedSpecified = true;
-                                                break;
-                                            case ZenithProtocol.ResponseUpdateMessageContainer.Error.Code.Limited:
-                                                limitedSpecified = true;
-                                                break;
-                                        }
+                                const parsedErrorTexts = this.checkGetResponseUpdateMessageErrorTexts(parsedMessage.Data);
+                                if (parsedErrorTexts !== undefined) {
+                                    if (subscription.errorsWarnings === undefined) {
+                                        subscription.errorsWarnings = parsedErrorTexts.texts;
+                                    } else {
+                                        subscription.errorsWarnings.push(...parsedErrorTexts.texts);
                                     }
 
-                                    if (subscription.errorsWarnings === undefined) {
-                                        subscription.errorsWarnings = texts;
-                                    } else {
-                                        subscription.errorsWarnings.push(...texts);
+                                    if (parsedErrorTexts.delayRetryAllowedSpecified && subscription.resendAllowed) {
+                                        subscription.delayRetryAllowedSpecified = true;
+                                    }
+                                    if (parsedErrorTexts.limitedSpecified) {
+                                        subscription.limitedSpecified = true;
                                     }
                                 }
 
                                 subscription.errorWarningCount++;
-                                if (delayRetryAllowedSpecified) {
-                                    subscription.delayRetryAllowedSpecified = true;
-                                }
-                                if (limitedSpecified) {
-                                    subscription.limitedSpecified = true;
-                                }
-
                                 return [];
                             }
 
                             case AdiPublisherSubscription.ErrorTypeId.SubscriptionWarning: {
                                 this.notifyServerWarning();
 
-                                let texts = this.checkGetResponseUpdateMessageErrorTexts(parsedMessage.Data);
+                                const parsedErrortexts = this.checkGetResponseUpdateMessageErrorTexts(parsedMessage.Data);
+                                let texts = parsedErrortexts?.texts;
 
                                 if (texts === undefined) {
                                     texts = [Strings[StringId.BadnessReasonId_PublisherServerWarning]];
@@ -405,21 +402,19 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
 
     private checkSubscriptionError(data: ZenithProtocol.ResponseUpdateMessageContainer.Data) {
         if (data === undefined || data === null) {
-            const error: ZenithPublisherSubscriptionManager.ResponseUpdateMessageError = {
-                texts: [],
-                errorTypeId: AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised,
+            const error: ZenithPublisherSubscriptionManager.SubscriptionError = {
+                texts: ['Data missing'],
+                errorTypeId: AdiPublisherSubscription.ErrorTypeId.SubscriptionError,
                 delayRetryAllowedSpecified: false,
                 limitedSpecified: false,
             };
             return error;
         } else {
-            const texts = this.checkGetResponseUpdateMessageErrorTexts(data);
-            if (texts !== undefined) {
-                const error: ZenithPublisherSubscriptionManager.ResponseUpdateMessageError = {
-                    texts,
+            const parsedErrorTexts = this.checkGetResponseUpdateMessageErrorTexts(data);
+            if (parsedErrorTexts !== undefined) {
+                const error: ZenithPublisherSubscriptionManager.SubscriptionError = {
+                    ...parsedErrorTexts,
                     errorTypeId: AdiPublisherSubscription.ErrorTypeId.SubscriptionError,
-                    delayRetryAllowedSpecified: false,
-                    limitedSpecified: false,
                 };
                 return error;
             } else {
@@ -428,15 +423,22 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
         }
     }
 
-    private createResponseUpdateMessageError(data: ZenithProtocol.ResponseUpdateMessageContainer.Data, actionErrorTypeId: AdiPublisherSubscription.ErrorTypeId) {
-        let texts = this.checkGetResponseUpdateMessageErrorTexts(data);
-
-        if (texts === undefined) {
-            texts = [Strings[StringId.BadnessReasonId_PublisherServerWarning]];
+    private checkGetResponseUpdateMessageErrorTexts(data: ZenithProtocol.ResponseUpdateMessageContainer.Data): ZenithPublisherSubscriptionManager.ParsedErrorTexts | undefined {
+        if (typeof data === 'string') {
+            return this.parseErrorTexts([data]);
+        } else {
+            if (data instanceof Array && data.length > 0 && typeof data[0] === 'string') {
+                return this.parseErrorTexts(data);
+            } else {
+                return undefined;
+            }
         }
+    }
 
+    private parseErrorTexts(texts: string[]): ZenithPublisherSubscriptionManager.ParsedErrorTexts {
         let delayRetryAllowedSpecified = false;
         let limitedSpecified = false;
+
         for (let i = 0; i < texts.length; i++) {
             const text = texts[i];
             switch (text as ZenithProtocol.ResponseUpdateMessageContainer.Error.Code) {
@@ -449,30 +451,17 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
             }
         }
 
-        const error: ZenithPublisherSubscriptionManager.ResponseUpdateMessageError = {
+        const parsedErrorTexts: ZenithPublisherSubscriptionManager.ParsedErrorTexts = {
             texts,
-            errorTypeId: actionErrorTypeId,
             delayRetryAllowedSpecified,
             limitedSpecified,
         };
 
-        return error;
-    }
-
-    private checkGetResponseUpdateMessageErrorTexts(data: ZenithProtocol.ResponseUpdateMessageContainer.Data) {
-        if (typeof data === 'string') {
-            return [data];
-        } else {
-            if (data instanceof Array && data.length > 0 && typeof data[0] === 'string') {
-                return data;
-            } else {
-                return undefined;
-            }
-        }
+        return parsedErrorTexts;
     }
 
     private createSubscriptionErrorDataMessage(subscription: AdiPublisherSubscription, zenithMsg: ZenithProtocol.ResponseUpdateMessageContainer,
-        error: ZenithPublisherSubscriptionManager.ResponseUpdateMessageError
+        error: ZenithPublisherSubscriptionManager.SubscriptionError
     ) {
         const errorTypeId = error.errorTypeId;
 
@@ -488,7 +477,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
         const errorText = `${joinedErrorTexts} (${controllerTopic})`;
 
         let allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId;
-        if (errorTypeId === AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised || errorTypeId === AdiPublisherSubscription.ErrorTypeId.SubscriptionError) {
+        if (!subscription.resendAllowed || errorTypeId === AdiPublisherSubscription.ErrorTypeId.DataNotAvailable || errorTypeId === AdiPublisherSubscription.ErrorTypeId.SubscriptionError) {
             allowedRetryTypeId = AdiPublisherSubscription.AllowedRetryTypeId.Never;
         } else {
             if (error.delayRetryAllowedSpecified) {
@@ -511,11 +500,11 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                 msg = new ErrorPublisherSubscriptionDataMessage_SubcriptionWarning(dataItemId, dataItemRequestNr,
                     errorText, allowedRetryTypeId);
                 break;
-            case AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised:
-                msg = new ErrorPublisherSubscriptionDataMessage_UserNotAuthorised(dataItemId, dataItemRequestNr, errorText);
-                break;
             case AdiPublisherSubscription.ErrorTypeId.SubscriptionError:
                 msg = new ErrorPublisherSubscriptionDataMessage_SubscriptionError(dataItemId, dataItemRequestNr, errorText);
+                break;
+            case AdiPublisherSubscription.ErrorTypeId.DataNotAvailable:
+                msg = new ErrorPublisherSubscriptionDataMessage_DataNotAvailable(dataItemId, dataItemRequestNr, errorText);
                 break;
 
             case AdiPublisherSubscription.ErrorTypeId.DataError:
@@ -592,11 +581,14 @@ export namespace ZenithPublisherSubscriptionManager {
 
     export const logTimeFormat = new Intl.DateTimeFormat(undefined, logTimeOptions);
 
-    export interface ResponseUpdateMessageError {
+    export interface ParsedErrorTexts {
         readonly texts: string[];
-        readonly errorTypeId: AdiPublisherSubscription.ErrorTypeId;
         readonly delayRetryAllowedSpecified: boolean;
         readonly limitedSpecified: boolean;
+    }
+
+    export interface SubscriptionError extends ParsedErrorTexts {
+        readonly errorTypeId: AdiPublisherSubscription.ErrorTypeId;
     }
 
     export interface ErrorActionSubscription {

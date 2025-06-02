@@ -22,11 +22,11 @@ export namespace Badness {
         PublisherSubscriptionError_Offlined_Error,
         PublisherSubscriptionError_RequestTimeout_Suspect,
         PublisherSubscriptionError_RequestTimeout_Error,
-        PublisherSubscriptionError_UserNotAuthorised_Error,
         PublisherSubscriptionError_SubscriptionError_Error,
         PublisherSubscriptionError_PublishRequestError_Suspect,
         PublisherSubscriptionError_PublishRequestError_Error,
         PublisherSubscriptionError_SubscriptionWarning_Suspect,
+        PublisherSubscriptionError_DataNotAvailable_Error,
         PublisherSubscriptionError_DataError_Suspect,
         PublisherSubscriptionError_DataError_Error,
         PublisherServerWarning_Usable,
@@ -234,11 +234,6 @@ export namespace Badness {
                 correctnessId: CorrectnessId.Error,
                 displayId: StringId.BadnessReasonId_PublisherSubscriptionError_Timeout_Error,
             },
-            PublisherSubscriptionError_UserNotAuthorised_Error: {
-                id: ReasonId.PublisherSubscriptionError_UserNotAuthorised_Error,
-                correctnessId: CorrectnessId.Error,
-                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error,
-            },
             PublisherSubscriptionError_SubscriptionError_Error: {
                 id: ReasonId.PublisherSubscriptionError_SubscriptionError_Error,
                 correctnessId: CorrectnessId.Error,
@@ -258,6 +253,11 @@ export namespace Badness {
                 id: ReasonId.PublisherSubscriptionError_SubscriptionWarning_Suspect,
                 correctnessId: CorrectnessId.Suspect,
                 displayId: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect,
+            },
+            PublisherSubscriptionError_DataNotAvailable_Error: {
+                id: ReasonId.PublisherSubscriptionError_DataNotAvailable_Error,
+                correctnessId: CorrectnessId.Error,
+                displayId: StringId.BadnessReasonId_PublisherSubscriptionError_DataNotAvailable_Error,
             },
             PublisherSubscriptionError_DataError_Suspect: {
                 id: ReasonId.PublisherSubscriptionError_DataError_Suspect,

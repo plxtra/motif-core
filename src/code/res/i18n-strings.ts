@@ -1446,6 +1446,7 @@ export const enum StringId {
     OrderPadFieldStatusReasonDescription_OrderNotFound,
     OrderPadFieldStatusReasonDescription_OrderCannotBeAmended,
     OrderPadFieldStatusReasonDescription_OrderCannotBeCancelled,
+    OrderPadFieldStatusReasonDescription_OrderCannotBeMoved,
     OrderTriggerTypeDisplay_Immediate,
     OrderTriggerTypeDisplay_Price,
     OrderTriggerTypeDisplay_TrailingPrice,
@@ -1878,11 +1879,11 @@ export const enum StringId {
     BadnessReasonId_PublisherSubscriptionError_Offlined_Error,
     BadnessReasonId_PublisherSubscriptionError_Timeout_Suspect,
     BadnessReasonId_PublisherSubscriptionError_Timeout_Error,
-    BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error,
     BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error,
     BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Suspect,
     BadnessReasonId_PublisherSubscriptionError_PublishRequestError_Error,
     BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect,
+    BadnessReasonId_PublisherSubscriptionError_DataNotAvailable_Error,
     BadnessReasonId_PublisherSubscriptionError_DataError_Suspect,
     BadnessReasonId_PublisherSubscriptionError_DataError_Error,
     BadnessReasonId_PublisherServerWarning,
@@ -9780,6 +9781,11 @@ export namespace I18nStrings {
                 en: 'Order cannot be cancelled',
             }
         },
+        OrderPadFieldStatusReasonDescription_OrderCannotBeMoved: {
+            id: StringId.OrderPadFieldStatusReasonDescription_OrderCannotBeMoved, translations: {
+                en: 'Order cannot be moved',
+            }
+        },
         OrderTriggerTypeDisplay_Immediate: {
             id: StringId.OrderTriggerTypeDisplay_Immediate, translations: {
                 en: 'Immediate',
@@ -11942,11 +11948,6 @@ export namespace I18nStrings {
                 en: 'Feed request timeout error',
             },
         },
-        BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error: {
-            id: StringId.BadnessReasonId_PublisherSubscriptionError_UserNotAuthorised_Error, translations: {
-                en: 'User authorisation error',
-            },
-        },
         BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error: {
             id: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionError_Error, translations: {
                 en: 'Feed subscription error',
@@ -11965,6 +11966,11 @@ export namespace I18nStrings {
         BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect: {
             id: StringId.BadnessReasonId_PublisherSubscriptionError_SubscriptionWarning_Suspect, translations: {
                 en: 'Feed subscription warning',
+            },
+        },
+        BadnessReasonId_PublisherSubscriptionError_DataNotAvailable_Error: {
+            id: StringId.BadnessReasonId_PublisherSubscriptionError_DataNotAvailable_Error, translations: {
+                en: 'Data not available',
             },
         },
         BadnessReasonId_PublisherSubscriptionError_DataError_Suspect: {

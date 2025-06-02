@@ -65,7 +65,7 @@ export class ZenithPublisher extends AdiPublisher {
     private _subscriptionErrorCount = 0;
     private _subscriptionWarningCount = 0;
     private _dataErrorSubscriptionErrorCount = 0;
-    private _userNotAuthorisedSubscriptionErrorCount = 0;
+    private _dataNotAvailableSubscriptionErrorCount = 0;
     private _serverWarningSubscriptionErrorCount = 0;
 
     constructor(decimalFactory: DecimalFactory) {
@@ -310,8 +310,8 @@ export class ZenithPublisher extends AdiPublisher {
             case AdiPublisherSubscription.ErrorTypeId.DataError:
                 this._dataErrorSubscriptionErrorCount++;
                 break;
-            case AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised:
-                this._userNotAuthorisedSubscriptionErrorCount++;
+            case AdiPublisherSubscription.ErrorTypeId.DataNotAvailable:
+                this._dataNotAvailableSubscriptionErrorCount++;
                 break;
             case AdiPublisherSubscription.ErrorTypeId.SubscriptionError:
                 this._subscriptionErrorCount++;
@@ -683,7 +683,7 @@ export class ZenithPublisher extends AdiPublisher {
         dataMessage.subscriptionErrorCount = this._subscriptionErrorCount;
         dataMessage.subscriptionWarningCount = this._subscriptionWarningCount;
         dataMessage.dataErrorSubscriptionErrorCount = this._dataErrorSubscriptionErrorCount;
-        dataMessage.userNotAuthorisedSubscriptionErrorCount = this._userNotAuthorisedSubscriptionErrorCount;
+        dataMessage.dataNotAvailableSubscriptionErrorCount = this._dataNotAvailableSubscriptionErrorCount;
         dataMessage.serverWarningSubscriptionErrorCount = this._serverWarningSubscriptionErrorCount;
         return dataMessage;
     }

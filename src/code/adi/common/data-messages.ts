@@ -1400,15 +1400,6 @@ export class ErrorPublisherSubscriptionDataMessage_Offlined extends ErrorPublish
     }
 }
 
-export class ErrorPublisherSubscriptionDataMessage_UserNotAuthorised extends ErrorPublisherSubscriptionDataMessage {
-    constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string) {
-        super(dataItemId, dataItemRequestNr,
-            AdiPublisherSubscription.ErrorTypeId.UserNotAuthorised, errorText,
-            AdiPublisherSubscription.AllowedRetryTypeId.Never,
-            true);
-    }
-}
-
 export class ErrorPublisherSubscriptionDataMessage_SubscriptionError extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string) {
         super(dataItemId, dataItemRequestNr,
@@ -1475,6 +1466,15 @@ export class ErrorPublisherSubscriptionDataMessage_SubcriptionWarning extends Er
     }
 }
 
+export class ErrorPublisherSubscriptionDataMessage_DataNotAvailable extends ErrorPublisherSubscriptionDataMessage {
+    constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string) {
+        super(dataItemId, dataItemRequestNr,
+            AdiPublisherSubscription.ErrorTypeId.DataNotAvailable, errorText,
+            AdiPublisherSubscription.AllowedRetryTypeId.Never,
+            true);
+    }
+}
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_DataError extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
@@ -1509,7 +1509,7 @@ export class ZenithCounterDataMessage extends DataMessage {
     subscriptionErrorCount: Integer;
     subscriptionWarningCount: Integer;
     dataErrorSubscriptionErrorCount: Integer;
-    userNotAuthorisedSubscriptionErrorCount: Integer;
+    dataNotAvailableSubscriptionErrorCount: Integer;
     serverWarningSubscriptionErrorCount: Integer;
 
     constructor() {

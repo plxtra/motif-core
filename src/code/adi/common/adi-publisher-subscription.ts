@@ -69,10 +69,10 @@ export namespace AdiPublisherSubscription {
         InvalidRequest,
         Offlined,
         RequestTimeout,
-        UserNotAuthorised,
         SubscriptionError,
         PublishRequestError,
         SubscriptionWarning,
+        DataNotAvailable,
         DataError,
     }
 
@@ -91,6 +91,6 @@ export namespace AdiPublisherSubscription {
     }
 
     export function generateAllowedRetryTypeId(subscription: AdiPublisherSubscription) {
-        return subscription.delayRetryAllowedSpecified ? AdiPublisherSubscription.AllowedRetryTypeId.Delay : AdiPublisherSubscription.AllowedRetryTypeId.Never;
+        return subscription.resendAllowed && subscription.delayRetryAllowedSpecified ? AdiPublisherSubscription.AllowedRetryTypeId.Delay : AdiPublisherSubscription.AllowedRetryTypeId.Never;
     }
 }
