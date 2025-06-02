@@ -590,7 +590,11 @@ export class Order implements BrokerageAccountRecord {
     }
 
     canCancel() {
-        return this.statusAllowIds.includes(OrderStatus.AllowId.Trade);
+        return this.statusAllowIds.includes(OrderStatus.AllowId.Cancel);
+    }
+
+    canMove() {
+        return this.statusAllowIds.includes(OrderStatus.AllowId.Move);
     }
 
     generateMapKey(): MapKey {

@@ -2174,7 +2174,11 @@ export class OrderPad {
                     if (this._existingOrder === undefined) {
                         this.setErrorFieldStatus(fieldId, OrderPad.Field.StatusReasonId.OrderNotFound);
                     } else {
-                        this.setReadOnlyFieldStatus(fieldId, OrderPad.Field.StatusReasonId.Unknown);
+                        if (!this._existingOrder.canMove()) {
+                            this.setErrorFieldStatus(fieldId, OrderPad.Field.StatusReasonId.OrderCannotBeMoved);
+                        } else {
+                            this.setReadOnlyFieldStatus(fieldId, OrderPad.Field.StatusReasonId.Unknown);
+                        }
                     }
                 }
                 break;
@@ -3355,6 +3359,7 @@ export namespace OrderPad {
             OrderNotFound,
             OrderCannotBeAmended,
             OrderCannotBeCancelled,
+            OrderCannotBeMoved,
         }
 
         export type Id = FieldId;
@@ -4063,6 +4068,10 @@ export namespace OrderPad {
                 OrderCannotBeCancelled: {
                     id: StatusReasonId.OrderCannotBeCancelled,
                     descriptionId: StringId.OrderPadFieldStatusReasonDescription_OrderCannotBeCancelled,
+                },
+                OrderCannotBeMoved: {
+                    id: StatusReasonId.OrderCannotBeMoved,
+                    descriptionId: StringId.OrderPadFieldStatusReasonDescription_OrderCannotBeMoved,
                 },
             };
 
