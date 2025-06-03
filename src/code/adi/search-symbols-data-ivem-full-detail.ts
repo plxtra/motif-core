@@ -55,7 +55,7 @@ export class SearchSymbolsDataIvemFullDetail extends SearchSymbolsDataIvemBaseDe
         this._tmcLegs = change.tmcLegs;
         this._categories = change.categories;
         const alternateCodes = change.alternateCodes;
-        this._alternateCodes = alternateCodes === undefined ? {} : alternateCodes;
+        this._alternateCodes = alternateCodes ?? {};
     }
 
     get cfi(): string | undefined { return this._cfi; }

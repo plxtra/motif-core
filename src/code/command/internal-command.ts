@@ -355,6 +355,7 @@ export namespace InternalCommand {
     }
 
     // InfosObject is just used to check for typos in Name enum
+    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
     type InfosObject = { [nameId in Name]: Info };
 
     const infosObject: InfosObject = {

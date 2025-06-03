@@ -163,6 +163,7 @@ export class LatestTradingDayTradesDataItem extends DataItem implements TradesDa
     }
 
     private handleSubscriptionOutOfRangeUpdateChangeEvent(change: TradesDataMessage.UpdateChange) {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (this._queryDataItem === undefined || !this._queryDataItem.usable) {
             this._subscriptionUnprocessedUpdateChanges.push(change);
         } else {

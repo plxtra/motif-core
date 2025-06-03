@@ -1,3 +1,4 @@
+import { ZenithProtocolCommon } from '../../../common/internal-api';
 import { ZenithProtocol } from './protocol/zenith-protocol';
 
 export namespace ZenithMarketPtx {
@@ -16,7 +17,7 @@ export namespace ZenithMarketPtx {
 
             export type Alternates = Pick<
                 ZenithProtocol.MarketController.SearchSymbols.Alternates,
-                'UID'
+                ZenithProtocolCommon.Symbol.KnownAlternateKey.UID
             >;
         }
     }

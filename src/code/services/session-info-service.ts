@@ -33,7 +33,6 @@ export class SessionInfoService {
         this.notifyStateChanged();
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get publisherSessionTerminated() { return this._publisherSessionTerminated; }
 
     get serviceName() { return this._serviceName; }

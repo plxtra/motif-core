@@ -63,7 +63,7 @@ export class LockerScanAttachedNotificationChannelList extends ModifierComparabl
                         this.addRange(definedChannels, modifier);
                     }
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'LSANCLL50813'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'LSANCLL50813'); }
             )
         }
         this._valid = true;

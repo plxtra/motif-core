@@ -468,7 +468,6 @@ export abstract class PublisherSubscriptionDataItem extends DataItem {
                             reasonExtra: errorText,
                         };
                         if (errorTypeId === AdiPublisherSubscription.ErrorTypeId.Offlined) {
-                            // eslint-disable-next-line max-len
                             if (this._publisherSubscriptionStateId !== PublisherSubscriptionDataItem.SubscriptionStateId.PublisherOfflining) {
                                 throw new AssertInternalError('PSDIPPSENOD1777723456', this.definition.description);
                             } else {

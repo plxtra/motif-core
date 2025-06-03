@@ -182,7 +182,6 @@ export namespace ZenithNotifyConvert {
         }
 
         export function to(value: ZenithProtocolCommon.UserMetadata): ScanMetadata {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             const versionNumberAsString = value['versionNumber'];
             const versionNumber = versionNumberAsString === undefined ? undefined : parseIntStrict(versionNumberAsString);
             const versionId = value['versionId'];
@@ -195,7 +194,6 @@ export namespace ZenithNotifyConvert {
             const zenithCriteriaSource = value['zenithCriteriaSource'];
             const zenithRankSource = value['zenithRankSource'];
             let lastSavedTime: Date | undefined;
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             if (lastSavedTimeAsString === undefined) {
                 lastSavedTime = undefined;
             } else {

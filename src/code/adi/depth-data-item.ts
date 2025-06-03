@@ -4,7 +4,6 @@ import {
     ComparisonResult,
     Integer,
     MultiEvent,
-    UnexpectedCaseError,
     UnreachableCaseError,
     earliestBinarySearch,
     isArrayEqualUniquely,
@@ -87,17 +86,10 @@ export class DepthDataItem extends MarketSubscriptionDataItem {
         } else {
             this.beginUpdate();
             try {
-                switch (msg.typeId) {
-                    case DataMessageTypeId.Depth:
-                        assert(msg instanceof DepthDataMessage, 'ID:43212081047');
-                        this.advisePublisherResponseUpdateReceived();
-                        this.notifyUpdateChange();
-                        this.processDepthMessage(msg as DepthDataMessage);
-                        break;
-
-                    default:
-                        throw new UnexpectedCaseError('DDIPM232984', `${msg.typeId as Integer}`);
-                }
+                assert(msg instanceof DepthDataMessage, 'ID:43212081047');
+                this.advisePublisherResponseUpdateReceived();
+                this.notifyUpdateChange();
+                this.processDepthMessage(msg as DepthDataMessage);
             } finally {
                 this.endUpdate();
             }
@@ -391,16 +383,16 @@ export class DepthDataItem extends MarketSubscriptionDataItem {
                         throw new ZenithDataError(ErrorCode.ZenithDepthMessage_CreateOrderDoesNotIncludeQuantity, JSON.stringify(msgOrder));
                     } else {
                         const msgOrderZenithMarketCode = msgOrder.zenithMarketCode;
-                        const marketZenithCode = msgOrderZenithMarketCode === undefined ? this.marketZenithCode : msgOrderZenithMarketCode;
+                        const marketZenithCode = msgOrderZenithMarketCode ?? this.marketZenithCode;
 
                         const newOrder: DepthDataItem.Order = {
                             orderId: msgOrder.id,
                             broker: msgOrder.broker,
                             crossRef: msgOrder.crossRef,
                             quantity,
-                            hasUndisclosed: msgOrder.hasUndisclosed === undefined ? false : msgOrder.hasUndisclosed,
+                            hasUndisclosed: msgOrder.hasUndisclosed ?? false,
                             marketZenithCode,
-                            attributes: msgOrder.attributes === undefined ? [] : msgOrder.attributes,
+                            attributes: msgOrder.attributes ?? [],
                             position,
                             price,
                             sideId,
@@ -754,7 +746,6 @@ export namespace DepthDataItem {
                 Xref,
                 Quantity,
                 HasUndisclosed,
-                // eslint-disable-next-line @typescript-eslint/no-shadow
                 Market,
                 Attributes,
             }

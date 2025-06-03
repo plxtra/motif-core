@@ -59,7 +59,7 @@ export class WatchmakerListDescriptorsDataItem extends KeyedCorrectnessSettableL
                         const descriptor = this.getRecordByMapKey(mapKey);
 
                         if (descriptor === undefined) {
-                            ErrorCodeLogger.logDataError('SDIPSDMUM10091', `${change.id}`);
+                            ErrorCodeLogger.logDataError('SDIPSDMUM10091', change.id);
                         } else {
                             descriptor.update(change);
                         }

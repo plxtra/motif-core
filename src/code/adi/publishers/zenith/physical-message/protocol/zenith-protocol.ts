@@ -37,7 +37,6 @@ export namespace ZenithProtocol {
         Topic: string;
         TransactionID?: Integer;
         Action: MessageContainer.Action;
-        // eslint-disable-next-line @typescript-eslint/ban-types
         Data?: object | string | string[] | null;
         Confirm?: boolean;
     }
@@ -73,7 +72,6 @@ export namespace ZenithProtocol {
     }
 
     export namespace ResponseUpdateMessageContainer {
-        // eslint-disable-next-line @typescript-eslint/ban-types
         export type Payload = object | undefined | null;
 
         // Note that Error type = undefined specifies 'NotAuthorised' Error.  This may be converted to an error code in the future

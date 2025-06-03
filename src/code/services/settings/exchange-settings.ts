@@ -82,7 +82,6 @@ export class ExchangeSettings {
         this._settingChangedEventer(ExchangeSettings.Id.SymbolNameFieldId);
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get symbolSearchFieldIds() { return this._symbolSearchFieldIds; }
     set symbolSearchFieldIds(value: readonly SymbolFieldId[]) {
         this._symbolSearchFieldIds = value;

@@ -456,6 +456,7 @@ export namespace ScanFormula {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     export abstract class SubFieldNode<MySubbedFieldId extends SubbedFieldId, SubFieldId> extends FieldBooleanNode {
         declare fieldId: MySubbedFieldId;
         subFieldId: SubFieldId;
@@ -835,7 +836,6 @@ export namespace ScanFormula {
         Leg,
         LotSize,
         LowPrice,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Market,
         // eslint-disable-next-line @typescript-eslint/no-shadow
         MarketBoard,
@@ -1547,7 +1547,6 @@ export namespace ScanFormula {
         export function initialise() {
             for (let i = 0; i < idCount; i++) {
                 const info = infos[i];
-                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 if (info.id !== i as AltCodeSubFieldId) {
                     throw new EnumInfoOutOfOrderError('ScanFormula.AltCodeSubFieldId', i, infos[i].name);
                 }
@@ -1641,7 +1640,6 @@ export namespace ScanFormula {
         export function initialise() {
             for (let i = 0; i < idCount; i++) {
                 const info = infos[i];
-                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 if (info.id !== i as AttributeSubFieldId) {
                     throw new EnumInfoOutOfOrderError('ScanFormula.AttributeSubFieldId', i, infos[i].name);
                 }

@@ -63,7 +63,6 @@ export namespace TableRecordSourceDefinition {
         EditableColumnLayoutDefinitionColumn,
         Scan,
         RankedDataIvemIdListDirectoryItem,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         GridField,
         ScanFieldEditorFrame,
         ScanEditorAttachedNotificationChannel,

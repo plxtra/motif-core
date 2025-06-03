@@ -37,7 +37,7 @@ export namespace DataSourceOrReference {
                     resolve(new Err(errorText));
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, 'DSORTCL35252'); }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'DSORTCL35252'); }
         )
 
         return resultPromise;

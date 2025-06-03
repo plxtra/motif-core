@@ -207,7 +207,6 @@ export namespace ScanStatusedDescriptor {
             FieldId.ZenithRankSource,
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export type Id = ScanStatusedDescriptor.FieldId;
         interface Info {
             readonly id: Id;

@@ -469,9 +469,7 @@ export class WatchmakerList implements LockOpenListItem<RankedDataIvemIdListDire
             const valueChange = valueChanges[i];
             const directoryItemFieldId = WatchmakerList.Field.idToDirectoryItemFieldId(valueChange.fieldId);
             if (directoryItemFieldId !== undefined) {
-                if (directoryItemFieldIds === undefined) {
-                    directoryItemFieldIds = new Array<RankedDataIvemIdListDirectoryItem.FieldId>(valueChangeCount);
-                }
+                directoryItemFieldIds ??= new Array<RankedDataIvemIdListDirectoryItem.FieldId>(valueChangeCount);
                 directoryItemFieldIds[directoryItemFieldIdCount++] = directoryItemFieldId;
             }
         }
@@ -568,8 +566,8 @@ export class WatchmakerList implements LockOpenListItem<RankedDataIvemIdListDire
                             this.processCreateOnServerResponse(dataItem);
                         } // else been cancelled so nothing to do
                     },
-                    (reason: string) => {
-                        throw new AssertInternalError('WLCONI23113', reason); // should never happen
+                    (reason: unknown) => {
+                        throw AssertInternalError.createIfNotError(reason, 'WLCONI23113'); // should never happen
                     }
                 )
             }

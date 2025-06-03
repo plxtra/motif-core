@@ -429,7 +429,7 @@ export class SettingsService implements SaveManagement {
                 const promise = this.saveMasterSettings();
                 promise.then(
                     () => {/**/},
-                    (e) => { throw AssertInternalError.createIfNotError(e, 'SSEMC21214') }
+                    (e: unknown) => { throw AssertInternalError.createIfNotError(e, 'SSEMC21214') }
                 );
                 this.notifyMasterChanged();
                 this._masterChanged = false;
@@ -466,7 +466,7 @@ export class SettingsService implements SaveManagement {
                     }
                     this.notifyEndSaveWaiting();
                 },
-                (reason) => {
+                (reason: unknown) => {
                     throw AssertInternalError.createIfNotError(reason, 'SSRS40498');
                 }
             );

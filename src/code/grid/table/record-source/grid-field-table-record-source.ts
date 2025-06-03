@@ -91,6 +91,7 @@ export class GridFieldTableRecordSource extends TableRecordSource {
             const fieldSourceDefinitionTypeId =
                 fieldSourceDefinition.typeId as GridFieldTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.GridField: {
                     const valueSource = new GridFieldTableValueSource(result.fieldCount, scan);
                     result.addSource(valueSource);

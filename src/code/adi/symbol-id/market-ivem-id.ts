@@ -118,7 +118,6 @@ export namespace MarketIvemId {
         environmentSpecified?: boolean; // If undefined, then: not specified
     }
 
-    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
     // export interface BaseJson {
     //     [name: string]: string;
     // }
@@ -403,7 +402,6 @@ export namespace MarketIvemId {
     // }
 
     export const enum FieldId {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         DataIvemId,
         Code,
         // eslint-disable-next-line @typescript-eslint/no-shadow

@@ -211,7 +211,7 @@ export class MarketsService {
                     }
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, 'MSS40114'); }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'MSS40114'); }
         );
         return resultPromise;
     }
@@ -244,6 +244,7 @@ export class MarketsService {
     //     return lookup[marketTypeId];
     // }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     getGenericUnknownMarket<T extends Market>(marketTypeId: Market.TypeId): T {
         return marketTypeId === Market.TypeId.Data ? this.genericUnknownDataMarket as unknown as T : this.genericUnknownTradingMarket as unknown as T;
     }
@@ -624,9 +625,7 @@ export class MarketsService {
     private getUnknownMarketBoard(zenithCode: string, market: DataMarket | undefined) {
         let result = this.unknownMarketBoards.findZenithCode(zenithCode);
         if (result === undefined) {
-            if (market === undefined) {
-                market = this.genericUnknownDataMarket;
-            }
+            market ??= this.genericUnknownDataMarket;
             result = MarketBoard.createUnknown(market, zenithCode);
             this.beginChange();
             this.unknownMarketBoards.binaryInsert(result);
@@ -1185,7 +1184,6 @@ export class MarketsService {
             }
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (defaultDefaultExchange === undefined) {
             // Default exchange was not explicity specified or could not be found.
             const defaultExchangeEnvironmentPriorityList = this._config.defaultExchangeEnvironmentPriorityList ?? MarketsConfig.defaultDefaultExchangeEnvironmentPriorityList;
@@ -1205,7 +1203,7 @@ export class MarketsService {
                     defaultDefaultExchange = newDefaultExchangeEnvironmentExchanges.find((exchange) => exchange.exchangeEnvironment.zenithCode === defaultExchangeEnvironmentZenithCode);
                     if (defaultDefaultExchange === undefined) {
                         // should always be found
-                        throw new AssertInternalError('MSCDDEHPLI41096', defaultExchangeEnvironmentZenithCode === null ? '<null>' : defaultExchangeEnvironmentZenithCode);
+                        throw new AssertInternalError('MSCDDEHPLI41096', defaultExchangeEnvironmentZenithCode ?? '<null>');
                     }
                 } else {
                     // None of the Data Environments were included in the defaultExchangeEnvironmentPriorityList
@@ -1230,7 +1228,6 @@ export class MarketsService {
                     }
                 }
             );
-
         }
 
         return defaultDefaultExchange;
@@ -1827,8 +1824,8 @@ export class MarketsService {
         return true;
     }
 
-    private generateMarketSymbologyExchangeSuffixCode<T extends Market>(
-        market: T,
+    private generateMarketSymbologyExchangeSuffixCode(
+        market: Market,
         configName: string | undefined,
         existingSymbologyExchangeSuffixCodeMap: MarketsService.SymbologyExchangeSuffixCodeMap.CodeMap,
     ): string {

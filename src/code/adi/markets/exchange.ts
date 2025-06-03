@@ -8,14 +8,14 @@ import {
     FieldDataTypeId
 } from "../../sys/internal-api";
 import { SymbolFieldId, unknownZenithCode, ZenithEnvironmentedValueParts } from '../common/internal-api';
-// eslint-disable-next-line import/no-cycle
-import { ExchangeEnvironment } from './exchange-environment';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { DataMarket } from './data-market';
-import { MarketsConfig } from './markets-config';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
+import { ExchangeEnvironment } from './exchange-environment';
+// eslint-disable-next-line import-x/no-cycle
 import { Market } from './market';
-// eslint-disable-next-line import/no-cycle
+import { MarketsConfig } from './markets-config';
+// eslint-disable-next-line import-x/no-cycle
 import { TradingMarket } from './trading-market';
 
 export class Exchange {
@@ -170,6 +170,7 @@ export class Exchange {
         return marketTypeId === Market.TypeId.Data ? this._dataMarkets as unknown as T[] : this._tradingMarkets as unknown as T[];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     getDefaultMarket<T extends Market>(marketTypeId: Market.TypeId): T | undefined {
         return marketTypeId === Market.TypeId.Data ? this._defaultLitMarket as unknown as (T | undefined) : this._defaultTradingMarket as unknown as (T | undefined);
     }

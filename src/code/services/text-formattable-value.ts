@@ -168,7 +168,6 @@ export namespace TextFormattableValue {
         MarketClassificationIdMyxDataIvemAttribute,
         DeliveryBasisIdMyxDataIvemAttribute,
         DayTradesDataItemRecordTypeId,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         ScanCriteriaTypeId,
         ScanTargetTypeId,
         ScanFieldBooleanOperationId,
@@ -203,7 +202,6 @@ export namespace TextFormattableValue {
             Correctness,
             HigherLower,
             BackgroundColor,
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             DepthRecord,
             DepthCountXRefField,
             DepthRecordInAuction,

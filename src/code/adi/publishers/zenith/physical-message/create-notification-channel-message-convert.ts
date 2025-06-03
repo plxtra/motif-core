@@ -66,7 +66,7 @@ export class CreateNotificationChannelMessageConvert extends MessageConvert {
         const settings = definition.settings;
         const parameters: ZenithProtocol.ChannelController.ChannelParameters = {
             Type: ZenithChannelConvert.DistributionMethodType.fromId(definition.distributionMethodId),
-            Settings: settings === undefined ? {} : settings,
+            Settings: settings ?? {},
         }
 
         const result: ZenithProtocol.ChannelController.CreateChannel.PublishMessageContainer = {

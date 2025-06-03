@@ -500,6 +500,7 @@ export namespace DayTradesDataItem {
 
     export namespace Field {
         export const enum Id {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             Id,
             Price,
             Quantity,
@@ -635,7 +636,7 @@ export namespace DayTradesDataItem {
             for (let i = 0; i < idCount; i++) {
                 const info = infos[i];
                 if (info.id !== i as Id) {
-                    throw new EnumInfoOutOfOrderError('DayTradeDataItem.Field.Id', i, `${idToName(i)}`);
+                    throw new EnumInfoOutOfOrderError('DayTradeDataItem.Field.Id', i, idToName(i));
                 } else {
                     allIds[i] = info.id;
                 }

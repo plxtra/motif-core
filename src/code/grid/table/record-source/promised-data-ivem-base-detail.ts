@@ -40,7 +40,7 @@ export class PromisedDataIvemBaseDetail implements DataIvemBaseDetail {
                     }
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, 'PLIBD10817'); }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'PLIBD10817'); }
         )
     }
 

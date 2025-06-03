@@ -43,6 +43,7 @@ export class ShortDepthRecord extends DepthRecord {
     get orderCount() { return this._level.orderCount; }
     get hasUndisclosed() { return this._level.hasUndisclosed; }
 
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     getVolume() { return this._level.volume === undefined ? 0 : this._level.volume; } // virtual override
     getRenderVolume() { return this._level.volume; } // virtual override
     acceptedByFilter(filterXrefs: string[]) { // virtual override

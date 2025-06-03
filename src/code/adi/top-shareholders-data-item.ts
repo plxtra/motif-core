@@ -1,6 +1,7 @@
 import {
     AssertInternalError,
     compareDate,
+    ComparisonResult,
     Integer,
     isSameDay,
     MultiEvent,
@@ -247,7 +248,7 @@ function getDatesForQueriesIgnored(
             ? definition.compareToTradingDate
             : undefined;
 
-    return defined(dateB) && compareDate(dateA, dateB) === -1
+    return defined(dateB) && compareDate(dateA, dateB) === ComparisonResult.LeftLessThanRight
         ? { dateA: dateB, dateB: dateA } // Swap dates so that dateA is always greater.
         : { dateA, dateB };
 }

@@ -337,7 +337,7 @@ export namespace HistorySequencer {
         const infos = Object.values(infosObject);
 
         export function initialise() {
-            const outOfOrderIdx = infos.findIndex((info, id) => info.id !== id);
+            const outOfOrderIdx = infos.findIndex((info, id) => info.id !== id as TypeId);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('HistorySequencer.TypeId', outOfOrderIdx, infos[outOfOrderIdx].jsonValue);
             }

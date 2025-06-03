@@ -42,9 +42,9 @@ export abstract class NullableDataItemTableField extends CorrectnessTableField {
     protected abstract compareNonNull(left: NullableCorrectnessTableValue, right: NullableCorrectnessTableValue): number;
 }
 
-// eslint-disable-next-line max-len
 export class GenericNullableDataItemTableField<
     DataType extends number | string,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     ValueClass extends GenericNullableCorrectnessTableValue<DataType>
 > extends NullableDataItemTableField {
     protected compareNonNull(left: NullableCorrectnessTableValue, right: NullableCorrectnessTableValue): number {
@@ -52,7 +52,6 @@ export class GenericNullableDataItemTableField<
     }
 }
 
-/* eslint-disable max-len */
 export class NullableStringDataItemTableField extends GenericNullableDataItemTableField<string, NullableStringCorrectnessTableValue> { }
 export class NullableIntegerDataItemTableField extends GenericNullableDataItemTableField<Integer, NullableIntegerCorrectnessTableValue> { }
 export class NullableNumberDataItemTableField extends GenericNullableDataItemTableField<number, NullableNumberCorrectnessTableValue> { }
@@ -81,7 +80,6 @@ export abstract class NullableBooleanDataItemTableField extends NullableDataItem
         return compareString(leftFormattedText, rightFormattedText);
     }
 }
-/* eslint-enable max-len */
 export abstract class NullableEnumDataItemTableField extends NullableDataItemTableField {
     protected compareNonNull(left: NullableCorrectnessTableValue, right: NullableCorrectnessTableValue): number {
         const leftTextFormattableValue = left.textFormattableValue;

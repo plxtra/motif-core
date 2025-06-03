@@ -267,7 +267,7 @@ export class SymbolsMessageConvert extends MessageConvert {
             ? undefined
             : ZenithConvert.SymbolConditionMatch.fromIds(condition.matchIds);
 
-        const group = condition.group === undefined ? '--Common%%' : condition.group;
+        const group = condition.group ?? '--Common%%';
 
         const result: ZenithProtocol.MarketController.SearchSymbols.Condition = {
             Field: field,
@@ -512,7 +512,7 @@ export class SymbolsMessageConvert extends MessageConvert {
                     break;
                 default: {
                     const entries = Object.entries(attributes);
-                    const result = new DataIvemAttributes(zenithExchangeCode);
+                    result = new DataIvemAttributes(zenithExchangeCode);
                     for (const [key, value] of entries) {
                         if (value !== undefined) {
                             result.addUnrecognised(key, value);

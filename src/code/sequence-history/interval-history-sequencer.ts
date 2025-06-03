@@ -303,7 +303,7 @@ export class IntervalHistorySequencer extends HistorySequencer {
                     }
                 } else {
                     const weekDay = date.getDay();
-                    switch (weekDay) {
+                    switch (weekDay as DayOfWeek) {
                         case DayOfWeek.Saturday:
                         case DayOfWeek.Sunday:
                             return undefined;
@@ -330,7 +330,7 @@ export class IntervalHistorySequencer extends HistorySequencer {
                                 intervalStart = addDays(firstDate, intervalStartNrDays);
                             }
 
-                            switch (intervalStart.getDay()) {
+                            switch (intervalStart.getDay() as DayOfWeek) {
                                 case DayOfWeek.Saturday:
                                 case DayOfWeek.Sunday:
                                     return addDays(intervalStart, 2);

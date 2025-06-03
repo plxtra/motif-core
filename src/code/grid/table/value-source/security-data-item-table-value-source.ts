@@ -72,7 +72,6 @@ export class SecurityDataItemTableValueSource extends TableValueSource {
             this.dataItemDefined = true;
             this.dataCorrectnessChangedEventSubscriptionId =
                 this.dataItem.subscribeCorrectnessChangedEvent(() => this.handleDataCorrectnessChangedEvent());
-            // eslint-disable-next-line max-len
             this.fieldValuesChangeEventSubscriptionId = this.dataItem.subscribeFieldValuesChangedEvent(
                 (changedFieldIds) => this.handleFieldValuesChangedEvent(changedFieldIds)
             );

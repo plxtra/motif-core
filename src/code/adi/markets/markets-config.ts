@@ -91,9 +91,7 @@ export namespace MarketsConfig {
                         return new JsonElementErr(productionExchangeEnvironmentStringResult.error, productionExchangeEnvironmentListPropertyName);
                     } else {
                         let productionExchangeEnvironmentList: readonly ExchangeEnvironmentZenithCode[] | undefined = productionExchangeEnvironmentStringResult.value;
-                        if (productionExchangeEnvironmentList === undefined) {
-                            productionExchangeEnvironmentList = defaultProductionExchangeEnvironmentList;
-                        }
+                        productionExchangeEnvironmentList ??= defaultProductionExchangeEnvironmentList;
                         const exchangeElementArrayResult = configElement.tryGetUndefinableElementArray(exchangesPropertyName);
                         if (exchangeElementArrayResult.isErr()) {
                             return new JsonElementErr(exchangeElementArrayResult.error, exchangesPropertyName);
@@ -225,9 +223,7 @@ export namespace MarketsConfig {
                                         return new Err(`${defaultSymbolNameFieldIdResult.error}: ${zenithCode}`);
                                     } else {
                                         let defaultSymbolNameFieldId = defaultSymbolNameFieldIdResult.value;
-                                        if (defaultSymbolNameFieldId === undefined) {
-                                            defaultSymbolNameFieldId = allowedSymbolNameFieldIds[0];
-                                        }
+                                        defaultSymbolNameFieldId ??= allowedSymbolNameFieldIds[0];
 
                                         const allowedSymbolSearchFieldIdsResult = tryGetUndefinableSymbolFieldIdArray(exchangeElement, allowedSymbolSearchFieldsPropertyName);
                                         if (allowedSymbolSearchFieldIdsResult.isErr()) {
@@ -243,9 +239,7 @@ export namespace MarketsConfig {
                                                 return new Err(`${defaultSymbolSearchFieldIdsResult.error}: ${zenithCode}`);
                                             } else {
                                                 let defaultSymbolSearchFieldIds: readonly SymbolFieldId[] | undefined = defaultSymbolSearchFieldIdsResult.value;
-                                                if (defaultSymbolSearchFieldIds === undefined) {
-                                                    defaultSymbolSearchFieldIds = allowedSymbolSearchFieldIds.slice(0, 2);
-                                                }
+                                                defaultSymbolSearchFieldIds ??= allowedSymbolSearchFieldIds.slice(0, 2);
 
                                                 const abbreviatedDisplayResult = tryParseLanguagedDisplay(exchangeElement, abbreviatedDisplayPropertyName);
                                                 if (abbreviatedDisplayResult.isErr()) {
@@ -448,7 +442,6 @@ export namespace MarketsConfig {
             // eslint-disable-next-line @typescript-eslint/no-shadow
             type PropertyName = keyof DataMarket;
 
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             const litPropertyName: PropertyName = 'lit';
             const boardsPropertyName: PropertyName = 'boards';
             const bestTradingMarketZenithCodePropertyName: PropertyName = 'bestTradingMarketZenithCode';
@@ -523,9 +516,7 @@ export namespace MarketsConfig {
             export namespace Board {
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 const zenithCodePropertyName = 'zenithCode';
-                // eslint-disable-next-line @typescript-eslint/no-shadow
                 const namePropertyName = 'name';
-                // eslint-disable-next-line @typescript-eslint/no-shadow
                 const displayPropertyName = 'display';
 
 
@@ -585,7 +576,6 @@ export namespace MarketsConfig {
             // eslint-disable-next-line @typescript-eslint/no-shadow
             type PropertyName = keyof TradingMarket;
 
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             const symbologicalCorrespondingDataMarketZenithCodePropertyName: PropertyName = 'symbologicalCorrespondingDataMarketZenithCode';
             const allowedOrderTypesPropertyName: PropertyName = 'allowedOrderTypes';
             const defaultOrderTypePropertyName: PropertyName = 'defaultOrderType';
@@ -623,9 +613,7 @@ export namespace MarketsConfig {
                                 return new Err(`${defaultOrderTypeIdResult.error}: ${zenithCode}`);
                             } else {
                                 let defaultOrderTypeId = defaultOrderTypeIdResult.value;
-                                if (defaultOrderTypeId === undefined) {
-                                    defaultOrderTypeId = allowedOrderTypeIds[0];
-                                }
+                                defaultOrderTypeId ??= allowedOrderTypeIds[0];
 
                                 const allowedOrderTimeInForceIdsResult = tryGetUndefinableTimeInForceIdArray(marketElement, allowedOrderTimeInForcesPropertyName);
                                 if (allowedOrderTimeInForceIdsResult.isErr()) {
@@ -641,9 +629,7 @@ export namespace MarketsConfig {
                                         return new Err(`${defaultOrderTimeInForceIdResult.error}: ${zenithCode}`);
                                     } else {
                                         let defaultOrderTimeInForceId = defaultOrderTimeInForceIdResult.value;
-                                        if (defaultOrderTimeInForceId === undefined) {
-                                            defaultOrderTimeInForceId = allowedOrderTimeInForceIds[0];
-                                        }
+                                        defaultOrderTimeInForceId ??= allowedOrderTimeInForceIds[0];
 
                                         const marketOrderTypeAllowedOrderTimeInForceIdsResult = tryGetUndefinableTimeInForceIdArray(marketElement, marketOrderTypeAllowedOrderTimeInForcesPropertyName);
                                         if (marketOrderTypeAllowedOrderTimeInForceIdsResult.isErr()) {
@@ -730,7 +716,7 @@ export namespace MarketsConfig {
 
                         const displayResult = tryParseLanguagedDisplay(exchangeEnvironmentElement, displayPropertyName);
                         if (displayResult.isErr()) {
-                            return displayResult.createType(zenithCode === null ? 'null' : zenithCode);
+                            return displayResult.createType(zenithCode ?? 'null');
                         } else {
                             const environment: ExchangeEnvironment = {
                                 zenithCode,

@@ -6,6 +6,7 @@ export class LocalStorageKeyValueStore implements KeyValueStore {
     public getItem(key: string, serviceOperator: string | undefined): Promise<Result<string | undefined>> {
         const resolvedKey = this.generateResolvedKey(key, serviceOperator);
         const item = window.localStorage.getItem(resolvedKey);
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         const value = (item === null)
             ? undefined
             : item;

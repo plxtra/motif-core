@@ -99,6 +99,7 @@ export class EditableColumnLayoutDefinitionColumnTableRecordSource extends Table
             const fieldSourceDefinition = fieldSource.definition;
             const fieldSourceDefinitionTypeId = fieldSourceDefinition.typeId as EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.EditableColumnLayoutDefinitionColumn: {
                     const valueSource = new EditableColumnLayoutDefinitionColumnTableValueSource(result.fieldCount, record);
                     result.addSource(valueSource);

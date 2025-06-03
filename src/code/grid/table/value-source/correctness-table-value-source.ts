@@ -3,6 +3,7 @@ import { Correctness, CorrectnessRecord } from '../../../sys/internal-api';
 import { TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export abstract class CorrectnessTableValueSource<Record extends CorrectnessRecord> extends TableValueSource {
     private _recordCorrectnessChangedEventSubscriptionId: MultiEvent.SubscriptionId;
 

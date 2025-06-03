@@ -76,7 +76,7 @@ export namespace TradingState {
         const infos = Object.values(infosObject);
 
         export function initialise() {
-            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index);
+            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index as Id);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('TradingState.AllowId', outOfOrderIdx, infos[outOfOrderIdx].name);
             }
@@ -135,7 +135,7 @@ export namespace TradingState {
         const infos = Object.values(infosObject);
 
         export function initialise() {
-            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index);
+            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index as Id);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('TradingStateReasonId', outOfOrderIdx, infos[outOfOrderIdx].name);
             }

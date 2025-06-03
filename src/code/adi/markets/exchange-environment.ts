@@ -8,15 +8,14 @@ import {
     FieldDataTypeId
 } from "../../sys/internal-api";
 import { ExchangeEnvironmentZenithCode } from '../common/internal-api';
-// eslint-disable-next-line import/no-cycle
-import { Exchange } from './exchange';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { DataMarket } from './data-market';
+// eslint-disable-next-line import-x/no-cycle
+import { Exchange } from './exchange';
 import { MarketsConfig } from './markets-config';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { TradingMarket } from './trading-market';
 import { ZenithCodedEnvironment } from './zenith-coded-environment';
-// eslint-disable-next-line import/no-cycle
 
 export class ExchangeEnvironment implements ZenithCodedEnvironment {
     readonly mapKey: string;

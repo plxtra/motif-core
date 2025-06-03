@@ -1261,12 +1261,12 @@ export class ScanFormulaZenithEncodingService {
     private tryDecodeNumericFieldInRangeNode(fieldId: ScanFormula.NumericRangeFieldId, min: unknown, max: unknown): Result<ScanFormula.NumericFieldInRangeNode, ScanFormulaZenithEncodingService.DecodeError> {
         const minUndefined = min === undefined;
         if (!minUndefined && typeof min !== 'number') {
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
             return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinIsDefinedButNotNumber, `${min}`);
         } else {
             const maxUndefined = max === undefined;
             if (!maxUndefined && typeof max !== 'number') {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMaxIsDefinedButNotNumber, `${max}`);
             } else {
                 if (minUndefined && maxUndefined) {
@@ -1305,7 +1305,7 @@ export class ScanFormulaZenithEncodingService {
             minDate = undefined;
         } else {
             if (typeof min !== 'string') {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinIsDefinedButNotString, `${min}`);
             } else {
                 minDate = ScanFormulaZenithEncodingService.DateValue.tryDecodeDate(min);
@@ -1320,7 +1320,7 @@ export class ScanFormulaZenithEncodingService {
             maxDate = undefined;
         } else {
             if (typeof max !== 'string') {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMaxIsDefinedButNotString, `${max}`);
             } else {
                 maxDate = ScanFormulaZenithEncodingService.DateValue.tryDecodeDate(max);
@@ -1383,6 +1383,7 @@ export class ScanFormulaZenithEncodingService {
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.TargetIsNotNumber, `${param2}`);
             } else {
                 switch (fieldId) {
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     case ScanFormula.FieldId.PriceSubbed: return this.tryDecodePriceSubFieldEqualsNode(subField, param2);
                     default:
                         throw new UnreachableCaseError('ZSTDNRSFEN10008', fieldId);
@@ -1409,6 +1410,7 @@ export class ScanFormulaZenithEncodingService {
                     return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.TargetHasInvalidDateFormat, param2);
                 } else {
                     switch (fieldId) {
+                        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                         case ScanFormula.FieldId.DateSubbed: return this.tryDecodeDateSubFieldEqualsNode(subField, targetAsDate);
                         default:
                             throw new UnreachableCaseError('ZSCCTTSFEOCN10008', fieldId);
@@ -1465,18 +1467,19 @@ export class ScanFormulaZenithEncodingService {
         } else {
             const minUndefined = min === undefined;
             if (!minUndefined && typeof min !== 'number') {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinIsDefinedButNotNumber, `${min}`);
             } else {
                 const maxUndefined = max === undefined;
                 if (!maxUndefined && typeof max !== 'number') {
-                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                     return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMaxIsDefinedButNotNumber, `${max}`);
                 } else {
                     if (minUndefined && maxUndefined) {
                         return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinAndMaxAreBothUndefined, undefined);
                     } else {
                         switch (fieldId) {
+                            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                             case ScanFormula.FieldId.PriceSubbed: return this.tryDecodePriceSubFieldInRangeNode(subField, min, max);
                             default:
                                 throw new UnreachableCaseError('SFZETDNSFIRN43210', fieldId);
@@ -1529,7 +1532,7 @@ export class ScanFormulaZenithEncodingService {
                 minDate = undefined;
             } else {
                 if (typeof min !== 'string') {
-                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                     return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinIsDefinedButNotString, `${min}`);
                 } else {
                     minDate = ScanFormulaZenithEncodingService.DateValue.tryDecodeDate(min);
@@ -1544,7 +1547,7 @@ export class ScanFormulaZenithEncodingService {
                 maxDate = undefined;
             } else {
                 if (typeof max !== 'string') {
-                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                     return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMaxIsDefinedButNotString, `${max}`);
                 } else {
                     maxDate = ScanFormulaZenithEncodingService.DateValue.tryDecodeDate(max);
@@ -1558,6 +1561,7 @@ export class ScanFormulaZenithEncodingService {
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.RangeMinAndMaxAreBothUndefined, undefined);
             } else {
                 switch (fieldId) {
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     case ScanFormula.FieldId.DateSubbed: return this.tryDecodeDateSubFieldInRangeNode(subField, minDate, maxDate);
                     default:
                         throw new UnreachableCaseError('SFZETDNSFIRN43210', fieldId);
@@ -1833,13 +1837,13 @@ export class ScanFormulaZenithEncodingService {
     ): Result<ScanFormula.NumericIfNode, ScanFormulaZenithEncodingService.DecodeError> {
         const tupleLength = tupleNode.length;
         if (tupleLength < 5) {
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
             return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.IfTupleNodeRequiresAtLeast4Parameters, `${tupleNode}`);
         } else {
             const armParameters = tupleLength - 1;
             const armsRemainder = armParameters % 2;
             if (armsRemainder !== 0) {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                 return ScanFormulaZenithEncodingService.createDecodeErrorResult(ScanFormulaZenithEncodingService.ErrorId.IfTupleNodeRequiresAnEvenNumberOfParameters, `${tupleNode}`);
             } else {
                 const armCount = armParameters / 2;
@@ -1989,7 +1993,7 @@ export namespace ScanFormulaZenithEncodingService {
                     resolvedAsId = ScanFormula.TextContainsAsId.None;
                 } else {
                     if (typeof as !== 'string') {
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                         return createDecodeErrorResult(ErrorId.TextFieldContainsAsIsNotString, `${as}`);
                     } else {
                         const asId = TextContainsAs.tryDecodeId(as as ZenithEncodedScanFormula.TextContainsAsEnum);
@@ -2006,7 +2010,7 @@ export namespace ScanFormulaZenithEncodingService {
                     resolvedIgnoreCase = false;
                 } else {
                     if (typeof ignoreCase !== 'boolean') {
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-base-to-string
                         return createDecodeErrorResult(ErrorId.TextFieldContainsAsIsNotBoolean, `${ignoreCase}`);
                     } else {
                         resolvedIgnoreCase = ignoreCase;
@@ -2146,6 +2150,7 @@ export namespace ScanFormulaZenithEncodingService {
 
         function tryDateFromId(value: ScanFormula.DateRangeFieldId): ZenithEncodedScanFormula.DateRangeFieldTupleNodeType | undefined {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case ScanFormula.FieldId.ExpiryDate: return ZenithEncodedScanFormula.ExpiryDateTupleNodeType;
                 default: {
                     const neverValueIgnored: never = value;
@@ -2301,6 +2306,7 @@ export namespace ScanFormulaZenithEncodingService {
         export namespace Category {
             export function idToDefaultTrueFalse(categoryId: ScanFormula.IsNode.CategoryId) {
                 switch (categoryId) {
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     case ScanFormula.IsNode.CategoryId.Index: return ZenithEncodedScanFormula.SingleDefault_IsIndex;
                     default:
                         throw new UnreachableCaseError('SFZEICITD69312', categoryId);
@@ -2309,6 +2315,7 @@ export namespace ScanFormulaZenithEncodingService {
 
             export function idToTupleNodeType(categoryId: ScanFormula.IsNode.CategoryId): ZenithEncodedScanFormula.BooleanSingleFieldTupleNodeType {
                 switch (categoryId) {
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     case ScanFormula.IsNode.CategoryId.Index: return ZenithEncodedScanFormula.IsIndexTupleNodeType;
                     default:
                         throw new UnreachableCaseError('SFZEEIN50502', categoryId);
@@ -2317,6 +2324,7 @@ export namespace ScanFormulaZenithEncodingService {
 
             export function tryTupleNodeTypeToId(tupleNodeType: ZenithEncodedScanFormula.BooleanSingleFieldTupleNodeType): ScanFormula.IsNode.CategoryId | undefined {
                 switch (tupleNodeType) {
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     case ZenithEncodedScanFormula.IsIndexTupleNodeType: return ScanFormula.IsNode.CategoryId.Index;
                     default: {
                         const ignoredValue: never = tupleNodeType;
@@ -2339,6 +2347,7 @@ export namespace ScanFormulaZenithEncodingService {
 
         export function tryDecodeId(value: ZenithEncodedScanFormula.PriceSubFieldEnum): ScanFormula.PriceSubFieldId | undefined {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case ZenithEncodedScanFormula.PriceSubFieldEnum.LastPrice: return ScanFormula.PriceSubFieldId.Last;
                 default: {
                     const neverValueIgnored: never = value;
@@ -2349,6 +2358,7 @@ export namespace ScanFormulaZenithEncodingService {
 
         export function encodeId(value: ScanFormula.PriceSubFieldId): ZenithEncodedScanFormula.PriceSubFieldEnum {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case ScanFormula.PriceSubFieldId.Last: return ZenithEncodedScanFormula.PriceSubFieldEnum.LastPrice;
                 default:
                     throw new UnreachableCaseError('ZSCCPSFFI16179', value);
@@ -2368,6 +2378,7 @@ export namespace ScanFormulaZenithEncodingService {
 
         export function tryDecodeId(value: ZenithEncodedScanFormula.DateSubFieldEnum): ScanFormula.DateSubFieldId | undefined {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case ZenithEncodedScanFormula.DateSubFieldEnum.Dividend: return ScanFormula.DateSubFieldId.Dividend;
                 default: {
                     const neverValueIgnored: never = value;
@@ -2378,6 +2389,7 @@ export namespace ScanFormulaZenithEncodingService {
 
         export function encodeId(value: ScanFormula.DateSubFieldId): ZenithEncodedScanFormula.DateSubFieldEnum {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case ScanFormula.DateSubFieldId.Dividend: return ZenithEncodedScanFormula.DateSubFieldEnum.Dividend;
                 default:
                     throw new UnreachableCaseError('ZSCCDSFFI16179', value);

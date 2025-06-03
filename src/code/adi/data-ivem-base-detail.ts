@@ -32,9 +32,9 @@ export namespace DataIvemBaseDetail {
 
     export namespace Field {
         export const enum Id {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             Id,
             Code,
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             Market,
             // eslint-disable-next-line @typescript-eslint/no-shadow
             IvemClassId,

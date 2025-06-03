@@ -25,9 +25,7 @@ export abstract class BrokerageAccountGroup {
     get display(): string { return this.getDisplay(); }
     get upperDisplay(): string {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (this._upperDisplay === undefined) {
-            this._upperDisplay = this.display.toUpperCase();
-        }
+        this._upperDisplay ??= this.display.toUpperCase();
         return this._upperDisplay;
     }
 

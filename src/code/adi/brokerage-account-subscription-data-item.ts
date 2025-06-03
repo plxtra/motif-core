@@ -238,6 +238,7 @@ export class BrokerageAccountSubscriptionDataItem extends SubscribabilityExtentS
     }
 
     private updateSubscribabilityExtent() {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (this._account === undefined || !this._account.usable) {
             this.setSubscribabilityExtent(SubscribabilityExtentId.None);
         } else {

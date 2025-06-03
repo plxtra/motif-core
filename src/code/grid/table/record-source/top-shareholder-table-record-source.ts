@@ -95,6 +95,7 @@ export class TopShareholderTableRecordSource extends SingleDataItemTableRecordSo
             const fieldSourceDefinitionTypeId =
                 fieldSourceDefinition.typeId as TopShareholderTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.TopShareholder: {
                     const valueSource = new TopShareholderTableValueSource(result.fieldCount, topShareholder, this._dataItem);
                     result.addSource(valueSource);

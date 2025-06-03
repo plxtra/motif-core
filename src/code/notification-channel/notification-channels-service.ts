@@ -264,7 +264,7 @@ export class NotificationChannelsService {
                         this._getSupportedDistributionMethodIdsResolves.forEach((resolve) => resolve(result));
                     }
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'NCSRSDMR50971'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'NCSRSDMR50971'); }
             )
         }
     }
@@ -296,7 +296,7 @@ export class NotificationChannelsService {
                         this._queryNotificationChannelsResolves.length = 0;
                     }
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
             )
         }
     }
@@ -363,7 +363,7 @@ export class NotificationChannelsService {
                                             this.checkOpenAndResolveQueryNotificationChannelIncubator(channelList, opener, idIncubator, channel);
                                         }
                                     },
-                                    (reason) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDLR50971')}
+                                    (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDLR50971')}
                                 )
                             } else {
                                 this.checkOpenAndResolveQueryNotificationChannelIncubator(channelList, opener, idIncubator, channel);
@@ -371,7 +371,7 @@ export class NotificationChannelsService {
                         }
                     }
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
             )
             return idIncubator;
         }
@@ -460,7 +460,7 @@ export class NotificationChannelsService {
                         }
                     }
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'NCSRCDR50971'); }
             )
             return idIncubator;
         }

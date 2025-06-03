@@ -47,7 +47,7 @@ export namespace InstrumentMovementColorSet {
     const infos = Object.values(infoObjects);
 
     export function staticConstructor() {
-        const outOfOrderIdx = infos.findIndex((info: Info, index: number) => info.id !== index);
+        const outOfOrderIdx = infos.findIndex((info: Info, index: number) => info.id !== index as InstrumentMovementColorSetId);
         if (outOfOrderIdx >= 0) {
             throw new EnumInfoOutOfOrderError('ColorScheme.Id', outOfOrderIdx, infos[outOfOrderIdx].jsonValue);
         }

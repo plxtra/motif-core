@@ -239,7 +239,6 @@ export namespace BrokerageAccount {
         EnvironmentZenithCode,
         Name,
         Currency,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         BrokerCode,
         BranchCode,
         AdvisorCode,

@@ -1,19 +1,14 @@
 import { EnumInfoOutOfOrderError } from '@pbkware/js-utils';
 
 export const enum FieldDataTypeId {
-    // eslint-disable-next-line id-blacklist
     String,
     StringArray,
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     Integer,
-    // eslint-disable-next-line id-blacklist
     Number,
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     Decimal,
     DecimalOrDouble,
     Date,
     DateTime,
-    // eslint-disable-next-line id-blacklist
     Boolean,
     Enumeration,
     EnumerationArray,
@@ -33,7 +28,6 @@ export namespace FieldDataType {
     type InfosObject = { [id in keyof typeof FieldDataTypeId]: Info };
 
     const infosObject: InfosObject = {
-        // eslint-disable-next-line id-blacklist
         String: {
             id: FieldDataTypeId.String,
             name: 'String',
@@ -52,7 +46,6 @@ export namespace FieldDataType {
             isNumber: true,
             isFloat: false,
         },
-        // eslint-disable-next-line id-blacklist
         Number: {
             id: FieldDataTypeId.Number,
             name: 'Double',
@@ -83,7 +76,6 @@ export namespace FieldDataType {
             isNumber: false,
             isFloat: false,
         },
-        // eslint-disable-next-line id-blacklist
         Boolean: {
             id: FieldDataTypeId.Boolean,
             name: 'Boolean',
@@ -121,8 +113,8 @@ export namespace FieldDataType {
 
     export function initialise() {
         for (let id = 0; id < FieldDataType.idCount; id++) {
-            if (id !== infos[id].id) {
-                throw new EnumInfoOutOfOrderError('FieldDataTypeId', id, `${infos[id].name}`);
+            if (id as FieldDataType.Id !== infos[id].id) {
+                throw new EnumInfoOutOfOrderError('FieldDataTypeId', id, infos[id].name);
             }
         }
     }

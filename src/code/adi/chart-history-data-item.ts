@@ -106,10 +106,10 @@ export class ChartHistoryDataItem extends PublisherSubscriptionDataItem {
         } else {
             const close = msgRecord.close;
 
-            const open = msgRecord.open !== undefined ? msgRecord.open : close;
-            const high = msgRecord.high ? msgRecord.high : close;
-            const low = msgRecord.low ? msgRecord.low : close;
-            const volume = msgRecord.volume ? msgRecord.volume : 0;
+            const open = msgRecord.open ?? close;
+            const high = msgRecord.high ?? close;
+            const low = msgRecord.low ?? close;
+            const volume = msgRecord.volume ?? 0;
 
             const record: ChartHistoryDataItem.Record = {
                 dateTime: msgRecord.dateTime,

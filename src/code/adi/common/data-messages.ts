@@ -163,7 +163,6 @@ export class BrokerageAccountsDataMessage extends DataMessage {
 }
 
 export namespace BrokerageAccountsDataMessage {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     export interface Account {
         // id: BrokerageAccountId;
         zenithCode: string;
@@ -1368,7 +1367,6 @@ export abstract class ErrorPublisherSubscriptionDataMessage extends PublisherDat
     get requestSent() { return this._requestSent; }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_Internal extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, errorText: string) {
         super(dataItemId, broadcastDataItemRequestNr,
@@ -1378,7 +1376,6 @@ export class ErrorPublisherSubscriptionDataMessage_Internal extends ErrorPublish
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_RequestTimeout extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
     ) {
@@ -1389,7 +1386,6 @@ export class ErrorPublisherSubscriptionDataMessage_RequestTimeout extends ErrorP
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_Offlined extends ErrorPublisherSubscriptionDataMessage {
 
     constructor(dataItemId: DataItemId, errorText: string, requestSent: boolean) {
@@ -1409,7 +1405,6 @@ export class ErrorPublisherSubscriptionDataMessage_SubscriptionError extends Err
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_PublishRequestError extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
         allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId
@@ -1423,9 +1418,7 @@ export class ErrorPublisherSubscriptionDataMessage_PublishRequestError extends E
 export namespace ErrorPublisherSubscriptionDataMessage_PublishRequestError {
     export function createFromAdiPublisherSubscription(subscription: AdiPublisherSubscription, allowedRetryTypeId?: AdiPublisherSubscription.AllowedRetryTypeId) {
         const errorText = AdiPublisherSubscription.generatePublishErrorText(subscription);
-        if (allowedRetryTypeId === undefined) {
-            allowedRetryTypeId = AdiPublisherSubscription.generateAllowedRetryTypeId(subscription);
-        }
+        allowedRetryTypeId ??= AdiPublisherSubscription.generateAllowedRetryTypeId(subscription);
         const errorMessage = new ErrorPublisherSubscriptionDataMessage_PublishRequestError(
             subscription.dataItemId,
             subscription.dataItemRequestNr,
@@ -1455,7 +1448,6 @@ export namespace ErrorPublisherSubscriptionDataMessage_InvalidRequest {
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_SubcriptionWarning extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
         allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId
@@ -1475,7 +1467,6 @@ export class ErrorPublisherSubscriptionDataMessage_DataNotAvailable extends Erro
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export class ErrorPublisherSubscriptionDataMessage_DataError extends ErrorPublisherSubscriptionDataMessage {
     constructor(dataItemId: DataItemId, dataItemRequestNr: Integer, errorText: string,
         allowedRetryTypeId: AdiPublisherSubscription.AllowedRetryTypeId

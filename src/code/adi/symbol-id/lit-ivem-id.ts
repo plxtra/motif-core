@@ -99,7 +99,6 @@ export namespace DataIvemId {
 
     export const enum JsonName {
         Code = 'code',
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Market = 'market', // Market ZenithCode
         EnvironmentSpecified = 'environmentSpecified', // Whether the Market ZenithCode specifies the exchange.  Required as Zenith codes without an explicit exchange environment can still implicitly specify production exchange environment
     }
@@ -110,7 +109,6 @@ export namespace DataIvemId {
         environmentSpecified?: boolean; // If undefined, then: not specified
     }
 
-    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
     // export interface BaseJson {
     //     [name: string]: string;
     // }
@@ -389,7 +387,6 @@ export namespace DataIvemId {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         DataIvemId,
         Code,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Market,
         Environment,
     }

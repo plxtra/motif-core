@@ -115,7 +115,7 @@ export abstract class LockOpenList<Item extends (LockOpenListItem<Item, Error> &
                 (lockResult) => {
                     resolve(lockResult);
                 },
-                (reason) => { throw AssertInternalError.createIfNotError(reason, 'LOLTLIBK64164'); }
+                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'LOLTLIBK64164'); }
             );
             return resultPromise;
         }
@@ -138,7 +138,7 @@ export abstract class LockOpenList<Item extends (LockOpenListItem<Item, Error> &
                     resolve(lockResult.createType());
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, 'LOLTLIAI64164'); }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'LOLTLIAI64164'); }
         );
 
         return resultPromise;

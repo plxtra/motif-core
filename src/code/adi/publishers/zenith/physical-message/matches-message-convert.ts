@@ -159,9 +159,7 @@ export class MatchesMessageConvert extends MessageConvert {
                     throw new ZenithDataError(ErrorCode.ZenithMessageConvert_Matches_AddUpdateMissingKey, JSON.stringify(addUpdateValue));
                 } else {
                     let rankScore = addUpdateValue.Rank;
-                    if (rankScore === undefined) {
-                        rankScore = 0;
-                    }
+                    rankScore ??= 0;
                     const change: DataIvemIdMatchesDataMessage.AddUpdateChange = {
                         typeId: changeTypeId,
                         key,

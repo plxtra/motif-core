@@ -3271,7 +3271,7 @@ export namespace ZenithConvert {
                 // marketId,
                 marketZenithCode: tradeData.Market,
                 relatedId: tradeData.RelatedID,
-                attributes: tradeData.Attributes === undefined ? [] : tradeData.Attributes,
+                attributes: tradeData.Attributes ?? [],
                 buyDepthOrderId: tradeData.Buy,
                 sellDepthOrderId: tradeData.Sell,
             } as const;
@@ -3301,7 +3301,7 @@ export namespace ZenithConvert {
                 // marketId,
                 marketZenithCode: tradeData.Market,
                 relatedId: tradeData.RelatedID,
-                attributes: tradeData.Attributes === undefined ? [] : tradeData.Attributes,
+                attributes: tradeData.Attributes ?? [],
                 buyDepthOrderId: tradeData.Buy,
                 sellDepthOrderId: tradeData.Sell,
             } as const;
@@ -3664,6 +3664,7 @@ export namespace ZenithConvert {
     export namespace OrderRequestFlag {
         export function fromId(value: OrderRequestFlagId): ZenithProtocol.TradingController.OrderRequestFlag {
             switch (value) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case OrderRequestFlagId.Pds: return ZenithProtocol.TradingController.OrderRequestFlag.Pds;
                 default: throw new UnreachableCaseError('ZCORFFI38885', value);
             }

@@ -117,7 +117,7 @@ export class BrokerageAccountIncubator {
                         }
                         this.checkResolve(result);
                     },
-                    (reason) => {
+                    (reason: unknown) => {
                         const errorText = getErrorMessage(reason);
                         this.checkReject(errorText);
                     }

@@ -258,6 +258,7 @@ export class SymbolsService {
             // move to extension
             switch (calculatedParseMode.id) {
                 // case SymbolsManager.ParseModeId.Ric: return this.parseRicDataIvemId(calculatedParseMode.parseText);
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case SymbolsService.ParseModeId.BuiltInSymbology: return this.builtinSymbologyParseMarketIvemId(
                     this._dataMarkets,
                     this._defaultExchangeEnvironmentDataMarkets,
@@ -278,6 +279,7 @@ export class SymbolsService {
             // move to extension
             switch (calculatedParseMode.id) {
                 // case SymbolsManager.ParseModeId.Ric: return this.parseRicDataIvemId(calculatedParseMode.parseText);
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case SymbolsService.ParseModeId.BuiltInSymbology: return this.builtinSymbologyParseMarketIvemId(
                     this._tradingMarkets,
                     this._defaultExchangeEnvironmentTradingMarkets,
@@ -303,6 +305,7 @@ export class SymbolsService {
             // move to extension
             switch (calculatedParseMode.id) {
                 // case SymbolsManager.ParseModeId.Ric: return this.parseRicDataIvemId(calculatedParseMode.parseText);
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case SymbolsService.ParseModeId.BuiltInSymbology: return this.builtinSymbologyParseMarketIvemId(
                     allMarkets,
                     defaultEnvironmentMarkets,
@@ -323,6 +326,7 @@ export class SymbolsService {
         } else {
             switch (calcululatedParseMode.id) {
                 // case SymbolsManager.ParseModeId.Ric: return this.parseRicIvemId(calcululatedParseMode.parseText);
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case SymbolsService.ParseModeId.BuiltInSymbology: return this.parsePscIvemId(calcululatedParseMode.parseText, this._zenithSymbologySupportLevelId);
                 default: throw new UnreachableCaseError('', calcululatedParseMode.id);
             }
@@ -552,9 +556,7 @@ export class SymbolsService {
                     default:
                         result = detailName;
                 }
-                if (result === undefined) {
-                    result = detailName;
-                }
+                result ??= detailName;
                 return result;
             }
         }
@@ -1348,6 +1350,7 @@ export class SymbolsService {
                     switch (this._defaultParseModeId) {
                         // case SymbolsManager.ParseModeId.Ric:
                         //     return SymbolsManager.CalculatedParseModeId.createValid(SymbolsManager.ParseModeId.Ric, value);
+                        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                         case SymbolsService.ParseModeId.BuiltInSymbology:
                             return SymbolsService.CalculatedParseModeId.createValid(SymbolsService.ParseModeId.BuiltInSymbology, value);
                         default:
@@ -1490,6 +1493,7 @@ export class SymbolsService {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     private findExchangeMarketWithExchangeSuffixCode<T extends Market>(marketTypeId: Market.TypeId, exchange: Exchange, suffixCode: string): T | undefined {
         const exchangeMarkets = exchange.getMarkets<T>(marketTypeId);
         const exchangeMarketCount = exchangeMarkets.length;

@@ -438,9 +438,7 @@ export class Scan implements LockOpenListItem<RankedDataIvemIdListDirectoryItem>
             const valueChange = valueChanges[i];
             const directoryItemFieldId = Scan.Field.idToDirectoryItemFieldId(valueChange.fieldId);
             if (directoryItemFieldId !== undefined) {
-                if (directoryItemFieldIds === undefined) {
-                    directoryItemFieldIds = new Array<RankedDataIvemIdListDirectoryItem.FieldId>(valueChangeCount);
-                }
+                directoryItemFieldIds ??= new Array<RankedDataIvemIdListDirectoryItem.FieldId>(valueChangeCount);
                 directoryItemFieldIds[directoryItemFieldIdCount++] = directoryItemFieldId;
             }
         }
@@ -544,7 +542,7 @@ export class Scan implements LockOpenListItem<RankedDataIvemIdListDirectoryItem>
                                 }
                             }
                         },
-                        (reason) => { throw AssertInternalError.createIfNotError(reason, 'SWDP40145', dataDefinition.scanId); }
+                        (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'SWDP40145', dataDefinition.scanId); }
                     )
                 }
             }

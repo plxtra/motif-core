@@ -9,6 +9,7 @@ export namespace ZenithMarketPtxConvert {
 
                 for (const [key, value] of Object.entries(alternates)) {
                     switch (key as keyof ZenithMarketPtx.MarketController.Symbols.Alternates) {
+                        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                         case ZenithProtocolCommon.Symbol.KnownAlternateKey.UID: {
                             // result.uid = value; // not currently used
                             break;

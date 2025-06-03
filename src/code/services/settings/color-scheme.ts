@@ -11,15 +11,11 @@ export class ColorScheme {
 
     resolve(itemId: ColorScheme.ItemId): ColorScheme.ResolvedItem {
         let bkgdResolver = ColorScheme.Item.idToBkgdResolver(itemId);
-        if (bkgdResolver === undefined) {
-            bkgdResolver = ColorScheme.resolveBkgdColor_Unexpected;
-        }
+        bkgdResolver ??= ColorScheme.resolveBkgdColor_Unexpected;
         const bkgd = bkgdResolver(this.items);
 
         let foreResolver = ColorScheme.Item.idToForeResolver(itemId);
-        if (foreResolver === undefined) {
-            foreResolver = ColorScheme.resolveForeColor_Unexpected;
-        }
+        foreResolver ??= ColorScheme.resolveForeColor_Unexpected;
         const fore = foreResolver(this.items);
 
         return {

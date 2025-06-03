@@ -57,9 +57,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
         let dataMessages = super.exercise(nowTickTime);
 
         if (this._physicalMessages.length > 0) {
-            if (dataMessages === undefined) {
-                dataMessages = new DataMessages();
-            }
+            dataMessages ??= new DataMessages();
             try {
                 for (let c1 = 0; c1 < this._physicalMessages.length; c1++) {
                     const msg = this._physicalMessages[c1];
@@ -361,9 +359,7 @@ export class ZenithPublisherSubscriptionManager extends AdiPublisherSubscription
                                 const parsedErrortexts = this.checkGetResponseUpdateMessageErrorTexts(parsedMessage.Data);
                                 let texts = parsedErrortexts?.texts;
 
-                                if (texts === undefined) {
-                                    texts = [Strings[StringId.BadnessReasonId_PublisherServerWarning]];
-                                }
+                                texts ??= [Strings[StringId.BadnessReasonId_PublisherServerWarning]];
 
                                 const subscription = errorActionSubscription.subscription;
                                 subscription.errorWarningCount++;

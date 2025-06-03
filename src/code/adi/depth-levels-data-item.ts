@@ -1,8 +1,7 @@
 import {
     Integer,
     MultiEvent,
-    UnexpectedCaseError,
-    UnreachableCaseError,
+    UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
 import {
@@ -74,25 +73,15 @@ export class DepthLevelsDataItem extends MarketSubscriptionDataItem {
         } else {
             this.beginUpdate();
             try {
-                switch (msg.typeId) {
-                    case DataMessageTypeId.DepthLevels:
-                        assert(
-                            msg instanceof DepthLevelsDataMessage,
-                            'ID:48723101902'
-                        );
-                        this.advisePublisherResponseUpdateReceived();
-                        this.notifyUpdateChange();
-                        this.processLevelsMessage(
-                            msg as DepthLevelsDataMessage
-                        );
-                        break;
-
-                    default:
-                        throw new UnexpectedCaseError(
-                            'DDIPM232984',
-                            `${msg.typeId as Integer}`
-                        );
-                }
+                assert(
+                    msg instanceof DepthLevelsDataMessage,
+                    'ID:48723101902'
+                );
+                this.advisePublisherResponseUpdateReceived();
+                this.notifyUpdateChange();
+                this.processLevelsMessage(
+                    msg as DepthLevelsDataMessage
+                );
             } finally {
                 this.endUpdate();
             }
@@ -372,9 +361,7 @@ export class DepthLevelsDataItem extends MarketSubscriptionDataItem {
         let L = 0;
         let H = levels.length - 1;
         while (L <= H) {
-            /* eslint-disable no-bitwise */
             const mid = L + ((H - L) >> 1);
-            /* eslint-enable no-bitwise */
             const cmp = comparePriceOrRemainder(
                 levels[mid].price,
                 price,
@@ -446,6 +433,7 @@ export class DepthLevelsDataItem extends MarketSubscriptionDataItem {
                             volume: msgLevel.volume,
                             marketZenithCode: msgLevel.marketZenithCode,
                             hasUndisclosed:
+                                // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
                                 msgLevel.hasUndisclosed === undefined
                                     ? false
                                     : msgLevel.hasUndisclosed,
@@ -499,6 +487,7 @@ export class DepthLevelsDataItem extends MarketSubscriptionDataItem {
                     };
                 }
                 const newHasUndisclosed =
+                    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
                     msgLevel.hasUndisclosed === undefined
                         ? false
                         : msgLevel.hasUndisclosed;
@@ -591,13 +580,13 @@ export namespace DepthLevelsDataItem {
     export namespace Level {
         export namespace Field {
             export const enum Id {
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 Id,
                 SideId,
                 Price,
                 OrderCount,
                 Volume,
                 HasUndisclosed,
-                // eslint-disable-next-line @typescript-eslint/no-shadow
                 Market,
             }
 

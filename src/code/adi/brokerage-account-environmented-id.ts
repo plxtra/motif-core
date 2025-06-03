@@ -41,7 +41,6 @@ export namespace BrokerageAccountEnvironmentedId {
             display,
         };
     }
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     export function isEqual(left: BrokerageAccountEnvironmentedId, right: BrokerageAccountEnvironmentedId) {
         return left.code === right.code && left.environment === right.environment;
     }

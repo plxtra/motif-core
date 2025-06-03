@@ -220,7 +220,7 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
                     resolveFtn([]);
                 } else {
                     let allAreUndefined = marketArrays[0] === undefined;
-                    let allMarkets = marketArrays[0] === undefined ? [] : marketArrays[0];
+                    let allMarkets = marketArrays[0] ?? [];
                     for (let i = 1; i < marketArrays.length; i++) {
                         const marketArray = marketArrays[i];
                         if (marketArray !== undefined) {
@@ -236,7 +236,7 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
                     }
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, '') }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, '') }
         );
         //     getMarketsPromise.then(
         //         (feedMarkets) => {
@@ -252,7 +252,7 @@ export class FeedsDataItem extends RecordsPublisherSubscriptionDataItem<Feed> {
         //                 }
         //             }
         //         },
-        //         (reason) => { throw AssertInternalError.createIfNotError(reason, 'FDICFGMPR30117'); }
+        //         (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'FDICFGMPR30117'); }
         //     );
         // }
 

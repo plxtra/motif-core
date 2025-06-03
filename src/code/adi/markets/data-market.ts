@@ -24,18 +24,17 @@ import {
     ZenithMarketBoards
 } from '../common/internal-api';
 import { AdiService } from '../data-item/adi-service';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { Exchange } from './exchange';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { ExchangeEnvironment } from './exchange-environment';
-import { MarketsConfig } from './markets-config';
-// eslint-disable-next-line import/no-cycle
 import { Market } from './market';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { MarketBoard } from './market-board';
-import { TradingStatesDataItem } from './trading-states-data-item';
-// eslint-disable-next-line import/no-cycle
+import { MarketsConfig } from './markets-config';
+// eslint-disable-next-line import-x/no-cycle
 import { TradingMarket } from './trading-market';
+import { TradingStatesDataItem } from './trading-states-data-item';
 import { ZenithDataMarket } from './zenith-data-market';
 
 export class DataMarket extends Market implements KeyedCorrectnessListItem {
@@ -177,7 +176,6 @@ export class DataMarket extends Market implements KeyedCorrectnessListItem {
     // }
 
     change(msgMarket: MarketsDataMessage.Market) {
-        // eslint-disable-next-line max-len
         const changedFieldIds = new Array<DataMarket.FieldId>(DataMarket.Field.idCount - DataMarket.Field.readonlyCount); // won't include fields that do not change
         let changedCount = 0;
         const feedStatusChanged = msgMarket.feedStatusId !== this.feedStatusId;

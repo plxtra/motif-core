@@ -8,6 +8,7 @@ export class AdiPublisherFactory implements AdiPublisher.Factory {
 
     createPublisher(typeId: AdiPublisherTypeId): AdiPublisher {
         switch (typeId) {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             case AdiPublisherTypeId.Zenith:
                 return new ZenithPublisher(this._decimalFactory);
 

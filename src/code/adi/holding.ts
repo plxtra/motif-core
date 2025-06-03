@@ -259,7 +259,6 @@ export namespace Holding {
         AccountId,
         StyleId,
         Cost,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Currency,
         TotalQuantity,
         TotalAvailableQuantity,

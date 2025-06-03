@@ -3,7 +3,6 @@ import { NumberHistorySequenceSeriesInterface } from './number-history-sequence-
 import { RepeatableExactHistorySequenceSeries } from './repeatable-exact-history-sequence-series';
 import { RepeatableExactHistorySequencer } from './repeatable-exact-history-sequencer';
 
-// eslint-disable-next-line max-len
 export class CurrentRepeatableExactHistorySequenceSeries extends RepeatableExactHistorySequenceSeries implements NumberHistorySequenceSeriesInterface {
     private _points = new ComparableList<CurrentRepeatableExactHistorySequenceSeries.Point>();
 

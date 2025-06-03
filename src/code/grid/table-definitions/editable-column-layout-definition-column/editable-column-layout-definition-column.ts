@@ -41,7 +41,6 @@ export class EditableColumnLayoutDefinitionColumn implements IndexedRecord {
             this.notifyWidthChanged({ fieldId: EditableColumnLayoutDefinitionColumn.FieldId.Width, recentChangeTypeId });
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get visible() { return this._visible; }
     set visible(newValue: boolean) {
         const oldValue = this._visible;

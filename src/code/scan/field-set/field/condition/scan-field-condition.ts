@@ -44,7 +44,6 @@ export namespace ScanFieldCondition {
             CurrencyEnum,
             // eslint-disable-next-line @typescript-eslint/no-shadow
             Exchange,
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             Market,
             // eslint-disable-next-line @typescript-eslint/no-shadow
             MarketBoard,
@@ -504,6 +503,7 @@ export namespace ScanFieldCondition {
         condition: NumericScanFieldCondition
     ) {
         switch (fieldId) {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             case ScanFormula.FieldId.PriceSubbed:
                 return createFormulaNodeForPriceSubField(fieldId as ScanFormula.FieldId.PriceSubbed, subFieldId as ScanFormula.PriceSubFieldId, condition);
             default:
@@ -711,6 +711,7 @@ export namespace ScanFieldCondition {
 
     function createFormulaNodeForDateSubbed(fieldId: ScanFormula.DateRangeSubbedFieldId, subFieldId: Integer | undefined, condition: DateScanFieldCondition) {
         switch (fieldId) {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             case ScanFormula.FieldId.DateSubbed:
                 return createFormulaNodeForDateSub(fieldId as ScanFormula.FieldId.DateSubbed, subFieldId as ScanFormula.DateSubFieldId, condition);
             default:
@@ -1171,6 +1172,7 @@ export namespace ScanFieldCondition {
         return createFormulaNodeForOverlapsValues(ScanFormula.MarketBoardFieldOverlapsNode, fieldId, values, not);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     function createFormulaNodeForOverlapsValues<FieldId extends ScanFormula.TextOverlapFieldId, DataType> (
         overlapsNodeConstructor: new() => ScanFormula.TypedOverlapsFieldNode<DataType>,
         fieldId: FieldId,
@@ -1308,7 +1310,6 @@ export namespace BaseNumericScanFieldCondition {
             ScanFieldCondition.OperatorId.NotHasValue,
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is HasValueOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.HasValue;
         }
@@ -1320,7 +1321,6 @@ export namespace BaseNumericScanFieldCondition {
     }
 
     export namespace ValueOperands {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is ValueOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.NumericValue || operands.typeId === ScanFieldCondition.Operands.TypeId.NumericComparisonValue;
         }
@@ -1342,7 +1342,6 @@ export namespace BaseNumericScanFieldCondition {
             ScanFieldCondition.OperatorId.NotInRange
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is RangeOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.NumericRange;
         }
@@ -1785,7 +1784,6 @@ export namespace BaseTextScanFieldCondition {
             ScanFieldCondition.OperatorId.NotHasValue,
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is HasValueOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.HasValue;
         }
@@ -1806,7 +1804,6 @@ export namespace BaseTextScanFieldCondition {
             ScanFieldCondition.OperatorId.NotEquals,
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is ValueOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.TextValue;
         }
@@ -1827,7 +1824,6 @@ export namespace BaseTextScanFieldCondition {
             ScanFieldCondition.OperatorId.NotContains,
         ];
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function is(operands: Operands): operands is ContainsOperands {
             return operands.typeId === ScanFieldCondition.Operands.TypeId.TextContains;
         }
@@ -2208,7 +2204,6 @@ export namespace IsScanFieldCondition {
             ScanFieldCondition.OperatorId.Is |
             ScanFieldCondition.OperatorId.NotIs
         >;
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export const supportedOperatorIds: readonly OperatorId[] = [
             ScanFieldCondition.OperatorId.Is,
             ScanFieldCondition.OperatorId.NotIs

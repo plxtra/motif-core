@@ -63,6 +63,7 @@ export class RankedDataIvemIdListDirectoryItemTableRecordSource extends Subscrib
             const fieldSourceDefinitionTypeId =
                 fieldSourceDefinition.typeId as RankedDataIvemIdListDirectoryItemTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.RankedDataIvemIdListDirectoryItem: {
                     const valueSource = new RankedDataIvemIdListDirectoryItemTableValueSource(result.fieldCount, rankedDataIvemIdListDirectoryItem);
                     result.addSource(valueSource);

@@ -1348,7 +1348,6 @@ export class ScanDescriptorsDataDefinition extends FeedSubscriptionDataDefinitio
     constructor() {
         super(DataChannelId.ScanDescriptors);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return true; }
 }
 
@@ -1356,7 +1355,6 @@ export class QueryScanDescriptorsDataDefinition extends FeedSubscriptionDataDefi
     constructor() {
         super(DataChannelId.ScanDescriptors);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1595,7 +1593,6 @@ export abstract class CreateWatchmakerListDataDefinition extends WatchmakerDataD
     listDescription?: string;
     category?: string;
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1617,7 +1614,6 @@ export class UpdateWatchmakerListDataDefinition extends WatchmakerDataDefinition
         super(DataChannelId.UpdateWatchmakerList);
     }
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1631,7 +1627,6 @@ export class CopyWatchmakerListDataDefinition extends WatchmakerDataDefinition {
         super(DataChannelId.CopyWatchmakerList);
     }
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1642,7 +1637,6 @@ export class DeleteWatchmakerListDataDefinition extends WatchmakerDataDefinition
         super(DataChannelId.DeleteWatchmakerList);
     }
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1650,7 +1644,6 @@ export class WatchmakerListDescriptorsDataDefinition extends WatchmakerDataDefin
     constructor() {
         super(DataChannelId.WatchmakerListDescriptors);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return true; }
 }
 
@@ -1660,7 +1653,6 @@ export class QueryWatchmakerListDescriptorsDataDefinition extends WatchmakerData
     constructor() {
         super(DataChannelId.WatchmakerListDescriptors);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1693,7 +1685,6 @@ export class DataIvemIdQueryWatchmakerListMembersDataDefinition extends QueryWat
 export abstract class AddToWatchmakerListDataDefinition extends WatchmakerDataDefinition {
     listId: string;
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1703,7 +1694,6 @@ export class DataIvemIdAddToWatchmakerListDataDefinition extends AddToWatchmaker
     constructor() {
         super(DataChannelId.DataIvemIdAddToWatchmakerList);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1711,7 +1701,6 @@ export abstract class InsertIntoWatchmakerListDataDefinition extends WatchmakerD
     listId: string;
     offset: Integer;
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1721,7 +1710,6 @@ export class DataIvemIdInsertIntoWatchmakerListDataDefinition extends InsertInto
     constructor() {
         super(DataChannelId.DataIvemIdInsertIntoWatchmakerList);
     }
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 
@@ -1735,7 +1723,6 @@ export class MoveInWatchmakerListDataDefinition extends WatchmakerDataDefinition
         super(DataChannelId.MoveInWatchmakerList);
     }
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable(): boolean { return false; }
 }
 

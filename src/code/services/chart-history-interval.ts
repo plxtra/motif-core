@@ -83,7 +83,7 @@ export namespace ChartHistoryInterval {
 
         export function initialise() {
             for (let id = 0; id < idCount; id++ ) {
-                if (infos[id].id !== id) {
+                if (infos[id].id !== id as UnitId) {
                     throw new EnumInfoOutOfOrderError('ChartHistoryInterval.UnitId', id, infos[id].name);
                 }
             }
@@ -223,7 +223,7 @@ export namespace ChartHistoryInterval {
 
         export function initialise() {
             for (let id = 0; id < idCount; id++ ) {
-                if (infos[id].id !== id) {
+                if (infos[id].id !== id as PresetId) {
                     throw new EnumInfoOutOfOrderError('ChartHistoryInterval.PresetId', id, infos[id].name);
                 }
             }

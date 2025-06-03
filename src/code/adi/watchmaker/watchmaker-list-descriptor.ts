@@ -143,7 +143,6 @@ export namespace WatchmakerListDescriptor {
     }
 
     export namespace Field {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export type Id = WatchmakerListDescriptor.FieldId;
         interface Info {
             readonly id: Id;

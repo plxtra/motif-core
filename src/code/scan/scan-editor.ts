@@ -40,7 +40,6 @@ import { LockerScanAttachedNotificationChannel } from './locker-scan-attached-no
 import { LockerScanAttachedNotificationChannelList } from './locker-scan-attached-notification-channel-list';
 import { Scan } from './scan';
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export abstract class OpenableScanEditor {
     private readonly _openers = new Array<LockOpenListItem.Locker>();
 

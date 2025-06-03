@@ -2,7 +2,7 @@ import { compareString, ComparisonResult, EnumInfoOutOfOrderError, Integer, Mult
 import { StringId, Strings } from '../../res/internal-api';
 import { FieldDataTypeId } from '../../sys/internal-api';
 import { TradingState, ZenithEnvironmentedValueParts, ZenithMarketBoard } from '../common/internal-api';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { DataMarket } from './data-market';
 
 export class MarketBoard {

@@ -16,6 +16,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
     private _columnHeaderFont: string | undefined;
     private _columnHeaderHorizontalAlignId: RevHorizontalAlignId | undefined;
 
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     get verticalOffset() { return this._verticalOffset !== undefined ? this._verticalOffset : this.gridSettings.verticalOffset; }
     set verticalOffset(value: number) {
         if (value !== this._verticalOffset) {
@@ -29,6 +30,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
         if (this._textTruncateTypeId === null) {
             return undefined;
         } else {
+            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
             return this._textTruncateTypeId !== undefined ? this._textTruncateTypeId : this.gridSettings.textTruncateTypeId;
         }
     }
@@ -44,6 +46,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
             this.endChange();
         }
     }
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     get textStrikeThrough() { return this._textStrikeThrough !== undefined ? this._textStrikeThrough : this.gridSettings.textStrikeThrough; }
     set textStrikeThrough(value: boolean) {
         if (value !== this._textStrikeThrough) {
@@ -53,6 +56,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
             this.endChange();
         }
     }
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     get font() { return this._font !== undefined ? this._font : this.gridSettings.font; }
     set font(value: string) {
         if (value !== this._font) {
@@ -62,6 +66,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
             this.endChange();
         }
     }
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     get horizontalAlignId() { return this._horizontalAlignId !== undefined ? this._horizontalAlignId : this.gridSettings.horizontalAlignId; }
     set horizontalAlignId(value: RevHorizontalAlignId) {
         if (value !== this._horizontalAlignId) {
@@ -71,6 +76,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
             this.endChange();
         }
     }
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     get columnHeaderFont() { return this._columnHeaderFont !== undefined ? this._columnHeaderFont : this.gridSettings.columnHeaderFont; }
     set columnHeaderFont(value: string) {
         if (value !== this._columnHeaderFont) {
@@ -81,6 +87,7 @@ export class InMemoryAdaptedRevgridBehavioredColumnSettings extends RevInMemoryB
         }
     }
     get columnHeaderHorizontalAlignId() {
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         return this._columnHeaderHorizontalAlignId !== undefined ? this._columnHeaderHorizontalAlignId : this.gridSettings.columnHeaderHorizontalAlignId;
     }
     set columnHeaderHorizontalAlignId(value: RevHorizontalAlignId) {

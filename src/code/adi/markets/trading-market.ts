@@ -16,14 +16,14 @@ import {
     TimeInForceId
 } from '../common/internal-api';
 import { TradingFeed } from '../feed/internal-api';
-// eslint-disable-next-line import/no-cycle
-import { Exchange } from './exchange';
-// eslint-disable-next-line import/no-cycle
-import { ExchangeEnvironment } from './exchange-environment';
-import { MarketsConfig } from './markets-config';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { DataMarket } from './data-market';
+// eslint-disable-next-line import-x/no-cycle
+import { Exchange } from './exchange';
+// eslint-disable-next-line import-x/no-cycle
+import { ExchangeEnvironment } from './exchange-environment';
 import { Market } from './market';
+import { MarketsConfig } from './markets-config';
 
 export class TradingMarket extends Market /* implements KeyedCorrectnessListItem */ {
     readonly orderRouteAlgorithmId = OrderRouteAlgorithmId.Market; // Currently only algorithm supported

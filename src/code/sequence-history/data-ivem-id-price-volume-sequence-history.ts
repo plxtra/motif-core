@@ -400,7 +400,7 @@ export class DataIvemIdPriceVolumeSequenceHistory extends SequenceHistory {
                 this.setUnusable(badness);
             } else {
                 const record = symbolsDataItem.records[0];
-                this._isIndex = record.isIndex !== undefined ? record.isIndex : false;
+                this._isIndex = record.isIndex ?? false;
                 this._exchange = record.exchange;
                 this._ivemClassId = record.ivemClassId;
                 this._tradingMarkets = record.tradingMarkets;

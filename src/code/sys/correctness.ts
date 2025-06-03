@@ -69,6 +69,7 @@ export namespace Correctness {
 
     export function merge2UndefinableIds(id1: CorrectnessId | undefined, id2: CorrectnessId | undefined): CorrectnessId | undefined {
         if (id1 === undefined) {
+            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
             return id2 === undefined ? undefined : id2;
         } else {
             return id2 === undefined ? id1 : merge2Ids(id1, id2);

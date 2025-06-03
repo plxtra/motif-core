@@ -1447,7 +1447,6 @@ export namespace SecurityDataItem {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         DataIvemId,
         Code,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Market,
         Exchange,
         Name,

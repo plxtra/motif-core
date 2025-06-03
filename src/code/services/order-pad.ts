@@ -60,7 +60,6 @@ import { SecurityPriceStepper } from './security-price-stepper';
 import { ScalarSettings } from './settings/internal-api';
 import { SymbolDetailCacheService } from './symbol-detail-cache-service';
 
-/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class OrderPad {
     private _fields = new Array<OrderPad.Field>(OrderPad.Field.idCount);
 
@@ -231,12 +230,10 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get account() {
         return this._account;
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get sideId() { return this._sideId; }
     set sideId(value: OrderTradeTypeId | undefined) {
         if (this._readonly) {
@@ -254,10 +251,8 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get allowedSideIds() { return this._allowedSideIds; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get tradingIvemId() { return this._tradingIvemId; }
     set tradingIvemId(value: TradingIvemId | undefined) {
         if (this._readonly) {
@@ -276,7 +271,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get tradingMarket() {
         const tradingIvemId = this._tradingIvemId;
         if (tradingIvemId === undefined) {
@@ -293,10 +287,8 @@ export class OrderPad {
             this.tradingIvemId = new TradingIvemId(existingTradingIvemId.code, value);
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get allowedTradingMarkets() { return this._allowedTradingMarkets; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get expiryDate() { return this._expiryDate; }
     set expiryDate(value: Date | undefined) {
         if (this._readonly) {
@@ -315,7 +307,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get orderTypeId() { return this._orderTypeId; }
     set orderTypeId(value: OrderTypeId | undefined) {
         if (this._readonly) {
@@ -333,10 +324,8 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get allowedOrderTypeIds() { return this._allowedOrderTypeIds; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get triggerTypeId() { return this._triggerTypeId; }
     set triggerTypeId(value: OrderTriggerTypeId | undefined) {
         if (this._readonly) {
@@ -354,10 +343,8 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get allowedTriggerTypeIds() { return this._allowedTriggerTypeIds; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get triggerValue() { return this._triggerValue; }
     set triggerValue(value: Decimal | undefined) {
         if (this._readonly) {
@@ -376,7 +363,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get triggerFieldId() { return this._triggerFieldId; }
     set triggerFieldId(value: PriceOrderTrigger.FieldId | undefined) {
         if (this._readonly) {
@@ -395,7 +381,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get triggerMovementId() { return this._triggerMovementId; }
     set triggerMovementId(value: MovementId | undefined) {
         if (this._readonly) {
@@ -414,7 +399,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get totalQuantity() { return this._totalQuantity; }
     set totalQuantity(value: Integer | undefined) {
         if (this._readonly) {
@@ -433,7 +417,6 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get limitValue() { return this._limitValue; }
     set limitValue(value: Decimal | undefined) {
         if (this._readonly) {
@@ -452,10 +435,8 @@ export class OrderPad {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get limitUnitId() { return this._limitUnitId; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get timeInForceId() { return this._timeInForceId; }
     set timeInForceId(value: TimeInForceId | undefined) {
         if (this._readonly) {
@@ -473,9 +454,8 @@ export class OrderPad {
             }
         }
     }
-    get allowedTimeInForceIds() { return this._allowedTimeInForceIds === undefined ? TimeInForce.all : this._allowedTimeInForceIds; }
+    get allowedTimeInForceIds() { return this._allowedTimeInForceIds ?? TimeInForce.all; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get existingOrderId() { return this._existingOrderId; }
     set existingOrderId(value: OrderId | undefined) {
         if (this._readonly) {
@@ -493,10 +473,8 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get existingOrder() { return this._existingOrder; }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get destinationAccountZenithCode() { return this._destinationAccountZenithCode; }
     set destinationAccountZenithCode(value: string | undefined) {
         if (this._readonly) {
@@ -514,7 +492,6 @@ export class OrderPad {
             }
         }
     }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get destinationAccount() {
         return this._destinationAccount;
     }
@@ -1066,9 +1043,7 @@ export class OrderPad {
                                         }
                                     }
                                 },
-                                (reason: string) => {
-                                    throw new AssertInternalError('OPLP31000', reason); // should never happen
-                                }
+                                (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'OPLP31000') } // should never happen
                             );
                         }
                     }
@@ -2329,7 +2304,7 @@ export class OrderPad {
                                     this.setAccount(account);
                                 }
                             },
-                            (reason) => {
+                            (reason: unknown) => {
                                 const errorText = getErrorMessage(reason);
                                 window.motifLogger.logError(`OrderPad.internalSetAccountId: Unexpected reject: ${errorText}`);
                             }
@@ -2400,6 +2375,7 @@ export class OrderPad {
                 this.updateLimitUnit();
                 this.updatePriceStepper();
                 const ivemIdSymbolDetail = this._symbolDetailCacheService.getIvemIdFromCache(value.ivemId);
+                // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
                 if (ivemIdSymbolDetail !== undefined && ivemIdSymbolDetail.full) {
                     this.setIvemIdSymbolDetail(ivemIdSymbolDetail, value);
                 } else {
@@ -2413,8 +2389,8 @@ export class OrderPad {
                                 this.setIvemIdSymbolDetail(detail, value);
                             }
                         },
-                        (reason) => {
-                            throw new AssertInternalError('OPISRII30199', getErrorMessage(reason)); // should never happen
+                        (reason: unknown) => {
+                            throw AssertInternalError.createIfNotError(reason, 'OPISRII30199'); // should never happen
                         }
                     );
                 }
@@ -2646,7 +2622,7 @@ export class OrderPad {
                                     this.setDestinationAccount(account);
                                 }
                             },
-                            (reason) => {
+                            (reason: unknown) => {
                                 const errorText = getErrorMessage(reason);
                                 window.motifLogger.logError(`OrderPad.internalSetDestinationAccountId: Unexpected reject: ${errorText}`);
                             }
@@ -2751,7 +2727,7 @@ export class OrderPad {
                             }
                         }
                     },
-                    (reason) => {
+                    (reason: unknown) => {
                         this.beginChanges();
                         try {
                             const errorText = getErrorMessage(reason);
@@ -3063,10 +3039,8 @@ export class OrderPad {
     }
 }
 
-/* eslint-disable @typescript-eslint/no-namespace */
 export namespace OrderPad {
     export const enum FieldId {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Account,
         // BrokerageCode,
         // BrokerageScheduleDataItemReady,
@@ -3098,7 +3072,6 @@ export namespace OrderPad {
         // OrderGiversDataItemReady,
         // OrderTakenBy,
         LimitValue,
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         Side,
         // RoaNoAdvice,
         // RoaNotes,
@@ -3183,7 +3156,6 @@ export namespace OrderPad {
         LoadedLimitValue = 'loadedLimitValue',
         LimitValue = 'limitValue',
         LoadedSideId = 'loadedSideId',
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         SideId = 'sideId',
         LoadedTimeInForceId = 'loadedTimeInForceId',
         UserTimeInForceId = 'userTimeInForceId',
@@ -3321,7 +3293,6 @@ export namespace OrderPad {
             PriceNotOnStep,
             NotRoaEnabled,
             RoaNoAdvice,
-            // eslint-disable-next-line @typescript-eslint/no-shadow
             IvemId,
             TriggerType,
             TriggerTypeNotDefined,
@@ -3709,8 +3680,6 @@ export namespace OrderPad {
         const infos = Object.values(infosObject);
 
         const initialiseInfos = new Array<InitialiseInfo>(idCount);
-
-        // eslint-disable-next-line @typescript-eslint/no-shadow
 
         export function idToName(id: Id): string {
             return infos[id].name;

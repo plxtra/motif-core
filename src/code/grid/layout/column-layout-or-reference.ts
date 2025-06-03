@@ -26,7 +26,7 @@ export namespace ColumnLayoutOrReference {
                     resolve(new Err(errorText));
                 }
             },
-            (reason) => { throw AssertInternalError.createIfNotError(reason, 'DSTCL35252'); }
+            (reason: unknown) => { throw AssertInternalError.createIfNotError(reason, 'DSTCL35252'); }
         )
 
         return resultPromise;

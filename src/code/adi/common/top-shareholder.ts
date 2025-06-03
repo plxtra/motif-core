@@ -94,7 +94,6 @@ export namespace TopShareholder {
     }
 
     export namespace Field {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export type Id = TopShareholder.FieldId;
         interface Info {
             readonly id: Id;
@@ -175,7 +174,7 @@ export namespace TopShareholder {
         }
 
         export function initialiseStaticField() {
-            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index);
+            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index as Id);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('OIODIFIS3885', outOfOrderIdx, infos[outOfOrderIdx].name);
             }
@@ -219,16 +218,11 @@ export namespace TopShareholder {
 
     export namespace Key {
         export function toString(holderKey?: string, name?: string): string {
-            if (holderKey === undefined) {
-                holderKey = '!)';
-            }
-            if (name === undefined) {
-                name = '(!';
-            }
+            holderKey ??= '!)';
+            name ??= '(!';
             return `${holderKey}|${name}`;
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function isEqual(left: Key, right: Key) {
             if (left.holderKey !== undefined || right.holderKey !== undefined) {
                 return left.holderKey === right.holderKey;

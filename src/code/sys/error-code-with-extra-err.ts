@@ -9,7 +9,6 @@ export interface ErrorCodeWithExtra {
 /** @public */
 export class ErrorCodeWithExtraErr<T = undefined> extends Err<T, ErrorCodeWithExtra>{
     createErrorCodeWithExtraOuter<OuterT = undefined>(outerExtra: string) {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         return new ErrorCodeWithExtraErr<OuterT>({ code: this.error.code, extra: outerExtra + ': ' + this.error.extra });
     }
 

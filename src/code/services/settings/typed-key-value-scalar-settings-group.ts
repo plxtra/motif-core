@@ -88,14 +88,10 @@ export abstract class TypedKeyValueScalarSettingsGroup extends SettingsGroup {
 
             let element: JsonElement;
             if (info.operator) {
-                if (operatorElement === undefined) {
-                    operatorElement = new JsonElement();
-                }
+                operatorElement ??= new JsonElement();
                 element = operatorElement;
             } else {
-                if (userElement === undefined) {
-                    userElement = new JsonElement();
-                }
+                userElement ??= new JsonElement();
                 element = userElement;
             }
             element.setString(name, formattedValue);

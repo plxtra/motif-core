@@ -12,7 +12,6 @@ export class ZenithQueryConfigureDataDefinition extends PublisherSubscriptionDat
         super(DataChannelId.ZenithQueryConfigure);
     }
 
-    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get referencable() { return false; }
 
     protected override getDescription(): string {

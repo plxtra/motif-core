@@ -20,7 +20,6 @@ export class DataItemsActivationMgr {
     get activeSubscriptionsLimit(): number { return this._activeSubscriptionsLimit; }
     set activeSubscriptionsLimit(value: number) { this.setActiveSubscriptionsLimit(value); }
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
     get cacheDataSubscriptions(): boolean { return this._cacheDataSubscriptions; }
     set cacheDataSubscriptions(value: boolean) { this.setCacheDataSubscriptions(value); }
 
@@ -254,7 +253,6 @@ export class DataItemsActivationMgr {
                     itemsToBeDeactivated[index].deactivate();
                 }
 
-                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 while (true) {
                     const isOk: boolean = (
                         (this._wantActivationItems.length > 0)

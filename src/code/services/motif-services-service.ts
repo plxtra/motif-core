@@ -17,7 +17,6 @@ export class MotifServicesService {
 
     private _logEvent = new MultiEvent<MotifServicesService.LogEvent>();
 
-    // eslint-disable-next-line max-len
     initialise(
         endpointBaseUrl: string,
         getAuthorizationHeaderValueCallback: MotifServicesService.GetAuthorizationHeaderValueCallback

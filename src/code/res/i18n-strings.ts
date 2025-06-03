@@ -80,7 +80,6 @@ export const enum StringId {
     Interested,
     Similar,
     Incompatible,
-    // eslint-disable-next-line id-blacklist
     Undefined,
     Enabled,
     Readonly,
@@ -2550,7 +2549,6 @@ export namespace I18nStrings {
 
     type recsObject = { [id in keyof typeof StringId]: Rec };
 
-    /* eslint-disable max-len */
     const recsObject: recsObject = {
         InternalError: {
             id: StringId.InternalError, translations: {
@@ -2952,7 +2950,6 @@ export namespace I18nStrings {
                 en: 'Incompatible',
             }
         },
-        // eslint-disable-next-line id-blacklist
         Undefined: {
             id: StringId.Undefined, translations: {
                 en: 'Undefined',
@@ -15226,6 +15223,7 @@ export namespace I18nStrings {
 
     function calculateString(idx: number, langId: LanguageId): string {
         switch (langId) {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             case LanguageId.English: return recs[idx].translations.en;
             default: return '?';
         }

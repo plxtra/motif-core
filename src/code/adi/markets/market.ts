@@ -1,8 +1,8 @@
 import { CommaText, compareString, compareUndefinableNumber, ComparisonResult } from '@pbkware/js-utils';
 import { ZenithEnvironmentedValueParts } from '../common/internal-api';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { Exchange } from './exchange';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import-x/no-cycle
 import { ExchangeEnvironment } from './exchange-environment';
 
 export abstract class Market {

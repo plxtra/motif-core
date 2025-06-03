@@ -23,7 +23,7 @@ export function getUndefinedNullOrFunctionResult<U, T>(value: U | undefined | nu
 /** @public */
 export function assert(value: boolean, message?: string): void {
     if (!value) {
-        throw new Error(message ? message : 'Assertion failed');
+        throw new Error(message ?? 'Assertion failed');
     }
 }
 

@@ -120,7 +120,7 @@ export class ScanStatusedDescriptorsDataItem extends FeedSubscriptionDataItem im
                         const descriptor = this._map.get(change.scanId);
 
                         if (descriptor === undefined) {
-                            ErrorCodeLogger.logDataError('SDIPSDMUM10091', `${change.scanId}`);
+                            ErrorCodeLogger.logDataError('SDIPSDMUM10091', change.scanId);
                         } else {
                             descriptor.update(change);
                         }

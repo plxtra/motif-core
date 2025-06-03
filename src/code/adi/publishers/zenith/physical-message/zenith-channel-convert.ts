@@ -40,9 +40,7 @@ export namespace ZenithChannelConvert {
 
     export namespace UserMetadata {
         export function fromMerge(userMetadata: ZenithProtocolCommon.UserMetadata | undefined, favourite: boolean | undefined): ZenithProtocolCommon.UserMetadata {
-            if (userMetadata === undefined) {
-                userMetadata = {};
-            }
+            userMetadata ??= {};
             if (favourite !== undefined) {
                 userMetadata[favouriteName] = favourite ? 'true' : 'false';
             }
@@ -50,7 +48,6 @@ export namespace ZenithChannelConvert {
         }
 
         export function to(value: ZenithProtocolCommon.UserMetadata): UserMetadata {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             const favouriteAsString = value[favouriteName];
             const favourite = favouriteAsString === undefined ? false : favouriteAsString.toUpperCase() === 'TRUE';
             return {

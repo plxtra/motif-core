@@ -11,7 +11,7 @@ export abstract class AdiPublisher {
     private _batchSubscriptionChanges: boolean;
 
     constructor(publisherTypeId?: AdiPublisherTypeId) {
-        this._publisherTypeId = (publisherTypeId !== undefined) ? publisherTypeId : this.getPublisherTypeId();
+        this._publisherTypeId = publisherTypeId ?? this.getPublisherTypeId();
         this._id = AdiPublisher.ID.getId();
     }
 

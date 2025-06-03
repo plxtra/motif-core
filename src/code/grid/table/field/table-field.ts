@@ -46,7 +46,7 @@ export namespace TableField {
     export type Constructor = RevTableField.Constructor<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId>;
 }
 
-// eslint-disable-next-line max-len
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export class GenericTableField<DataType extends number | string, ValueClass extends GenericTableValue<DataType>> extends TableField {
     protected compareDefined(left: TableValue, right: TableValue): number {
         return compareValue<DataType>((left as ValueClass).definedData, (right as ValueClass).definedData);
@@ -120,9 +120,9 @@ export namespace CorrectnessTableField {
     ) => CorrectnessTableField;
 }
 
-// eslint-disable-next-line max-len
 export class GenericCorrectnessTableField<
     DataType extends number | string,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
     ValueClass extends GenericCorrectnessTableValue<DataType>
 > extends CorrectnessTableField {
     protected compareDefined(left: CorrectnessTableValue, right: CorrectnessTableValue): number {

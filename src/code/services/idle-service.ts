@@ -7,6 +7,7 @@ export class IdleService {
     private readonly _requests = new Array<IdleService.Request>();
     private readonly _idleWaitingRequests = new Array<IdleService.IdleWaitingRequest>();
 
+    // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
     private _callbackOrTimeoutHandle: number | ReturnType<typeof setTimeout> | undefined;
     private _callbackTimeoutTime: SysTick.Time;
 
@@ -139,7 +140,7 @@ export class IdleService {
             throw new AssertInternalError('ISCIC50598');
         } else {
             if (this._requestIdleCallbackAvailable) {
-                cancelIdleCallback(this._callbackOrTimeoutHandle as number);
+                cancelIdleCallback(this._callbackOrTimeoutHandle);
             } else {
                 clearTimeout(this._callbackOrTimeoutHandle);
             }
@@ -255,7 +256,7 @@ export namespace IdleService {
                 (value) => {
                     this.resolve(value);
                 },
-                (reason) => Promise.reject(AssertInternalError.createIfNotError(reason, 'ISCAR45557')),
+                (reason: unknown) => Promise.reject(AssertInternalError.createIfNotError(reason, 'ISCAR45557')),
             );
         }
 

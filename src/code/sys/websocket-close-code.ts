@@ -105,7 +105,7 @@ export namespace WebsocketCloseCode {
     const infos = Object.values(infosObject);
 
     export function initialise() {
-        const outOfOrderIdx = infos.findIndex((info, id) => id !== info.id);
+        const outOfOrderIdx = infos.findIndex((info, id) => id as WebsocketCloseCode.Id !== info.id);
         if (outOfOrderIdx >= 0) {
             throw new EnumInfoOutOfOrderError('ZenithWebsocket.CloseCodeId', outOfOrderIdx, idToDisplay(outOfOrderIdx));
         }

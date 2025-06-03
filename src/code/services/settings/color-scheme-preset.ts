@@ -58,7 +58,6 @@ export namespace ColorSchemePreset {
         const PastelDefaultAltRowFlashedOnFore = BlackColor;
 
         const itemsObject: ItemsObject = {
-            /* eslint-disable max-len */
             Layout_Base: { id: ColorScheme.ItemId.Layout_Base, bkgd: '#e1e1e1', fore: inherit },
             Layout_SinglePaneContent: { id: ColorScheme.ItemId.Layout_SinglePaneContent, bkgd: '#000000', fore: inherit },
             Layout_PopinIconBorder: { id: ColorScheme.ItemId.Layout_PopinIconBorder, bkgd: inherit, fore: '#cccccc' },
@@ -221,12 +220,10 @@ export namespace ColorSchemePreset {
             Panel_ItemHover: { id: ColorScheme.ItemId.Panel_ItemHover, bkgd: inherit, fore: NoneColor },
 
             Unexpected: { id: ColorScheme.ItemId.Unexpected, bkgd: BtnFaceColor, fore: WindowTextColor },
-            /* eslint-enable max-len */
         };
 
         export const items = Object.values(itemsObject);
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function createColorScheme() {
             const scheme = new ColorScheme(name, true);
             for (let i = 0; i < ColorScheme.Item.idCount; i++) {
@@ -242,7 +239,6 @@ export namespace ColorSchemePreset {
             }
         }
 
-        /* eslint-disable max-len */
         // News_BodyText: { id: ColorScheme.ItemId.News_BodyText, bkgd: WindowColor, fore: WindowTextColor },
         // Alert_Disabled: { id: ColorScheme.ItemId.Alert_Disabled, bkgd: LtGrayColor, fore: BlackColor },
         // Alert_DisabledAltRow: { id: ColorScheme.ItemId.Alert_DisabledAltRow, bkgd: MedGrayColor, fore: BlackColor },
@@ -336,14 +332,12 @@ export namespace ColorSchemePreset {
         // WaitingPanel: { id: ColorScheme.ItemId.WaitingPanel, bkgd: NoneColor, fore: NoneColor },
         // WaitingBar: { id: ColorScheme.ItemId.WaitingBar, bkgd: HighlightColor, fore: NoneColor },
         // Highlight: { id: ColorScheme.ItemId.Highlight, bkgd: HighlightColor, fore: WindowTextColor },
-        /* eslint-enable max-len */
     }
 
     namespace Dark {
         export const name = 'Default Dark';
 
         const itemsObject: ItemsObject = {
-            /* eslint-disable max-len */
             Layout_Base: { id: ColorScheme.ItemId.Layout_Base, bkgd: '#212828', fore: inherit },
             Layout_SinglePaneContent: { id: ColorScheme.ItemId.Layout_SinglePaneContent, bkgd: inherit, fore: inherit },
             Layout_PopinIconBorder: { id: ColorScheme.ItemId.Layout_PopinIconBorder, bkgd: inherit, fore: '#eeeeee' },
@@ -499,12 +493,10 @@ export namespace ColorSchemePreset {
             Panel_Splitter: { id: ColorScheme.ItemId.Panel_Splitter, bkgd: inherit, fore: inherit },
             Panel_ItemHover: { id: ColorScheme.ItemId.Panel_ItemHover, bkgd: '#272727', fore: inherit },
             Unexpected: { id: ColorScheme.ItemId.Unexpected, bkgd: '#D4D3D1', fore: 'black' },
-            /* eslint-enable max-len */
         };
 
         export const items = Object.values(itemsObject);
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         export function createColorScheme() {
             const scheme = new ColorScheme(name, true);
             for (let i = 0; i < ColorScheme.Item.idCount; i++) {
@@ -520,7 +512,6 @@ export namespace ColorSchemePreset {
             }
         }
 
-        /* eslint-disable max-len */
         // News_BodyText: { id: ColorScheme.ItemId.News_BodyText, bkgd: '#201F23', fore: 'White' },
         // Alert_Disabled: { id: ColorScheme.ItemId.Alert_Disabled, bkgd: '#B8B8B8', fore: 'White' },
         // Alert_DisabledAltRow: { id: ColorScheme.ItemId.Alert_DisabledAltRow, bkgd: '#C1C0C0', fore: 'White' },
@@ -614,7 +605,6 @@ export namespace ColorSchemePreset {
         // WaitingPanel: { id: ColorScheme.ItemId.WaitingPanel, bkgd: inherit, fore: inherit },
         // WaitingBar: { id: ColorScheme.ItemId.WaitingBar, bkgd: 'Aqua', fore: inherit },
         // Highlight: { id: ColorScheme.ItemId.Highlight, bkgd: 'Aqua', fore: inherit },
-        /* eslint-enable max-len */
     }
 
     export function initialiseStatic() {

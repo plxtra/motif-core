@@ -63,6 +63,7 @@ export class ScanTableRecordSource extends LockOpenListTableRecordSource<Scan, S
             const fieldSourceDefinitionTypeId =
                 fieldSourceDefinition.typeId as ScanTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.Scan: {
                     const valueSource = new ScanTableValueSource(this._symbolsService, result.fieldCount, scan);
                     result.addSource(valueSource);

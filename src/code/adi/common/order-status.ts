@@ -70,7 +70,7 @@ export namespace OrderStatus {
         const infos = Object.values(infosObject);
 
         export function initialise() {
-            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index);
+            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index as AllowId);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('OrderStatus.AllowId', outOfOrderIdx, infos[outOfOrderIdx].name);
             }
@@ -134,7 +134,7 @@ export namespace OrderStatus {
         const infos = Object.values(infosObject);
 
         export function initialise() {
-            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index);
+            const outOfOrderIdx = infos.findIndex((info: Info, index: Integer) => info.id !== index as ReasonId);
             if (outOfOrderIdx >= 0) {
                 throw new EnumInfoOutOfOrderError('OrderStatusReasonId', outOfOrderIdx, infos[outOfOrderIdx].name);
             }

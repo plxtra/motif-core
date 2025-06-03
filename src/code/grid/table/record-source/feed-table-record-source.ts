@@ -59,6 +59,7 @@ export class FeedTableRecordSource extends SingleDataItemRecordTableRecordSource
             const fieldSourceDefinition = fieldSource.definition;
             const fieldSourceDefinitionTypeId = fieldSourceDefinition.typeId as FeedTableRecordSourceDefinition.FieldSourceDefinitionTypeId;
             switch (fieldSourceDefinitionTypeId) {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 case TableFieldSourceDefinition.TypeId.Feed: {
                     const valueSource = new FeedTableValueSource(result.fieldCount, feed);
                     result.addSource(valueSource);

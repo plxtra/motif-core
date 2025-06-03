@@ -37,7 +37,7 @@ export class ScanIdRankedDataIvemIdList extends BaseRankedDataIvemIdList {
             throw new AssertInternalError('SMSRLIILGD20091');
         } else {
             const description = lockedScan.description;
-            return description === undefined ? '' : description;
+            return description ?? '';
         }
     }
 

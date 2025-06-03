@@ -1273,8 +1273,6 @@ export type MarketOrderId = Integer; // This is probably wrong
     }
 }*/
 
-/* eslint-disable no-bitwise */
-
 // Enum Namespaces
 
 export namespace Currency {

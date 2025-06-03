@@ -110,6 +110,7 @@ export class SymbolDetailCacheService {
                 this.setBaseDataIvemId(dataIvemDetail);
             } else {
                 const existingDetail = this.getDataIvemIdFromCache(dataIvemId);
+                // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
                 if (existingDetail === undefined || !existingDetail.full) {
                     this.setBaseDataIvemId(dataIvemDetail);
                 }
