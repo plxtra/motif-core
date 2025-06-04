@@ -43,12 +43,19 @@ export class ExchangeEnvironment implements ZenithCodedEnvironment {
 
         if (exchangeEnvironmentConfig === undefined) {
             this.display = ExchangeEnvironmentZenithCode.createDisplay(zenithCode);
+            this.production = productionExchangeEnvironmentListZenithCodes.includes(zenithCode);
         } else {
             const display = exchangeEnvironmentConfig.display;
             if (display === undefined) {
                 this.display = ExchangeEnvironmentZenithCode.createDisplay(zenithCode);
             } else {
                 this.display = display;
+            }
+
+            if (exchangeEnvironmentConfig.production !== undefined) {
+                this.production = exchangeEnvironmentConfig.production;
+            } else {
+                this.production = productionExchangeEnvironmentListZenithCodes.includes(zenithCode);
             }
         }
     }
