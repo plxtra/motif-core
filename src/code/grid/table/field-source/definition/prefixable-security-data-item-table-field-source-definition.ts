@@ -5,11 +5,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { SecurityDataItem } from '../../../../adi/internal-api';
+import { SecurityDataItem } from '../../../../adi';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     BooleanCorrectnessTableField,
     CorrectnessTableField,

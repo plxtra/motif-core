@@ -21,5 +21,7 @@ debug.log
 /temp
 /tsbuildinfo
 
+/docs
+
 # make sure pack tarballs are not accidentally commited
 *.tgz

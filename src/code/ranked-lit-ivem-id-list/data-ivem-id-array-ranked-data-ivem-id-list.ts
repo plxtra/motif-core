@@ -1,7 +1,7 @@
 import {
     AssertInternalError, Integer
 } from '@pbkware/js-utils';
-import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
+import { DataIvemId, RankScoredDataIvemIdList } from '../adi';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition

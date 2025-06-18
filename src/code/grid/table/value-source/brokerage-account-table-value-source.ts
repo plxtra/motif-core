@@ -1,6 +1,6 @@
 import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { BrokerageAccount } from '../../../adi/internal-api';
-import { Correctness } from '../../../sys/internal-api';
+import { BrokerageAccount } from '../../../adi';
+import { Correctness } from '../../../sys';
 import { BrokerageAccountTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

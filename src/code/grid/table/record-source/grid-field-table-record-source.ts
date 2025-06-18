@@ -1,7 +1,7 @@
 import { Integer, LockOpenListItem, Ok, Result, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { TextFormatter } from '../../../services/internal-api';
-import { Badness, CorrectnessBadness } from '../../../sys/internal-api';
+import { TextFormatter } from '../../../services';
+import { Badness, CorrectnessBadness } from '../../../sys';
 import { GridField } from '../../field/internal-api';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory

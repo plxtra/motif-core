@@ -3,13 +3,13 @@ import {
     Integer,
     MultiEvent
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Correctness,
     CorrectnessId,
     FieldDataTypeId,
     KeyedCorrectnessListItem,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { ExchangeEnvironmentZenithCode, FeedClass, FeedClassId, FeedStatus, FeedStatusId, ZenithEnvironmentedValueParts } from '../common/internal-api';
 
 export class Feed implements KeyedCorrectnessListItem {

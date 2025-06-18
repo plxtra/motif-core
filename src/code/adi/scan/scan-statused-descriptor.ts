@@ -8,7 +8,7 @@ import {
 import {
     ErrorCode,
     ZenithDataError
-} from "../../sys/internal-api";
+} from "../../sys";
 import { ActiveFaultedStatusId, ScanStatusedDescriptorsDataMessage } from '../common/internal-api';
 import { ScanStatusedDescriptorInterface } from './scan-statused-descriptor-interface';
 

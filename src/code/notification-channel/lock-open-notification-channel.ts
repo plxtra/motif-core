@@ -10,11 +10,11 @@ import {
     Result,
 } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { ActiveFaultedStatusId, NotificationChannel, NotificationDistributionMethodId, ZenithProtocolCommon } from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
+import { ActiveFaultedStatusId, NotificationChannel, NotificationDistributionMethodId, ZenithProtocolCommon } from '../adi';
+import { StringId, Strings } from '../res';
 import {
     FieldDataTypeId,
-} from '../sys/internal-api';
+} from '../sys';
 
 export class LockOpenNotificationChannel implements LockOpenListItem<LockOpenNotificationChannel> {
     changedEventer: LockOpenNotificationChannel.ChangedEventer | undefined; // only used by List

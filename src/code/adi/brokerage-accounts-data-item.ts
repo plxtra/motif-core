@@ -1,5 +1,5 @@
 import { Integer, UsableListChangeTypeId, } from '@pbkware/js-utils';
-import { assert, ErrorCode, ZenithDataError } from '../sys/internal-api';
+import { assert, ErrorCode, ZenithDataError } from '../sys';
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import {

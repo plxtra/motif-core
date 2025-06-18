@@ -1,8 +1,8 @@
 import { JsonElement, Ok, PickEnum, Result } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { IvemId, MarketsService, SecurityDataItem } from '../../../../adi/internal-api';
-import { CallPut } from '../../../../services/internal-api';
-import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
+import { IvemId, MarketsService, SecurityDataItem } from '../../../../adi';
+import { CallPut } from '../../../../services';
+import { ErrorCode, JsonElementErr } from '../../../../sys';
 import {
     CallPutTableFieldSourceDefinition,
     CallSecurityDataItemTableFieldSourceDefinition,

@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, Integer, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { DepthLevelsDataItem } from '../../../../adi/internal-api';
+import { DepthLevelsDataItem } from '../../../../adi';
 
 export const enum ShortDepthSideFieldId {
     PriceAndHasUndisclosed,

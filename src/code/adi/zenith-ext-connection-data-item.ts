@@ -1,5 +1,5 @@
 import { Integer, MultiEvent, newNowDate, SysTick } from '@pbkware/js-utils';
-import { assert, Badness } from '../sys/internal-api';
+import { assert, Badness } from '../sys';
 import { AdiPublisher } from './common/adi-publisher';
 import {
     AuthStatusId,

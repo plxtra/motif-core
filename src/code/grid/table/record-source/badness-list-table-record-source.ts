@@ -1,7 +1,7 @@
 import { LockOpenListItem } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { TextFormatter } from '../../../services/internal-api';
-import { BadnessList, CorrectnessBadness } from '../../../sys/internal-api';
+import { TextFormatter } from '../../../services';
+import { BadnessList, CorrectnessBadness } from '../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { BadnessListTableRecordSourceDefinition } from './definition/internal-api';
 import { SubscribeBadnessListTableRecordSource } from './subscribe-badness-list-table-record-source';

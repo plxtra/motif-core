@@ -1,9 +1,9 @@
 import { AssertInternalError, JsonElement, UnexpectedCaseError, UnreachableCaseError } from '@pbkware/js-utils';
-import { AdiService } from '../adi/internal-api';
-import { ScansService } from '../scan/internal-api';
-import { AppStorageService, IdleService, KeyValueStore } from '../services/internal-api';
-import { LockOpenList } from '../sys/internal-api';
-import { WatchmakerService } from '../watchmaker/internal-api';
+import { AdiService } from '../adi';
+import { ScansService } from '../scan';
+import { AppStorageService, IdleService, KeyValueStore } from '../services';
+import { LockOpenList } from '../sys';
+import { WatchmakerService } from '../watchmaker';
 import { RankedDataIvemIdListDefinition } from './definition/internal-api';
 import { RankedDataIvemIdListReferential } from './ranked-data-ivem-id-list-referential';
 

@@ -1,6 +1,6 @@
 import { ChangeSubscribableComparableList, JsonElement, Ok, PickEnum, Result } from '@pbkware/js-utils';
-import { DataIvemId, Market, MarketIvemId, MarketsService } from '../../../../adi/internal-api';
-import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
+import { DataIvemId, Market, MarketIvemId, MarketsService } from '../../../../adi';
+import { ErrorCode, JsonElementErr } from '../../../../sys';
 import { TableFieldSourceDefinition } from '../../field-source/internal-api';
 import { UsableListTableRecordSourceDefinition } from './usable-list-table-record-source-definition';
 

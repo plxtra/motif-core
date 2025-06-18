@@ -8,8 +8,8 @@ import {
     UsableListChangeTypeId
 } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { TextFormatter } from '../../../services/internal-api';
-import { Badness } from '../../../sys/internal-api';
+import { TextFormatter } from '../../../services';
+import { Badness } from '../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { TableRecordSourceDefinition } from './definition/internal-api';
 import { TableRecordSource } from './table-record-source';

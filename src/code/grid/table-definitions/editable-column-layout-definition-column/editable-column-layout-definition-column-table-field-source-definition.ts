@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { FieldDataType } from '../../../sys/internal-api';
+import { FieldDataType } from '../../../sys';
 import {
     BooleanTableField,
     IntegerTableField,

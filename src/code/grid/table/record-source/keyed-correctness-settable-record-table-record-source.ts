@@ -1,4 +1,4 @@
-import { KeyedCorrectnessSettableList, KeyedCorrectnessSettableListItem } from "../../../sys/internal-api";
+import { KeyedCorrectnessSettableList, KeyedCorrectnessSettableListItem } from "../../../sys";
 import { SubscribeBadnessListTableRecordSource } from './subscribe-badness-list-table-record-source';
 
 export abstract class KeyedCorrectnessSettableRecordTableRecordSource<

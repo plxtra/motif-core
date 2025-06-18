@@ -13,11 +13,11 @@ import {
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import {
     assert,
     FieldDataTypeId,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     CallOrPutId,
     CurrencyId,

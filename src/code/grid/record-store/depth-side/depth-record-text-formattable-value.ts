@@ -1,5 +1,5 @@
-import { OrderSideId } from '../../../adi/internal-api';
-import { TextFormattableValue } from '../../../services/internal-api';
+import { OrderSideId } from '../../../adi';
+import { TextFormattableValue } from '../../../services';
 import { GridRecordStoreTextFormattableValue } from '../grid-record-store-text-formattable-value';
 import { DepthRecord } from './depth-record';
 

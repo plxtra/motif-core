@@ -1,6 +1,6 @@
 import { AssertInternalError, IndexSignatureHack, Integer } from '@pbkware/js-utils';
 import { RevDataServer, RevRectangle, RevStandardCheckboxPainter, RevViewCell } from 'revgrid';
-import { SettingsService, TextFormattableValue } from '../../../../services/internal-api';
+import { SettingsService, TextFormattableValue } from '../../../../services';
 import { GridField } from '../../../field/internal-api';
 import { SourcedFieldGrid } from '../../adapted-revgrid/sourced-field-grid';
 import { AdaptedRevgridBehavioredColumnSettings } from '../../settings/internal-api';

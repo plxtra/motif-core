@@ -8,11 +8,11 @@ import {
     UnexpectedCaseError,
     UnreachableCaseError,
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../../res/internal-api';
+import { StringId, Strings } from '../../../res';
 import {
     ErrorCode,
     ZenithDataError
-} from "../../../sys/internal-api";
+} from "../../../sys";
 import { AdiPublisherSubscriptionManager } from '../../common/adi-publisher-subscription-manager';
 import {
     AdiPublisherRequest,

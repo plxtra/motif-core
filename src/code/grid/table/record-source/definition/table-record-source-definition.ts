@@ -8,12 +8,12 @@ import {
     compareNumber
 } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings, RevTableRecordSourceDefinition } from 'revgrid';
-import { StringId, Strings } from '../../../../res/internal-api';
-import { TextFormattableValue } from '../../../../services/internal-api';
+import { StringId, Strings } from '../../../../res';
+import { TextFormattableValue } from '../../../../services';
 import {
     ErrorCode,
     JsonElementErr,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 
 export abstract class TableRecordSourceDefinition extends RevTableRecordSourceDefinition<

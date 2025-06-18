@@ -1,6 +1,6 @@
 import { PickEnum } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { BrokerageAccount, BrokerageAccountGroup, Order } from '../../../../adi/internal-api';
+import { BrokerageAccount, BrokerageAccountGroup, Order } from '../../../../adi';
 import { BrokerageAccountTableFieldSourceDefinition, OrderTableFieldSourceDefinition, TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { BrokerageAccountGroupTableRecordSourceDefinition } from './brokerage-account-group-table-record-source-definition';
 import { TableRecordSourceDefinition } from './table-record-source-definition';

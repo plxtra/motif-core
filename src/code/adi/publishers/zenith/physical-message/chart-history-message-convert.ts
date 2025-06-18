@@ -1,6 +1,6 @@
 import { AssertInternalError, Err, Ok, Result } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../../../res/internal-api';
-import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
+import { StringId, Strings } from '../../../../res';
+import { ErrorCode, ZenithDataError } from '../../../../sys';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

@@ -1,6 +1,6 @@
 import { AssertInternalError, DecimalFactory, Integer, LockOpenListItem, NotImplementedError, Ok, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { AdiService, RankedDataIvemId } from '../../../adi/internal-api';
+import { AdiService, RankedDataIvemId } from '../../../adi';
 import {
     DataIvemIdArrayRankedDataIvemIdListDefinition,
     DataIvemIdExecuteScanRankedDataIvemIdListDefinition,
@@ -8,10 +8,10 @@ import {
     RankedDataIvemIdListDefinition,
     RankedDataIvemIdListFactoryService,
     ScanIdRankedDataIvemIdListDefinition
-} from "../../../ranked-lit-ivem-id-list/internal-api";
-import { TextFormatter } from '../../../services/internal-api';
+} from "../../../ranked-lit-ivem-id-list";
+import { TextFormatter } from '../../../services';
 import { SymbolDetailCacheService } from '../../../services/symbol-detail-cache-service';
-import { CorrectnessBadness, ErrorCode, } from '../../../sys/internal-api';
+import { CorrectnessBadness, ErrorCode, } from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

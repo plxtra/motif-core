@@ -4,11 +4,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { BrokerageAccount } from '../../../../adi/internal-api';
+import { BrokerageAccount } from '../../../../adi';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     CorrectnessTableField,
     EnumCorrectnessTableField,

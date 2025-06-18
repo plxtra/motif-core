@@ -1,6 +1,6 @@
 import { PickEnum } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { Scan } from '../../../../scan/internal-api';
+import { Scan } from '../../../../scan';
 import { ScanTableFieldSourceDefinition, TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

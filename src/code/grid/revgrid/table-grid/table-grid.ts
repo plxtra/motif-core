@@ -1,7 +1,7 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { RevColumnLayout, RevGridDefinition, RevGridOptions, RevRecordSchemaServer, RevSubgrid, RevTableGrid, RevViewLayout } from 'revgrid';
-import { SettingsService, TextFormattableValue } from '../../../services/internal-api';
-import { Badness } from '../../../sys/internal-api';
+import { SettingsService, TextFormattableValue } from '../../../services';
+import { Badness } from '../../../sys';
 import { GridField } from '../../field/internal-api';
 import { ReferenceableColumnLayoutsService } from '../../layout/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory, TableRecordSourceDefinition, TableRecordStore } from '../../table/internal-api';

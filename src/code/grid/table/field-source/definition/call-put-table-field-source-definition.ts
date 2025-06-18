@@ -4,11 +4,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { CallPut } from '../../../../services/internal-api';
+import { CallPut } from '../../../../services';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     BooleanTableField,
     DataIvemIdTableField,

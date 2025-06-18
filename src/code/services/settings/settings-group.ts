@@ -1,5 +1,5 @@
 import { EnumInfoOutOfOrderError, Err, Integer, JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../../sys';
 
 export abstract class SettingsGroup {
     beginChangesEvent: SettingsGroup.BeginChangesEvent;

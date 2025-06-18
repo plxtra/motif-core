@@ -8,8 +8,8 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi/internal-api';
-import { FactoryisedDecimal, TextFormattableValue } from '../../../services/internal-api';
+import { AdiService, DataIvemId, HigherLowerId, SecurityDataDefinition, SecurityDataItem } from '../../../adi';
+import { FactoryisedDecimal, TextFormattableValue } from '../../../services';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,

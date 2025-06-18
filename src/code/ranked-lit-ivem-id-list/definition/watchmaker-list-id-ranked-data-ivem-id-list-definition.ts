@@ -1,5 +1,5 @@
 import { JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../../sys';
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';
 
 /** @public */

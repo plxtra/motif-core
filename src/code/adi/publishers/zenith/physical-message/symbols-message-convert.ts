@@ -9,7 +9,7 @@ import {
     ErrorCode,
     ifDefined,
     ZenithDataError
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

@@ -3,7 +3,7 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevHorizontalAlignId, RevRecordField, RevRecordSourcedFieldDefinition, RevRecordSourcedFieldSourceDefinition, RevSourcedFieldDefinition } from 'revgrid';
-import { StringId, Strings } from '../../../res/internal-api';
+import { StringId, Strings } from '../../../res';
 import {
     ColorScheme,
     ColorSettings,
@@ -14,7 +14,7 @@ import {
     NumberTextFormattableValue,
     StringTextFormattableValue,
     TextFormattableValue
-} from '../../../services/internal-api';
+} from '../../../services';
 import { GridField } from '../../field/internal-api';
 import { ColorSchemeGridRecordStore } from './color-scheme-grid-record-store';
 

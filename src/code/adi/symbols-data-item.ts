@@ -1,5 +1,5 @@
 import { Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { assert, CorrectnessList, ErrorCode, FeedError } from '../sys/internal-api';
+import { assert, CorrectnessList, ErrorCode, FeedError } from '../sys';
 import {
     AurcChangeTypeId,
     DataDefinition,

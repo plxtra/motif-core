@@ -1,5 +1,5 @@
 import { RevReferenceableColumnLayout, RevReferenceableColumnLayoutDefinition, RevReferenceableColumnLayouts } from 'revgrid';
-import { LockOpenList } from '../../sys/internal-api';
+import { LockOpenList } from '../../sys';
 
 export class ReferenceableColumnLayoutsService extends LockOpenList<RevReferenceableColumnLayout> implements RevReferenceableColumnLayouts {
     getOrNew(definition: RevReferenceableColumnLayoutDefinition): RevReferenceableColumnLayout {

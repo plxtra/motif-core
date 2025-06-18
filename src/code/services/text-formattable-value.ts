@@ -20,11 +20,11 @@ import {
     TradeFlagId,
     TradingIvemId,
     TradingState
-} from "../adi/internal-api";
+} from "../adi";
 import {
     CorrectnessId,
     PriceOrRemainder,
-} from '../sys/internal-api';
+} from '../sys';
 import { FactoryisedDecimal } from './factoryised-decimal';
 import { ColorSettings } from './settings/internal-api';
 

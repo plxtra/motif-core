@@ -1,6 +1,6 @@
 import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { Order } from '../../../adi/internal-api';
-import { FactoryisedDecimal } from '../../../services/internal-api';
+import { Order } from '../../../adi';
+import { FactoryisedDecimal } from '../../../services';
 import { OrderTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanCorrectnessTableValue,

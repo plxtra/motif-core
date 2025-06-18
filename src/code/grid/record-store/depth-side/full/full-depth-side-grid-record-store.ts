@@ -11,11 +11,11 @@ import {
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from 'revgrid';
-import { DepthDataItem, DepthStyleId, MarketsService, OrderSide, OrderSideId } from '../../../../adi/internal-api';
+import { DepthDataItem, DepthStyleId, MarketsService, OrderSide, OrderSideId } from '../../../../adi';
 import { SessionInfoService } from '../../../../services/session-info-service';
 import {
     CorrectnessId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import { DepthRecord } from '../depth-record';
 import { DepthSideGridRecordStore } from '../depth-side-grid-record-store';
 import { FullDepthRecord, OrderFullDepthRecord, PriceLevelFullDepthRecord } from './full-depth-record';

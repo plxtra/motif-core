@@ -15,12 +15,12 @@ import {
     secsPerMin
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Badness,
     CorrectnessId,
     assert,
-} from '../../sys/internal-api';
+} from '../../sys';
 import { ZenithProtocolCommon } from './zenith-protocol/internal-api';
 
 // No Enum value should have an external dependency or be persisted. Use exports or imports instead.

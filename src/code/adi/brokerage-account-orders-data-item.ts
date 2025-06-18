@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { assert, ErrorCodeLogger } from '../sys/internal-api';
+import { assert, ErrorCodeLogger } from '../sys';
 import { BrokerageAccountGroupOrderList } from './brokerage-account-group-order-list';
 import { AurcChangeTypeId, DataMessage, DataMessageTypeId, OrdersDataMessage } from './common/internal-api';
 import { Order } from './order';

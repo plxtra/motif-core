@@ -1,7 +1,7 @@
 import { AssertInternalError, Guid, IndexedRecord, Integer, LockOpenListItem, LockOpenManager, MapKey, Ok, Result, UnexpectedCaseError } from '@pbkware/js-utils';
-import { AdiService } from '../adi/internal-api';
-import { ScansService } from '../scan/internal-api';
-import { ErrorCode } from "../sys/internal-api";
+import { AdiService } from '../adi';
+import { ScansService } from '../scan';
+import { ErrorCode } from "../sys";
 import { WatchmakerService } from '../watchmaker/watchmaker-service';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import { DataIvemIdArrayRankedDataIvemIdList } from './data-ivem-id-array-ranked-data-ivem-id-list';

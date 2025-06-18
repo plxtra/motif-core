@@ -6,7 +6,7 @@ import {
 import { StringId, Strings } from '../../res/i18n-strings';
 import {
     FieldDataTypeId,
-} from "../../sys/internal-api";
+} from "../../sys";
 import {
     MarketOrderRoute,
     OrderRouteAlgorithmId,

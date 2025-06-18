@@ -14,7 +14,7 @@ import {
     Badness,
     CorrectnessId,
     KeyedCorrectnessSettableList,
-} from '../sys/internal-api';
+} from '../sys';
 import { AllBrokerageAccountsListChangeDataItem } from './all-brokerage-accounts-list-change-data-item';
 import { AllBrokerageAccountGroup } from './brokerage-account-group';
 import { BrokerageAccountGroupRecordList } from './brokerage-account-group-record-list';

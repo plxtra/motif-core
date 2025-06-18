@@ -10,9 +10,9 @@ import {
     BrokerageAccountOrdersDataItem,
     Order,
     SingleBrokerageAccountGroup
-} from "../../../adi/internal-api";
-import { TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness } from '../../../sys/internal-api';
+} from "../../../adi";
+import { TextFormatter } from '../../../services';
+import { CorrectnessBadness } from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

@@ -1,5 +1,5 @@
 import { Integer, MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { Exchange, MarketsService, SymbolFieldId } from '../../adi/internal-api';
+import { Exchange, MarketsService, SymbolFieldId } from '../../adi';
 import { ExchangeSettings } from './exchange-settings';
 import { TypedKeyValueArraySettingsGroup } from './typed-key-value-array-settings-group';
 

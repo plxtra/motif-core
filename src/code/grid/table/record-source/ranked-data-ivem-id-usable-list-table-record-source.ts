@@ -1,9 +1,9 @@
 import { DecimalFactory, Integer, NotImplementedError, UnreachableCaseError, UsableListChangeType, UsableListChangeTypeId, moveElementsInArray } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { AdiService, DataIvemBaseDetail, RankedDataIvemId } from '../../../adi/internal-api';
-import { TextFormatter } from '../../../services/internal-api';
+import { AdiService, DataIvemBaseDetail, RankedDataIvemId } from '../../../adi';
+import { TextFormatter } from '../../../services';
 import { SymbolDetailCacheService } from '../../../services/symbol-detail-cache-service';
-import { Badness, BadnessComparableList, CorrectnessBadness } from '../../../sys/internal-api';
+import { Badness, BadnessComparableList, CorrectnessBadness } from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

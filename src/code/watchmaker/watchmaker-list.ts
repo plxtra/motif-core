@@ -21,9 +21,9 @@ import {
     RankScoredDataIvemId,
     RankScoredDataIvemIdList,
     WatchmakerListDescriptor
-} from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { RankedDataIvemIdListDirectoryItem } from '../services/internal-api';
+} from '../adi';
+import { StringId, Strings } from '../res';
+import { RankedDataIvemIdListDirectoryItem } from '../services';
 import {
     Badness,
     BadnessList,
@@ -32,7 +32,7 @@ import {
     ErrorCodeLogger,
     FieldDataTypeId,
     KeyedCorrectnessSettableListItem,
-} from '../sys/internal-api';
+} from '../sys';
 
 export class WatchmakerList implements LockOpenListItem<RankedDataIvemIdListDirectoryItem>, KeyedCorrectnessSettableListItem, RankScoredDataIvemIdList, RankedDataIvemIdListDirectoryItem {
     readonly directoryItemTypeId = RankedDataIvemIdListDirectoryItem.TypeId.WatchmakerList;

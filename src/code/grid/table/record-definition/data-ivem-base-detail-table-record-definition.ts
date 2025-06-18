@@ -1,4 +1,4 @@
-import { DataIvemBaseDetail } from '../../../adi/internal-api';
+import { DataIvemBaseDetail } from '../../../adi';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { TableRecordDefinition } from './table-record-definition';
 

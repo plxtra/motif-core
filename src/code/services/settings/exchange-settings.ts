@@ -1,5 +1,5 @@
 import { AssertInternalError } from '@pbkware/js-utils';
-import { Exchange, MarketsConfig, SymbolField, SymbolFieldId } from '../../adi/internal-api';
+import { Exchange, MarketsConfig, SymbolField, SymbolFieldId } from '../../adi';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 
 export class ExchangeSettings {

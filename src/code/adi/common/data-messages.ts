@@ -12,7 +12,7 @@ import {
 import { Decimal } from 'decimal.js-light';
 import {
     PriceOrRemainder,
-} from '../../sys/internal-api';
+} from '../../sys';
 import { AdiPublisherSubscription } from './adi-publisher-subscription';
 import { DataIvemAlternateCodes } from './data-ivem-alternate-codes';
 import { DataIvemAttributes } from './data-ivem-attributes';

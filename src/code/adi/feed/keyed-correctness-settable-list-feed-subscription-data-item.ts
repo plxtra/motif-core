@@ -8,7 +8,7 @@ import {
 import {
     KeyedCorrectnessSettableList,
     KeyedCorrectnessSettableListItem,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { FeedSubscriptionDataItem } from './feed-subscription-data-item';
 
 export abstract class KeyedCorrectnessSettableListFeedSubscriptionDataItem<Record extends KeyedCorrectnessSettableListItem> extends FeedSubscriptionDataItem

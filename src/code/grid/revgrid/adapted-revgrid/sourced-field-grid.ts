@@ -1,6 +1,6 @@
 // import { ColorScheme, GridField, MultiEvent, SettingsService } from '@motifmarkets/motif-core';
 import { RevSourcedFieldGrid } from 'revgrid';
-import { ColorScheme, SettingsService } from '../../../services/internal-api';
+import { ColorScheme, SettingsService } from '../../../services';
 import { GridField } from '../../field/internal-api';
 import {
     AdaptedRevgridBehavioredColumnSettings,

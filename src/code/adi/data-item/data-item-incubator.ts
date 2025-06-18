@@ -1,5 +1,5 @@
 import { AssertInternalError, MultiEvent } from '@pbkware/js-utils';
-import { Incubator } from '../../sys/internal-api';
+import { Incubator } from '../../sys';
 import { DataDefinition } from '../common/internal-api';
 import { AdiService } from './adi-service';
 import { DataItem } from './data-item';

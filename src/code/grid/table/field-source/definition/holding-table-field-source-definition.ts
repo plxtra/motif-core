@@ -4,11 +4,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { Holding } from '../../../../adi/internal-api';
+import { Holding } from '../../../../adi';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     CorrectnessTableField,
     DecimalCorrectnessTableField,

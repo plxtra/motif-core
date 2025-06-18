@@ -1,7 +1,7 @@
 import { JsonElement, Ok, PickEnum, Result } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { DataIvemId, MarketIvemId, MarketsService, TopShareholder } from '../../../../adi/internal-api';
-import { ErrorCode } from '../../../../sys/internal-api';
+import { DataIvemId, MarketIvemId, MarketsService, TopShareholder } from '../../../../adi';
+import { ErrorCode } from '../../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory, TopShareholderTableFieldSourceDefinition } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

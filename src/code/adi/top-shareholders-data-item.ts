@@ -11,7 +11,7 @@ import {
     assert,
     Badness,
     defined,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     DataMessage,
     TopShareholder,

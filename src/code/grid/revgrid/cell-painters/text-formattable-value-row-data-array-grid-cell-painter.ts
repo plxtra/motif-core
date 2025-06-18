@@ -6,7 +6,7 @@ import {
     StringTextFormattableValue,
     TextFormattableValue,
     TrueFalseTextFormattableValue
-} from '../../../services/internal-api';
+} from '../../../services';
 import { GridField } from '../../field/internal-api';
 import { AdaptedRevgridBehavioredColumnSettings } from '../settings/adapted-revgrid-behaviored-column-settings';
 import { TextFormattableValueCellPainter } from './text-formattable-value/internal-api';

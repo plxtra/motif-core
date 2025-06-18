@@ -1,5 +1,5 @@
-import { ExtStringId, StringId } from '../res/internal-api';
-import { ExtensionHandle, Handle } from '../sys/internal-api';
+import { ExtStringId, StringId } from '../res';
+import { ExtensionHandle, Handle } from '../sys';
 import { Command } from './command';
 import { InternalCommand } from './internal-command';
 

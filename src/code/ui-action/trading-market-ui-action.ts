@@ -1,4 +1,4 @@
-import { TradingMarket } from '../adi/internal-api';
+import { TradingMarket } from '../adi';
 import { MarketUiAction } from './market-ui-action';
 
 export class TradingMarketUiAction extends MarketUiAction<TradingMarket> {

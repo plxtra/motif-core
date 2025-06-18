@@ -1,7 +1,7 @@
 import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevDataSourceOrReferenceDefinition } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
-import { ErrorCode } from '../../sys/internal-api';
+import { TextFormattableValue } from '../../services';
+import { ErrorCode } from '../../sys';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 import { DataSourceDefinition } from './data-source-definition';
 import { TableRecordSourceDefinitionFromJsonFactory } from './table-record-source-definition-from-json-factory';

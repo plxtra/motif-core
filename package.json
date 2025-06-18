@@ -38,7 +38,9 @@
     "force-api": "npm run force-build && npm run rollup",
     "clean": "npx del-cli ./dist/* && npx del-cli ./lib/*",
     "dist": "npm run clean && npm run force-api",
-    "publish": "npm publish --access=public"
+    "publish": "npm publish --access=public",
+    "docs:build": "typedoc --options ./typedoc.json",
+    "docs:serve": "ws -d docs"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
@@ -55,6 +57,8 @@
     "eslint": "^9.28.0",
     "eslint-import-resolver-typescript": "^4.4.2",
     "eslint-plugin-import-x": "^4.15.0",
+    "local-web-server": "^5.4.0",
+    "typedoc": "^0.28.5",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.33.0"
   }

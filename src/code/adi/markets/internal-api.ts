@@ -8,4 +8,6 @@ export * from './markets-data-item';
 export * from './markets-service';
 export * from './trading-market';
 export * from './trading-states-data-item';
+export * from './zenith-coded-environment';
+export * from './zenith-data-market';
 

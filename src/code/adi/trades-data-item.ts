@@ -16,7 +16,7 @@ import {
     assert,
     Badness,
     CorrectnessBadness,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     AuiChangeTypeId, DataDefinition,
     DataMessage,

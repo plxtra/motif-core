@@ -1,5 +1,5 @@
 import { AssertInternalError, DecimalFactory, UnreachableCaseError } from '@pbkware/js-utils';
-import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
+import { ErrorCode, ZenithDataError } from '../../../../sys';
 import {
     AurcChangeTypeId,
     BestMarketOrderRoute,

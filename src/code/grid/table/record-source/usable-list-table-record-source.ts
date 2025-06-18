@@ -1,7 +1,7 @@
 import { Integer, LockOpenListItem, MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, UsableList } from '../../../sys/internal-api';
+import { TextFormatter } from '../../../services';
+import { CorrectnessBadness, UsableList } from '../../../sys';
 import { TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { UsableListTableRecordSourceDefinition } from './definition/internal-api';
 import { TableRecordSource } from './table-record-source';

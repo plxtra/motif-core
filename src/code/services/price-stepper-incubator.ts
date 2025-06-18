@@ -1,4 +1,4 @@
-import { AdiService } from '../adi/internal-api';
+import { AdiService } from '../adi';
 import { SecurityPriceStepper } from './security-price-stepper';
 import { SymbolDetailCacheService } from './symbol-detail-cache-service';
 

@@ -1,4 +1,4 @@
-import { DataMarket } from '../adi/internal-api';
+import { DataMarket } from '../adi';
 import { MarketUiAction } from './market-ui-action';
 
 export class DataMarketUiAction extends MarketUiAction<DataMarket> {

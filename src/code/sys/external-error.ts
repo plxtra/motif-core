@@ -1,4 +1,4 @@
-import { I18nStrings, StringId } from '../res/internal-api';
+import { I18nStrings, StringId } from '../res';
 import { ErrorCode } from './error-code';
 
 /** @public */

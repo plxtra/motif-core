@@ -4,11 +4,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { DataIvemAlternateCodes } from '../../../../adi/internal-api';
+import { DataIvemAlternateCodes } from '../../../../adi';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import { CorrectnessTableField, StringCorrectnessTableField, TableField } from '../../field/internal-api';
 import { CorrectnessTableValue, StringCorrectnessTableValue } from '../../value/internal-api';
 import { TableFieldSourceDefinition } from './table-field-source-definition';

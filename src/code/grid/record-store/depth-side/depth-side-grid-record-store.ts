@@ -1,7 +1,7 @@
 import { Integer } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { RevRecordIndex, RevRecordInvalidatedValue, RevRecordStore } from 'revgrid';
-import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi/internal-api';
+import { DepthStyleId, MarketsService, OrderSideId } from '../../../adi';
 import { DepthRecord } from './depth-record';
 
 /** @public */

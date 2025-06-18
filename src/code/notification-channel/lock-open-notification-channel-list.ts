@@ -1,5 +1,5 @@
-import { NotificationChannel } from '../adi/internal-api';
-import { LockOpenList } from '../sys/internal-api';
+import { NotificationChannel } from '../adi';
+import { LockOpenList } from '../sys';
 import { LockOpenNotificationChannel } from './lock-open-notification-channel';
 
 

@@ -1,5 +1,5 @@
 import { Integer, UnreachableCaseError } from '@pbkware/js-utils';
-import { TopShareholder, TopShareholdersDataItem } from '../../../adi/internal-api';
+import { TopShareholder, TopShareholdersDataItem } from '../../../adi';
 import { TopShareholderTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

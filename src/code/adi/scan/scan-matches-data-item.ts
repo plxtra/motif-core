@@ -10,7 +10,7 @@ import {
 import {
     ErrorCode,
     ZenithDataError
-} from '../../sys/internal-api';
+} from '../../sys';
 import {
     AurcChangeTypeId,
     DataDefinition,

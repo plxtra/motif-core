@@ -1,7 +1,7 @@
 import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevDataSourceOrReference } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
-import { Badness, ErrorCode } from '../../sys/internal-api';
+import { TextFormattableValue } from '../../services';
+import { Badness, ErrorCode } from '../../sys';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 
 export class DataSourceOrReference extends RevDataSourceOrReference<

@@ -7,8 +7,8 @@ import {
     isUndefinableDecimalEqual
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { StringId, Strings } from '../res/internal-api';
-import { FieldDataTypeId } from '../sys/internal-api';
+import { StringId, Strings } from '../res';
+import { FieldDataTypeId } from '../sys';
 import {
     CallOrPutId,
     DataIvemAlternateCodes,

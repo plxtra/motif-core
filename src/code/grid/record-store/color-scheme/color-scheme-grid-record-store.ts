@@ -8,7 +8,7 @@ import {
     ColorScheme,
     ColorSettings,
     SettingsService
-} from '../../../services/internal-api';
+} from '../../../services';
 
 /** @public */
 export class ColorSchemeGridRecordStore implements RevRecordStore {

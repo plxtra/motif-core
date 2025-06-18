@@ -6,12 +6,12 @@ import {
     Result,
     UsableListChangeTypeId
 } from '@pbkware/js-utils';
-import { AdiService } from '../adi/internal-api';
-import { NotificationChannelsService } from '../notification-channel/internal-api';
-import { SymbolsService } from '../services/internal-api';
+import { AdiService } from '../adi';
+import { NotificationChannelsService } from '../notification-channel';
+import { SymbolsService } from '../services';
 import {
     ErrorCode,
-} from "../sys/internal-api";
+} from "../sys";
 import { ScanConditionSet } from './condition-set/internal-api';
 import { ScanFieldSet } from './field-set/internal-api';
 import { ScanFormulaZenithEncodingService } from './formula/internal-api';

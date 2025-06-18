@@ -4,13 +4,13 @@ import {
     MultiEvent
 } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import {
     Correctness,
     CorrectnessId,
     FieldDataTypeId,
     KeyedCorrectnessListItem,
-} from "../sys/internal-api";
+} from "../sys";
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import {
     BrokerageAccountsDataMessage,

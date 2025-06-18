@@ -14,12 +14,12 @@ import {
     TopShareholder,
     TopShareholdersDataDefinition,
     TopShareholdersDataItem
-} from "../../../adi/internal-api";
-import { TextFormatter } from '../../../services/internal-api';
+} from "../../../adi";
+import { TextFormatter } from '../../../services';
 import {
     Badness,
     CorrectnessBadness,
-} from "../../../sys/internal-api";
+} from "../../../sys";
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

@@ -3,7 +3,7 @@ import {
 } from '@pbkware/js-utils';
 import {
     ErrorCode, ZenithDataError
-} from '../../../../sys/internal-api';
+} from '../../../../sys';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

@@ -1,8 +1,8 @@
 import { Integer, LockOpenListItem, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { RankedDataIvemIdListDirectory } from '../../../ranked-lit-ivem-id-list/internal-api';
-import { RankedDataIvemIdListDirectoryItem, TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness } from '../../../sys/internal-api';
+import { RankedDataIvemIdListDirectory } from '../../../ranked-lit-ivem-id-list';
+import { RankedDataIvemIdListDirectoryItem, TextFormatter } from '../../../services';
+import { CorrectnessBadness } from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

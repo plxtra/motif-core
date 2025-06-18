@@ -1,4 +1,4 @@
-import { SettingsService, TextFormatter } from '../../../services/internal-api';
+import { SettingsService, TextFormatter } from '../../../services';
 import { RecordSourcedFieldGrid, SingleHeadingGridDataServer, SourcedFieldGrid } from '../adapted-revgrid/internal-api';
 import { RecordGridDataServer } from '../record-grid/internal-api';
 import { RowDataArrayGrid, RowDataArrayGridDataServer } from '../row-data-array-grid/internal-api';

@@ -1,6 +1,6 @@
 import { DecimalFactory, IndexedRecord, Integer } from '@pbkware/js-utils';
-import { MarketsService } from '../../../adi/internal-api';
-import { IntegerTextFormattableValue, TextFormattableValue } from '../../../services/internal-api';
+import { MarketsService } from '../../../adi';
+import { IntegerTextFormattableValue, TextFormattableValue } from '../../../services';
 
 /** @public */
 export abstract class DepthRecord implements IndexedRecord {

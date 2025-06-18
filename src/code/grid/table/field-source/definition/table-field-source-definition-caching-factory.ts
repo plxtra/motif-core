@@ -1,5 +1,5 @@
 import { RevTableFieldSourceDefinitionCachingFactory } from 'revgrid';
-import { TextFormattableValue } from '../../../../services/internal-api';
+import { TextFormattableValue } from '../../../../services';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
 
 export interface TableFieldSourceDefinitionCachingFactory extends RevTableFieldSourceDefinitionCachingFactory<

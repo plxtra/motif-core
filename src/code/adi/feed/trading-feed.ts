@@ -4,13 +4,13 @@ import {
     Integer,
     MultiEvent
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Badness,
     Correctness,
     CorrectnessId,
     FieldDataTypeId,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { FeedClassId, FeedStatusId, OrderStatuses, TradingMarketsDataMessage } from '../common/internal-api';
 import { Feed } from './feed';
 import { OrderStatusesDataItem } from './order-statuses-data-item';

@@ -1,7 +1,7 @@
 /* eslint-disable brace-style */
 import { Integer, SourceTzOffsetDateTime, SysTick } from '@pbkware/js-utils';
-import { OrderTypeId, TimeInForceId } from '../../adi/internal-api';
-import { SourceTzOffsetDateTimeTimezoneMode } from '../../sys/internal-api';
+import { OrderTypeId, TimeInForceId } from '../../adi';
+import { SourceTzOffsetDateTimeTimezoneMode } from '../../sys';
 import { TypedKeyValueScalarSettingsGroup } from './typed-key-value-scalar-settings-group';
 import { TypedKeyValueSettings } from './typed-key-value-settings';
 

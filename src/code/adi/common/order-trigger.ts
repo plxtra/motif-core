@@ -6,7 +6,7 @@ import {
     isUndefinableDecimalEqual,
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import { Movement, MovementId, OrderTriggerTypeId } from './data-types';
 
 export abstract class OrderTrigger {

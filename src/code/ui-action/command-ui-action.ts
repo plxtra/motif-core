@@ -1,7 +1,7 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { BooleanUiAction } from '@pbkware/ui-action';
-import { Command } from '../command/internal-api';
-import { extStrings } from '../res/internal-api';
+import { Command } from '../command';
+import { extStrings } from '../res';
 
 export class CommandUiAction extends BooleanUiAction {
     private _accessKey = '';

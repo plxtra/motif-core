@@ -1,4 +1,4 @@
-import { BrokerageAccount } from '../../../adi/internal-api';
+import { BrokerageAccount } from '../../../adi';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { KeyedCorrectnessTableRecordDefinition } from './keyed-correctness-table-record-definition';
 import { TableRecordDefinition } from './table-record-definition';

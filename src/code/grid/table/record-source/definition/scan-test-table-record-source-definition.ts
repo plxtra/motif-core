@@ -1,6 +1,6 @@
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { DataIvemBaseDetail, RankedDataIvemId } from '../../../../adi/internal-api';
-import { DataIvemIdExecuteScanRankedDataIvemIdListDefinition } from '../../../../ranked-lit-ivem-id-list/internal-api';
+import { DataIvemBaseDetail, RankedDataIvemId } from '../../../../adi';
+import { DataIvemIdExecuteScanRankedDataIvemIdListDefinition } from '../../../../ranked-lit-ivem-id-list';
 import {
     DataIvemBaseDetailTableFieldSourceDefinition,
     RankedDataIvemIdTableFieldSourceDefinition,

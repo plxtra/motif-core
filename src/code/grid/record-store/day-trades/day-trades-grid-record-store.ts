@@ -6,7 +6,7 @@ import {
     UsableListChangeTypeId
 } from '@pbkware/js-utils';
 import { RevRecordStore } from 'revgrid';
-import { DayTradesDataItem } from '../../../adi/internal-api';
+import { DayTradesDataItem } from '../../../adi';
 
 export class DayTradesGridRecordStore implements RevRecordStore {
     private _recordsEventers: RevRecordStore.RecordsEventers;

@@ -1,4 +1,4 @@
-import { CallPut } from '../../../services/internal-api';
+import { CallPut } from '../../../services';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { TableRecordDefinition } from './table-record-definition';
 

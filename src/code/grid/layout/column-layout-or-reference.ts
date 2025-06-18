@@ -1,6 +1,6 @@
 import { AssertInternalError, Err, LockOpenListItem, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevColumnLayoutOrReference } from 'revgrid';
-import { ErrorCode } from '../../sys/internal-api';
+import { ErrorCode } from '../../sys';
 
 export namespace ColumnLayoutOrReference {
     export function tryLock(columnLayoutOrReference: RevColumnLayoutOrReference, locker: LockOpenListItem.Locker): Promise<Result<void>> {

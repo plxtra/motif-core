@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer, MultiEvent, RecordList, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { BadnessList, ErrorCodeLogger } from '../../sys/internal-api';
+import { BadnessList, ErrorCodeLogger } from '../../sys';
 import { AurcChangeTypeId, DataDefinition, DataMessage, DataMessageTypeId, FeedClassId, ScanStatusedDescriptorsDataMessage } from '../common/internal-api';
 import { FeedSubscriptionDataItem } from '../feed/internal-api';
 import { ScanStatusedDescriptor } from './scan-statused-descriptor';

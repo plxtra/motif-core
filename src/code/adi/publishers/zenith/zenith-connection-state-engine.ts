@@ -8,7 +8,7 @@ import {
 } from '@pbkware/js-utils';
 import {
     WebsocketCloseCode
-} from '../../../sys/internal-api';
+} from '../../../sys';
 import { ZenithPublisherReconnectReasonId, ZenithPublisherStateId } from '../../common/internal-api';
 
 export class ZenithConnectionStateEngine {

@@ -1,8 +1,8 @@
 import { UnreachableCaseError } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevRecordSourcedFieldDefinition, RevSourcedFieldDefinition } from 'revgrid';
-import { OrderSideId } from '../../../../adi/internal-api';
-import { TextFormattableValue } from '../../../../services/internal-api';
-import { CorrectnessId } from '../../../../sys/internal-api';
+import { OrderSideId } from '../../../../adi';
+import { TextFormattableValue } from '../../../../services';
+import { CorrectnessId } from '../../../../sys';
 import { AllowedGridField } from '../../../field/internal-api';
 import { DepthSideGridField } from '../depth-side-grid-field';
 import { FullDepthRecord } from './full-depth-record';

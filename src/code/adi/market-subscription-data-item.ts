@@ -6,7 +6,7 @@ import {
 import {
     Badness,
     CorrectnessId,
-} from '../sys/internal-api';
+} from '../sys';
 import { DataDefinition, FeedClass, FeedClassId } from './common/internal-api';
 import { FeedStatusSubscriptionDataItem } from './feed/internal-api';
 import { DataMarket, MarketsService } from './markets/internal-api';

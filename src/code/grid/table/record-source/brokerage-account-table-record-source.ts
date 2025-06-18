@@ -1,8 +1,8 @@
 import { Integer, LockOpenListItem, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { AdiService, BrokerageAccount, BrokerageAccountsDataDefinition, BrokerageAccountsDataItem } from '../../../adi/internal-api';
-import { TextFormatter } from '../../../services/internal-api';
-import { CorrectnessBadness, KeyedCorrectnessList } from '../../../sys/internal-api';
+import { AdiService, BrokerageAccount, BrokerageAccountsDataDefinition, BrokerageAccountsDataItem } from '../../../adi';
+import { TextFormatter } from '../../../services';
+import { CorrectnessBadness, KeyedCorrectnessList } from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

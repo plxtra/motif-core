@@ -1,5 +1,5 @@
 import { delay1Tick, Integer, MultiEvent, SysTick } from '@pbkware/js-utils';
-import { assert, Badness, CorrectnessBadness } from '../../sys/internal-api';
+import { assert, Badness, CorrectnessBadness } from '../../sys';
 import {
     AdiPublisher,
     DataChannel,

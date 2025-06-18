@@ -1,5 +1,5 @@
-import { CommandContext } from '../command-context/internal-api';
-import { Command } from '../command/internal-api';
+import { Command } from '../command';
+import { CommandContext } from '../command-context';
 
 export class KeyboardShortcutRegistry {
     private readonly _shortcutEntries = new Array<KeyboardShortcutRegistry.Entry>();

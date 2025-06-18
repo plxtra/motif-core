@@ -1,6 +1,6 @@
 import { MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { SelectItemsUiAction } from '@pbkware/ui-action';
-import { MarketBoard, MarketsService } from '../adi/internal-api';
+import { MarketBoard, MarketsService } from '../adi';
 
 export class MarketBoardListSelectItemsUiAction extends SelectItemsUiAction<MarketBoard> {
     private _marketBoardListChangeSubscriptionId: MultiEvent.SubscriptionId;

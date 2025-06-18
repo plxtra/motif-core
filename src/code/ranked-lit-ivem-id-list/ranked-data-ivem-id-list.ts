@@ -1,7 +1,7 @@
 import { Integer, LockOpenListItem, Result } from '@pbkware/js-utils';
-import { DataIvemId } from '../adi/internal-api';
+import { DataIvemId } from '../adi';
 import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
-import { BadnessList } from '../sys/internal-api';
+import { BadnessList } from '../sys';
 import { RankedDataIvemIdListDefinition } from './definition/ranked-data-ivem-id-list-definition';
 
 /** @public */

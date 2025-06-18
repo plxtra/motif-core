@@ -10,7 +10,7 @@ import {
     SysTick,
     UnreachableCaseError
 } from '@pbkware/js-utils';
-import { WebsocketCloseCode } from '../../../sys/internal-api';
+import { WebsocketCloseCode } from '../../../sys';
 import { AdiPublisher } from '../../common/adi-publisher';
 import {
     AdiPublisherSubscription,

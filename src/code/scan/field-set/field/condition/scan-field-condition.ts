@@ -1,6 +1,6 @@
 import { AssertInternalError, EnumInfoOutOfOrderError, Integer, PickEnum, SourceTzOffsetDate, UnreachableCaseError, isArrayEqualUniquely } from '@pbkware/js-utils';
-import { CurrencyId, DataMarket, Exchange, MarketBoard } from '../../../../adi/internal-api';
-import { StringId, Strings } from '../../../../res/internal-api';
+import { CurrencyId, DataMarket, Exchange, MarketBoard } from '../../../../adi';
+import { StringId, Strings } from '../../../../res';
 import { ScanFormula } from '../../../formula/internal-api';
 
 export interface ScanFieldCondition<IgnoredModifier = void> {

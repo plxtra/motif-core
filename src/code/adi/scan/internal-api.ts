@@ -5,6 +5,7 @@ export * from './delete-scan-data-item';
 export * from './query-scan-detail-data-item';
 export * from './ranked-data-ivem-id';
 export * from './readonly-ranked-data-ivem-id-record';
+export * from './scan-descriptor-and-detail';
 export * from './scan-detail';
 export * from './scan-match';
 export * from './scan-match-record';

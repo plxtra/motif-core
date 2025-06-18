@@ -1,5 +1,5 @@
 import { EnumInfoOutOfOrderError, HtmlTypes, Integer, JsonElement, UnreachableCaseError } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import { ColorScheme } from './color-scheme';
 import { ColorSchemePreset } from './color-scheme-preset';
 import { SettingsGroup } from './settings-group';

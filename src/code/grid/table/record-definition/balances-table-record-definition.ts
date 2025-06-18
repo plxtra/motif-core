@@ -1,4 +1,4 @@
-import { Balances } from '../../../adi/internal-api';
+import { Balances } from '../../../adi';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { BrokerageAccountRecordTableRecordDefinition } from './brokerage-account-record-table-record-definition';
 import { TableRecordDefinition } from './table-record-definition';

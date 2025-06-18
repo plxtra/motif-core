@@ -1,6 +1,6 @@
 import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail } from '../../../adi/internal-api';
-import { CorrectnessRecord } from '../../../sys/internal-api';
+import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail } from '../../../adi';
+import { CorrectnessRecord } from '../../../sys';
 import { DataIvemAlternateCodesTableFieldSourceDefinition } from '../field-source/internal-api';
 import { CorrectnessTableValue, StringCorrectnessTableValue, TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';

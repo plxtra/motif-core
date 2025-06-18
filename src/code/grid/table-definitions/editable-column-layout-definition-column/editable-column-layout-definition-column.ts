@@ -5,10 +5,10 @@ import {
     MultiEvent,
 } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { StringId, Strings } from '../../../res/internal-api';
+import { StringId, Strings } from '../../../res';
 import {
     FieldDataTypeId,
-} from "../../../sys/internal-api";
+} from "../../../sys";
 import { GridField } from '../../field/internal-api';
 
 export class EditableColumnLayoutDefinitionColumn implements IndexedRecord {

@@ -1,5 +1,5 @@
 import { RevRecordDataServer } from 'revgrid';
-import { ScalarSettings } from '../../../services/internal-api';
+import { ScalarSettings } from '../../../services';
 import { GridField } from '../../field/internal-api';
 
 export class RecordGridDataServer extends RevRecordDataServer<GridField> {

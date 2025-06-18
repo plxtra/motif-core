@@ -1,7 +1,7 @@
 import { AssertInternalError, CommaText, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { Scan } from '../../../scan/internal-api';
+import { Scan } from '../../../scan';
 import { SymbolsService } from '../../../services/symbols-service';
-import { Correctness } from '../../../sys/internal-api';
+import { Correctness } from '../../../sys';
 import { ScanTableFieldSourceDefinition } from '../field-source/internal-api';
 import {
     ActiveFaultedStatusIdCorrectnessTableValue,

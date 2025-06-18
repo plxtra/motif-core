@@ -1,6 +1,6 @@
 import { MultiEvent, UsableListChangeTypeId } from '@pbkware/js-utils';
 import { SelectItemUiAction } from '@pbkware/ui-action';
-import { DataMarket, Market, MarketsService } from '../adi/internal-api';
+import { DataMarket, Market, MarketsService } from '../adi';
 
 /** @public */
 export class MarketListSelectItemUiAction<T extends Market> extends SelectItemUiAction<T> {

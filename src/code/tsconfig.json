@@ -25,5 +25,6 @@
     { "path": "./keyboard/tsconfig.json" },
     { "path": "./text-format/tsconfig.json" },
     { "path": "./grid/tsconfig.json" },
+    { "path": "./core/tsconfig.json" },
   ]
 }

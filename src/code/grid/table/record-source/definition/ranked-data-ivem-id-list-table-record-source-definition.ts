@@ -3,8 +3,8 @@ import { RevSourcedFieldCustomHeadings } from 'revgrid';
 import {
     RankedDataIvemIdListDefinition,
     RankedDataIvemIdListDefinitionFactoryService
-} from "../../../../ranked-lit-ivem-id-list/internal-api";
-import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
+} from "../../../../ranked-lit-ivem-id-list";
+import { ErrorCode, JsonElementErr } from '../../../../sys';
 import {
     TableFieldSourceDefinition,
     TableFieldSourceDefinitionCachingFactory

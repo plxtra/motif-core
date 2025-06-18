@@ -1,4 +1,4 @@
-import { DataIvemId, DataMarket, MarketsService } from '../adi/internal-api';
+import { DataIvemId, DataMarket, MarketsService } from '../adi';
 import { MarketIvemIdUiAction } from './market-ivem-id-ui-action';
 
 export class DataIvemIdUiAction extends MarketIvemIdUiAction<DataMarket> {

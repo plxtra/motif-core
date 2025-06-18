@@ -1,6 +1,6 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { SelectItemsUiAction } from '@pbkware/ui-action';
-import { Exchange, MarketsService } from '../adi/internal-api';
+import { Exchange, MarketsService } from '../adi';
 
 /** @public */
 export class ExchangeListSelectItemsUiAction extends SelectItemsUiAction<Exchange> {

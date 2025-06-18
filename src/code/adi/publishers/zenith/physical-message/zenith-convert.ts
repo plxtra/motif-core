@@ -20,12 +20,12 @@ import {
     UnreachableCaseError,
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { StringId, Strings } from '../../../../res/internal-api';
+import { StringId, Strings } from '../../../../res';
 import {
     ErrorCode,
     ErrorCodeLogger,
     ZenithDataError
-} from '../../../../sys/internal-api';
+} from '../../../../sys';
 import {
     ActiveFaultedStatusId,
     OrderRequestError as AdiOrderRequestError,

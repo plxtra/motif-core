@@ -1,6 +1,6 @@
 import { PickEnum } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { BrokerageAccount, BrokerageAccountGroup, Holding } from '../../../../adi/internal-api';
+import { BrokerageAccount, BrokerageAccountGroup, Holding } from '../../../../adi';
 import {
     BrokerageAccountTableFieldSourceDefinition,
     HoldingTableFieldSourceDefinition,

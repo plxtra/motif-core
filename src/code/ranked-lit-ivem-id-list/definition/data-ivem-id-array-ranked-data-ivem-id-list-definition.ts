@@ -1,6 +1,6 @@
 import { JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { DataIvemId, DataMarket, Market, MarketIvemId, MarketsService } from '../../adi/internal-api';
-import { ErrorCode, JsonElementErr } from "../../sys/internal-api";
+import { DataIvemId, DataMarket, Market, MarketIvemId, MarketsService } from '../../adi';
+import { ErrorCode, JsonElementErr } from "../../sys";
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';
 
 export class DataIvemIdArrayRankedDataIvemIdListDefinition extends RankedDataIvemIdListDefinition {

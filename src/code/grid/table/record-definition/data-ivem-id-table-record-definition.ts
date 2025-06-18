@@ -1,4 +1,4 @@
-import { DataIvemId, MarketIvemId } from '../../../adi/internal-api';
+import { DataIvemId, MarketIvemId } from '../../../adi';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { TableRecordDefinition } from './table-record-definition';
 

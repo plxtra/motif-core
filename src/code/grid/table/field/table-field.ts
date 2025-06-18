@@ -9,8 +9,8 @@ import {
     compareValue
 } from '@pbkware/js-utils';
 import { RevTableField } from 'revgrid';
-import { IvemId, MarketIvemId } from '../../../adi/internal-api';
-import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
+import { IvemId, MarketIvemId } from '../../../adi';
+import { TextFormattableValue, TextFormatter } from '../../../services';
 import {
     BaseSourceTzOffsetDateTimeCorrectnessTableValue,
     CorrectnessTableValue,

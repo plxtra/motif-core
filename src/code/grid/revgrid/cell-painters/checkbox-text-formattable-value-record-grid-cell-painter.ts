@@ -1,5 +1,5 @@
 import { RevClickBoxCellPainter, RevRectangle, RevViewCell } from 'revgrid';
-import { TextFormattableValue } from '../../../services/internal-api';
+import { TextFormattableValue } from '../../../services';
 import { GridField } from '../../field/internal-api';
 import { RecordGridDataServer } from '../record-grid/internal-api';
 import { AdaptedRevgridBehavioredColumnSettings } from '../settings/internal-api';

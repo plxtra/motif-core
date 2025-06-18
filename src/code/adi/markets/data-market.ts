@@ -5,13 +5,13 @@ import {
     MultiEvent, RecordList, SourceTzOffsetDate,
     SourceTzOffsetDateTime, UsableListChangeTypeId
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Correctness,
     CorrectnessId,
     FieldDataTypeId,
     KeyedCorrectnessListItem,
-} from "../../sys/internal-api";
+} from "../../sys";
 import {
     FeedClassId,
     FeedStatusId,

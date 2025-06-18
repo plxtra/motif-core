@@ -11,8 +11,8 @@ import {
     compareUndefinableString
 } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevHorizontalAlignId, RevRecordField, RevRecordSourcedFieldDefinition, RevRecordSourcedFieldSourceDefinition, RevSourcedFieldDefinition } from 'revgrid';
-import { DayTradesDataItem, MovementId, TradeFlagId } from '../../../adi/internal-api';
-import { StringId, Strings } from '../../../res/internal-api';
+import { DayTradesDataItem, MovementId, TradeFlagId } from '../../../adi';
+import { StringId, Strings } from '../../../res';
 import {
     DayTradesDataItemRecordTypeIdTextFormattableValue,
     FactoryisedDecimal,
@@ -26,10 +26,10 @@ import {
     TradeAffectsIdArrayTextFormattableValue,
     TradeFlagIdArrayTextFormattableValue,
     TrendIdTextFormattableValue
-} from '../../../services/internal-api';
+} from '../../../services';
 import {
     CorrectnessId,
-} from "../../../sys/internal-api";
+} from "../../../sys";
 
 import { AllowedGridField, GridField } from '../../field/internal-api';
 

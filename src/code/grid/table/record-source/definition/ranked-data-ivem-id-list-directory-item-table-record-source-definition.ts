@@ -1,7 +1,7 @@
 import { PickEnum } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { RankedDataIvemIdListDirectory } from '../../../../ranked-lit-ivem-id-list/internal-api';
-import { RankedDataIvemIdListDirectoryItem } from '../../../../services/internal-api';
+import { RankedDataIvemIdListDirectory } from '../../../../ranked-lit-ivem-id-list';
+import { RankedDataIvemIdListDirectoryItem } from '../../../../services';
 import {
     RankedDataIvemIdListDirectoryItemTableFieldSourceDefinition,
     TableFieldSourceDefinition,

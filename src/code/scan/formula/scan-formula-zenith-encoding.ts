@@ -8,8 +8,8 @@ import {
     SourceTzOffsetDate,
     UnreachableCaseError
 } from '@pbkware/js-utils';
-import { Currency, CurrencyId, DataMarket, Exchange, MarketBoard, MarketsService, ZenithConvert, ZenithEncodedScanFormula, ZenithProtocolCommon } from '../../adi/internal-api';
-import { StringId, Strings } from '../../res/internal-api';
+import { Currency, CurrencyId, DataMarket, Exchange, MarketBoard, MarketsService, ZenithConvert, ZenithEncodedScanFormula, ZenithProtocolCommon } from '../../adi';
+import { StringId, Strings } from '../../res';
 import { ScanFormula } from './scan-formula';
 
 export class ScanFormulaZenithEncodingService {

@@ -1,7 +1,7 @@
 import { AssertInternalError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { AdiService, ScanDescriptorsDataDefinition, ScanStatusedDescriptor, ScanStatusedDescriptorsDataItem } from '../adi/internal-api';
+import { AdiService, ScanDescriptorsDataDefinition, ScanStatusedDescriptor, ScanStatusedDescriptorsDataItem } from '../adi';
 import { RankedDataIvemIdListDirectoryItem } from '../services/ranked-data-ivem-id-list-directory-item';
-import { Badness, ErrorCode, LockOpenList, ZenithDataError } from '../sys/internal-api';
+import { Badness, ErrorCode, LockOpenList, ZenithDataError } from '../sys';
 import { Scan } from './scan';
 
 export class ScanList extends LockOpenList<Scan, RankedDataIvemIdListDirectoryItem> {

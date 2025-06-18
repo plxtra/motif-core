@@ -1,7 +1,7 @@
 import { JsonElement, SysTick, mSecsPerSec } from '@pbkware/js-utils';
 import { RevDataSource, RevReferenceableDataSources } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
-import { Badness, LockOpenList } from '../../sys/internal-api';
+import { TextFormattableValue } from '../../services';
+import { Badness, LockOpenList } from '../../sys';
 import { ReferenceableColumnLayoutsService } from '../layout/internal-api';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionFactory, TableRecordSourceDefinition } from '../table/internal-api';
 import { ReferenceableDataSource } from './referenceable-data-source';

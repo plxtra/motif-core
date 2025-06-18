@@ -1,5 +1,5 @@
 import { DecimalFactory, Integer, UnreachableCaseError } from '@pbkware/js-utils';
-import { CallPut, FactoryisedDecimal } from '../../../services/internal-api';
+import { CallPut, FactoryisedDecimal } from '../../../services';
 import { CallPutTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     BooleanTableValue,

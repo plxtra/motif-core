@@ -1,6 +1,6 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { AllBrokerageAccountGroup, BrokerageAccountGroup } from '../adi/internal-api';
+import { AllBrokerageAccountGroup, BrokerageAccountGroup } from '../adi';
 
 export class BrokerageAccountGroupUiAction extends UiAction {
     private _value: BrokerageAccountGroup | undefined;

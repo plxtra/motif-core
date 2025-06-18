@@ -5,10 +5,10 @@ import {
     UnexpectedCaseError,
     UnreachableCaseError
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Badness,
-} from '../../sys/internal-api';
+} from '../../sys';
 import {
     AdiPublisher,
     AdiPublisherSubscription,

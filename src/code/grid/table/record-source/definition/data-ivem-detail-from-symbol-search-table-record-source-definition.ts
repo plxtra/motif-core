@@ -1,7 +1,7 @@
 import { DecimalFactory, JsonElement, Ok, PickEnum, Result } from '@pbkware/js-utils';
 import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from 'revgrid';
-import { DataIvemAlternateCodes, DataIvemBaseDetail, Exchange, MarketsService, MyxDataIvemAttributes, SearchSymbolsDataDefinition, SearchSymbolsDataIvemFullDetail, ZenithProtocolCommon } from '../../../../adi/internal-api';
-import { ErrorCode, JsonElementErr } from '../../../../sys/internal-api';
+import { DataIvemAlternateCodes, DataIvemBaseDetail, Exchange, MarketsService, MyxDataIvemAttributes, SearchSymbolsDataDefinition, SearchSymbolsDataIvemFullDetail, ZenithProtocolCommon } from '../../../../adi';
+import { ErrorCode, JsonElementErr } from '../../../../sys';
 import {
     DataIvemAlternateCodesTableFieldSourceDefinition,
     DataIvemBaseDetailTableFieldSourceDefinition,

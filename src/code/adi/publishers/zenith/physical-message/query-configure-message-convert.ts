@@ -1,5 +1,5 @@
 import { AssertInternalError, Ok, Result, SysTick } from '@pbkware/js-utils';
-import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
+import { ErrorCode, ZenithDataError } from '../../../../sys';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, RequestErrorDataMessages } from '../../../common/internal-api';
 import { ZenithQueryConfigureDataDefinition } from '../zenith-data-definitions';
 import { ZenithQueryConfigureDataMessage } from '../zenith-data-messages';

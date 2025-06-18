@@ -1,6 +1,6 @@
 import { LockOpenListItem, RecordList } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { TextFormatter } from '../../../services/internal-api';
+import { TextFormatter } from '../../../services';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { RecordListTableRecordSourceDefinition } from './definition/internal-api';
 import { SubscribeRecordListTableRecordSource } from './subscribe-record-list-table-record-source';

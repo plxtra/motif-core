@@ -8,7 +8,7 @@ import {
 import {
     Badness,
     CorrectnessId,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { DataDefinition, FeedClass, FeedClassId, FeedsDataDefinition } from '../common/internal-api';
 import { Feed } from './feed';
 import { FeedStatusSubscriptionDataItem } from './feed-status-subscription-data-item';

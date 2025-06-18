@@ -1,7 +1,7 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { Market, MarketIvemId, MarketsService } from '../adi/internal-api';
-import { SymbolsService } from '../services/internal-api';
+import { Market, MarketIvemId, MarketsService } from '../adi';
+import { SymbolsService } from '../services';
 
 export class MarketIvemIdUiAction<T extends Market> extends UiAction {
     private _value: MarketIvemId<T> | undefined;

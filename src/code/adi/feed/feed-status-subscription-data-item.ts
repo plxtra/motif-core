@@ -1,4 +1,4 @@
-import { Badness } from '../../sys/internal-api';
+import { Badness } from '../../sys';
 import { FeedStatus, FeedStatusId, SubscribabilityExtentId } from '../common/internal-api';
 import { SubscribabilityExtentSubscriptionDataItem } from '../publish-subscribe/internal-api';
 

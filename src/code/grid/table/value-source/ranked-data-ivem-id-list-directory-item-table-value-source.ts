@@ -1,6 +1,6 @@
 import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { RankedDataIvemIdListDirectoryItem } from '../../../services/internal-api';
+import { RankedDataIvemIdListDirectoryItem } from '../../../services';
 import { RankedDataIvemIdListDirectoryItemTableFieldSourceDefinition } from '../field-source/internal-api';
 import { CorrectnessTableValue, RankedDataIvemIdListDirectoryItemTypeIdCorrectnessTableValue, ReadonlyCorrectnessTableValue, StringCorrectnessTableValue, TableValue } from '../value/internal-api';
 import { CorrectnessTableValueSource } from './correctness-table-value-source';

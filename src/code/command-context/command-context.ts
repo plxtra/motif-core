@@ -1,9 +1,9 @@
 import { SysTick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { Command } from '../command/internal-api';
-import { StringId } from '../res/internal-api';
-import { ErrorCode, ExtensionHandle, ExtensionOrInternalError } from '../sys/internal-api';
-import { CommandUiAction } from '../ui-action/internal-api';
+import { Command } from '../command';
+import { StringId } from '../res';
+import { ErrorCode, ExtensionHandle, ExtensionOrInternalError } from '../sys';
+import { CommandUiAction } from '../ui-action';
 import { Cancellable } from './cancellable';
 
 export class CommandContext {

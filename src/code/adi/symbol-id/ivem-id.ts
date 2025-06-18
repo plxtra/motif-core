@@ -1,5 +1,5 @@
 import { CommaText, compareString, ComparisonResult, Err, JsonElement, MapKey, Ok, priorityCompareString, Result } from '@pbkware/js-utils';
-import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../../sys';
 import { Exchange, MarketsService } from '../markets/internal-api';
 
 export class IvemId {

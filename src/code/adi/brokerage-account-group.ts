@@ -13,7 +13,7 @@ import {
 import {
     ErrorCode,
     JsonElementErr,
-} from "../sys/internal-api";
+} from "../sys";
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import { MarketsService } from './markets/internal-api';
 

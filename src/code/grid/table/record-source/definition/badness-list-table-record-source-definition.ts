@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { BadnessList } from '../../../../sys/internal-api';
+import { BadnessList } from '../../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

@@ -1,5 +1,5 @@
 import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { MyxDataIvemAttributes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi/internal-api';
+import { MyxDataIvemAttributes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi';
 import { MyxDataIvemAttributesTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

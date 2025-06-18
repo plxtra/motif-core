@@ -1,5 +1,5 @@
 import { AssertInternalError } from '@pbkware/js-utils';
-import { Badness, CorrectnessId } from '../sys/internal-api';
+import { Badness, CorrectnessId } from '../sys';
 
 export abstract class SequenceHistory {
     badnessChangedEvent: SequenceHistory.badnessChangedEvent;

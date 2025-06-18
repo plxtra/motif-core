@@ -11,11 +11,11 @@ import {
     mSecsPerMin,
     rangedEarliestBinarySearch
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import {
     Badness,
     ErrorCodeLogger,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     DataDefinition,
     DayTradesDataDefinition,

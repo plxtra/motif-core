@@ -65,9 +65,9 @@ import {
     TradingState,
     TrailingStopLossOrderConditionType,
     TrailingStopLossOrderConditionTypeId
-} from "../adi/internal-api";
-import { StringId, Strings } from '../res/internal-api';
-import { Scan, ScanField } from '../scan/internal-api';
+} from "../adi";
+import { StringId, Strings } from '../res';
+import { Scan, ScanField } from '../scan';
 import {
     BigIntTextFormattableValue,
     BooleanTextFormattableValue,
@@ -106,8 +106,8 @@ import {
     TradeFlagIdArrayTextFormattableValue,
     TradingIvemIdTextFormattableValue,
     TradingStateAllowIdArrayTextFormattableValue,
-} from '../services/internal-api';
-import { PriceOrRemainder } from '../sys/internal-api';
+} from '../services';
+import { PriceOrRemainder } from '../sys';
 
 /** @public */
 export class TextFormatterService implements TextFormatter {

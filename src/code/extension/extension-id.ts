@@ -1,6 +1,6 @@
 import { JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { PublisherId } from '../publisher/internal-api';
-import { ErrorCode, JsonElementErr } from '../sys/internal-api';
+import { PublisherId } from '../publisher';
+import { ErrorCode, JsonElementErr } from '../sys';
 
 /** @public */
 export interface ExtensionId {

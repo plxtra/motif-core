@@ -3,8 +3,8 @@ import {
     RevSourcedFieldCustomHeadings,
     RevStandardSourcedFieldCustomHeadingsService
 } from 'revgrid';
-import { AdiPublisherFactory, AdiService, DataItemFactory, MarketsService } from './adi/internal-api';
-import { CommandRegisterService } from "./command/internal-api";
+import { AdiPublisherFactory, AdiService, DataItemFactory, MarketsService } from '../adi';
+import { CommandRegisterService } from "../command";
 import {
     CellPainterFactoryService,
     ReferenceableColumnLayoutsService,
@@ -13,14 +13,14 @@ import {
     StandardTableFieldSourceDefinitionCachingFactoryService,
     TableFieldSourceDefinitionFactory,
     TableRecordSourceFactory
-} from "./grid/internal-api";
-import { KeyboardService } from "./keyboard/internal-api";
-import { NotificationChannelsService } from './notification-channel/internal-api';
+} from "../grid";
+import { KeyboardService } from "../keyboard";
+import { NotificationChannelsService } from '../notification-channel';
 import {
     RankedDataIvemIdListDefinitionFactoryService,
     RankedDataIvemIdListFactoryService,
-} from "./ranked-lit-ivem-id-list/internal-api";
-import { ScanFormulaZenithEncodingService, ScansService } from './scan/internal-api';
+} from "../ranked-lit-ivem-id-list";
+import { ScanFormulaZenithEncodingService, ScansService } from '../scan';
 import {
     AppStorageService,
     CapabilitiesService,
@@ -29,10 +29,10 @@ import {
     SettingsService,
     SymbolDetailCacheService,
     SymbolsService
-} from "./services/internal-api";
-import { WarningsService } from './sys/internal-api';
-import { TextFormatterService } from "./text-format/internal-api";
-import { WatchmakerService } from './watchmaker/internal-api';
+} from "../services";
+import { WarningsService } from '../sys';
+import { TextFormatterService } from "../text-format";
+import { WatchmakerService } from '../watchmaker';
 
 /** @public */
 export class CoreService {

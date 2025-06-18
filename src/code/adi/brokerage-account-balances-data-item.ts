@@ -12,7 +12,7 @@ import {
 import {
     ErrorCode,
     ZenithDataError
-} from "../sys/internal-api";
+} from "../sys";
 import { Balances } from './balances';
 import { BrokerageAccountEnvironmentedId } from './brokerage-account-environmented-id';
 import { BrokerageAccountGroupRecordList } from './brokerage-account-group-record-list';

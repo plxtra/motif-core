@@ -1,9 +1,9 @@
 import { AssertInternalError, EnumInfoOutOfOrderError, Integer, MultiEvent } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi/internal-api';
-import { LockOpenNotificationChannel } from '../notification-channel/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { FieldDataTypeId } from '../sys/internal-api';
+import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi';
+import { LockOpenNotificationChannel } from '../notification-channel';
+import { StringId, Strings } from '../res';
+import { FieldDataTypeId } from '../sys';
 
 export class LockerScanAttachedNotificationChannel {
     changedEventer: LockerScanAttachedNotificationChannel.ChangedEventer | undefined; // only used by List

@@ -1,7 +1,7 @@
 import { AssertInternalError, Err, Integer, LockOpenListItem, Ok, Result } from '@pbkware/js-utils';
-import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
-import { ErrorCode } from "../sys/internal-api";
-import { WatchmakerList, WatchmakerService } from '../watchmaker/internal-api';
+import { DataIvemId, RankScoredDataIvemIdList } from '../adi';
+import { ErrorCode } from "../sys";
+import { WatchmakerList, WatchmakerService } from '../watchmaker';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import { WatchmakerListIdRankedDataIvemIdListDefinition } from './definition/internal-api';
 

@@ -1,5 +1,5 @@
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { UsableList } from '../../../../sys/internal-api';
+import { UsableList } from '../../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../../field-source/internal-api';
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

@@ -1,7 +1,7 @@
 import { UnreachableCaseError } from '@pbkware/js-utils';
 import { RevRecordSourcedField, RevSourcedField } from 'revgrid';
-import { StringId, Strings } from '../../res/internal-api';
-import { TextFormattableValue } from '../../services/internal-api';
+import { StringId, Strings } from '../../res';
+import { TextFormattableValue } from '../../services';
 
 export abstract class GridField extends RevRecordSourcedField<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {
 

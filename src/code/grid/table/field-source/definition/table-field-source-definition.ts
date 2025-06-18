@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, Integer } from '@pbkware/js-utils';
 import { RevTableFieldSourceDefinition } from 'revgrid';
-import { TextFormattableValue } from '../../../../services/internal-api';
+import { TextFormattableValue } from '../../../../services';
 // import { GridRecordFieldState } from '../../../record/grid-record-internal-api';
 import { CorrectnessTableField, TableField } from '../../field/internal-api';
 import { CorrectnessTableValue, TableValue } from '../../value/internal-api';

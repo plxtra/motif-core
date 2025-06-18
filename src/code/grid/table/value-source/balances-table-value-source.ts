@@ -1,5 +1,5 @@
 import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { Balances } from '../../../adi/internal-api';
+import { Balances } from '../../../adi';
 import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { BalancesTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {

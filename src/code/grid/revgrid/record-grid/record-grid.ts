@@ -6,7 +6,7 @@ import {
     RevSubgrid,
     RevViewLayout
 } from 'revgrid';
-import { SettingsService } from '../../../services/internal-api';
+import { SettingsService } from '../../../services';
 import { GridField } from '../../field/internal-api';
 import { RecordSourcedFieldGrid, SingleHeadingGridDataServer, SourcedFieldGrid } from '../adapted-revgrid/internal-api';
 import { AdaptedRevgridBehavioredColumnSettings, AdaptedRevgridBehavioredGridSettings } from '../settings/internal-api';

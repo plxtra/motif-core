@@ -1,6 +1,6 @@
 import { ComparableList, ComparisonResult, EnumInfoOutOfOrderError, Err, JsonElement, Mappable, Ok, Result, compareString } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
-import { ErrorCode, FieldDataTypeId, JsonElementErr, ZenithDataError } from '../../sys/internal-api';
+import { StringId, Strings } from '../../res';
+import { ErrorCode, FieldDataTypeId, JsonElementErr, ZenithDataError } from '../../sys';
 import { ZenithSymbol } from '../common/internal-api';
 import { DataMarket, Exchange, ExchangeEnvironment, MarketsService } from '../markets/internal-api';
 import { IvemId } from './ivem-id';

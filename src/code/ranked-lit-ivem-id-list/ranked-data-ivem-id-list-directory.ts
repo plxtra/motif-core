@@ -5,13 +5,13 @@ import {
     UnreachableCaseError,
     UsableListChangeTypeId
 } from '@pbkware/js-utils';
-import { RankedDataIvemIdListDirectoryItem } from '../services/internal-api';
+import { RankedDataIvemIdListDirectoryItem } from '../services';
 import {
     Badness,
     BadnessComparableList,
     BadnessMappedComparableList,
     ResourceBadness,
-} from '../sys/internal-api';
+} from '../sys';
 
 export class RankedDataIvemIdListDirectory extends BadnessComparableList<RankedDataIvemIdListDirectoryItem> {
     private readonly _sourceCount: Integer;

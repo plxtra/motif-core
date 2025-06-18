@@ -1,6 +1,6 @@
 import { AssertInternalError, Err, getErrorMessage, Integer, JsonElement, Logger, mSecsPerSec, MultiEvent, Ok, Result } from '@pbkware/js-utils';
-import { MarketsService } from '../../adi/internal-api';
-import { JsonElementErr } from '../../sys/internal-api';
+import { MarketsService } from '../../adi';
+import { JsonElementErr } from '../../sys';
 import { AppStorageService } from '../app-storage-service';
 import { IdleService } from '../idle-service';
 import { KeyValueStore } from '../key-value-store/internal-api';

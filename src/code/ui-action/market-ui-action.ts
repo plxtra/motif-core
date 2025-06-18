@@ -1,6 +1,6 @@
 import { MultiEvent } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { Market, MarketsService } from '../adi/internal-api';
+import { Market, MarketsService } from '../adi';
 
 export class MarketUiAction<T extends Market> extends UiAction {
 

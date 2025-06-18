@@ -1,6 +1,6 @@
 import { Err, Integer, JsonElement, Result } from '@pbkware/js-utils';
-import { MarketsService } from '../../adi/internal-api';
-import { ErrorCode } from '../../sys/internal-api';
+import { MarketsService } from '../../adi';
+import { ErrorCode } from '../../sys';
 import { DataIvemIdArrayRankedDataIvemIdListDefinition } from './data-ivem-id-array-ranked-data-ivem-id-list-definition';
 import { DataIvemIdExecuteScanRankedDataIvemIdListDefinition } from './data-ivem-id-execute-scan-ranked-data-ivem-id-list-definition';
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';

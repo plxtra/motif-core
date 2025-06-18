@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import { BadnessComparableList } from '../../sys/badness-comparable-list';
 import { Correctness } from '../../sys/correctness';
 import { DataDefinition, DataMessage, DataMessageTypeId, MarketsDataMessage } from '../common/internal-api';

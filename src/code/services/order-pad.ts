@@ -53,8 +53,8 @@ import {
     TradingIvemId,
     TradingMarket,
     ZenithEnvironmentedValueParts
-} from "../adi/internal-api";
-import { StringId, Strings } from '../res/internal-api';
+} from "../adi";
+import { StringId, Strings } from '../res';
 import { PriceStepperIncubator } from './price-stepper-incubator';
 import { SecurityPriceStepper } from './security-price-stepper';
 import { ScalarSettings } from './settings/internal-api';

@@ -20,13 +20,13 @@ import {
     SearchSymbolsDataIvemFullDetail,
     SymbolFieldId,
     SymbolsDataItem
-} from '../../../adi/internal-api';
-import { CallPut, TextFormatter } from '../../../services/internal-api';
+} from '../../../adi';
+import { CallPut, TextFormatter } from '../../../services';
 import {
     Badness,
     CorrectnessBadness,
     ErrorCodeLogger,
-} from '../../../sys/internal-api';
+} from '../../../sys';
 import {
     TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory
 } from "../field-source/internal-api";

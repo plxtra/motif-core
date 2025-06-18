@@ -14,7 +14,7 @@ import {
     PriceTextFormattableValue,
     StringTextFormattableValue,
     TextFormattableValue
-} from '../../../services/internal-api';
+} from '../../../services';
 import { CorrectnessTableValue } from './table-value';
 
 export abstract class NullableCorrectnessTableValue extends CorrectnessTableValue {

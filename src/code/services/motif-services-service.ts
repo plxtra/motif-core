@@ -6,7 +6,7 @@ import {
     Result,
     getErrorMessage
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 
 export class MotifServicesService {
     private _baseUrl: string;

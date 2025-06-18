@@ -2113,6 +2113,85 @@ export namespace BaseNumericScanFieldCondition {
     }
 }
 
+// Warning: (ae-missing-release-tag) "BaseRankedDataIvemIdList" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export abstract class BaseRankedDataIvemIdList implements RankedDataIvemIdList {
+    constructor(typeId: RankedDataIvemIdListDefinition.TypeId, userCanAdd: boolean, userCanReplace: boolean, userCanRemove: boolean, userCanMove: boolean);
+    // (undocumented)
+    get badness(): Badness;
+    // (undocumented)
+    abstract get category(): string;
+    // (undocumented)
+    closeLocked(_opener: LockOpenListItem.Opener): void;
+    // (undocumented)
+    get correctnessId(): CorrectnessId;
+    // (undocumented)
+    get count(): number;
+    // (undocumented)
+    abstract createDefinition(): RankedDataIvemIdListDefinition;
+    // (undocumented)
+    abstract get description(): string;
+    // (undocumented)
+    getAt(index: number): RankedDataIvemId;
+    // (undocumented)
+    indexOf(record: RankedDataIvemId): number;
+    // (undocumented)
+    protected _lockedScoredList: RankScoredDataIvemIdList;
+    // (undocumented)
+    abstract get name(): string;
+    // (undocumented)
+    openLocked(_opener: LockOpenListItem.Opener): void;
+    // (undocumented)
+    referentialTargettedModifiedEventer: BaseRankedDataIvemIdList.ModifiedEventer | undefined;
+    // (undocumented)
+    subscribeBadnessChangedEvent(handler: BadnessList.badnessChangedEventHandler): number;
+    // (undocumented)
+    subscribeListChangeEvent(handler: RecordList.ListChangeEventHandler): number;
+    // (undocumented)
+    abstract subscribeRankScoredDataIvemIdList(): RankScoredDataIvemIdList;
+    // (undocumented)
+    toArray(): readonly RankedDataIvemId[];
+    // (undocumented)
+    tryLock(_locker: LockOpenListItem.Locker): Promise<Result<void>>;
+    // (undocumented)
+    readonly typeId: RankedDataIvemIdListDefinition.TypeId;
+    // (undocumented)
+    unlock(_locker: LockOpenListItem.Locker): void;
+    // (undocumented)
+    unsubscribeBadnessChangedEvent(subscriptionId: MultiEvent.SubscriptionId): void;
+    // (undocumented)
+    unsubscribeListChangeEvent(subscriptionId: MultiEvent.SubscriptionId): void;
+    // (undocumented)
+    abstract unsubscribeRankScoredDataIvemIdList(): void;
+    // (undocumented)
+    get usable(): boolean;
+    // (undocumented)
+    userAdd(_dataIvemId: DataIvemId): Integer;
+    // (undocumented)
+    userAddArray(_dataIvemIds: DataIvemId[]): void;
+    // (undocumented)
+    readonly userCanAdd: boolean;
+    // (undocumented)
+    readonly userCanMove: boolean;
+    // (undocumented)
+    readonly userCanRemove: boolean;
+    // (undocumented)
+    readonly userCanReplace: boolean;
+    // (undocumented)
+    userMoveAt(_fromIndex: number, _count: number, _toIndex: number): void;
+    // (undocumented)
+    userRemoveAt(_index: number, _count: number): void;
+    // (undocumented)
+    userReplaceAt(_index: number, _dataIvemIds: DataIvemId[]): void;
+}
+
+// @public (undocumented)
+export namespace BaseRankedDataIvemIdList {
+    // (undocumented)
+    export type ModifiedEventer = (this: void) => void;
+}
+
 // Warning: (ae-missing-release-tag) "BaseReadonlyIntegerArrayTableValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -6442,7 +6521,6 @@ export class DataIvemIdAddToWatchmakerListDataDefinition extends AddToWatchmaker
 export class DataIvemIdAddToWatchmakerListDataItem extends RequestAcknowledgeWatchmakerListDataItem {
 }
 
-// Warning: (ae-forgotten-export) The symbol "BaseRankedDataIvemIdList" needs to be exported by the entry point public-api.d.ts
 // Warning: (ae-missing-release-tag) "DataIvemIdArrayRankedDataIvemIdList" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "DataIvemIdArrayRankedDataIvemIdList" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -7047,7 +7125,6 @@ export class DataIvemIdWatchmakerListMembersDataItem extends WatchmakerListMembe
 //
 // @public (undocumented)
 export class DataMarket extends Market implements KeyedCorrectnessListItem {
-    // Warning: (ae-forgotten-export) The symbol "ZenithDataMarket" needs to be exported by the entry point public-api.d.ts
     constructor(_adiService: AdiService, zenithCode: string, name: string, display: string, exchange: Exchange, exchangeEnvironment: ExchangeEnvironment, _marketBoardConfigs: readonly MarketsConfig.Exchange.DataMarket.Board[], lit: boolean, displayPriority: number | undefined, unknown: boolean, _zenithDataMarket: ZenithDataMarket, _listCorrectnessId: CorrectnessId);
     // (undocumented)
     get allowIds(): TradingState.AllowIds | undefined;
@@ -10536,7 +10613,6 @@ export namespace Exchange {
     }
 }
 
-// Warning: (ae-forgotten-export) The symbol "ZenithCodedEnvironment" needs to be exported by the entry point public-api.d.ts
 // Warning: (ae-missing-release-tag) "ExchangeEnvironment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "ExchangeEnvironment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -21458,8 +21534,6 @@ export class QueryScanDetailDataDefinition extends FeedSubscriptionDataDefinitio
 // @public (undocumented)
 export class QueryScanDetailDataItem extends ScanPublishDataItem {
     constructor(_marketsService: MarketsService, definition: DataDefinition);
-    // Warning: (ae-forgotten-export) The symbol "ScanDescriptorAndDetail" needs to be exported by the entry point public-api.d.ts
-    //
     // (undocumented)
     get descriptorAndDetail(): ScanDescriptorAndDetail;
     // (undocumented)
@@ -22111,7 +22185,55 @@ export class RankedDataIvemIdListFactoryService {
     createFromDefinition(definition: RankedDataIvemIdListDefinition): RankedDataIvemIdList;
 }
 
-// Warning: (ae-forgotten-export) The symbol "RankedDataIvemIdListReferential" needs to be exported by the entry point public-api.d.ts
+// Warning: (ae-missing-release-tag) "RankedDataIvemIdListReferential" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class RankedDataIvemIdListReferential implements LockOpenListItem<RankedDataIvemIdListReferential>, IndexedRecord {
+    constructor(_adiService: AdiService, _scansService: ScansService, _watchmakerService: WatchmakerService, definition: RankedDataIvemIdListDefinition, name: string, initialIndex: Integer, _becameDirtyEventer: RankedDataIvemIdListReferential.BecameDirtyEventer);
+    // (undocumented)
+    closeLocked(opener: LockOpenListItem.Opener): void;
+    // (undocumented)
+    createDefinition(): RankedDataIvemIdListDefinition;
+    // (undocumented)
+    equals(other: RankedDataIvemIdListReferential): boolean;
+    // (undocumented)
+    readonly id: Guid;
+    // (undocumented)
+    index: Integer;
+    // (undocumented)
+    isLocked(ignoreOnlyLocker: LockOpenListItem.Locker | undefined): boolean;
+    // (undocumented)
+    get lockCount(): number;
+    // (undocumented)
+    get lockedList(): BaseRankedDataIvemIdList | undefined;
+    // (undocumented)
+    get lockers(): readonly LockOpenListItem.Locker[];
+    // (undocumented)
+    readonly mapKey: MapKey;
+    // (undocumented)
+    readonly name: string;
+    // (undocumented)
+    get openCount(): number;
+    // (undocumented)
+    get openers(): readonly LockOpenListItem.Opener[];
+    // (undocumented)
+    openLocked(opener: LockOpenListItem.Opener): void;
+    // (undocumented)
+    tryLock(locker: LockOpenListItem.Locker): Promise<Result<void>>;
+    // (undocumented)
+    readonly typeId: RankedDataIvemIdListDefinition.TypeId;
+    // (undocumented)
+    unlock(locker: LockOpenListItem.Locker): void;
+    // (undocumented)
+    readonly upperCaseName: string;
+}
+
+// @public (undocumented)
+export namespace RankedDataIvemIdListReferential {
+    // (undocumented)
+    export type BecameDirtyEventer = (this: void) => void;
+}
+
 // Warning: (ae-missing-release-tag) "RankedDataIvemIdListReferentialsService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "RankedDataIvemIdListReferentialsService" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -22764,6 +22886,28 @@ export namespace RepeatableExactHistorySequenceSeries {
     }
 }
 
+// Warning: (ae-missing-release-tag) "Request" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+abstract class Request_2 {
+    constructor(_dataMgr: DataMgr, definition: DataDefinition);
+    // (undocumented)
+    abstract cancel(): void;
+    // (undocumented)
+    protected checkUnsubscribeDataItem(): void;
+    // (undocumented)
+    dataCorrectnessChangeSubscriptionId: MultiEvent.SubscriptionId;
+    // (undocumented)
+    dataItem: SymbolsDataItem | undefined;
+    // (undocumented)
+    protected abstract processDataItemError(dataItem: SymbolsDataItem): void;
+    // (undocumented)
+    protected abstract processDataItemUsable(dataItem: SymbolsDataItem): void;
+    // (undocumented)
+    abstract resolve(detail: SymbolDetailCacheService.Detail | undefined): void;
+}
+export { Request_2 as Request }
+
 // Warning: (ae-missing-release-tag) "RequestErrorDataMessages" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -22863,8 +23007,6 @@ export class RowDataArrayGrid extends RevSingleHeadingDataRowArraySourcedFieldGr
 
 // @public (undocumented)
 export namespace RowDataArrayGrid {
-    // Warning: (ae-forgotten-export) The symbol "RowDataArrayGridField" needs to be exported by the entry point public-api.d.ts
-    //
     // (undocumented)
     export function createField(sourcelessName: string, defaultHeading: string, defaultTextAlignId: RevHorizontalAlignId, defaultWidth?: Integer, key?: string): RowDataArrayGridField;
     // (undocumented)
@@ -22879,6 +23021,14 @@ export namespace RowDataArrayGrid {
 //
 // @public (undocumented)
 export class RowDataArrayGridDataServer extends RevDataRowArrayDataServer<GridField> {
+}
+
+// Warning: (ae-missing-release-tag) "RowDataArrayGridField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class RowDataArrayGridField extends GridField {
+    // (undocumented)
+    getViewValue(_record: IndexedRecord): TextFormattableValue;
 }
 
 // Warning: (ae-missing-release-tag) "SaveManagement" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -23728,6 +23878,12 @@ export const enum ScanConditionSetLoadErrorTypeId {
 export namespace ScanDataDefinition {
     // (undocumented)
     export type Targets = readonly string[] | readonly ZenithSymbol[];
+}
+
+// Warning: (ae-missing-release-tag) "ScanDescriptorAndDetail" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ScanDescriptorAndDetail extends ScanStatusedDescriptorInterface, ScanDetail {
 }
 
 // Warning: (ae-missing-release-tag) "ScanDescriptorModule" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -33470,8 +33626,6 @@ export namespace SymbolDetailCacheService {
         expireTime: SysTick.Time;
         // (undocumented)
         full: boolean;
-        // Warning: (ae-forgotten-export) The symbol "Request_2" needs to be exported by the entry point public-api.d.ts
-        //
         // (undocumented)
         request: Request_2 | undefined;
     }
@@ -38975,6 +39129,23 @@ export interface ZenithAccountParts {
     environmentZenithCode: ExchangeEnvironmentZenithCode;
 }
 
+// Warning: (ae-missing-release-tag) "ZenithCodedEnvironment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ZenithCodedEnvironment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ZenithCodedEnvironment {
+    // (undocumented)
+    destroyed: boolean;
+    // (undocumented)
+    readonly zenithCode: ExchangeEnvironmentZenithCode;
+}
+
+// @public (undocumented)
+export namespace ZenithCodedEnvironment {
+    // (undocumented)
+    export function compareZenithCode(left: ExchangeEnvironmentZenithCode, right: ExchangeEnvironmentZenithCode): ComparisonResult;
+}
+
 // Warning: (ae-missing-release-tag) "ZenithConnectionStateEngine" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "ZenithConnectionStateEngine" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -39610,6 +39781,36 @@ export class ZenithCounterDataMessage extends DataMessage {
 // @public (undocumented)
 export class ZenithDataError extends BaseZenithDataError {
     constructor(code: ErrorCode, message: string);
+}
+
+// Warning: (ae-missing-release-tag) "ZenithDataMarket" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ZenithDataMarket" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ZenithDataMarket implements MarketsDataMessage.Market {
+    constructor(msgMarket: MarketsDataMessage.Market);
+    // (undocumented)
+    changedEventerForDataMarket: ZenithDataMarket.ChangedEventer | undefined;
+    // (undocumented)
+    get feedStatusId(): FeedStatusId;
+    // (undocumented)
+    get marketTime(): SourceTzOffsetDateTime | undefined;
+    // (undocumented)
+    get status(): string | undefined;
+    // (undocumented)
+    get tradingDate(): SourceTzOffsetDate | undefined;
+    // (undocumented)
+    update(msg: MarketsDataMessage.Market): void;
+    // (undocumented)
+    readonly zenithCode: string;
+    // (undocumented)
+    get zenithMarketBoards(): ZenithMarketBoards | undefined;
+}
+
+// @public (undocumented)
+export namespace ZenithDataMarket {
+    // (undocumented)
+    export type ChangedEventer = (this: void) => void;
 }
 
 // @public (undocumented)

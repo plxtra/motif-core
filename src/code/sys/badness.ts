@@ -1,5 +1,5 @@
 import { EnumInfoOutOfOrderError } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import { Correctness, CorrectnessId } from './correctness';
 
 /** @public */

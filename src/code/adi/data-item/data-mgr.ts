@@ -13,7 +13,7 @@ import {
 import {
     assert,
     assigned,
-} from '../../sys/internal-api';
+} from '../../sys';
 import {
     AdiPublisher,
     AdiPublisherTypeId,

@@ -5,8 +5,8 @@ import {
     UnreachableCaseError,
     UsableListChangeTypeId
 } from '@pbkware/js-utils';
-import { AdiService, WatchmakerListDescriptorsDataDefinition, WatchmakerListDescriptorsDataItem } from '../adi/internal-api';
-import { LockOpenList } from '../sys/internal-api';
+import { AdiService, WatchmakerListDescriptorsDataDefinition, WatchmakerListDescriptorsDataItem } from '../adi';
+import { LockOpenList } from '../sys';
 import { WatchmakerList } from './watchmaker-list';
 
 /** @public */

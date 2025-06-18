@@ -1,5 +1,5 @@
 import { MultiEvent } from '@pbkware/js-utils';
-import { ExtensionHandle } from '../sys/internal-api';
+import { ExtensionHandle } from '../sys';
 import { ExtensionInfo } from './extension-info';
 
 /** @public */

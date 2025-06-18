@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, Err, JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
-import { ErrorCode, JsonElementErr } from '../../sys/internal-api';
+import { StringId, Strings } from '../../res';
+import { ErrorCode, JsonElementErr } from '../../sys';
 
 export abstract class RankedDataIvemIdListDefinition {
     constructor(readonly typeId: RankedDataIvemIdListDefinition.TypeId) {

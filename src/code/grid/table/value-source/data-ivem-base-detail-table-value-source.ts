@@ -1,6 +1,6 @@
 import { CommaText, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { DataIvemBaseDetail } from '../../../adi/internal-api';
-import { CorrectnessRecord } from '../../../sys/internal-api';
+import { DataIvemBaseDetail } from '../../../adi';
+import { CorrectnessRecord } from '../../../sys';
 import { DataIvemBaseDetailTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

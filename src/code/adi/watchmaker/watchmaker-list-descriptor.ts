@@ -9,7 +9,7 @@ import {
     ErrorCode,
     KeyedCorrectnessSettableListItem,
     ZenithDataError
-} from '../../sys/internal-api';
+} from '../../sys';
 import { WatchmakerListDescriptorsDataMessage } from '../common/internal-api';
 
 export class WatchmakerListDescriptor implements KeyedCorrectnessSettableListItem {

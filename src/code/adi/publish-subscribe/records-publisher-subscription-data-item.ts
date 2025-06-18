@@ -9,7 +9,7 @@ import {
     KeyedCorrectnessList,
     KeyedCorrectnessListItem,
     KeyedCorrectnessSettableList,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { PublisherSubscriptionDataItem } from './publisher-subscription-data-item';
 
 export class RecordsPublisherSubscriptionDataItem<Record extends KeyedCorrectnessListItem> extends PublisherSubscriptionDataItem

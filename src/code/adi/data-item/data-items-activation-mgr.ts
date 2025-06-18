@@ -1,5 +1,5 @@
 import { AssertInternalError, Logger, SysTick } from '@pbkware/js-utils';
-import { assert } from '../../sys/internal-api';
+import { assert } from '../../sys';
 import { DataItemId } from '../common/internal-api';
 import { DataItem } from './data-item';
 

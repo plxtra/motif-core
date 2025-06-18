@@ -1,7 +1,7 @@
 import { CorrectnessState, MultiEvent } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings, RevTableRecordSource } from 'revgrid';
-import { TextFormattableValue, TextFormatter } from '../../../services/internal-api';
-import { Badness } from '../../../sys/internal-api';
+import { TextFormattableValue, TextFormatter } from '../../../services';
+import { Badness } from '../../../sys';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from '../field-source/internal-api';
 import { TableRecordSourceDefinition } from './definition/internal-api';
 

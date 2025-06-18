@@ -1,6 +1,6 @@
 import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevReferenceableColumnLayoutDefinition } from 'revgrid';
-import { ErrorCode } from '../../../sys/internal-api';
+import { ErrorCode } from '../../../sys';
 
 export namespace ReferenceableColumnLayoutDefinition {
     export function tryCreateReferenceableFromJson(element: JsonElement): Result<RevReferenceableColumnLayoutDefinition> {

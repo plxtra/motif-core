@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, MultiEvent } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
-import { FieldDataTypeId } from '../sys/internal-api';
+import { StringId, Strings } from '../res';
+import { FieldDataTypeId } from '../sys';
 import {
     DataIvemAlternateCodes,
     IvemClassId,

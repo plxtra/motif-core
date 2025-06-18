@@ -1,5 +1,5 @@
 import { Integer } from '@pbkware/js-utils';
-import { assert } from '../sys/internal-api';
+import { assert } from '../sys';
 import { DataMessage, DataMessageTypeId, TLowLevelTopShareholdersDataMessage, TopShareholder } from './common/internal-api';
 import { PublisherSubscriptionDataItem } from './publish-subscribe/internal-api';
 

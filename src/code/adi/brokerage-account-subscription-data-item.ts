@@ -8,7 +8,7 @@ import {
 import {
     Badness,
     CorrectnessId,
-} from '../sys/internal-api';
+} from '../sys';
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountsDataItem } from './brokerage-accounts-data-item';
 import {

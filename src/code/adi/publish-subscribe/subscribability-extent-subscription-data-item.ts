@@ -1,6 +1,6 @@
 import { AssertInternalError, ComparisonResult, UnreachableCaseError } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
-import { Badness } from '../../sys/internal-api';
+import { StringId, Strings } from '../../res';
+import { Badness } from '../../sys';
 import { SubscribabilityExtent, SubscribabilityExtentId } from '../common/internal-api';
 import { PublisherSubscriptionDataItem } from './publisher-subscription-data-item';
 

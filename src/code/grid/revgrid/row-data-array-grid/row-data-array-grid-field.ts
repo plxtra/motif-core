@@ -1,5 +1,5 @@
 import { AssertInternalError, IndexedRecord } from '@pbkware/js-utils';
-import { TextFormattableValue } from '../../../services/internal-api';
+import { TextFormattableValue } from '../../../services';
 import { GridField } from '../../field/internal-api';
 
 export class RowDataArrayGridField extends GridField {

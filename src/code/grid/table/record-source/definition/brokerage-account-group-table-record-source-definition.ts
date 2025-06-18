@@ -1,6 +1,6 @@
 import { JsonElement } from '@pbkware/js-utils';
 import { RevSourcedFieldCustomHeadings } from 'revgrid';
-import { AllBrokerageAccountGroup, BrokerageAccountGroup, MarketsService } from '../../../../adi/internal-api';
+import { AllBrokerageAccountGroup, BrokerageAccountGroup, MarketsService } from '../../../../adi';
 import { TableFieldSourceDefinition, TableFieldSourceDefinitionCachingFactory } from "../../field-source/internal-api";
 import { TableRecordSourceDefinition } from './table-record-source-definition';
 

@@ -1,8 +1,8 @@
 import { EnumInfoOutOfOrderError, Integer, MapKey, SourceTzOffsetDate } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
-import { DataIvemId, DataMarket, ExerciseTypeId, IvemId } from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { FieldDataTypeId } from '../sys/internal-api';
+import { DataIvemId, DataMarket, ExerciseTypeId, IvemId } from '../adi';
+import { StringId, Strings } from '../res';
+import { FieldDataTypeId } from '../sys';
 
 export class CallPut {
     readonly mapKey: MapKey;

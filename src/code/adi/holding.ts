@@ -9,13 +9,13 @@ import {
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import {
     CorrectnessId,
     ErrorCode,
     FieldDataTypeId,
     ZenithDataError,
-} from "../sys/internal-api";
+} from "../sys";
 import { BrokerageAccount } from './brokerage-account';
 import { BrokerageAccountRecord } from './brokerage-account-record';
 import {

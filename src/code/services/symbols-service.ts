@@ -22,13 +22,13 @@ import {
     TradingIvemId,
     TradingMarket,
     ZenithProtocolCommon
-} from '../adi/internal-api';
+} from '../adi';
 import { MarketIvemId } from '../adi/symbol-id/market-ivem-id';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 import {
     ErrorCode,
     JsonLoadError
-} from '../sys/internal-api';
+} from '../sys';
 import { ExchangesSettings, ScalarSettings, SettingsService, TypedKeyValueScalarSettingsGroup, TypedKeyValueSettings } from './settings/internal-api';
 
 export class SymbolsService {

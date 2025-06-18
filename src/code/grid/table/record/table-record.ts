@@ -1,5 +1,5 @@
 import { RevTableRecord } from 'revgrid';
-import { TextFormattableValue } from '../../../services/internal-api';
+import { TextFormattableValue } from '../../../services';
 
 export class TableRecord extends RevTableRecord<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {
 }

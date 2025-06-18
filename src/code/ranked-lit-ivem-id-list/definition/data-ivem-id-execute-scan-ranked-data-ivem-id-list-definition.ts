@@ -1,6 +1,6 @@
 import { Err, JsonElement, Result } from '@pbkware/js-utils';
-import { DataIvemIdExecuteScanDataDefinition } from '../../adi/internal-api';
-import { ErrorCode } from "../../sys/internal-api";
+import { DataIvemIdExecuteScanDataDefinition } from '../../adi';
+import { ErrorCode } from "../../sys";
 import { RankedDataIvemIdListDefinition } from './ranked-data-ivem-id-list-definition';
 
 /** @public */

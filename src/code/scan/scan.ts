@@ -29,14 +29,14 @@ import {
     ScanStatusedDescriptorInterface,
     ScanTargetTypeId,
     ZenithEncodedScanFormula
-} from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { EnumTextFormattableValue, RankedDataIvemIdListDirectoryItem, TextFormattableValue } from '../services/internal-api';
+} from '../adi';
+import { StringId, Strings } from '../res';
+import { EnumTextFormattableValue, RankedDataIvemIdListDirectoryItem, TextFormattableValue } from '../services';
 import {
     Correctness,
     CorrectnessId,
     FieldDataTypeId,
-} from "../sys/internal-api";
+} from "../sys";
 
 /** @public */
 export class Scan implements LockOpenListItem<RankedDataIvemIdListDirectoryItem>, RankedDataIvemIdListDirectoryItem {

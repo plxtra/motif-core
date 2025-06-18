@@ -1,6 +1,6 @@
 import { AssertInternalError, Err, Integer, LockOpenListItem, Ok, Result } from '@pbkware/js-utils';
-import { AdiService, CreateNotificationChannelDataDefinition, CreateNotificationChannelDataItem, DataItemIncubator, DeleteNotificationChannelDataDefinition, DeleteNotificationChannelDataItem, NotificationChannel, NotificationDistributionMethodId, QueryNotificationChannelDataDefinition, QueryNotificationChannelDataItem, QueryNotificationChannelsDataDefinition, QueryNotificationChannelsDataItem, QueryNotificationDistributionMethodsDataDefinition, QueryNotificationDistributionMethodsDataItem } from '../adi/internal-api';
-import { Badness } from '../sys/internal-api';
+import { AdiService, CreateNotificationChannelDataDefinition, CreateNotificationChannelDataItem, DataItemIncubator, DeleteNotificationChannelDataDefinition, DeleteNotificationChannelDataItem, NotificationChannel, NotificationDistributionMethodId, QueryNotificationChannelDataDefinition, QueryNotificationChannelDataItem, QueryNotificationChannelsDataDefinition, QueryNotificationChannelsDataItem, QueryNotificationDistributionMethodsDataDefinition, QueryNotificationDistributionMethodsDataItem } from '../adi';
+import { Badness } from '../sys';
 import { LockOpenNotificationChannel } from './lock-open-notification-channel';
 import { LockOpenNotificationChannelList } from './lock-open-notification-channel-list';
 

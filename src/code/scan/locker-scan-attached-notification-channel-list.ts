@@ -1,6 +1,6 @@
 import { AssertInternalError, Integer, LockOpenListItem, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi/internal-api';
-import { NotificationChannelsService } from '../notification-channel/internal-api';
+import { NotificationChannel, ScanAttachedNotificationChannel } from '../adi';
+import { NotificationChannelsService } from '../notification-channel';
 import { ModifierComparableList } from '../sys/modifier-comparable-list';
 import { LockerScanAttachedNotificationChannel } from './locker-scan-attached-notification-channel';
 

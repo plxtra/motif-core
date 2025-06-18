@@ -1,5 +1,5 @@
 import { MultiEvent } from '@pbkware/js-utils';
-import { Correctness, CorrectnessRecord } from '../../../sys/internal-api';
+import { Correctness, CorrectnessRecord } from '../../../sys';
 import { TableValue } from '../value/internal-api';
 import { TableValueSource } from './table-value-source';
 

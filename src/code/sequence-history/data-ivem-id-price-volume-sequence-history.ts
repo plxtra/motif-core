@@ -33,13 +33,13 @@ import {
     TradeAffectsId,
     TradesDataItem,
     TradingMarket
-} from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { SymbolsService } from '../services/internal-api';
+} from '../adi';
+import { StringId, Strings } from '../res';
+import { SymbolsService } from '../services';
 import {
     Badness,
     ResourceBadness,
-} from '../sys/internal-api';
+} from '../sys';
 import { HistorySequenceSeries } from './history-sequence-series';
 import { HistorySequencer } from './history-sequencer';
 import { IntervalHistorySequencer } from './interval-history-sequencer';

@@ -11,10 +11,10 @@ import {
     SysTick,
     UnreachableCaseError,
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     Badness,
-} from '../../sys/internal-api';
+} from '../../sys';
 import { AdiPublisherRequest } from './adi-publisher-request';
 import { AdiPublisherSubscription } from './adi-publisher-subscription';
 import { AdiPublisherSubscriptionDelayRetryAlgorithmId } from './adi-publisher-subscription-delay-retry-algorithm';

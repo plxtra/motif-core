@@ -1,4 +1,4 @@
-import { KeyedCorrectnessListItem } from '../../sys/internal-api';
+import { KeyedCorrectnessListItem } from '../../sys';
 import { DataIvemId } from './data-ivem-id';
 
 export interface DataIvemIdKeyedCorrectnessListItem extends KeyedCorrectnessListItem {

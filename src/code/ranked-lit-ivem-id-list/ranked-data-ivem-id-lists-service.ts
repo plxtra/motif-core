@@ -1,5 +1,5 @@
 import { MultiEvent } from '@pbkware/js-utils';
-import { ScanList, ScansService } from '../scan/internal-api';
+import { ScanList, ScansService } from '../scan';
 
 export class RankedDataIvemIdListsService /* extends LockOpenList<RankedDataIvemIdList>*/ {
     private readonly _scanList: ScanList;

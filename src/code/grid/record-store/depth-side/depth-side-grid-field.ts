@@ -1,6 +1,6 @@
 import { RevRecordField, RevRecordSourcedFieldSourceDefinition } from 'revgrid';
-import { TextFormattableValue } from '../../../services/internal-api';
-import { CorrectnessId } from '../../../sys/internal-api';
+import { TextFormattableValue } from '../../../services';
+import { CorrectnessId } from '../../../sys';
 import { GridField } from '../../field/internal-api';
 import { DepthRecord } from './depth-record';
 

@@ -1,6 +1,6 @@
 import { Integer, ModifierKey } from '@pbkware/js-utils';
-import { ExtStringId } from '../res/internal-api';
-import { ExtensionHandle, Handle } from '../sys/internal-api';
+import { ExtStringId } from '../res';
+import { ExtensionHandle, Handle } from '../sys';
 
 export interface Command {
     readonly extensionHandle: ExtensionHandle;

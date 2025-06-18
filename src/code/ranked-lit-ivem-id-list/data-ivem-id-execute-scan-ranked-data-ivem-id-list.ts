@@ -1,5 +1,5 @@
 import { AssertInternalError } from '@pbkware/js-utils';
-import { AdiService, DataIvemIdExecuteScanDataDefinition, DataIvemIdScanMatchesDataItem, RankScoredDataIvemIdList } from '../adi/internal-api';
+import { AdiService, DataIvemIdExecuteScanDataDefinition, DataIvemIdScanMatchesDataItem, RankScoredDataIvemIdList } from '../adi';
 import { BaseRankedDataIvemIdList } from './base-ranked-data-ivem-id-list';
 import { DataIvemIdExecuteScanRankedDataIvemIdListDefinition } from './definition/internal-api';
 

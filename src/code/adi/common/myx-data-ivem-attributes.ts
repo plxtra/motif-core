@@ -4,10 +4,10 @@ import {
     Integer,
     isUndefinableArrayEqualUniquely
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     FieldDataTypeId,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { DataIvemAttributes } from './data-ivem-attributes';
 import { ZenithProtocolCommon } from './zenith-protocol/internal-api';
 

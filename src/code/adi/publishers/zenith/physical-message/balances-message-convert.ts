@@ -1,5 +1,5 @@
 import { AssertInternalError, DecimalFactory, Ok, Result, UnexpectedCaseError } from '@pbkware/js-utils';
-import { ErrorCode, ErrorCodeLogger, ZenithDataError } from '../../../../sys/internal-api';
+import { ErrorCode, ErrorCodeLogger, ZenithDataError } from '../../../../sys';
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

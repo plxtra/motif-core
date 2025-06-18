@@ -31,9 +31,9 @@ import {
     SymbolsDataItem,
     TmcLegs,
     TradingMarket
-} from '../adi/internal-api';
-import { StringId, Strings } from '../res/internal-api';
-import { CorrectnessId } from '../sys/internal-api';
+} from '../adi';
+import { StringId, Strings } from '../res';
+import { CorrectnessId } from '../sys';
 import { SymbolsService } from './symbols-service';
 
 export class SymbolDetailCacheService {
@@ -461,7 +461,7 @@ type IvemIdResolveFtn = (this: void, value: SymbolDetailCacheService.IvemIdDetai
 type DataIvemIdMap = Map<MapKey, SymbolDetailCacheService.DataIvemIdDetail>;
 type IvemIdMap = Map<MapKey, SymbolDetailCacheService.IvemIdDetail>;
 
-abstract class Request {
+export abstract class Request {
     dataItem: SymbolsDataItem | undefined;
     dataCorrectnessChangeSubscriptionId: MultiEvent.SubscriptionId;
 

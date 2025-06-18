@@ -8,7 +8,7 @@ import {
 import {
     assert,
     Badness,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     DataMessage,
     DataMessageTypeId,

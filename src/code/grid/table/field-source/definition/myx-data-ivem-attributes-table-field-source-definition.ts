@@ -4,11 +4,11 @@ import {
     UnreachableCaseError
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { MyxDataIvemAttributes } from '../../../../adi/internal-api';
+import { MyxDataIvemAttributes } from '../../../../adi';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     CorrectnessTableField,
     EnumCorrectnessTableField,

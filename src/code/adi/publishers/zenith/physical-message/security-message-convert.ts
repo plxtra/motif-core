@@ -7,13 +7,13 @@ import {
     Result,
     UnexpectedCaseError
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../../../res/internal-api';
+import { StringId, Strings } from '../../../../res';
 import {
     ErrorCode,
     getUndefinedNullOrFunctionResult,
     ifDefined,
     ZenithDataError
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     AdiPublisherRequest,
     AdiPublisherSubscription,

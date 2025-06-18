@@ -1,5 +1,5 @@
 import { UnreachableCaseError } from '@pbkware/js-utils';
-import { CallOrPutId } from '../../../../adi/internal-api';
+import { CallOrPutId } from '../../../../adi';
 import { PrefixableSecurityDataItemTableFieldSourceDefinition } from './prefixable-security-data-item-table-field-source-definition';
 import { TableFieldSourceDefinition } from './table-field-source-definition';
 

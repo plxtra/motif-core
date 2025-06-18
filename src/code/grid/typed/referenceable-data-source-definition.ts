@@ -1,5 +1,5 @@
 import { RevReferenceableDataSourceDefinition } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
+import { TextFormattableValue } from '../../services';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 
 export class ReferenceableDataSourceDefinition extends RevReferenceableDataSourceDefinition<

@@ -1,5 +1,5 @@
 import { parseIntStrict, parseNumberStrict, UnreachableCaseError } from '@pbkware/js-utils';
-import { ErrorCodeLogger } from '../../../../sys/internal-api';
+import { ErrorCodeLogger } from '../../../../sys';
 import { DataIvemAlternateCodes, ZenithProtocolCommon } from '../../../common/internal-api';
 import { MyxDataIvemAttributes } from '../../../common/myx-data-ivem-attributes';
 import { ZenithMarketMyx } from './zenith-market-myx';

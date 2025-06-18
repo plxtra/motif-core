@@ -8,7 +8,7 @@ import {
 import {
     Badness,
     BadnessList,
-} from "../../../sys/internal-api";
+} from "../../../sys";
 import { TableRecordSource } from './table-record-source';
 
 /** @public */

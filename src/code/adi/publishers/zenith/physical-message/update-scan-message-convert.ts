@@ -1,5 +1,5 @@
 import { AssertInternalError, Ok, Result } from '@pbkware/js-utils';
-import { ErrorCode, ZenithDataError } from '../../../../sys/internal-api';
+import { ErrorCode, ZenithDataError } from '../../../../sys';
 import { AdiPublisherRequest, AdiPublisherSubscription, DataMessage, ErrorPublisherSubscriptionDataMessage_PublishRequestError, RequestErrorDataMessages, UpdateScanDataDefinition, UpdateScanDataMessage } from '../../../common/internal-api';
 import { MessageConvert } from './message-convert';
 import { ZenithProtocol } from './protocol/zenith-protocol';

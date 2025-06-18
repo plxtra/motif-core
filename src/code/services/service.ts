@@ -1,5 +1,5 @@
 import { EnumInfoOutOfOrderError, Integer } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
+import { StringId, Strings } from '../res';
 
 export const enum ServiceId {
     Watchmaker,

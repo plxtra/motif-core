@@ -1,6 +1,6 @@
 import { EnumInfoOutOfOrderError, Integer, LockOpenListItem, MultiEvent } from '@pbkware/js-utils';
-import { StringId, Strings } from '../res/internal-api';
-import { CorrectnessRecord, CorrectnessSettableListItem, FieldDataTypeId } from '../sys/internal-api';
+import { StringId, Strings } from '../res';
+import { CorrectnessRecord, CorrectnessSettableListItem, FieldDataTypeId } from '../sys';
 
 export interface RankedDataIvemIdListDirectoryItem extends LockOpenListItem<RankedDataIvemIdListDirectoryItem>, CorrectnessSettableListItem, CorrectnessRecord {
     readonly directoryItemTypeId: RankedDataIvemIdListDirectoryItem.TypeId;

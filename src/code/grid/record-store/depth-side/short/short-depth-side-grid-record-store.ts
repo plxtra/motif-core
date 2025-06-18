@@ -1,7 +1,7 @@
 import { DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevRecordIndex, RevRecordStore } from 'revgrid';
-import { DepthLevelsDataItem, DepthStyleId, MarketsService, OrderSideId } from '../../../../adi/internal-api';
-import { CorrectnessId } from '../../../../sys/internal-api';
+import { DepthLevelsDataItem, DepthStyleId, MarketsService, OrderSideId } from '../../../../adi';
+import { CorrectnessId } from '../../../../sys';
 import { DepthSideGridRecordStore } from '../depth-side-grid-record-store';
 import { ShortDepthRecord } from './short-depth-record';
 

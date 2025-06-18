@@ -3,10 +3,10 @@ import {
     Integer,
     MultiEvent
 } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
+import { StringId, Strings } from '../../res';
 import {
     FieldDataTypeId
-} from "../../sys/internal-api";
+} from "../../sys";
 import { ExchangeEnvironmentZenithCode } from '../common/internal-api';
 // eslint-disable-next-line import-x/no-cycle
 import { DataMarket } from './data-market';

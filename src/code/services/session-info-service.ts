@@ -1,5 +1,5 @@
 import { IndexSignatureHack, Integer, MultiEvent } from '@pbkware/js-utils';
-import { ExchangeEnvironment, MarketIvemId, PublisherSessionTerminatedReasonId } from '../adi/internal-api';
+import { ExchangeEnvironment, MarketIvemId, PublisherSessionTerminatedReasonId } from '../adi';
 import { SessionStateId } from './session-state';
 
 /** @public */

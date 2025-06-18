@@ -1,4 +1,4 @@
-import { KeyedCorrectnessListItem } from '../../../sys/internal-api';
+import { KeyedCorrectnessListItem } from '../../../sys';
 import { KeyedCorrectnessSettableTableRecordDefinition } from './keyed-correctness-settable-table-record-definition';
 
 export interface KeyedCorrectnessTableRecordDefinition<Record extends KeyedCorrectnessListItem> extends KeyedCorrectnessSettableTableRecordDefinition<Record> {

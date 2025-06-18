@@ -8,7 +8,7 @@ import {
 } from '@pbkware/js-utils';
 import {
     Badness,
-} from '../sys/internal-api';
+} from '../sys';
 import {
     DataDefinition,
     LatestTradingDayTradesDataDefinition,

@@ -1,4 +1,4 @@
-import { DataItem } from '../../../adi/internal-api';
+import { DataItem } from '../../../adi';
 import { TableRecordSource } from './table-record-source';
 
 export abstract class SingleDataItemTableRecordSource extends TableRecordSource {

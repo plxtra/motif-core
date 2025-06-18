@@ -11,7 +11,7 @@ import {
 } from '@pbkware/js-utils';
 import { Decimal } from 'decimal.js-light';
 import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
+import { DataMarket, DepthDataItem, MarketsService, OrderSideId } from '../../../../adi';
 import {
     CountAndXrefsTextFormattableValue,
     FactoryisedDecimal,
@@ -21,7 +21,7 @@ import {
     StringArrayTextFormattableValue,
     StringTextFormattableValue,
     TextFormattableValue
-} from '../../../../services/internal-api';
+} from '../../../../services';
 import { DepthRecord } from '../depth-record';
 import { DepthRecordTextFormattableValue } from '../depth-record-text-formattable-value';
 import { FullDepthSideField, FullDepthSideFieldId } from './full-depth-side-field';

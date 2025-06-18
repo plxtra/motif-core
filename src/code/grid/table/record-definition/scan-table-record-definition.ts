@@ -1,4 +1,4 @@
-import { Scan } from '../../../scan/internal-api';
+import { Scan } from '../../../scan';
 import { TableFieldSourceDefinition } from '../field-source/internal-api';
 import { PayloadTableRecordDefinition } from './payload-table-record-definition';
 import { TableRecordDefinition } from './table-record-definition';

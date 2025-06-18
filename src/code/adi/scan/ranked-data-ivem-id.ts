@@ -10,7 +10,7 @@ import {
     CorrectnessId,
     CorrectnessRecord,
     FieldDataTypeId,
-} from "../../sys/internal-api";
+} from "../../sys";
 import { DataIvemId } from '../symbol-id/internal-api';
 
 export class RankedDataIvemId implements CorrectnessRecord, Mappable {

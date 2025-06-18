@@ -6,7 +6,7 @@ import {
     compareInteger,
 } from '@pbkware/js-utils';
 import { RevRecordInvalidatedValue, RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { DepthLevelsDataItem, MarketsService, OrderSideId } from '../../../../adi/internal-api';
+import { DepthLevelsDataItem, MarketsService, OrderSideId } from '../../../../adi';
 import {
     IntegerTextFormattableValue,
     PriceOrRemainderAndHasUndisclosedTextFormattableValue,
@@ -14,11 +14,11 @@ import {
     PriceTextFormattableValue,
     StringTextFormattableValue,
     TextFormattableValue
-} from '../../../../services/internal-api';
+} from '../../../../services';
 import {
     PriceOrRemainder,
     comparePriceOrRemainder
-} from '../../../../sys/internal-api';
+} from '../../../../sys';
 import { DepthRecord } from '../depth-record';
 import { DepthRecordTextFormattableValue } from '../depth-record-text-formattable-value';
 import { ShortDepthSideField, ShortDepthSideFieldId } from './short-depth-side-field';

@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer, SourceTzOffsetDateTime } from '@pbkware/js-utils';
-import { assert, defined } from '../sys/internal-api';
+import { assert, defined } from '../sys';
 import {
     ChartHistoryDataMessage,
     ChartIntervalId,

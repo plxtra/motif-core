@@ -1,6 +1,6 @@
 import { RevTableRecordStore } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
-import { Badness } from "../../sys/internal-api";
+import { TextFormattableValue } from '../../services';
+import { Badness } from "../../sys";
 import { TableFieldSourceDefinition } from './field-source/internal-api';
 import { TableRecordSourceDefinition } from './record-source/internal-api';
 

@@ -1,6 +1,6 @@
 import { AssertInternalError, BinaryFind, ChangeSubscribableComparableList, CompareFtn, EnumInfoOutOfOrderError, Integer, MultiEvent, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { StringId, Strings } from '../../res/internal-api';
-import { Badness, BadnessComparableList, ConfigError, ErrorCode, WarningsService, ZenithDataError } from '../../sys/internal-api';
+import { StringId, Strings } from '../../res';
+import { Badness, BadnessComparableList, ConfigError, ErrorCode, WarningsService, ZenithDataError } from '../../sys';
 import { FeedsDataDefinition, MarketsDataDefinition } from '../common/data-definition';
 import { ExchangeEnvironmentZenithCode, unknownZenithCode, ZenithEnvironmentedValueParts, ZenithMarketParts } from '../common/internal-api';
 import { AdiService } from '../data-item/internal-api';

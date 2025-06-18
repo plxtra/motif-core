@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer, UnreachableCaseError, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { ErrorCodeLogger } from '../../sys/internal-api';
+import { ErrorCodeLogger } from '../../sys';
 import { AurcChangeTypeId, DataDefinition, DataMessage, DataMessageTypeId, FeedClassId, WatchmakerListDescriptorsDataMessage } from '../common/internal-api';
 import { KeyedCorrectnessSettableListFeedSubscriptionDataItem } from '../feed/internal-api';
 import { WatchmakerListDescriptor } from './watchmaker-list-descriptor';

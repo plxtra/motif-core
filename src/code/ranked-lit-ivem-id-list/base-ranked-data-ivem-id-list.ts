@@ -14,13 +14,13 @@ import {
     moveElementsInArray,
     rangedAnyBinarySearch
 } from '@pbkware/js-utils';
-import { DataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
+import { DataIvemId, RankScoredDataIvemIdList } from '../adi';
 import { RankedDataIvemId } from '../adi/scan/ranked-data-ivem-id';
 import {
     Badness,
     BadnessList,
     CorrectnessId,
-} from "../sys/internal-api";
+} from "../sys";
 import { RankedDataIvemIdListDefinition } from './definition/internal-api';
 import { RankedDataIvemIdList } from './ranked-data-ivem-id-list';
 

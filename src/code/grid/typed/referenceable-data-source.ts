@@ -1,6 +1,6 @@
 import { RevReferenceableDataSource } from 'revgrid';
-import { TextFormattableValue } from '../../services/internal-api';
-import { Badness } from '../../sys/internal-api';
+import { TextFormattableValue } from '../../services';
+import { Badness } from '../../sys';
 import { TableFieldSourceDefinition, TableRecordSourceDefinition } from '../table/internal-api';
 
 export class ReferenceableDataSource extends RevReferenceableDataSource<

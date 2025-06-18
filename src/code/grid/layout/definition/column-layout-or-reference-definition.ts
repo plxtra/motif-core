@@ -1,6 +1,6 @@
 import { Err, JsonElement, Ok, PickEnum, Result, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevColumnLayoutOrReferenceDefinition } from 'revgrid';
-import { ErrorCode } from '../../../sys/internal-api';
+import { ErrorCode } from '../../../sys';
 
 /** @public */
 export namespace ColumnLayoutOrReferenceDefinition {

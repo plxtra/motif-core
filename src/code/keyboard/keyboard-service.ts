@@ -1,10 +1,10 @@
 import { compareInteger, Integer, ModifierKey, SysTick } from '@pbkware/js-utils';
 import { UiAction } from '@pbkware/ui-action';
-import { CommandContext } from '../command-context/internal-api';
+import { CommandContext } from '../command-context';
 import { Command } from '../command/command';
 import { extStrings } from '../res/ext-strings';
+import { ErrorCode } from '../sys';
 import { ExtensionOrInternalError } from '../sys/external-error';
-import { ErrorCode } from '../sys/internal-api';
 import { KeyboardShortcutRegistry } from './keyboard-shortcut-registry';
 
 /** @public */

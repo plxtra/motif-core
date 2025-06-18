@@ -1,5 +1,5 @@
 import { PickEnum, SourceTzOffsetDate, UnreachableCaseError, isArrayEqualUniquely } from '@pbkware/js-utils';
-import { CurrencyId, DataMarket, Exchange, MarketBoard } from '../../../adi/internal-api';
+import { CurrencyId, DataMarket, Exchange, MarketBoard } from '../../../adi';
 import { ScanFormula } from '../../formula/internal-api';
 
 export interface ScanCondition {

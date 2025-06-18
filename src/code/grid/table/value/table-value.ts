@@ -5,7 +5,7 @@ import {
     newUndefinableDate
 } from '@pbkware/js-utils';
 import { RevTableValue } from 'revgrid';
-import { DataIvemId, IvemId } from '../../../adi/internal-api';
+import { DataIvemId, IvemId } from '../../../adi';
 import {
     BooleanTextFormattableValue,
     DataIvemIdTextFormattableValue,
@@ -26,10 +26,10 @@ import {
     StringArrayTextFormattableValue,
     StringTextFormattableValue,
     TextFormattableValue
-} from '../../../services/internal-api';
+} from '../../../services';
 import {
     CorrectnessId,
-} from '../../../sys/internal-api';
+} from '../../../sys';
 
 export abstract class TableValue extends RevTableValue<TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId> {
 }

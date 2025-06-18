@@ -17,7 +17,7 @@ import {
     ErrorCode,
     ZenithDataError,
     assert,
-} from '../sys/internal-api';
+} from '../sys';
 
 import {
     DataDefinition,

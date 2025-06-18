@@ -10,7 +10,7 @@ import {
     ValueRecentChangeType,
     assert,
     comparePriceOrRemainder
-} from '../sys/internal-api';
+} from '../sys';
 import {
     DataDefinition,
     DataMessage,

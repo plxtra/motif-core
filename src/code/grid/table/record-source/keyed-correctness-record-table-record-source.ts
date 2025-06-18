@@ -1,4 +1,4 @@
-import { KeyedCorrectnessList, KeyedCorrectnessListItem } from "../../../sys/internal-api";
+import { KeyedCorrectnessList, KeyedCorrectnessListItem } from "../../../sys";
 import { KeyedCorrectnessSettableRecordTableRecordSource } from './keyed-correctness-settable-record-table-record-source';
 
 export abstract class KeyedCorrectnessRecordTableRecordSource<

@@ -1,7 +1,7 @@
 import { Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
 import { RevRecordValueRecentChangeTypeId } from 'revgrid';
-import { ExchangeEnvironmentZenithCode, Feed } from '../../../adi/internal-api';
-import { Correctness } from '../../../sys/internal-api';
+import { ExchangeEnvironmentZenithCode, Feed } from '../../../adi';
+import { Correctness } from '../../../sys';
 import { FeedTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
     CorrectnessTableValue,

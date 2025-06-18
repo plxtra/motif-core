@@ -1,5 +1,5 @@
 import { CommaText, Result, UnreachableCaseError } from '@pbkware/js-utils';
-import { ExchangeEnvironmentZenithCode, MarketsService } from '../adi/internal-api';
+import { ExchangeEnvironmentZenithCode, MarketsService } from '../adi';
 import { KeyValueStore } from './key-value-store/key-value-store';
 import { LocalStorageKeyValueStore } from './key-value-store/local-storage-key-value-store';
 import { MotifServicesKeyValueStore } from './key-value-store/motif-services-key-value-store';

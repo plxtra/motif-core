@@ -3,11 +3,11 @@ import {
     Integer
 } from '@pbkware/js-utils';
 import { RevHorizontalAlignId } from 'revgrid';
-import { RankedDataIvemIdListDirectoryItem } from '../../../../services/internal-api';
+import { RankedDataIvemIdListDirectoryItem } from '../../../../services';
 import {
     FieldDataType,
     FieldDataTypeId,
-} from "../../../../sys/internal-api";
+} from "../../../../sys";
 import {
     BooleanCorrectnessTableField,
     CorrectnessTableField,

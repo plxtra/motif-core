@@ -1,5 +1,5 @@
 import { AssertInternalError, Integer, parseIntStrict, parseNumberStrict } from '@pbkware/js-utils';
-import { OrderType, OrderTypeId, TimeInForce, TimeInForceId } from '../../adi/internal-api';
+import { OrderType, OrderTypeId, TimeInForce, TimeInForceId } from '../../adi';
 
 export namespace TypedKeyValueSettings {
     const _numberFormat = new Intl.NumberFormat(TypedKeyValueSettings.locale, { useGrouping: false });

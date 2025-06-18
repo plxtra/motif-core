@@ -1,5 +1,5 @@
 import { compareString, ComparisonResult, Err, JsonElement, Ok, Result } from '@pbkware/js-utils';
-import { ErrorCode, JsonElementErr } from '../sys/internal-api';
+import { ErrorCode, JsonElementErr } from '../sys';
 import { unknownZenithCode as dataTypeUnknownZenithCode, ExchangeEnvironmentZenithCode, ZenithEnvironmentedValueParts } from './common/internal-api';
 import { ExchangeEnvironment, MarketsService } from './markets/internal-api';
 

@@ -1,9 +1,9 @@
 import { Integer, MultiEvent, RecordList, UsableListChangeTypeId } from '@pbkware/js-utils';
-import { DataIvemId, RankScoredDataIvemId, RankScoredDataIvemIdList } from '../adi/internal-api';
+import { DataIvemId, RankScoredDataIvemId, RankScoredDataIvemIdList } from '../adi';
+import { CorrectnessRecord } from '../sys';
 import { Badness } from '../sys/badness';
 import { BadnessList } from '../sys/badness-list';
 import { CorrectnessId } from '../sys/correctness';
-import { CorrectnessRecord } from '../sys/internal-api';
 
 export class IndexRankScoredDataIvemIdList implements RankScoredDataIvemIdList {
     readonly userCanAdd = true;

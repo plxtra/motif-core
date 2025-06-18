@@ -1,5 +1,5 @@
 import { AssertInternalError, DecimalFactory, Integer, MultiEvent, UnreachableCaseError } from '@pbkware/js-utils';
-import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi/internal-api';
+import { DataIvemAlternateCodes, SearchSymbolsDataIvemFullDetail, SymbolsDataItem } from '../../../adi';
 import { FactoryisedDecimal } from '../../../services/factoryised-decimal';
 import { DataIvemExtendedDetailTableFieldSourceDefinition } from '../field-source/definition/internal-api';
 import {
