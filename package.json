@@ -27,7 +27,7 @@
     "src/**/*.ts"
   ],
   "scripts": {
-    "link-plxtra": "npm link @plxtra/js-utils @plxtra/ui-action revgrid",
+    "link-pbkware": "npm link @pbkware/js-utils @pbkware/ui-action revgrid",
     "lint": "eslint",
     "build": "tsc --build ./tsconfig.json",
     "force-build": "tsc --build --force ./tsconfig.json",
