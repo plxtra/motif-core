@@ -688,7 +688,7 @@ export class DepthDataItem extends MarketSubscriptionDataItem {
     ) {
         const oldQuantity = order.quantity;
         const oldHasUndisclosed = order.hasUndisclosed;
-        moveElementInArray<DepthDataItem.Order>(list, oldIndex, newIndex);
+        moveElementInArray(list, oldIndex, newIndex);
         const valueChanges = this.updateOrder(order, changeOrder);
         switch (sideId) {
             case OrderSideId.Bid:

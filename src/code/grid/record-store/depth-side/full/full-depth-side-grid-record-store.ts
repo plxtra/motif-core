@@ -732,7 +732,7 @@ export class FullDepthSideGridRecordStore extends DepthSideGridRecordStore imple
 
             if (toOrderIdx !== fromOrderIdx) {
                 // move element in OrderIndex
-                moveElementInArray<FullDepthRecord>(this._orderIndex, fromOrderIdx, toOrderIdx);
+                moveElementInArray(this._orderIndex, fromOrderIdx, toOrderIdx);
             }
             this._orderIndex[toOrderIdx] = toRecord;
 
