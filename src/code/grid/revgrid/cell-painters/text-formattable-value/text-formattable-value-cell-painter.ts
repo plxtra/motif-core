@@ -36,7 +36,7 @@ export abstract class TextFormattableValueCellPainter {
         const subgrid = cell.subgrid;
         const focus = grid.focus;
         const isMainSubgrid = subgrid.isMain;
-        const rowFocused = isMainSubgrid && grid.focus.isMainSubgridRowFocused(subgridRowIndex);
+        const rowFocused = isMainSubgrid && grid.focus.isMainRowFocused(subgridRowIndex);
         let focusedCellBorderColor: string | undefined;
         let focusedRowBorderColor: string | undefined;
         let focusedRowBorderWidth: number;

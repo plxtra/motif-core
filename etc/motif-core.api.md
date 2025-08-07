@@ -9417,6 +9417,8 @@ export const enum ErrorCode {
     // (undocumented)
     CSOIPJCS988354312 = "CSOIPJCS988354312",
     // (undocumented)
+    CSOIPJPLRU12120987 = "CSOIPJPLRU12120987",
+    // (undocumented)
     CSOIPJRU33448829 = "CSOIPJRU33448829",
     // (undocumented)
     CSOIPJSC67773223 = "CSOIPJSC67773223",

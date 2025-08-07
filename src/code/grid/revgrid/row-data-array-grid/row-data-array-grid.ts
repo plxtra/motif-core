@@ -59,12 +59,18 @@ export class RowDataArrayGrid extends RevSingleHeadingDataRowArraySourcedFieldGr
         this.applySettings();
     }
 
-    get focusedRowIndex() { return this.focus.currentY; }
+    get focusedRowIndex() {
+        if (this.focus.currentSubgrid === this.mainSubgrid) {
+            return this.focus.currentSubgridRowIndex;
+        } else {
+            return undefined;
+        }
+    }
     set focusedRowIndex(rowIndex: number | undefined) {
         if (rowIndex === undefined) {
             this.focus.clear();
         } else {
-            this.focus.setY(rowIndex, undefined, undefined);
+            this.focus.trySetRow(rowIndex, this.mainSubgrid, undefined, undefined);
         }
     }
 
