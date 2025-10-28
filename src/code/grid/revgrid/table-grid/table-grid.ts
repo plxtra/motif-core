@@ -35,7 +35,7 @@ export class TableGrid extends RevTableGrid<
         tableRecordSourceFactory: TableRecordSourceFactory,
         referenceableDataSourcesService: ReferenceableDataSourcesService,
         settingsService: SettingsService,
-        gridHostElement: HTMLElement,
+        gridCanvasElement: HTMLCanvasElement,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         private readonly _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
         getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
@@ -78,7 +78,7 @@ export class TableGrid extends RevTableGrid<
             tableRecordSourceDefinitionFromJsonFactory,
             referenceableDataSourcesService,
             tableRecordSourceFactory,
-            gridHostElement,
+            gridCanvasElement,
             definition,
             gridSettings,
             (field) => this.getSettingsForNewColumn(field),
@@ -111,7 +111,7 @@ export class TableGrid extends RevTableGrid<
             this.columnsViewWidthsChangedEventer(
                 changeds.fixedChanged,
                 changeds.scrollableChanged,
-                changeds.visibleChanged
+                changeds.viewChanged
             );
         }
     }

@@ -23,7 +23,7 @@ export class RowDataArrayGrid extends RevSingleHeadingDataRowArraySourcedFieldGr
 
     constructor(
         settingsService: SettingsService,
-        gridHostElement: HTMLElement,
+        gridCanvasElement: HTMLCanvasElement,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         createFieldEventer: RevSingleHeadingDataRowArraySourcedFieldGrid.CreateFieldEventer<GridField>,
         private readonly _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
@@ -41,7 +41,7 @@ export class RowDataArrayGrid extends RevSingleHeadingDataRowArraySourcedFieldGr
         }
 
         super(
-            gridHostElement,
+            gridCanvasElement,
             getHeaderCellPainterEventer,
             getMainCellPainterEventer,
             gridSettings,

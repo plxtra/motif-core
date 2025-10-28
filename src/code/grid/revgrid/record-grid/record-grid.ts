@@ -26,7 +26,7 @@ export class RecordGrid extends RecordSourcedFieldGrid {
 
     constructor(
         settingsService: SettingsService,
-        gridHostElement: HTMLElement,
+        gridCanvasElement: HTMLCanvasElement,
         recordStore: RevRecordStore,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         private readonly _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
@@ -64,7 +64,7 @@ export class RecordGrid extends RecordSourcedFieldGrid {
         }
 
         super(
-            gridHostElement,
+            gridCanvasElement,
             definition,
             gridSettings,
             (field) => this.getSettingsForNewColumn(field),
@@ -93,7 +93,7 @@ export class RecordGrid extends RecordSourcedFieldGrid {
             this.columnsViewWidthsChangedEventer(
                 changeds.fixedChanged,
                 changeds.scrollableChanged,
-                changeds.visibleChanged
+                changeds.viewChanged
             );
         }
     }
