@@ -44,23 +44,23 @@
     "docs:serve": "ws -d docs"
   },
   "dependencies": {
-    "@ctrl/tinycolor": "^4.1.0",
+    "@ctrl/tinycolor": "^4.2.0",
     "@pbkware/js-utils": "^0.8.3",
-    "@pbkware/ui-action": "^0.9.3",
+    "@pbkware/ui-action": "^0.9.4",
     "decimal.js-light": "^2.5.1",
     "nanoid": "^5.0.6",
-    "revgrid": "^0.11.0"
+    "revgrid": "^0.11.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.28.0",
-    "@microsoft/api-extractor": "^7.51.1",
-    "del-cli": "^6.0.0",
-    "eslint": "^9.28.0",
-    "eslint-import-resolver-typescript": "^4.4.2",
-    "eslint-plugin-import-x": "^4.15.0",
+    "@eslint/js": "^9.39.0",
+    "@microsoft/api-extractor": "^7.53.3",
+    "del-cli": "^7.0.0",
+    "eslint": "^9.38.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.1",
     "local-web-server": "^5.4.0",
-    "typedoc": "^0.28.5",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.33.0"
+    "typedoc": "^0.28.14",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
   }
 }
