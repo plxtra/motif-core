@@ -22514,7 +22514,7 @@ export class ReadonlyTextFormattableValue extends BooleanTextFormattableValue {
 
 // @public (undocumented)
 export class RecordGrid extends RecordSourcedFieldGrid {
-    constructor(settingsService: SettingsService, gridHostElement: HTMLElement, recordStore: RevRecordStore, customGridSettings: SourcedFieldGrid.CustomGridSettings, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
+    constructor(settingsService: SettingsService, gridCanvasElement: HTMLCanvasElement, recordStore: RevRecordStore, customGridSettings: SourcedFieldGrid.CustomGridSettings, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
     // (undocumented)
     columnsViewWidthsChangedEventer: SourcedFieldGrid.ColumnsViewWidthsChangedEventer | undefined;
     // (undocumented)
@@ -22985,7 +22985,7 @@ export namespace ResStaticInitialise {
 //
 // @public (undocumented)
 export class RowDataArrayGrid extends RevSingleHeadingDataRowArraySourcedFieldGrid<AdaptedRevgridBehavioredGridSettings, AdaptedRevgridBehavioredColumnSettings, GridField> {
-    constructor(settingsService: SettingsService, gridHostElement: HTMLElement, customGridSettings: SourcedFieldGrid.CustomGridSettings, createFieldEventer: RevSingleHeadingDataRowArraySourcedFieldGrid.CreateFieldEventer<GridField>, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
+    constructor(settingsService: SettingsService, gridCanvasElement: HTMLCanvasElement, customGridSettings: SourcedFieldGrid.CustomGridSettings, createFieldEventer: RevSingleHeadingDataRowArraySourcedFieldGrid.CreateFieldEventer<GridField>, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
     // (undocumented)
     protected descendantProcessClick(event: MouseEvent, hoverCell: RevLinedHoverCell<AdaptedRevgridBehavioredColumnSettings, GridField> | null | undefined): void;
     // (undocumented)
@@ -34499,7 +34499,7 @@ export namespace TableFieldSourceStaticInitialise {
 //
 // @public (undocumented)
 export class TableGrid extends RevTableGrid<Badness, TableRecordSourceDefinition.TypeId, TableFieldSourceDefinition.TypeId, TextFormattableValue.TypeId, TextFormattableValue.Attribute.TypeId, AdaptedRevgridBehavioredGridSettings, AdaptedRevgridBehavioredColumnSettings> {
-    constructor(referenceableColumnLayoutsService: ReferenceableColumnLayoutsService, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, tableRecordSourceDefinitionFromJsonFactory: TableRecordSourceDefinitionFromJsonFactory, tableRecordSourceFactory: TableRecordSourceFactory, referenceableDataSourcesService: ReferenceableDataSourcesService, settingsService: SettingsService, gridHostElement: HTMLElement, customGridSettings: SourcedFieldGrid.CustomGridSettings, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
+    constructor(referenceableColumnLayoutsService: ReferenceableColumnLayoutsService, tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory, tableRecordSourceDefinitionFromJsonFactory: TableRecordSourceDefinitionFromJsonFactory, tableRecordSourceFactory: TableRecordSourceFactory, referenceableDataSourcesService: ReferenceableDataSourcesService, settingsService: SettingsService, gridCanvasElement: HTMLCanvasElement, customGridSettings: SourcedFieldGrid.CustomGridSettings, _customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer, getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>, externalParent: unknown);
     // (undocumented)
     calculateHeaderPlusFixedRowsHeight(): number;
     // (undocumented)
