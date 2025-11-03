@@ -22,6 +22,7 @@
   },
   "module": "dist/code/public-api.js",
   "typings": "dist/types/public-api.d.ts",
+  "sideEffects": false,
   "files": [
     "dist/**/*",
     "src/**/*.ts"
@@ -48,7 +49,7 @@
     "@pbkware/ui-action": "^0.9.3",
     "decimal.js-light": "^2.5.1",
     "nanoid": "^5.0.6",
-    "revgrid": "^0.10.0"
+    "revgrid": "^0.11.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
